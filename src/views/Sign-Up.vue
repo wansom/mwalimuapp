@@ -10,7 +10,6 @@
 		<div class="sign-up-header" style="background-image: url('images/lsk.jpg')">
 		</div>
 		<!-- / Sign Up Image And Headings -->
-		
 		<!-- Sign Up Form -->
 		<a-card :bordered="false" class="card-signup header-solid h-full" :bodyStyle="{paddingTop: 0}">
 			<template #title>

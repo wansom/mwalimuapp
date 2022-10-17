@@ -12,7 +12,7 @@ let routes = [
 	{
 		path: '/',
 		name: 'Home',
-		redirect: '/sign-in',
+		redirect: '/advocate-listing',
 	},
 	{
 		path: '/dashboard',
@@ -71,6 +71,11 @@ let routes = [
 			layoutClass: 'layout-sign-up',
 		},
 		component: () => import('../views/Sign-Up.vue'),
+	},
+	{
+		path: '/advocate-listing',
+		name: 'Advocate-Listing',
+		component: () => import('../views/Advocate-List.vue'),
 	},
 ]
 
