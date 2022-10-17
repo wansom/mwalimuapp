@@ -191,12 +191,15 @@
     <div
       class="header-col header-btn"
     >
-      <a-button href="#" target="_blank" type="dark" shape="round" class="mx-5"
+      <router-link to="sign-in"><a-button href="#" target="_blank" type="dark" shape="round" class="mx-5"
         >Sign In</a-button
-      >
-      <a-button href="#" target="_blank" type="primary" shape="round"
+      ></router-link>
+      <router-link to="sign-up">
+        <a-button href="#" target="_blank" type="primary" shape="round"
         >Create Account</a-button
       >
+      </router-link>
+      
     </div>
   </a-layout-header>
   <!-- / Layout Header ( Navbar ) -->
