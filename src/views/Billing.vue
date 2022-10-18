@@ -11,14 +11,14 @@
 			<!-- Billing Info Column -->
 			<a-col :span="24" :md="16">
 				<a-row type="flex" :gutter="24">
-					<a-col :span="24" :xl="12" class="mb-24">
+					<a-col :span="24" :lg="12" class="mb-24">
 
 						<!-- Master Card -->
 						<CardCredit></CardCredit>
 						<!-- / Master Card -->
 
 					</a-col>
-					<a-col :span="12" :xl="6" class="mb-24" v-for="(salary, index) in salaries" :key="index">
+					<a-col :span="12" :lg="10" class="mb-24" v-for="(salary, index) in salaries" :key="index">
 
 						<!-- Salary Card -->
 						<WidgetSalary
@@ -55,33 +55,6 @@
 			<!-- / Invoices Column -->
 
 		</a-row>
-
-		<a-row type="flex" :gutter="24">
-
-			<!-- Billing Information Column -->
-			<a-col :span="24" :md="16" class="mb-24">
-
-				<!-- Billing Information Card -->
-				<CardBillingInfo></CardBillingInfo>
-				<!-- / Billing Information Card -->
-
-			</a-col>
-			<!-- Billing Information Column -->
-
-			<!-- Your Transactions Column -->
-			<a-col :span="24" :md="8" class="mb-24">
-
-				<!-- Your Transactions Card -->
-				<CardTransactions
-					:data="transactionsData"
-				></CardTransactions>
-				<!-- / Your Transactions Card -->
-
-			</a-col>
-			<!-- / Your Transactions Column -->
-			
-		</a-row>
-
 	</div>
 </template>
 
@@ -108,17 +81,10 @@
 												<path id="Path-2" data-name="Path" d="M0,.707H20.5" transform="translate(0 19.793)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
 											</g>
 										</svg>`,
-			title: "Salary",
-			content: "Belong Interactive",
+			title: "Total Payments",
+			content: "Subscriptions",
 		},
-		{
-			value: 49000,
-			prefix: "+$",
-			icon: `
-										<img src="images/logos/paypal-logo-2.png" alt="">`,
-			title: "Paypal",
-			content: "Freelance Payment",
-		},
+
 	] ;
 
 	// "Invoices" list data.
