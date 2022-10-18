@@ -214,6 +214,9 @@ export default {
       collapseNav: 0,
     };
   },
+  methods:{
+    onSearch(){}
+  }
 };
 </script>
 

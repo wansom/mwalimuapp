@@ -7,9 +7,12 @@ import DefaultLayout from './layouts/Default.vue'
 import DashboardLayout from './layouts/Dashboard.vue'
 import DashboardRTLLayout from './layouts/DashboardRTL.vue'
 import router from './router'
+
 // import './plugins/click-away'
 
 import './scss/app.scss';
+
+import store from './store'
 
 Vue.use(Antd);
 
@@ -22,5 +25,6 @@ Vue.component("layout-dashboard-rtl", DashboardRTLLayout);
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

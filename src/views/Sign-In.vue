@@ -59,7 +59,7 @@
 </template>
 
 <script>
-
+import router from "../router/index"
 	export default ({
 		data() {
 			return {
@@ -78,6 +78,7 @@
 				this.form.validateFields((err, values) => {
 					if ( !err ) {
 						console.log('Received values of form: ', values) ;
+						router.push("dashboard")
 					}
 				});
 			},
