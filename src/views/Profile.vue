@@ -36,7 +36,7 @@
 		<a-row type="flex" :gutter="24">
 
 			<!-- Platform Settings Column -->
-			<a-col :span="24" :md="8" class="mb-24">
+			<a-col :span="24" :md="10" class="mb-24">
 
 				<!-- Platform Settings Card -->
 				<CardPlatformSettings></CardPlatformSettings>
@@ -46,7 +46,7 @@
 			<!-- / Platform Settings Column -->
 
 			<!-- Profile Information Column -->
-			<a-col :span="24" :md="8" class="mb-24">
+			<a-col :span="24" :md="14" class="mb-24">
 
 				<!-- Profile Information Card -->
 				<CardProfileInformation></CardProfileInformation>
@@ -56,15 +56,6 @@
 			<!-- / Profile Information Column -->
 			
 			<!-- Conversations Column -->
-			<a-col :span="24" :md="8" class="mb-24">
-			
-				<!-- Conversations Card -->
-				<CardConversations
-					:data="conversationsData"
-				></CardConversations>
-				<!-- / Conversations Card -->
-
-			</a-col>
 			<!-- / Conversations Column -->
 
 		</a-row>
