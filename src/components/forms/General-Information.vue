@@ -115,6 +115,50 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
+          <a-col :span="12">
+            <a-form-item label="Practice Areas">
+              <a-select
+                mode="tags"
+                style="width: 100%"
+                placeholder="Type or search"
+                v-decorator="[
+                  'location',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter your location' },
+                    ],
+                  },
+                ]"
+              >
+                <a-select-option
+                  v-for="i in 25"
+                  :key="(i + 9).toString(36) + i"
+                >
+                  {{ (i + 9).toString(36) + i }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="Website">
+              <a-input
+                v-decorator="[
+                  'job-title',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter your job title',
+                      },
+                    ],
+                  },
+                ]"
+                style="width: 100%"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="16">
           <a-col :span="24">
             <a-form-item label="Short Biography">
               <a-textarea
@@ -150,7 +194,6 @@
                 <p class="ant-upload-text">
                   Click or drag file to this area to upload
                 </p>
-              
               </a-upload-dragger>
             </a-form-item>
           </a-col>
