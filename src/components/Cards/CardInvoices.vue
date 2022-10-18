@@ -5,11 +5,11 @@
 		<template #title>
 			<h6 class="font-semibold m-0">Invoices</h6>
 		</template>
-		<template slot="extra" class="mb-0">
+		<!-- <template slot="extra" class="mb-0">
 			<a-button type="primary">
 				VIEW ALL
 			</a-button>
-		</template>
+		</template> -->
 		<a-list
 			class="invoice-list"
 			item-layout="horizontal"
