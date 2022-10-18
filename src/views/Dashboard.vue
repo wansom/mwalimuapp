@@ -5,52 +5,13 @@
 
 <template>
 	<div>
-		<!-- Counter Widgets -->
-		<a-row :gutter="24">
-			<a-col :span="24" :lg="12" :xl="6" class="mb-24" v-for="(stat, index) in stats" :key="index">
-				<!-- Widget 1 Card -->
-				<WidgetCounter
-					:title="stat.title"
-					:value="stat.value"
-					:prefix="stat.prefix"
-					:suffix="stat.suffix"
-					:icon="stat.icon"
-					:status="stat.status"
-				></WidgetCounter>
-				<!-- / Widget 1 Card -->
-			</a-col>
-		</a-row>
-		<!-- / Counter Widgets -->
-
-		<!-- Charts -->
-		<a-row :gutter="24" type="flex" align="stretch">
-			<a-col :span="24" :lg="10" class="mb-24">
-
-				<!-- Active Users Card -->
-				<CardBarChart></CardBarChart>
-				<!-- Active Users Card -->
-
-			</a-col>
-			<a-col :span="24" :lg="14" class="mb-24">
-				
-				<!-- Sales Overview Card -->
-				<CardLineChart></CardLineChart>
-				<!-- / Sales Overview Card -->
-
-			</a-col>
-		</a-row>
-		<!-- / Charts -->
-
-		<!-- Table & Timeline -->
-		<a-row :gutter="24" type="flex" align="stretch">
+				<!-- Table & Timeline -->
+				<a-row :gutter="24" type="flex" align="stretch">
 			<!-- Table -->
 			<a-col :span="24" :lg="16" class="mb-24">
 				
 				<!-- Projects Table Card -->
-				<CardProjectTable
-					:data="tableData"
-					:columns="tableColumns"
-				></CardProjectTable>
+				<CardInfo></CardInfo>
 				<!-- / Projects Table Card -->
 				
 			</a-col>
@@ -68,24 +29,17 @@
 		</a-row>
 		<!-- / Table & Timeline -->
 
-		<!-- Cards -->
+		<!-- Charts -->
 		<a-row :gutter="24" type="flex" align="stretch">
-			<a-col :span="24" :xl="14" class="mb-24">
+			<a-col :span="24" :lg="24" class="mb-24">
 
-				<!-- Information Card 1 -->
-				<CardInfo></CardInfo>
-				<!-- / Information Card 1 -->
-
-			</a-col>
-			<a-col :span="24" :xl="10" class="mb-24">
-
-				<!-- Information Card 2 -->
-				<CardInfo2></CardInfo2>
-				<!-- / Information Card 2 -->
+				<!-- Active Users Card -->
+				<CardBarChart></CardBarChart>
+				<!-- Active Users Card -->
 
 			</a-col>
 		</a-row>
-		<!-- / Cards -->
+		<!-- / Charts -->
 
 	</div>
 </template>

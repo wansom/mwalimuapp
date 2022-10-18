@@ -2,9 +2,13 @@
 
 	<!-- Active Users Card -->
 	<a-card :bordered="false" class="dashboard-bar-chart">
-		<chart-bar :height="220" :data="barChartData"></chart-bar>
-		<div class="card-title">
-			<h6>Active Users</h6>
+		<a-row type="flex" :gutter="[24,24]" justify="space-around" align="middle">
+			<a-col :span="12">
+				<chart-bar :height="400" :data="barChartData"></chart-bar>
+			</a-col>
+			<a-col :span="12" >
+				<div class="card-title">
+			<h6>Profile Visits</h6>
 			<p>than last week <span class="text-success">+23%</span></p>
 		</div>
 		<div class="card-content">
@@ -13,7 +17,7 @@
 		<a-row class="card-footer" type="flex" justify="center" align="top">
 			<a-col :span="6">
 				<h4>3,6K</h4>
-				<span>Users</span>
+				<span>Visitors</span>
 			</a-col>
 			<a-col :span="6">
 				<h4>2m</h4>
@@ -21,13 +25,13 @@
 			</a-col>
 			<a-col :span="6">
 				<h4>$772</h4>
-				<span>Sales</span>
+				<span>Sessions</span>
 			</a-col>
-			<a-col :span="6">
-				<h4>82</h4>
-				<span>Items</span>
-			</a-col>
+		
+		</a-row></a-col>
 		</a-row>
+		
+
 	</a-card>
 	<!-- Active Users Card -->
 
