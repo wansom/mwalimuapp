@@ -61,8 +61,8 @@
             <a-card class="icon-card" @click="()=>{
                 next(5)
             }">
-                <a-icon type="audit" class="icon-list text-warning" />
-                <p class="card-p">Project Preferences</p>
+                <a-icon type="transaction" class="icon-list text-warning" />
+                <p class="card-p">Payment</p>
                 
 
             </a-card>
@@ -82,6 +82,9 @@
 <div class="my-10" v-if="current==4">
     <CertificateUpload></CertificateUpload>
 </div>
+<div class="my-10" v-if="current==5">
+    <SubscriptionPayment></SubscriptionPayment>
+</div>
     </div>
   </template>
   <script>
@@ -89,6 +92,7 @@ import GeneralInformation from './General-Information.vue';
 import EmploymentInformation from './Employment-Information.vue';
 import EducationInformation from './Education-Information.vue';
 import CertificateUpload from './Certificate-Upload.vue';
+import SubscriptionPayment from './Subscription-Payment.vue';
   export default {
     data() {
         return {
@@ -105,7 +109,7 @@ import CertificateUpload from './Certificate-Upload.vue';
         },
 
     },
-    components: { GeneralInformation, EmploymentInformation, EducationInformation, CertificateUpload }
+    components: { GeneralInformation, EmploymentInformation, EducationInformation, CertificateUpload, SubscriptionPayment }
 };
   </script>
   <style scoped>

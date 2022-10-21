@@ -5,7 +5,7 @@
       :bodyStyle="{ paddingTop: 0, paddingBottom: '16px' }"
     >
       <div>
-        <h3>General Information</h3>
+        <h3>Certificate Upload</h3>
         <a-form :form="form" layout="vertical" hide-required-mark>
           <a-row :gutter="16">
             <a-col :span="12">
@@ -68,7 +68,7 @@
         </a-form>
         <div>
             <a-button class="mx-10" @click="onClose">Previous Section </a-button>
-          <a-button type="primary" @click="onClose"> Next Section </a-button>
+          <a-button type="primary" @click="onClose">Submit for Review </a-button>
         </div>
       </div>
     </a-card>
