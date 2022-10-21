@@ -13,6 +13,7 @@ import router from './router'
 import './scss/app.scss';
 
 import store from './store'
+import { auth } from "./firebase";
 
 Vue.use(Antd);
 
@@ -23,8 +24,16 @@ Vue.component("layout-default", DefaultLayout);
 Vue.component("layout-dashboard", DashboardLayout);
 Vue.component("layout-dashboard-rtl", DashboardRTLLayout);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+let app;
+auth.onAuthStateChanged((user) => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: (h) => h(App),
+    }).$mount("#app");
+  }
+  if (user) {
+    store.dispatch("fetchUserProfile", user);
+  }
+});

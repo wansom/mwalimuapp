@@ -27,11 +27,11 @@
 								<path d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z" fill="#111827"/>
 							</svg>
 						</span>
-						<span class="label" v-if="active">Dashboard</span>
+						<span class="label" v-if="user.status=='active'">Dashboard</span>
 						<span class="label" v-else>Create Profile</span>
 					</router-link>
 				</a-menu-item>
-				<a-menu-item v-if="active">
+				<a-menu-item v-if="user.status=='active'">
 					<router-link to="/billing" >
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
 						<span class="label">Billing</span>
 					</router-link>
 				</a-menu-item>
-				<a-menu-item  v-if="!active">
+				<a-menu-item  v-if="user.status!='active'">
 					<router-link to="/rtl">
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
 				<a-menu-item class="menu-item-header">
 					Account
 				</a-menu-item>
-				<a-menu-item v-if="active">
+				<a-menu-item v-if="user.status!='active'">
 					<router-link to="/profile" >
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-
+import { mapState } from "vuex"
 	export default ({
 		props: {
 			// Sidebar collapsed status.
@@ -133,6 +133,9 @@
 				active:false
 			}
 		},
+		computed: {
+    ...mapState(["clients", "user"]),
+  },
 	})
 
 </script>

@@ -30,6 +30,7 @@ export default new Vuex.Store({
               email: data.email,
               password: data.password,
               uid: result.user.uid,
+              status:"incomplete"
             })
             .then(() => {
               router.push("/sign-in");
@@ -64,7 +65,7 @@ export default new Vuex.Store({
       })
     }
 
-    
+
   },
   modules: {},
 });
