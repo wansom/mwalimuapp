@@ -8,13 +8,28 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user:{}
+    user: {},
+    general_information: {
+      first_name:"",
+      last_name:"",
+      phone:"",
+      job_title:"",
+      biography:"",
+      email:"",
+      location:"",
+      webiste:"",
+      specialisation:""
+
+    },
   },
   getters: {},
   mutations: {
-    setUserProfile(state,val){
-      state.user =val
-    }
+    setUserProfile(state, val) {
+      state.user = val;
+    },
+    setGeneralInformation(state, val) {
+      state.general_information = val;
+    },
   },
   actions: {
     //register new user
@@ -30,42 +45,52 @@ export default new Vuex.Store({
               email: data.email,
               password: data.password,
               uid: result.user.uid,
-              status:"incomplete"
+              status: "incomplete",
             })
             .then(() => {
               router.push("/sign-in");
             });
-        }).catch((err)=>{
+        })
+        .catch((err) => {
           swal({
             title: "OOPS!",
             text: `${err.message}`,
             icon: "error",
           });
-        })
+        });
     },
 
     //login user
-    login({dispatch},data){
-      fb.auth.signInWithEmailAndPassword(data.email,data.password).then((result)=>{
-          dispatch("fetchUserProfile",result.user)
-          router.push("/dashboard")
-
-      }).catch((err)=>{
-        swal({
-          title: "OOPS!",
-          text: `${err.message}`,
-          icon: "error",
+    login({ dispatch }, data) {
+      fb.auth
+        .signInWithEmailAndPassword(data.email, data.password)
+        .then((result) => {
+          dispatch("fetchUserProfile", result.user);
+          router.push("/dashboard");
+        })
+        .catch((err) => {
+          swal({
+            title: "OOPS!",
+            text: `${err.message}`,
+            icon: "error",
+          });
         });
-      })
     },
 
-    fetchUserProfile({commit},data){
-      fb.usersCollection.doc(data.uid).get().then((result)=>{
-        commit("setUserProfile",result.data())
-      })
-    }
-
-
+    fetchUserProfile({ commit }, data) {
+      fb.usersCollection
+        .doc(data.uid)
+        .get()
+        .then((result) => {
+          commit("setUserProfile", result.data());
+        });
+    },
+    /*
+    user registration start
+    */
+   addGeneralInfo({commit},data){
+    commit("setGeneralInformation",data)
+   }
   },
   modules: {},
 });
