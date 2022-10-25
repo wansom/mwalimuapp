@@ -21,6 +21,9 @@ export default new Vuex.Store({
       specialisation:""
 
     },
+    employmentInfo:{
+      
+    }
   },
   getters: {},
   mutations: {

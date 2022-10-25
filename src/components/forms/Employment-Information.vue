@@ -17,7 +17,7 @@
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
-                  'name',
+                  'current_employer',
                   {
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -32,7 +32,7 @@
             <a-form-item label="Starting Date">
               <a-date-picker
                 v-decorator="[
-                  'last_name',
+                  'current_starting',
                   {
                     rules: [
                       {
@@ -53,7 +53,7 @@
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
-                  'name',
+                  'prev1',
                   {
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -67,25 +67,32 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-                v-model="startValue"
-                :disabled-date="disabledStartDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev1starting',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="Start"
-                @openChange="handleStartOpenChange"
+           
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-                v-model="endValue"
-                :disabled-date="disabledEndDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev1ending',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="End"
-                :open="endOpen"
-                @openChange="handleEndOpenChange"
+              
               />
             </a-form-item>
           </a-col>
@@ -95,7 +102,7 @@
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
-                  'name',
+                  'prev2',
                   {
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -109,25 +116,33 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-                v-model="startValue"
-                :disabled-date="disabledStartDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev2starting',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
+               
                 placeholder="Start"
-                @openChange="handleStartOpenChange"
+                
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-                v-model="endValue"
-                :disabled-date="disabledEndDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev2ending',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="End"
-                :open="endOpen"
-                @openChange="handleEndOpenChange"
+               
               />
             </a-form-item>
           </a-col>
@@ -137,7 +152,7 @@
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
-                  'name',
+                  'prev3',
                   {
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -151,25 +166,31 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-                v-model="startValue"
-                :disabled-date="disabledStartDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev3starting',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="Start"
-                @openChange="handleStartOpenChange"
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-                v-model="endValue"
-                :disabled-date="disabledEndDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev3ending',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="End"
-                :open="endOpen"
-                @openChange="handleEndOpenChange"
+                
               />
             </a-form-item>
           </a-col>
@@ -179,7 +200,7 @@
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
-                  'name',
+                  'prev4',
                   {
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -193,25 +214,32 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-                v-model="startValue"
-                :disabled-date="disabledStartDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev4starting',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="Start"
-                @openChange="handleStartOpenChange"
+              
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-                v-model="endValue"
-                :disabled-date="disabledEndDate"
-                show-time
-                format="YYYY-MM-DD HH:mm:ss"
+              v-decorator="[
+                  'prev4ending',
+                  {
+                    rules: [
+                      { required: true, message: 'Please enter user name' },
+                    ],
+                  },
+                ]"
                 placeholder="End"
-                :open="endOpen"
-                @openChange="handleEndOpenChange"
+              
               />
             </a-form-item>
           </a-col>
@@ -219,8 +247,8 @@
       </a-form>
       <div
       >
-        <a-button type="" @click="onClose" class="mx-10"> Previous Section </a-button>
-        <a-button type="primary" @click="onClose"> Next Section </a-button>
+        <a-button type="" @click="handlePrevious" class="mx-10"> Previous Section </a-button>
+        <a-button type="primary" @click="handleSubmit"> Next Section </a-button>
       </div>
     </div>
   </a-card>
@@ -231,8 +259,10 @@ export default {
   data() {
     return {
       startValue: null,
-      endValue: null,
+      prev1startValue:null,
+      prev1endValue: null,
       endOpen: false,
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     };
   },
   watch: {
@@ -244,27 +274,40 @@ export default {
     },
   },
   methods: {
-    disabledStartDate(startValue) {
+    prev1disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {
         return false;
       }
       return startValue.valueOf() > endValue.valueOf();
     },
-    disabledEndDate(endValue) {
+    prev1disabledEndDate(endValue) {
       const startValue = this.startValue;
       if (!endValue || !startValue) {
         return false;
       }
       return startValue.valueOf() >= endValue.valueOf();
     },
-    handleStartOpenChange(open) {
+    prev1handleStartOpenChange(open) {
       if (!open) {
         this.endOpen = true;
       }
     },
-    handleEndOpenChange(open) {
+    prev1handleEndOpenChange(open) {
       this.endOpen = open;
+    },
+    handlePrevious(){
+
+
+    },
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values);
+          this.$store.dispatch("addGeneralInfo",values);
+        }
+      });
     },
   },
 };

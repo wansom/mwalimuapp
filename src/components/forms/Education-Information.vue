@@ -18,10 +18,10 @@
               <a-form-item label="Law School">
                 <a-input
                   v-decorator="[
-                    'name',
+                    'law_school',
                     {
                       rules: [
-                        { required: true, message: 'Please enter user name' },
+                        { required: true, message: 'Please enter your law school' },
                       ],
                     },
                   ]"
@@ -32,22 +32,31 @@
             <a-col :span="4">
               <a-form-item label="Starting Date">
                 <a-date-picker
-                  v-model="startValue"
+                v-decorator="[
+                    'law_starting',
+                    {
+                      rules: [
+                        { required: true, message: 'Please enter starting date' },
+                      ],
+                    },
+                  ]"
                   :disabled-date="disabledStartDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
                   placeholder="Start"
-                  @openChange="handleStartOpenChange"
+                
                 />
               </a-form-item>
             </a-col>
             <a-col :span="4">
               <a-form-item label="Ending Date">
                 <a-date-picker
-                  v-model="endValue"
-                  :disabled-date="disabledEndDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'law_ending',
+                    {
+                      rules: [
+                        { required: true, message: 'Please enter starting date' },
+                      ],
+                    },
+                  ]"
                   placeholder="End"
                   :open="endOpen"
                   @openChange="handleEndOpenChange"
@@ -60,7 +69,7 @@
               <a-form-item label="Institution">
                 <a-input
                   v-decorator="[
-                    'name',
+                    'school1',
                     {
                       rules: [
                         { required: true, message: 'Please enter user name' },
@@ -74,22 +83,31 @@
             <a-col :span="4">
               <a-form-item label="Starting Date">
                 <a-date-picker
-                  v-model="startValue"
-                  :disabled-date="disabledStartDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'school1_starting',
+                    {
+                      rules: [
+                        { required: true, message: 'Please enter user name' },
+                      ],
+                    },
+                  ]"
+                 
                   placeholder="Start"
-                  @openChange="handleStartOpenChange"
+                  
                 />
               </a-form-item>
             </a-col>
             <a-col :span="4">
               <a-form-item label="Ending Date">
                 <a-date-picker
-                  v-model="endValue"
-                  :disabled-date="disabledEndDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'school1_ending',
+                    {
+                      rules: [
+                        { required: true, message: 'Field is required' },
+                      ],
+                    },
+                  ]"
                   placeholder="End"
                   :open="endOpen"
                   @openChange="handleEndOpenChange"
@@ -102,10 +120,10 @@
               <a-form-item label="Institution">
                 <a-input
                   v-decorator="[
-                    'name',
+                    'school2',
                     {
                       rules: [
-                        { required: true, message: 'Please enter user name' },
+                        { required: true, message: 'field is required' },
                       ],
                     },
                   ]"
@@ -116,22 +134,30 @@
             <a-col :span="4">
               <a-form-item label="Starting Date">
                 <a-date-picker
-                  v-model="startValue"
-                  :disabled-date="disabledStartDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'school2_start',
+                    {
+                      rules: [
+                        { required: true, message: 'field is required' },
+                      ],
+                    },
+                  ]"
                   placeholder="Start"
-                  @openChange="handleStartOpenChange"
+                
                 />
               </a-form-item>
             </a-col>
             <a-col :span="4">
               <a-form-item label="Ending Date">
                 <a-date-picker
-                  v-model="endValue"
-                  :disabled-date="disabledEndDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'school2_end',
+                    {
+                      rules: [
+                        { required: true, message: 'field is required' },
+                      ],
+                    },
+                  ]"
                   placeholder="End"
                   :open="endOpen"
                   @openChange="handleEndOpenChange"
@@ -144,7 +170,7 @@
               <a-form-item label="Institution">
                 <a-input
                   v-decorator="[
-                    'name',
+                    'school3',
                     {
                       rules: [
                         { required: true, message: 'Please enter user name' },
@@ -158,25 +184,34 @@
             <a-col :span="4">
               <a-form-item label="Starting Date">
                 <a-date-picker
-                  v-model="startValue"
-                  :disabled-date="disabledStartDate"
-                  show-time
+                v-decorator="[
+                    'school3_start',
+                    {
+                      rules: [
+                        { required: true, message: 'field is required' },
+                      ],
+                    },
+                  ]"
                   format="YYYY-MM-DD HH:mm:ss"
                   placeholder="Start"
-                  @openChange="handleStartOpenChange"
+                 
                 />
               </a-form-item>
             </a-col>
             <a-col :span="4">
               <a-form-item label="Ending Date">
                 <a-date-picker
-                  v-model="endValue"
-                  :disabled-date="disabledEndDate"
-                  show-time
-                  format="YYYY-MM-DD HH:mm:ss"
+                v-decorator="[
+                    'school3_end',
+                    {
+                      rules: [
+                        { required: true, message: 'field is required' },
+                      ],
+                    },
+                  ]"
                   placeholder="End"
                   :open="endOpen"
-                  @openChange="handleEndOpenChange"
+                 
                 />
               </a-form-item>
             </a-col>
@@ -184,8 +219,8 @@
         </a-form>
         <div
         >
-          <a-button type="" @click="onClose" class="mx-10"> Previous Section </a-button>
-          <a-button type="primary" @click="onClose"> Next Section </a-button>
+          <a-button type="" @click="handlePrevious" class="mx-10"> Previous Section </a-button>
+          <a-button type="primary" @click="handleSubmit"> Next Section </a-button>
         </div>
       </div>
     </a-card>
@@ -198,6 +233,7 @@
         startValue: null,
         endValue: null,
         endOpen: false,
+        form: this.$form.createForm(this, { name: 'coordinated' }),
       };
     },
     watch: {
@@ -231,6 +267,20 @@
       handleEndOpenChange(open) {
         this.endOpen = open;
       },
+      handlePrevious(){
+
+
+},
+handleSubmit(e) {
+  e.preventDefault();
+  this.form.validateFields((err, values) => {
+    if (!err) {
+      console.log('Received values of form: ', values);
+      this.$store.dispatch("addGeneralInfo",values);
+    }
+  });
+},
+
     },
   };
   </script>
