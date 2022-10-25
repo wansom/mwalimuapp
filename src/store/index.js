@@ -10,20 +10,34 @@ export default new Vuex.Store({
   state: {
     user: {},
     general_information: {
-      first_name:"",
-      last_name:"",
-      phone:"",
-      job_title:"",
-      biography:"",
-      email:"",
-      location:"",
-      webiste:"",
-      specialisation:""
-
+      first_name: "",
+      last_name: "",
+      phone: "",
+      job_title: "",
+      biography: "",
+      email: "",
+      location: "",
+      webiste: "",
+      specialisation: "",
     },
-    employmentInfo:{
-      
-    }
+    employmentInfo: {
+      current_employer: "",
+      current_starting: new Date(),
+
+      prev1: "",
+      prev1ending: new Date(),
+      prev1starting: new Date(),
+      prev2: "",
+      prev2ending: new Date(),
+      prev2starting: new Date(),
+      prev3: "",
+      prev3ending: new Date(),
+      prev3starting: new Date(),
+      prev4: "",
+      prev4ending: new Date(),
+      prev4starting: "",
+    },
+    step:0
   },
   getters: {},
   mutations: {
@@ -33,6 +47,9 @@ export default new Vuex.Store({
     setGeneralInformation(state, val) {
       state.general_information = val;
     },
+    setStep(state,val){
+      state.step=val
+    }
   },
   actions: {
     //register new user
@@ -81,19 +98,37 @@ export default new Vuex.Store({
     },
 
     fetchUserProfile({ commit }, data) {
+      console.log("received data,",data)
       fb.usersCollection
         .doc(data.uid)
         .get()
         .then((result) => {
+          console.log(result.data())
           commit("setUserProfile", result.data());
         });
     },
     /*
     user registration start
     */
-   addGeneralInfo({commit},data){
-    commit("setGeneralInformation",data)
-   }
+    updateUser({ dispatch }, data) {
+      let user = fb.auth.currentUser;
+      fb.usersCollection.doc(user.uid).update(data).then(()=>{
+        dispatch("setStep",1)
+        dispatch("fetchUserProfile",user)
+        swal({
+          title: "Success!",
+          text: `Info updated Successfully!`,
+          icon: "success",
+        });
+
+      }).catch((err)=>{
+        swal({
+          title: "OOPS!",
+          text: `${err.message}`,
+          icon: "error",
+        });
+      })
+    },
   },
   modules: {},
 });

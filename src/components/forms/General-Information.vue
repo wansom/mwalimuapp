@@ -13,8 +13,9 @@
               <a-input
                 v-decorator="[
                   'first_name',
-                
-                  {initialValue:general_information.first_name,
+
+                  {
+                    initialValue: user.first_name,
 
                     rules: [
                       { required: true, message: 'Please enter user name' },
@@ -30,7 +31,8 @@
               <a-input
                 v-decorator="[
                   'last_name',
-                  {initialValue:general_information.last_name,
+                  {
+                    initialValue: user.last_name,
                     rules: [
                       {
                         required: true,
@@ -50,7 +52,8 @@
               <a-input
                 v-decorator="[
                   'email',
-                  {initialValue:general_information.email,
+                  {
+                    initialValue: user.email,
                     rules: [
                       { required: true, message: 'Please select your email' },
                     ],
@@ -66,7 +69,8 @@
               <a-input
                 v-decorator="[
                   'phone',
-                  {initialValue:general_information.phone,
+                  {
+                    initialValue: user.phone,
                     rules: [
                       {
                         required: true,
@@ -87,7 +91,8 @@
               <a-input
                 v-decorator="[
                   'location',
-                  {initialValue:general_information.location,
+                  {
+                    initialValue: user.location,
                     rules: [
                       { required: true, message: 'Please enter your location' },
                     ],
@@ -102,7 +107,8 @@
               <a-input
                 v-decorator="[
                   'job_title',
-                  {initialValue:general_information.job_title,
+                  {
+                    initialValue: user.job_title,
                     rules: [
                       {
                         required: true,
@@ -146,7 +152,8 @@
               <a-input
                 v-decorator="[
                   'website',
-                  {initialValue:general_information.website,
+                  {
+                    initialValue: user.website,
                     rules: [
                       {
                         required: false,
@@ -166,7 +173,8 @@
               <a-textarea
                 v-decorator="[
                   'biography',
-                  {initialValue:general_information.biography,
+                  {
+                    initialValue: user.biography,
                     rules: [
                       {
                         required: true,
@@ -202,19 +210,22 @@
         </a-row>
       </a-form>
       <div>
-        <a-button type="primary" @click="handleSubmit"> Next Section </a-button>
+        <a-button type="primary" @click="handleSubmit"
+          >Save and Continue
+        </a-button>
       </div>
     </div>
   </a-card>
 </template>
 
 <script>
-import {mapState} from "vuex"
+import { mapState } from "vuex";
+import * as fb from "../../firebase";
 export default {
   data() {
     return {
-      formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' }),
+      formLayout: "horizontal",
+      form: this.$form.createForm(this, { name: "coordinated" }),
     };
   },
 
@@ -223,22 +234,37 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
-          this.$store.dispatch("addGeneralInfo",values);
+          console.log("Received values of form: ", values);
+          const payload = {
+            first_name:values.first_name?? "",
+            last_name: values.last_name?? "",
+            phone: values.phone??"",
+            job_title:values.job_title?? "",
+            biography: values.biography?? "",
+            email: values.email??"",
+            location:values.location?? "",
+            webiste: values.webiste??"",
+            specialisation: values.specialisation?? "",
+            step:"generalInfo"
+          };
+          this.$store.dispatch("updateUser", payload);
         }
       });
     },
     handleChange(value) {
       console.log(value);
       this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+        note: `Hi, ${value === "male" ? "man" : "lady"}!`,
       });
     },
   },
   computed: {
     ...mapState(["general_information", "user"]),
   },
-
+  mounted(){
+    let user =fb.auth.currentUser
+    this.$store.dispatch("fetchUserProfile",user)
+  }
 };
 </script>
 

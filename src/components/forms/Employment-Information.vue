@@ -18,9 +18,9 @@
               <a-input
                 v-decorator="[
                   'current_employer',
-                  {
+                  { initialValue: user.current_employer,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: true, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -33,11 +33,11 @@
               <a-date-picker
                 v-decorator="[
                   'current_starting',
-                  {
+                  { initialValue: user.current_starting,
                     rules: [
                       {
                         required: true,
-                        message: 'Please enter your last name',
+                        message: 'Field is required',
                       },
                     ],
                   },
@@ -54,9 +54,9 @@
               <a-input
                 v-decorator="[
                   'prev1',
-                  {
+                  { initialValue: user.prev1,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -67,32 +67,30 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev1starting',
-                  {
+                  { initialValue: user.prev1starting,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="Start"
-           
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev1ending',
-                  {
+                  { initialValue: user.prev1ending,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="End"
-              
               />
             </a-form-item>
           </a-col>
@@ -103,9 +101,9 @@
               <a-input
                 v-decorator="[
                   'prev2',
-                  {
+                  { initialValue: user.prev2,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -116,33 +114,30 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev2starting',
-                  {
+                  { initialValue: user.prev2starting,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
-               
                 placeholder="Start"
-                
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev2ending',
-                  {
+                  { initialValue: user.prev2ending,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="End"
-               
               />
             </a-form-item>
           </a-col>
@@ -153,9 +148,9 @@
               <a-input
                 v-decorator="[
                   'prev3',
-                  {
+                  { initialValue: user.prev3,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -166,11 +161,11 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev3starting',
-                  {
+                  { initialValue: user.prev3starting,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -181,16 +176,15 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev3ending',
-                  {
+                  { initialValue: user.prev3ending,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="End"
-                
               />
             </a-form-item>
           </a-col>
@@ -201,9 +195,9 @@
               <a-input
                 v-decorator="[
                   'prev4',
-                  {
+                  { initialValue: user.prev4,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
@@ -214,55 +208,57 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev4starting',
-                  {
+                  { initialValue: user.prev4starting,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="Start"
-              
               />
             </a-form-item>
           </a-col>
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
-              v-decorator="[
+                v-decorator="[
                   'prev4ending',
-                  {
+                  { initialValue: user.prev4ending,
                     rules: [
-                      { required: true, message: 'Please enter user name' },
+                      { required: false, message: 'Field is required' },
                     ],
                   },
                 ]"
                 placeholder="End"
-              
               />
             </a-form-item>
           </a-col>
         </a-row>
       </a-form>
-      <div
-      >
-        <a-button type="" @click="handlePrevious" class="mx-10"> Previous Section </a-button>
-        <a-button type="primary" @click="handleSubmit"> Next Section </a-button>
+      <div>
+        <a-button type="" @click="handlePrevious" class="mx-10">
+          Previous Section
+        </a-button>
+        <a-button type="primary" @click="handleSubmit"> Save and Continue </a-button>
       </div>
     </div>
   </a-card>
 </template>
 
 <script>
+import * as fb from "../../firebase";
+import { mapState } from "vuex";
+const moment =require("moment");
 export default {
   data() {
     return {
       startValue: null,
-      prev1startValue:null,
+      prev1startValue: null,
       prev1endValue: null,
       endOpen: false,
-      form: this.$form.createForm(this, { name: 'coordinated' }),
+      form: this.$form.createForm(this, { name: "coordinated" }),
     };
   },
   watch: {
@@ -296,19 +292,41 @@ export default {
     prev1handleEndOpenChange(open) {
       this.endOpen = open;
     },
-    handlePrevious(){
-
-
-    },
+    handlePrevious() {},
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
+        console.log(values)
         if (!err) {
-          console.log('Received values of form: ', values);
-          this.$store.dispatch("addGeneralInfo",values);
+          const payload = {
+            current_employer:values.current_employer?? "",
+            current_starting: values.current_starting.format()??"",
+
+            prev1:values.prev1?? "",
+            prev1ending:values.prev1ending.format()?? "",
+            prev1starting:values.prev1starting.format()??"",
+            prev2:values.prev2?? "",
+            prev2ending:values.prev2ending.format()??"",
+            prev2starting: values.prev2starting?.format()??"",
+            prev3:values.prev3?? "",
+            prev3ending: values.prev3ending.format()??"",
+            prev3starting: values.prev3starting.format()??"",
+            prev4: values.prev4??"",
+            prev4ending: values.prev4ending.format()??"",
+            prev4starting:values.prev4starting.format()?? "",
+            step:"employmentInfo"
+          };
+          this.$store.dispatch("updateUser",payload);
         }
       });
     },
+  },
+  computed: {
+    ...mapState(["user"]),
+  },
+  mounted() {
+    let user = fb.auth.currentUser;
+    this.$store.dispatch("fetchUserProfile", user);
   },
 };
 </script>
