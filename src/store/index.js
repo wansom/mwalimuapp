@@ -98,12 +98,10 @@ export default new Vuex.Store({
     },
 
     fetchUserProfile({ commit }, data) {
-      console.log("received data,",data)
       fb.usersCollection
         .doc(data.uid)
         .get()
         .then((result) => {
-          console.log(result.data())
           commit("setUserProfile", result.data());
         });
     },
@@ -113,7 +111,6 @@ export default new Vuex.Store({
     updateUser({ dispatch }, data) {
       let user = fb.auth.currentUser;
       fb.usersCollection.doc(user.uid).update(data).then(()=>{
-        dispatch("setStep",1)
         dispatch("fetchUserProfile",user)
         swal({
           title: "Success!",
