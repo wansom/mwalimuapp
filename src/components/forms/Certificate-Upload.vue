@@ -13,7 +13,7 @@
               <a-date-picker
                 v-decorator="[
                   'practise_start',
-                  {
+                  { initialValue: user.practise_start,
                     rules: [
                       {
                         required: true,
@@ -31,8 +31,8 @@
             <a-form-item label="Certificate Renewal Date">
               <a-date-picker
                 v-decorator="[
-                  'practise_end',
-                  {
+                  'cert_renewal_date',
+                  { initialValue: user.cert_renewal_date,
                     rules: [
                       {
                         required: true,
@@ -47,7 +47,6 @@
             </a-form-item>
           </a-col>
         </a-row>
-
         <a-row :gutter="16">
           <a-col :span="24">
             <a-form-item label="Practise Certificate">
@@ -81,6 +80,9 @@
 </template>
 
 <script>
+import * as fb from "../../firebase";
+import { mapState } from "vuex";
+const moment = require("moment");
 export default {
   data() {
     return {
@@ -105,11 +107,25 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
+          const payload={
+            practise_start:values.practise_start.format()??"",
+            cert_renewal_date:values.cert_renewal_date.format()??"",
+            step:"certUpload",
+            status:"pending approval"
+
+          }
           console.log("Received values of form: ", values);
-          this.$store.dispatch("addGeneralInfo", values);
+           this.$store.dispatch("updateUser", payload);
         }
       });
     },
+  },
+  computed: {
+    ...mapState(["user"]),
+  },
+  mounted() {
+    let user = fb.auth.currentUser;
+    this.$store.dispatch("fetchUserProfile", user);
   },
 };
 </script>
