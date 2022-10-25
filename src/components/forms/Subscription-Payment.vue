@@ -5,7 +5,16 @@
     :bodyStyle="{ paddingTop: 0, paddingBottom: '16px' }"
   >
     <a-result
-    v-if="status=='notsubmitted'"
+      v-if="user.status == 'pending approval'"
+      status="404"
+      title="Account Pending review"
+      sub-title="Your Details are currently being reviewed,you will be notified to make payments once your account has been approved"
+    >
+     
+    </a-result>
+    <CardPaymentMethods v-else-if="user.status == 'approved'"></CardPaymentMethods>
+    <a-result
+      v-else
       status="500"
       title="Profile Not Submitted"
       sub-title="Sorry, You can only make payment once your profile has been approved"
@@ -14,30 +23,28 @@
         <a-button type="primary"> Submit Profile </a-button>
       </template>
     </a-result>
-    <a-result
-    v-if="status=='pending approval'"
-      status="404"
-      title="Account Pending review"
-      sub-title="Your Details are currently being reviewed,you will be notified to make payments once your account has been approved"
-    >
-      <template #extra>
-        <a-button type="primary"> Submit Profile </a-button>
-      </template>
-    </a-result>
-    <CardPaymentMethods v-if="status=='approved'"></CardPaymentMethods>
   </a-card>
 </template>
 
 <script>
-import CardPaymentMethods from '../Cards/CardPaymentMethods.vue';
+import CardPaymentMethods from "../Cards/CardPaymentMethods.vue";
+import * as fb from "../../firebase";
+import { mapState } from "vuex";
 export default {
-    data() {
-        return {
-            optons: ["notsubmitted", "pending approval", "approved", "active"],
-            status: "approved"
-        };
-    },
-    components: { CardPaymentMethods }
+  data() {
+    return {
+      optons: ["notsubmitted", "pending approval", "approved", "active"],
+      status: "approved",
+    };
+  },
+  components: { CardPaymentMethods },
+  computed: {
+    ...mapState(["user"]),
+  },
+  mounted() {
+    let user = fb.auth.currentUser;
+    this.$store.dispatch("fetchUserProfile", user);
+  },
 };
 </script>
 
