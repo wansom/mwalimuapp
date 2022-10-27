@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { auth } from "../firebase";
+import { auth } from "../firebase";	
+import * as fb from "../firebase";
+
 
 Vue.use(VueRouter)
 
@@ -37,7 +39,7 @@ let routes = [
 		component: () => import('../views/Tables.vue'),
 	},
 	{
-		path: '/details',
+		path: '/details/:id',
 		name: 'Details',
 		component: () => import('../views/Profile.vue'),
 	},
@@ -101,6 +103,15 @@ router.beforeEach((to, from, next) => {
 	  next("/Sign-In");
 	} else {
 	  next();
+	}
+  });
+
+  router.afterEach((to, from) => {
+	if(to.params.id){
+		fb.usersCollection.doc(to.params.id).update({
+			profile_visits:fb.types.FieldValue.increment(1)
+		})
+
 	}
   });
 

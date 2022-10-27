@@ -141,7 +141,8 @@
 			],
 		},
 	] ;
-
+	import * as fb from "../firebase";
+	import router from "../router/index"
 	export default ({
 		components: {
 			CardPlatformSettings,
@@ -159,9 +160,26 @@
 
 				// Project cards data
 				projects,
-				advocate:this.$route.params.advocate
+				advocate:{}
 			}
 		},
+methods:{
+	fetchDetails(){
+			fb.usersCollection.doc(this.$route.params.id).get().then((doc)=>{
+				this.advocate=doc.data()
+
+			})
+		},
+		updateProfileVisits(){
+		fb.usersCollection.doc(this.$route.params.id).update({
+			profile_visits:fb.types.FieldValue.increment()
+		})	
+		}
+},
+		mounted(){
+			this.fetchDetails()
+			
+		}
 	})
 
 </script>
