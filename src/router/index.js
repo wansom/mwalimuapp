@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { auth } from "../firebase";
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,9 @@ let routes = [
 	{
 		path: '/dashboard',
 		name: 'Dashboard',
+		meta: {
+			requiresAuth: true,
+		  },
 		layout: "dashboard",
 		component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
 	},
@@ -33,9 +37,8 @@ let routes = [
 		component: () => import('../views/Tables.vue'),
 	},
 	{
-		path: '/billing',
-		name: 'Billing',
-		layout: "dashboard",
+		path: '/details',
+		name: 'Details',
 		component: () => import('../views/Profile.vue'),
 	},
 	{
@@ -48,7 +51,7 @@ let routes = [
 		component: () => import('../views/RTL.vue'),
 	},
 	{
-		path: '/Profile',
+		path: '/profile',
 		name: 'Profile',
 		layout: "dashboard",
 		component: () => import('../views/Billing.vue'),
@@ -73,8 +76,6 @@ let routes = [
 	},
 ]
 
-// Adding layout property from each route to the meta
-// object so it can be accessed later.
 function addLayoutToRoute( route, parentLayout = "default" )
 {
 	route.meta = route.meta || {} ;
@@ -90,22 +91,17 @@ function addLayoutToRoute( route, parentLayout = "default" )
 routes = routes.map( ( route ) => addLayoutToRoute( route ) ) ;
 
 const router = new VueRouter({
-	mode: 'hash',
-	base: process.env.BASE_URL,
+	mode: 'history',
 	routes,
-	scrollBehavior (to, from, savedPosition) {
-		if ( to.hash ) {
-			return {
-				selector: to.hash,
-				behavior: 'smooth',
-			}
-		}
-		return {
-			x: 0,
-			y: 0,
-			behavior: 'smooth',
-		}
-	}
 })
+router.beforeEach((to, from, next) => {
+	const requiresAuth = to.matched.some((route) => route.meta.requiresAuth);
+  
+	if (requiresAuth && !auth.currentUser) {
+	  next("/Sign-In");
+	} else {
+	  next();
+	}
+  });
 
 export default router

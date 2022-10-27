@@ -15,17 +15,15 @@
 			<template #title>
 				<a-row type="flex" align="middle">
 					<a-col :span="24" :md="12" class="col-info">
-						<a-avatar :size="74" shape="square" src="images/face-1.jpg" />
+						<a-avatar :size="240" shape="square" src="images/face-1.jpg" />
 						<div class="avatar-info">
-							<h4 class="font-semibold m-0">Sarah Jacob</h4>
-							<p>CEO / Co-Founder</p>
+							<h4 class="font-semibold m-0">{{advocate.first_name}}<span class="mx-5"></span>{{advocate.last_name}}</h4>
+							<p>{{advocate.job_title}}</p>
 						</div>
 					</a-col>
 					<a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 						<a-radio-group v-model="profileHeaderBtns" size="small">
-							<a-radio-button value="overview">OVERVIEW</a-radio-button>
-							<a-radio-button value="teams">TEAMS</a-radio-button>
-							<a-radio-button value="projects">PROJECTS</a-radio-button>
+							<a-radio-button value="overview">View More Profiles</a-radio-button>
 						</a-radio-group>
 					</a-col>
 				</a-row>
@@ -161,6 +159,7 @@
 
 				// Project cards data
 				projects,
+				advocate:this.$route.params.advocate
 			}
 		},
 	})
