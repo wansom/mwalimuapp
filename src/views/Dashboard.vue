@@ -1,8 +1,3 @@
-<!-- 
-	This is the dashboard page, it uses the dashboard layout in: 
-	"./layouts/Dashboard.vue" .
- -->
-
 <template>
   <div>
     <!-- Table & Timeline -->
@@ -13,13 +8,7 @@
         <CardBarChart></CardBarChart>
         <!-- / Projects Table Card -->
       </a-col>
-      <!-- / Table -->
-
-      <!-- Timeline -->
       <a-col :span="24" :lg="8" class="mb-24">
-        <!-- Orders History Timeline Card -->
-        <!-- <CardOrderHistory></CardOrderHistory> -->
-        <!-- / Orders History Timeline Card -->
       </a-col>
       <!-- / Timeline -->
     </a-row>
