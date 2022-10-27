@@ -39,7 +39,7 @@ let routes = [
 		path: '/billing',
 		name: 'Billing',
 		layout: "dashboard",
-		component: () => import('../views/Billing.vue'),
+		component: () => import('../views/Profile.vue'),
 	},
 	{
 		path: '/rtl',
@@ -54,10 +54,7 @@ let routes = [
 		path: '/Profile',
 		name: 'Profile',
 		layout: "dashboard",
-		meta: {
-			layoutClass: 'layout-profile',
-		},
-		component: () => import('../views/Profile.vue'),
+		component: () => import('../views/Billing.vue'),
 	},
 	{
 		path: '/sign-in',

@@ -10,35 +10,7 @@
 
 			<!-- Billing Info Column -->
 			<a-col :span="24" :md="16">
-				<a-row type="flex" :gutter="24">
-					<a-col :span="24" :lg="12" class="mb-24">
-
-						<!-- Master Card -->
-						<CardCredit></CardCredit>
-						<!-- / Master Card -->
-
-					</a-col>
-					<a-col :span="12" :lg="10" class="mb-24" v-for="(salary, index) in salaries" :key="index">
-
-						<!-- Salary Card -->
-						<WidgetSalary
-							:value="salary.value"
-							:prefix="salary.prefix"
-							:icon="salary.icon"
-							:title="salary.title"
-							:content="salary.content"
-						></WidgetSalary>
-						<!-- / Salary Card -->
-
-					</a-col>
-					<a-col :span="24" class="mb-24">
-
-						<!-- Payment Methods Card -->
-						<CardPaymentMethods></CardPaymentMethods>
-						<!-- Payment Methods Card -->
-
-					</a-col>
-				</a-row>
+				<profile-information></profile-information>
 			</a-col>
 			<!-- / Billing Info Column -->
 			
@@ -66,6 +38,7 @@
 	import CardInvoices from "../components/Cards/CardInvoices"
 	import CardBillingInfo from "../components/Cards/CardBillingInfo"
 	import CardTransactions from "../components/Cards/CardTransactions"
+	import ProfileInformation from "../components/forms/ProfileInformation.vue";
 
 
 	// Salary cards data
@@ -176,6 +149,7 @@
 			CardInvoices,
 			CardBillingInfo,
 			CardTransactions,
+			ProfileInformation
 		},
 		data() {
 			return {

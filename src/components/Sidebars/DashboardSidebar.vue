@@ -32,7 +32,7 @@
 					</router-link>
 				</a-menu-item>
 				<a-menu-item v-if="user.status=='active'">
-					<router-link to="/billing" >
+					<router-link to="/profile" >
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M4 4C2.89543 4 2 4.89543 2 6V7H18V6C18 4.89543 17.1046 4 16 4H4Z" fill="#111827"/>

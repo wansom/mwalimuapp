@@ -6,23 +6,27 @@
     :bodyStyle="{ paddingTop: 0 }"
   >
     <div>
-      <a-modal
-        v-model="visible"
-        on-ok="initiatePayment"
-      > <template slot="footer">
-        <a-button key="back" @click="handleCancel">
-          Cancel
-        </a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="intiatePayment">
-          Proceed to Checkout
-        </a-button>
-      </template>
+      <a-modal v-model="visible" on-ok="initiatePayment">
+        <template slot="footer">
+          <a-button key="back" @click="handleCancel"> Cancel </a-button>
+          <a-button
+            key="submit"
+            type="primary"
+            :loading="loading"
+            @click="intiatePayment"
+          >
+            Proceed to Checkout
+          </a-button>
+        </template>
         <a-result
           status="info"
           title="KES 1500.00!"
-          :sub-title="'a notification will be sent to your phone number registered ' +user.phone+ 'enter MPESA PIN to complete payment'"
+          :sub-title="
+            'a notification will be sent to your phone number registered ' +
+            user.phone +
+            'enter MPESA PIN to complete payment'
+          "
         >
-         
         </a-result>
       </a-modal>
     </div>
@@ -38,7 +42,9 @@
           :md="12"
           style="display: flex; align-items: center; justify-content: flex-end"
         >
-          <a-button type="primary" @click="confirmPayment"> VERIFY PAYMENT </a-button>
+          <a-button type="primary" @click="confirmPayment">
+            VERIFY PAYMENT
+          </a-button>
         </a-col>
       </a-row>
     </template>
@@ -71,7 +77,7 @@
 <script>
 import * as fb from "../../firebase";
 export default {
-	props:['user'],
+  props: ["user"],
   data() {
     return {
       visible: false,
@@ -82,12 +88,12 @@ export default {
     showModal() {
       this.visible = true;
     },
-	intiatePayment() {
+    intiatePayment() {
       if (this.user.phone.startsWith("254")) {
         this.loading = true;
         this.$store
           .dispatch("intiatePayments", {
-            amount:5,
+            amount: 5,
             phone_number: this.user.phone,
           })
           .then((response) => {
@@ -112,7 +118,7 @@ export default {
         this.loading = true;
         this.$store
           .dispatch("intiatePayments", {
-            amount:5,
+            amount: 5,
             phone_number: this.user.phone,
           })
           .then((response) => {
@@ -133,8 +139,7 @@ export default {
               icon: "error",
             });
           });
-      }  
-	  else {
+      } else {
         swal({
           title: "OOPS!",
           text: `phone number form 254705****21`,
@@ -143,7 +148,7 @@ export default {
         this.loading = false;
       }
     },
-	confirmPayment() {
+    confirmPayment() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
       console.log(id);
       fb.mpesaCollection
@@ -187,13 +192,17 @@ export default {
           let data = doc.data();
           if (doc.exists && data.amount == 5) {
             this.paymentConfirmed = true;
-           let user =fb.auth.currentUser
-		   fb.usersCollection.doc(user.uid).update({
-			status:"active"
-		   }).then(()=>{
-			let user =fb.auth.currentUser
-			this.$store.dispatch("fetchUserProfile",user)
-		   })
+            let user = fb.auth.currentUser;
+            fb.usersCollection
+              .doc(user.uid)
+              .update({
+                status: "active",
+                subscription_date: new Date(),
+              })
+              .then(() => {
+                let user = fb.auth.currentUser;
+                this.$store.dispatch("fetchUserProfile", user);
+              });
           } else {
             swal({
               title: "SORRY!",
@@ -203,9 +212,9 @@ export default {
           }
         });
     },
-	handleCancel(){
-		this.visible=false
-	}
+    handleCancel() {
+      this.visible = false;
+    },
   },
 };
 </script>

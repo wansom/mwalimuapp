@@ -13,6 +13,13 @@
     </a-result>
     <CardPaymentMethods v-else-if="user.status == 'approved'" :user="user"></CardPaymentMethods>
     <a-result
+    v-else-if="user.status == 'active'"
+    status="success"
+    title="Your Account currently is Active!"
+    sub-title="You will be required to renew your subsction on"
+  >
+  </a-result>
+    <a-result
       v-else
       status="500"
       title="Profile Not Submitted"
