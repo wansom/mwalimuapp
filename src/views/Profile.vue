@@ -37,7 +37,7 @@
 			<a-col :span="24" :md="10" class="mb-24">
 
 				<!-- Platform Settings Card -->
-				<CardPlatformSettings></CardPlatformSettings>
+				<CardPlatformSettings :advocate="advocate"></CardPlatformSettings>
 				<!-- / Platform Settings Card -->
 
 			</a-col>
@@ -47,7 +47,7 @@
 			<a-col :span="24" :md="14" class="mb-24">
 
 				<!-- Profile Information Card -->
-				<CardProfileInformation></CardProfileInformation>
+				<CardProfileInformation :advocate="advocate"></CardProfileInformation>
 				<!-- / Profile Information Card -->
 
 			</a-col>

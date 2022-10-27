@@ -48,7 +48,7 @@
         <div class="card-footer">
           <router-link :to="{name:'Details', params:{advocate:advocate}}">
             <a href="#" size="small">
-              <span>Read More</span>
+              <span>View Profile</span>
               <svg
                 width="16"
                 height="16"
