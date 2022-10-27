@@ -16,33 +16,8 @@
 <div class="mx-5 find-by-focus">
   <h3>FIND LAWYERS BY FOCUS</h3>
   <a-row type="flex" :gutter="[24,24]" justify="space-around" align="middle" :lg="{span: 12, offset: 0}" :xl="{span: 6, offset: 2}">
-            <a-col  :span="24" :md="6">
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-
-            </a-col>
-            <a-col  :span="24" :md="6">
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-
-            </a-col>
-            <a-col  :span="24" :md="6">
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-
-            </a-col>
-            <a-col  :span="24" :md="6">
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-              <p>Real Estats</p>
-
+            <a-col  :span="24" :md="6" v-for="i of focus_areas" :key="i">
+              <p>Real Estate</p>
             </a-col>
 
           </a-row>
@@ -92,6 +67,12 @@ export default {
   components: {
     DefaultHeader,
     CardInfo,
+
+  },
+  data(){
+    return{
+      focus_areas:[1,2,3,4,5,0,6,7,51,43,50,49,]
+    }
   },
   computed: {
     ...mapState(["advocates", "user"]),
