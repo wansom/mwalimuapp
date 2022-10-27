@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import router from "../router/index";
 import * as fb from "../firebase";
 import swal from "sweetalert";
+const axios = require("axios").default;
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
       location: "",
       webiste: "",
       specialisation: "",
+      advocates:[]
     },
     employmentInfo: {
       current_employer: "",
@@ -37,7 +39,8 @@ export default new Vuex.Store({
       prev4ending: new Date(),
       prev4starting: "",
     },
-    step:0
+    step:0,
+    advocates:[]
   },
   getters: {},
   mutations: {
@@ -49,6 +52,9 @@ export default new Vuex.Store({
     },
     setStep(state,val){
       state.step=val
+    },
+    setAdvocates(state,val){
+      state.advocates=val
     }
   },
   actions: {
@@ -126,6 +132,40 @@ export default new Vuex.Store({
         });
       })
     },
+        //mpesa
+        async intiatePayments({ dispatch }, values) {
+          const result = await axios.get(
+            `https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/payments/pay/${values.amount}/${values.phone_number}`
+          );
+          return result;
+        },
+        async confirmPayments({ dispatch }) {
+          const result = await axios.get(
+            "https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/payments/callback"
+          );
+          return result;
+        },
+        //send email
+        async sendMail({ dispatch }, values) {
+          await axios.post(
+            "https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/mail/sendmail",
+            {
+              name: values.name,
+              email: values.email,
+              subject: values.subject,
+            }
+          );
+        },
+        async fetchAdvocates({ commit }) {
+          fb.usersCollection.where("status","==","active").onSnapshot((snapshot) => {
+            const loadedAdvocates = [];
+            snapshot.forEach((doc) => {
+              const loadedAdvocate = doc.data();
+              (loadedAdvocate.id = doc.id), loadedAdvocates.push(loadedAdvocate);
+            });
+            commit("setAdvocates", loadedAdvocates);
+          });
+        },
   },
   modules: {},
 });

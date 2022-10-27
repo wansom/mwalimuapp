@@ -4,14 +4,14 @@ import "firebase/firestore";
 import "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDqLBvlU2U9nfhykPbJ9ORGn9g7FiBZmRQ",
-    authDomain: "azimio-kazi.firebaseapp.com",
-    databaseURL: "https://azimio-kazi-default-rtdb.firebaseio.com",
-    projectId: "azimio-kazi",
-    storageBucket: "azimio-kazi.appspot.com",
-    messagingSenderId: "862321007430",
-    appId: "1:862321007430:web:eeee65edf20c48d771a347",
-    measurementId: "G-XL5Q8TKRHR"
+  apiKey: "AIzaSyDMsPInM58uPksNu3E9iQ5EhnWBz67CPeQ",
+  authDomain: "scanpal-f74da.firebaseapp.com",
+  databaseURL: "https://scanpal-f74da.firebaseio.com",
+  projectId: "scanpal-f74da",
+  storageBucket: "scanpal-f74da.appspot.com",
+  messagingSenderId: "702443834173",
+  appId: "1:702443834173:web:a4148356cf434a6fda1354",
+  measurementId: "G-37KL0M4ESD"
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -24,9 +24,11 @@ const types = firebase.firestore;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion();
 
 // collection references
-const usersCollection = db.collection("users");
+const usersCollection = db.collection("lawyers");
 const businessCollection = db.collection("clients");
 const adminCollections =db.collection("admins");
+const mpesaCollection = db.collection("mpesa_responses");
+const transactions = db.collection("transactions");
 const capture = firebase.auth
 
 // export utils/refs
@@ -40,5 +42,7 @@ export {
   usersCollection,
   businessCollection,
   capture,
-  adminCollections
+  adminCollections,
+  mpesaCollection,
+  transactions
 };

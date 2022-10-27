@@ -10,7 +10,7 @@
       <!-- Table -->
       <a-col :span="24" :lg="16" class="mb-24">
         <!-- Projects Table Card -->
-        <CardInfo></CardInfo>
+        <CardBarChart></CardBarChart>
         <!-- / Projects Table Card -->
       </a-col>
       <!-- / Table -->
@@ -18,21 +18,12 @@
       <!-- Timeline -->
       <a-col :span="24" :lg="8" class="mb-24">
         <!-- Orders History Timeline Card -->
-        <CardOrderHistory></CardOrderHistory>
+        <!-- <CardOrderHistory></CardOrderHistory> -->
         <!-- / Orders History Timeline Card -->
       </a-col>
       <!-- / Timeline -->
     </a-row>
     <!-- / Table & Timeline -->
-
-    <!-- Charts -->
-    <a-row :gutter="24" type="flex" align="stretch" v-if="user.status=='active'">
-      <a-col :span="24" :lg="24" class="mb-24">
-        <!-- Active Users Card -->
-        <CardBarChart></CardBarChart>
-        <!-- Active Users Card -->
-      </a-col>
-    </a-row>
     <!-- / Charts -->
     <profile-information v-if="user.status!='active'"></profile-information>
   </div>
@@ -110,6 +101,7 @@ const stats = [
   },
 ];
 import {mapState} from 'vuex'
+import * as fb from "../firebase";
 export default {
   components: {
     CardBarChart,
@@ -132,7 +124,8 @@ export default {
     ...mapState(["clients", "user"]),
   },
   mounted() {
-   
+    let user = fb.auth.currentUser;
+    this.$store.dispatch("fetchUserProfile", user);
   },
 };
 </script>

@@ -9,10 +9,9 @@
       status="404"
       title="Account Pending review"
       sub-title="Your Details are currently being reviewed,you will be notified to make payments once your account has been approved"
-    >
-     
+    > 
     </a-result>
-    <CardPaymentMethods v-else-if="user.status == 'approved'"></CardPaymentMethods>
+    <CardPaymentMethods v-else-if="user.status == 'approved'" :user="user"></CardPaymentMethods>
     <a-result
       v-else
       status="500"

@@ -53,9 +53,9 @@
 <a-row :gutter="[24,24]" justify="space-around" align="middle">
   <a-col :span="16">
     <a-space direction="vertical">
-      <card-info class="my-5"></card-info>
-  <card-info class="my-5"></card-info>
-  <card-info class="my-5"></card-info>
+      <div v-for="advocate of advocates" :key="advocate.id">
+        <card-info class="my-5" :advocate="advocate"></card-info>
+      </div>
     </a-space>
 
   </a-col>
@@ -85,13 +85,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import CardInfo from '../components/Cards/CardInfo.vue';
 import DefaultHeader from "../components/Headers/DefaultHeader.vue";
-
 export default {
   components: {
     DefaultHeader,
     CardInfo,
+  },
+  computed: {
+    ...mapState(["advocates", "user"]),
+  },
+  mounted() {
+    
+    this.$store.dispatch("fetchAdvocates");
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <a-row type="flex">
       <a-col class="col-content" :span="24" :xl="12">
         <div class="card-content">
-          <h5>Jordan M.</h5>
+          <h5>{{advocate.first_name}} {{advocate.last_name}}</h5>
           <h6>Partner</h6>
           <a-row type="flex" class="my-5">
             <a-col :span="12">
@@ -98,6 +98,7 @@ const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 });
 export default {
+  props:['advocate'],
 	components: {
     IconFont,
   },
