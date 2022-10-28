@@ -6,7 +6,7 @@
   >
     <div>
       <h3>General Information</h3>
-      <a-form :form="form" layout="vertical" hide-required-mark>
+      <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="12">
             <a-form-item label="First Name">
@@ -41,7 +41,7 @@
                     ],
                   },
                 ]"
-                placeholder="Please enter your first name"
+                placeholder="last name"
               />
             </a-form-item>
           </a-col>
@@ -98,7 +98,7 @@
                     ],
                   },
                 ]"
-                placeholder="Nairobi"
+                placeholder=""
               />
             </a-form-item>
           </a-col>
@@ -131,9 +131,9 @@
                 placeholder="Type or search"
                 v-decorator="[
                   'specialisation',
-                  {
+                  { initialValue: user.specialisation,
                     rules: [
-                      { required: true, message: 'Please enter your location' },
+                      { required: true, message: 'field is required' },
                     ],
                   },
                 ]"
@@ -193,10 +193,20 @@
           <a-col :span="24">
             <a-form-item label="Profile Picture">
               <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
+              name="file"
+            :multiple="false"
+            list-type="picture"
+            :transform-file="transformFile"
+            :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload"
+                v-decorator="[
+                  'photo',
+                  {
+                    
+                    rules: [
+                      { required: true, message: 'Please choose a photo' },
+                    ],
+                  },
+                ]"
               >
                 <p class="ant-upload-drag-icon">
                   <a-icon type="inbox" />
@@ -226,15 +236,52 @@ export default {
     return {
       formLayout: "horizontal",
       form: this.$form.createForm(this, { name: "coordinated" }),
+      image:null,
+      fileList: [],
+      uploading: false,
     };
   },
 
   methods: {
-    handleSubmit(e) {
+    handleRemove(file) {
+      const index = this.fileList.indexOf(file);
+      const newFileList = this.fileList.slice();
+      newFileList.splice(index, 1);
+      this.fileList = newFileList;
+    },
+    beforeUpload(file) {
+      this.fileList = [...this.fileList, file];
+      return false;
+    },
+    transformFile(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const canvas = document.createElement("canvas");
+          const img = document.createElement("img");
+          img.src = reader.result;
+          img.onload = () => {
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            ctx.fillStyle = "red";
+            ctx.textBaseline = "middle";
+            ctx.fillText("Ant Design", 20, 20);
+            canvas.toBlob(resolve);
+          };
+        };
+      });
+    },
+    async handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
+      this.form.validateFields(async(err, values) => {
         if (!err) {
           console.log("Received values of form: ", values);
+          const ref = fb.storage.ref();
+      const url = await ref
+        .child(values.photo.file.name)
+        .put(values.photo.file, values.photo.file.type)
+        .then((snapshot) => snapshot.ref.getDownloadURL());
           const payload = {
             first_name:values.first_name?? "",
             last_name: values.last_name?? "",
@@ -245,7 +292,8 @@ export default {
             location:values.location?? "",
             webiste: values.webiste??"",
             specialisation: values.specialisation?? "",
-            step:"generalInfo"
+            step:"generalInfo",
+            profile_photo:url
           };
           this.$store.dispatch("updateUser", payload);
         }
