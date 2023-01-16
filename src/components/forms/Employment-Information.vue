@@ -10,7 +10,7 @@
         Please provide us with the information of your current and past
         employemnt
       </p>
-      <a-form :form="form" layout="vertical" hide-required-mark>
+      <a-form :form="form" layout="vertical">
         <h5 class="my-5">Your Current Employer</h5>
         <a-row :gutter="16">
           <a-col :span="18">
@@ -47,7 +47,7 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <h5 class="my-10">Your Previous Employer</h5>
+        <h5 class="my-10">Your Previous Employers</h5>
         <a-row type="flex" :gutter="16">
           <a-col :span="14">
             <a-form-item label="Company">
@@ -238,20 +238,19 @@
         </a-row>
       </a-form>
       <div>
-        <a-button type="" @click="handlePrevious" class="mx-10">
+        <!-- <a-button type="" @click="handlePrevious" class="mx-10">
           Previous Section
-        </a-button>
-        <a-button type="primary" @click="handleSubmit"> Save and Continue </a-button>
+        </a-button> -->
+        <a-button type="primary" @click="handleSubmit" :loading="loading"> Save Changes </a-button>
       </div>
     </div>
   </a-card>
 </template>
 
 <script>
-import * as fb from "../../firebase";
-import { mapState } from "vuex";
-const moment =require("moment");
+import { mapState } from 'vuex';
 export default {
+  props:['user'],
   data() {
     return {
       startValue: null,
@@ -296,39 +295,39 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
-        console.log(values)
         if (!err) {
           const payload = {
             current_employer:values.current_employer?? "",
             current_starting: values.current_starting.format()??"",
 
             prev1:values.prev1?? "",
-            prev1ending:values.prev1ending.format()?? "",
-            prev1starting:values.prev1starting.format()??"",
-            prev2:values.prev2?? "",
-            prev2ending:values.prev2ending.format()??"",
-            prev2starting: values.prev2starting?.format()??"",
-            prev3:values.prev3?? "",
-            prev3ending: values.prev3ending.format()??"",
-            prev3starting: values.prev3starting.format()??"",
+            prev1ending:values.prev1ending?values.prev1ending.format(): "",
+            prev1starting:values.prev1starting?values.prev1starting.format():"",
+            prev2:values.prev2?values.prev2: "",
+            prev2ending:values.prev2ending?values.prev2ending.format():"",
+            prev2starting:values.prev2starting? values.prev2starting.format():"",
+            prev3:values.prev3?prev3: "",
+            prev3ending: values.prev3ending?values.prev3ending.format():"",
+            prev3starting: values.prev3starting?values.prev3starting.format():"",
             prev4: values.prev4??"",
-            prev4ending: values.prev4ending.format()??"",
-            prev4starting:values.prev4starting.format()?? "",
-            step:"employmentInfo"
+            prev4ending:  values.prev4ending?values.prev4ending.format():"",
+            prev4starting:values.prev4starting?values.prev4starting.format(): "",
+            step:"employment information",
+            current:3
           };
+          console.log(payload)
           this.$store.dispatch("updateUser",payload);
         }
       });
     },
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["loading"]),
   },
-  mounted() {
-    let user = fb.auth.currentUser;
-    this.$store.dispatch("fetchUserProfile", user);
-  },
+
 };
 </script>
 
 <style></style>
+
+

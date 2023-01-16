@@ -29,14 +29,14 @@
 						]" placeholder="Email" />
 					</a-form-item>
 					<a-form-item class="mb-5" label="Password" :colon="false">
-						<a-input
+						<a-input-password
 						v-decorator="[
 						'password',
 						{ rules: [{ required: true, message: 'Please input your password!' }] },
 						]" type="password" placeholder="Password" />
 					</a-form-item>
 					<a-form-item>
-						<a-button type="primary" block html-type="submit" class="login-form-button">
+						<a-button type="primary" block html-type="submit" class="login-form-button" :loading="loading">
 							SIGN IN
 						</a-button>
 					</a-form-item>
@@ -65,6 +65,7 @@ import router from "../router/index"
 			return {
 				// Binded model property for "Sign In Form" switch button for "Remember Me" .
 				rememberMe: true,
+				loading:this.$store.state.loading
 			}
 		},
 		beforeCreate() {
@@ -78,7 +79,7 @@ import router from "../router/index"
 				this.form.validateFields((err, values) => {
 					if ( !err ) {
 						console.log('Received values of form: ', values) ;
-						router.push("dashboard")
+						this.$store.dispatch("login",values)
 					}
 				});
 			},

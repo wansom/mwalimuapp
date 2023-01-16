@@ -10,58 +10,47 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {},
-    general_information: {
-      first_name: "",
-      last_name: "",
-      phone: "",
-      job_title: "",
-      biography: "",
-      email: "",
-      location: "",
-      webiste: "",
-      specialisation: "",
-      advocates:[]
-    },
-    employmentInfo: {
-      current_employer: "",
-      current_starting: new Date(),
-
-      prev1: "",
-      prev1ending: new Date(),
-      prev1starting: new Date(),
-      prev2: "",
-      prev2ending: new Date(),
-      prev2starting: new Date(),
-      prev3: "",
-      prev3ending: new Date(),
-      prev3starting: new Date(),
-      prev4: "",
-      prev4ending: new Date(),
-      prev4starting: "",
-    },
     step:0,
-    advocates:[]
+    advocates:[],
+    requests:[],
+    allAdvocates:[],
+    request:{},
+    loading:false,
+    current:1
   },
   getters: {},
   mutations: {
     setUserProfile(state, val) {
       state.user = val;
     },
-    setGeneralInformation(state, val) {
-      state.general_information = val;
-    },
     setStep(state,val){
-      state.step=val
+      state.current=val
+    },
+    setLoading(state,val){
+      state.loading=val
+
     },
     setAdvocates(state,val){
       state.advocates=val
+    },
+    setRequests(state,val){
+      state.requests=val
+    },
+    setAllAdvocates(state,val){
+      state.allAdvocates=val
+    },
+    setRequest(state,val){
+      state.request=val
     }
+
+    
   },
   actions: {
     //register new user
     signUp({ commit }, data) {
+      commit("setLoading",true)
       fb.auth
-        .createUserWithEmailAndPassword(data.email, data.password)
+        .createUserWithEmailAndPassword(data.email.replace(/\s/g, ''), data.password)
         .then((result) => {
           fb.usersCollection
             .doc(result.user.uid)
@@ -72,8 +61,10 @@ export default new Vuex.Store({
               password: data.password,
               uid: result.user.uid,
               status: "incomplete",
+              notifications:[]
             })
             .then(() => {
+              commit("setLoading",false)
               router.push("/sign-in");
             });
         })
@@ -83,14 +74,17 @@ export default new Vuex.Store({
             text: `${err.message}`,
             icon: "error",
           });
+          commit("setLoading",false)
         });
     },
 
     //login user
-    login({ dispatch }, data) {
+    login({ dispatch,commit }, data) {
+      commit("setLoading",true)
       fb.auth
-        .signInWithEmailAndPassword(data.email, data.password)
+        .signInWithEmailAndPassword(data.email.replace(/\s/g, ''), data.password)
         .then((result) => {
+          commit("setLoading",false)
           dispatch("fetchUserProfile", result.user);
           router.push("/dashboard");
         })
@@ -111,20 +105,50 @@ export default new Vuex.Store({
           commit("setUserProfile", result.data());
         });
     },
+    logout({dispatch}){
+      fb.auth.signOut().then(()=>{
+        router.push("/sign-in")
+      }
+        
+      )
+
+    },
     /*
     user registration start
     */
-    updateUser({ dispatch }, data) {
+    updateUser({ dispatch,commit }, data) {
+      commit("setLoading",true)
       let user = fb.auth.currentUser;
       fb.usersCollection.doc(user.uid).update(data).then(()=>{
+    
+
         dispatch("fetchUserProfile",user)
         swal({
           title: "Success!",
           text: `Info updated Successfully!`,
           icon: "success",
         });
+        
+
+          fb.usersCollection.doc(user.uid).update({
+            notifications:fb.types.FieldValue.arrayUnion({
+              notification:`your ${data.step} have been updated successfully`,
+              date:new Date()
+            })
+          })
+        if(data.status){
+          fb.usersCollection.doc(user.uid).update({
+            notifications:fb.types.FieldValue.arrayUnion({
+              notification:`your account details have been submitted successfully for review`,
+              date:new Date()
+            })
+          })
+        }
+        commit("setLoading",false);
+        dispatch("changeStep",data.current)
 
       }).catch((err)=>{
+        commit("setLoading",false)
         swal({
           title: "OOPS!",
           text: `${err.message}`,
@@ -166,6 +190,38 @@ export default new Vuex.Store({
             commit("setAdvocates", loadedAdvocates);
           });
         },
+        
+        async fetchRequests({ commit }) {
+          fb.usersCollection.where("status","==","pending approval").onSnapshot((snapshot) => {
+            const loadedAdvocates = [];
+            snapshot.forEach((doc) => {
+              const loadedAdvocate = doc.data();
+              (loadedAdvocate.id = doc.id), loadedAdvocates.push(loadedAdvocate);
+            });
+            commit("setRequests", loadedAdvocates);
+          });
+        },
+      
+        async fetAllAdvocates({ commit }) {
+          fb.usersCollection.onSnapshot((snapshot) => {
+            const loadedAdvocates = [];
+            snapshot.forEach((doc) => {
+              const loadedAdvocate = doc.data();
+              (loadedAdvocate.id = doc.id), loadedAdvocates.push(loadedAdvocate);
+            });
+            commit("setAllAdvocates", loadedAdvocates);
+          });
+        },
+        fetchSingleRequest({commit},uid){
+          fb.usersCollection.doc(uid).get()
+        },
+        changeStep({commit},value){
+          commit("setStep",value)
+        },
+        changeLoading({commit},data){
+          commit("setLoading",data)
+
+        }
   },
   modules: {},
 });

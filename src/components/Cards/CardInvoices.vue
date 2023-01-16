@@ -24,8 +24,9 @@
 					PDF
 				</a-button> -->
 				<a-list-item-meta
-					:title="item.title"
-					:description="item.code"
+				:description="item.number"
+					:title="'PAYMENT FOR:'+item.date.toDate().toDateString()"
+					
 				></a-list-item-meta>
 				<div class="amount"><span class="mx-4">KSH</span>{{ item.amount }}</div>
 			</a-list-item>

@@ -53,7 +53,7 @@
         <a-card class="payment-method-card">
           <img src="images/logos/mastercard-logo.png" alt="" />
           <h6 class="card-number">CREDIT CARD</h6>
-          <a-button type="dashed"> PAY </a-button>
+          <a-button type="dashed" @click="payWithCard"> PAY </a-button>
         </a-card>
       </a-col>
       <a-col :span="24" :md="8">
@@ -66,7 +66,7 @@
       <a-col :span="24" :md="8">
         <a-card class="payment-method-card">
           <h6 class="card-number">DIRECT BANK TRANSFER</h6>
-          <a-button type="dashed"> PAY </a-button>
+          <a-button type="dashed" @click="payWithCard"> PAY </a-button>
         </a-card>
       </a-col>
     </a-row>
@@ -82,11 +82,19 @@ export default {
     return {
       visible: false,
       loading: false,
+      sdkSent:false
     };
   },
   methods: {
     showModal() {
       this.visible = true;
+    },
+    payWithCard(){
+      swal({
+              title: "OOPS!",
+              text: `Payment method not available`,
+              icon: "error",
+            });
     },
     intiatePayment() {
       if (this.user.phone.startsWith("254")) {
@@ -102,7 +110,9 @@ export default {
             if (response.status == 200) {
               let id = response.data.CheckoutRequestID;
               localStorage.setItem("transactionID", JSON.stringify(id));
+              this.sdkSent=true
               this.loading = false;
+              this.visible=false
             }
           })
           .catch(function (error) {
@@ -184,7 +194,6 @@ export default {
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      console.log(id);
       fb.transactions
         .doc(id)
         .get()
@@ -198,6 +207,16 @@ export default {
               .update({
                 status: "active",
                 subscription_date: new Date(),
+                notifications:fb.types.FieldValue.arrayUnion({
+                  notification:"payment has been made succcessfully",
+                  date:new Date()
+
+                }),
+                invoices:fb.types.FieldValue.arrayUnion({
+                  date: new Date(),
+                  amount:data.amount,
+                  number: id
+                })
               })
               .then(() => {
                 let user = fb.auth.currentUser;

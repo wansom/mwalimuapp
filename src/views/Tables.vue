@@ -11,7 +11,6 @@
 
 			<!-- Authors Table Column -->
 			<a-col :span="24" class="mb-24">
-
 				<!-- Authors Table Card -->
 				<CardAuthorTable
 					:data="table1Data"
@@ -24,26 +23,6 @@
 
 		</a-row>
 		<!-- / Authors Table -->
-
-		<!-- Projects Table -->
-		<a-row :gutter="24" type="flex">
-
-			<!-- Projects Table Column -->
-			<a-col :span="24" class="mb-24">
-
-				<!-- Projects Table Column -->
-				<CardProjectTable2
-					:data="table2Data"
-					:columns="table2Columns"
-				></CardProjectTable2>
-				<!-- / Projects Table Column -->
-
-			</a-col>
-			<!-- / Projects Table Column -->
-
-		</a-row>
-		<!-- / Projects Table -->
-
 	</div>
 </template>
 
@@ -58,7 +37,7 @@
 	// "Authors" table list of columns and their properties.
 	const table1Columns = [
 		{
-			title: 'AUTHOR',
+			title: 'Name',
 			dataIndex: 'author',
 			scopedSlots: { customRender: 'author' },
 		},

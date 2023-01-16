@@ -72,7 +72,7 @@
           </a-input>
         </a-form-item>
         <a-form-item class="mb-5" label="Password" has-feedback>
-          <a-input
+          <a-input-password
 		  v-decorator="[
           'password',
           {
@@ -90,7 +90,7 @@
         type="password"
             placeholder="Password"
           >
-          </a-input>
+          </a-input-password>
         </a-form-item>
         <a-form-item class="mb-5" label="Confirm Password" has-feedback>
           <a-input
@@ -134,6 +134,7 @@
             block
             html-type="submit"
             class="login-form-button"
+            :loading="loading"
           >
             SIGN UP
           </a-button>
@@ -153,7 +154,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      loading:this.$store.state.loading
+    };
   },
   beforeCreate() {
     // Creates the form and adds to it component's "form" property.
@@ -165,7 +168,6 @@ export default {
       e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
 		  this.$store.dispatch("signUp",values)
         }
       });

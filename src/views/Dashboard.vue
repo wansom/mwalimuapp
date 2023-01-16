@@ -16,13 +16,14 @@
       </a-col>
       <a-col :span="24" :lg="16" class="mb-24">
         <CardInvoices
-					:data="invoiceData"
+					:data="user.invoices"
 				></CardInvoices> </a-col>
 
     </a-row>
+    <admin-dashboard v-if="user.status=='admin'"></admin-dashboard>
     <!-- / Table & Timeline -->
     <!-- / Charts -->
-    <profile-information></profile-information>
+    <profile-information v-if="user.status!='admin'"></profile-information>
   </div>
 </template>
 
@@ -117,6 +118,7 @@ const transactionsData = [
 ];
 import { mapState } from "vuex";
 import * as fb from "../firebase";
+import AdminDashboard from './AdminDashboard.vue';
 export default {
   components: {
     CardBarChart,
@@ -127,7 +129,8 @@ export default {
     CardInfo,
     CardInfo2,
     ProfileInformation,
-    CardInvoices
+    CardInvoices,
+    AdminDashboard
   },
   data() {
     return {

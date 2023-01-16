@@ -28,21 +28,22 @@
 							</svg>
 						</span>
 						<span class="label" v-if="user.status=='active'">Dashboard</span>
+						<span class="label" v-else-if="user.status=='admin'">Admin Dashboard</span>
 						<span class="label" v-else>Create Profile</span>
 					</router-link>
 				</a-menu-item>
-				<!-- <a-menu-item v-if="user.status=='active'">
-					<router-link to="/profile" >
+				<a-menu-item v-if="user.status=='admin'">
+					<router-link to="/requests" >
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M4 4C2.89543 4 2 4.89543 2 6V7H18V6C18 4.89543 17.1046 4 16 4H4Z" fill="#111827"/>
 								<path fill-rule="evenodd" clip-rule="evenodd" d="M18 9H2V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V9ZM4 13C4 12.4477 4.44772 12 5 12H6C6.55228 12 7 12.4477 7 13C7 13.5523 6.55228 14 6 14H5C4.44772 14 4 13.5523 4 13ZM9 12C8.44772 12 8 12.4477 8 13C8 13.5523 8.44772 14 9 14H10C10.5523 14 11 13.5523 11 13C11 12.4477 10.5523 12 10 12H9Z" fill="#111827"/>
 							</svg>
 						</span>
-						<span class="label">Profile</span>
+						<span class="label">Requests</span>
 					</router-link>
-				</a-menu-item> -->
-				<a-menu-item  v-if="user.status!='active'">
+				</a-menu-item>
+				<!-- <a-menu-item  v-if="user.status!='admin'">
 					<router-link to="/resources">
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,11 +52,11 @@
 						</span>
 						<span class="label">Resources</span>
 					</router-link>
-				</a-menu-item>
+				</a-menu-item> -->
 				<a-menu-item class="menu-item-header">
 					Account
 				</a-menu-item>
-				<a-menu-item v-if="user.status!='active'">
+				<!-- <a-menu-item v-if="user.status!='active'">
 					<router-link to="/profile" >
 						<span class="icon">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +65,7 @@
 						</span>
 						<span class="label">Profile</span>
 					</router-link>
-				</a-menu-item>
+				</a-menu-item> -->
 				<!-- <a-menu-item>
 					<router-link to="/sign-in">
 						<span class="icon">
@@ -76,7 +77,7 @@
 					</router-link>
 				</a-menu-item> -->
 				<a-menu-item>
-					<router-link to="/sign-in">
+					<a-button @click="logout" type="link" >
 						<span class="icon">
 							<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 								<title>duplicate</title>
@@ -95,7 +96,7 @@
 							</svg>
 						</span>
 						<span class="label">Sign Out</span>
-					</router-link>
+					</a-button >
 				</a-menu-item>
 			</a-menu>
 			<!-- / Sidebar Navigation Menu -->
@@ -131,6 +132,11 @@ import { mapState } from "vuex"
 			return {
 				// sidebarCollapsedModel: this.sidebarCollapsed,
 				active:false
+			}
+		},
+		methods:{
+			logout(){
+				this.$store.dispatch("logout")
 			}
 		},
 		computed: {

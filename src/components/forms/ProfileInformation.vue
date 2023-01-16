@@ -52,7 +52,7 @@
             <a-card class="icon-card">
               
                 <a-icon type="file-protect" class="icon-list text-warning"/>
-                <p class="card-p">Certificate Upload</p>
+                <p class="card-p">Documents Upload</p>
                 
 
             </a-card>
@@ -71,19 +71,19 @@
 
       </a-row>
 <div class="my-10" v-if="current==1">
-    <GeneralInformation/>
+    <GeneralInformation :user="user"/>
 </div>
 <div class="my-10" v-if="current==2">
-    <EmploymentInformation/>
+    <EmploymentInformation :user="user"/>
 </div>
 <div class="my-10" v-if="current==3">
-    <EducationInformation></EducationInformation>
+    <EducationInformation :user="user"></EducationInformation>
 </div>
 <div class="my-10" v-if="current==4">
-    <CertificateUpload></CertificateUpload>
+    <CertificateUpload :user="user"></CertificateUpload>
 </div>
 <div class="my-10" v-if="current==5">
-    <SubscriptionPayment></SubscriptionPayment>
+    <SubscriptionPayment :user="user"></SubscriptionPayment>
 </div>
     </div>
   </template>
@@ -93,23 +93,32 @@ import EmploymentInformation from './Employment-Information.vue';
 import EducationInformation from './Education-Information.vue';
 import CertificateUpload from './Certificate-Upload.vue';
 import SubscriptionPayment from './Subscription-Payment.vue';
+import * as fb from "../../firebase";
+import { mapState } from 'vuex';
   export default {
     data() {
         return {
-            current: 0,
+            
       
         };
     },
     methods: {
         next(value) {
-            this.current=value;
+            this.$store.dispatch("changeStep",value)
         },
         prev() {
             this.current--;
         },
 
     },
-    components: { GeneralInformation, EmploymentInformation, EducationInformation, CertificateUpload, SubscriptionPayment }
+    components: { GeneralInformation, EmploymentInformation, EducationInformation, CertificateUpload, SubscriptionPayment },
+    computed: {
+    ...mapState(["user","current"]),
+  },
+  mounted() {
+    let user = fb.auth.currentUser;
+    this.$store.dispatch("fetchUserProfile", user);
+  },
 };
   </script>
   <style scoped>

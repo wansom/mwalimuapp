@@ -17,8 +17,8 @@
 
           <!-- Header Page Title -->
           <div class="ant-page-header-heading">
-            <a-alert message="Account Waiting approval" banner closable  v-if="user.status=='pending approval'"/>
-			<a-alert message="Your account has been approved.Pending payment" banner closable  type="success" v-if="user.status=='approved'"/>
+            <a-alert message="Account Waiting approval" banner  v-if="user.status=='pending approval'"/>
+			<a-alert message="Your account has been approved.Pending payment" banner  type="success" v-if="user.status=='approved'"/>
           </div>
           <!-- / Header Page Title -->
         </a-col>
@@ -32,7 +32,7 @@
             overlayClassName="header-notifications-dropdown"
             :getPopupContainer="() => wrapper"
           >
-            <a-badge count="4">
+            <a-badge :count="user.notifications.length">
               <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 <svg
                   width="20"
@@ -56,13 +56,13 @@
             <a-list
               item-layout="horizontal"
               class="header-notifications-list"
-              :data-source="notificationsData"
+              :data-source="user.notifications"
               slot="overlay"
             >
               <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta>
                   <template #description>
-                    <svg
+                    <!-- <svg
                       width="20"
                       height="20"
                       viewBox="0 0 20 20"
@@ -75,10 +75,10 @@
                         d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM11 6C11 5.44772 10.5523 5 10 5C9.44772 5 9 5.44772 9 6V10C9 10.2652 9.10536 10.5196 9.29289 10.7071L12.1213 13.5355C12.5118 13.9261 13.145 13.9261 13.5355 13.5355C13.9261 13.145 13.9261 12.5118 13.5355 12.1213L11 9.58579V6Z"
                         fill="#111827"
                       />
-                    </svg>
-                    <span>{{ item.time }}</span>
+                    </svg> -->
+                    <span>{{ item.date.toDate().toDateString() }}</span>
                   </template>
-                  <a slot="title" href="#">{{ item.title }}</a>
+                  <a slot="title" href="#">{{ item.notification }}</a>
                   <a-avatar
                     v-if="item.img"
                     slot="avatar"
@@ -113,11 +113,7 @@
               />
             </svg>
           </a-button>
-          <router-link
-            to="/sign-in"
-            class="btn-sign-in"
-            @click="(e) => e.preventDefault()"
-          >
+       <a-button @click="logout">
             <svg
               width="20"
               height="20"
@@ -132,8 +128,7 @@
                 fill="#111827"
               />
             </svg>
-            <span>Sign Out</span>
-          </router-link>
+            <span>Sign Out</span></a-button>
           <!-- / Header Control Buttons -->
         </a-col>
         <!-- / Header Control Column -->
@@ -205,6 +200,7 @@ export default {
 
       // The wrapper element to attach dropdowns to.
       wrapper: document.body,
+      lists:[]
     };
   },
   methods: {
@@ -215,6 +211,9 @@ export default {
       // scroller is anywhere but the top of the page.
     },
     onSearch(value) {},
+    logout(){
+      this.$store.dispatch('logout')
+    }
   },
   computed: {
     ...mapState(["user"]),

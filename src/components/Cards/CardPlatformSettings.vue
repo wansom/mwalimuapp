@@ -3,45 +3,98 @@
 	<!-- Platform Settings Card -->
 	<a-card :bordered="false" class="header-solid h-full" :bodyStyle="{paddingTop: 0, paddingBottom: 0 }">
 		<template #title>
-			<h6 class="font-semibold m-0">PROFESSIONAL EXPERIENCE</h6>
+			<h6 class="font-semibold m-0"></h6>
 		</template>
-		<ul class="list settings-list">
-			<li>
-				<a-switch v-model="emailForFollows" />
-				<span>Email me when someone follows me</span>
-			</li>
-			<li>
-				<a-switch v-model="emailForAnswers"/>
-				<span>Email me when someone answers me</span>
-			</li>
-			<li>
-				<a-switch v-model="emailForMentions" />
-				<span>Email me when someone mentions me</span>
-			</li>
-			<li>
-				<h5 class="font-semibold m-0">EDUCATION</h5>
-			</li>
-			<li>
-				<a-switch v-model="emailForNewProjects" />
-				<span>New launches and projects</span>
-			</li>
-			<li>
-				<a-switch v-model="emailForProductUpdates" />
-				<span>Monthly product updates</span>
-			</li>
-			<li>
-				<a-switch v-model="emailForNewsletter" />
-				<span>Subscribe to newsletter</span>
-			</li>
-		</ul>
+		<a-collapse accordion>
+      <a-collapse-panel key="1" header="PROFESSIONAL EXPERIENCE">
+        <div style="background:#ffffff;display: flex;justify-content: space-between;">
+			<h5>Current Employer:</h5>
+			<span>{{advocate.current_employer}}</span>
+			<span>{{advocate.current_starting}}</span>
+		</div>
+		<p>{{advocate.prev2}}</p>
+      </a-collapse-panel>
+      <a-collapse-panel key="2" header="EDUCATION" :disabled="false">
+		<div style="background:#ffffff;display: flex;justify-content: space-between;">
+			<h5>Law School:</h5>
+			<span>{{advocate.law_school}}</span>
+			<span>{{advocate.law_ending}}</span>
+		</div>
+		<div style="background:#ffffff;display: flex;justify-content: space-between;">
+			<h5>Postgraduate Diploma:</h5>
+			<span>{{advocate.postgraduate_diploma}}</span>
+			<span>{{advocate.postgraduate_diploma_end}}</span>
+		</div>
+       
+      </a-collapse-panel>
+      <a-collapse-panel key="3" header="BIOGRAPHY">
+        <p>{{ advocate.biography }}</p>
+      </a-collapse-panel>
+    </a-collapse>
+	<div
+        label="Social"
+        style="display: flex; align-items: center; justify-content: center;margin-bottom: 20px;margin-top: 20px;"
+      >
+     
+		<ShareNetwork
+          network="email"
+          url="https://acelitigator.com"
+          :title="'Hello'+ advocate.first_name +'I found your contact on'"
+          description="and would like to engage your legal services"
+        >
+		<a-button
+          icon="mail"
+          type="secondary"
+          class="mx-5 px-5"
+          style="font-size: 18px"
+          >Send Mail</a-button
+        >
+        </ShareNetwork>
+        <a-button
+          icon="phone"
+          type="primary"
+          class="mx-5 px-5"
+          style="font-size: 18px"
+          >Call {{ advocate.phone }}</a-button
+        >
+
+		<ShareNetwork
+          network="linkedin"
+          url="https://acelitigator.com"
+          :title="'Hello'+ advocate.first_name +'I found your contact on'"
+          description="and would like to engage your legal services"
+        >
+		<a-button
+          icon="linkedin"
+          class="mx-5 px-5"
+          style="color: #3ea1ec; font-size: 18px"
+          >View on linkedin</a-button
+        >
+        </ShareNetwork>
+        <ShareNetwork
+          network="whatsapp"
+          url="https://acelitigator.com"
+          :title="'Hello'+ advocate.first_name +'I found your contact on'"
+          description="and would like to engage your legal services"
+        >
+		<a-button
+          icon="wechat"
+          class="mx-5 px-5"
+          style="color: #00a884; font-size: 20px"
+          >Whatsapp</a-button
+        >
+        </ShareNetwork>
+      </div>
 	</a-card>
 	<!-- / Platform Settings Card -->
 
 </template>
 
 <script>
+import { mapState } from "vuex"
 
 	export default ({
+		props:['advocate'],
 		data() {
 			return {
 				// Binded model property for "Platform Settings" switch button for "Email ... follows me" .

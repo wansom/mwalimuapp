@@ -22,6 +22,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import * as fb from "../../firebase";
 
 export default {
   components: {

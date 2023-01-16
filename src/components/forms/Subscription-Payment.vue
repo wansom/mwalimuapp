@@ -16,7 +16,7 @@
     v-else-if="user.status == 'active'"
     status="success"
     title="Your Account currently is Active!"
-    sub-title="You will be required to renew your subsction on"
+    sub-title="You will be required to renew your subscription on"
   >
   </a-result>
     <a-result

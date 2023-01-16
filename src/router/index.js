@@ -33,10 +33,16 @@ let routes = [
 		component: () => import('../views/Layout.vue'),
 	},
 	{
-		path: '/tables',
-		name: 'Tables',
+		path: '/requests',
+		name: 'Requests',
 		layout: "dashboard",
-		component: () => import('../views/Tables.vue'),
+		component: () => import('../views/Requests.vue'),
+	},
+	{
+		path: '/request/:id',
+		name: 'Request',
+		layout: "dashboard",
+		component: () => import('../views/SingleRequest.vue'),
 	},
 	{
 		path: '/details/:id',
