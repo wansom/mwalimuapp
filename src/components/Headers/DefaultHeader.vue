@@ -25,7 +25,7 @@
     </div>
     <div class="header-col header-nav">
       <!-- Navigation Menu For Large Screens -->
-      <a-menu mode="horizontal" class="menu-large">
+      <!-- <a-menu mode="horizontal" class="menu-large">
         <a-menu-item>
           <router-link
             to="/marketplace"
@@ -46,7 +46,7 @@
             
           </router-link>
         </a-menu-item>
-      </a-menu>
+      </a-menu> -->
       <!-- / Navigation Menu For Large Screens -->
 
       <!-- Collapsible Navigation Menu For Small Screens -->
