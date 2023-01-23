@@ -61,9 +61,18 @@ export default new Vuex.Store({
               password: data.password,
               uid: result.user.uid,
               status: "incomplete",
-              notifications:[]
+              notifications:fb.types.FieldValue.arrayUnion({
+                notification:`Your account was created successfully proceed to fill your profile`,
+                date:new Date()
+              })
             })
             .then(() => {
+              axios.post("http://127.0.0.1:5001/scanpal-f74da/us-central1/barizi/mail/auth",{
+                content:"Your Account has been created successfully. Please proceed to complete your profile",
+                email:data.email
+              }).then((res)=>{
+                console.log(res)
+              })
               commit("setLoading",false)
               router.push("/sign-in");
             });
@@ -87,6 +96,7 @@ export default new Vuex.Store({
           commit("setLoading",false)
           dispatch("fetchUserProfile", result.user);
           router.push("/dashboard");
+          
         })
         .catch((err) => {
           swal({

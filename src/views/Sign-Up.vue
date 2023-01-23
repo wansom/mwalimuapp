@@ -31,7 +31,7 @@
             v-decorator="[
               'first_name',
               {
-                rules: [{ required: true, message: 'Please input your name!' }],
+                rules: [{ required: true, message: 'Please input your  first name!' }],
               },
             ]"
             placeholder="First Name"
@@ -43,7 +43,7 @@
             v-decorator="[
               'last_name',
               {
-                rules: [{ required: true, message: 'Please input your name!' }],
+                rules: [{ required: true, message: 'Please input your last name!' }],
               },
             ]"
             placeholder="Last Name"

@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import router from "../router/index"
 	export default ({
 		data() {
 			return {
@@ -78,7 +77,6 @@ import router from "../router/index"
 				e.preventDefault();
 				this.form.validateFields((err, values) => {
 					if ( !err ) {
-						console.log('Received values of form: ', values) ;
 						this.$store.dispatch("login",values)
 					}
 				});
