@@ -15,7 +15,7 @@ let routes = [
 	{
 		path: '/',
 		name: 'Home',
-		redirect: '/advocate-listing',
+		component: () => import('../views/Advocate-List.vue'),
 	},
 	{
 		path: '/dashboard',

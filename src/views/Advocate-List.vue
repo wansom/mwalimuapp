@@ -26,7 +26,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-12">
+      <!-- <div class="col-sm-12">
         <transition name="fade">
           <div v-if="shopbymenu" class="panel shopbymenu">
             <div class="col-sm-12">
@@ -46,7 +46,7 @@
             </div>
           </div>
         </transition>
-      </div>
+      </div> -->
 
       <div class="col-sm-12 product-list-all">
         <a-row>
@@ -117,7 +117,7 @@
                       :rotate="props.isActive ? 90 : 0"
                     />
                   </template>
-                  <a-collapse-panel key="1" header="PRACTISE AREAS">
+                  <a-collapse-panel key="2" header="PRACTISE AREAS">
                     <section class="section size">
                       <div
                         v-for="category in categories"
