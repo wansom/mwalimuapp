@@ -100,6 +100,8 @@
                 label="LSK Letter of Good Standing"
                 name="file"
                 accept="application/pdf"
+                :file-list="fileList"
+                :remove="handleRemove" :before-upload="beforeUpload"
                 v-decorator="[
                   'lsk_letter',
                   {
@@ -121,6 +123,8 @@
               <a-upload
                 name="file"
                 accept="application/pdf"
+                :file-list="fileList1"
+                :remove="handleRemove1" :before-upload="beforeUpload1"
                 v-decorator="[
                   'admission_cert',
                   {
@@ -142,6 +146,8 @@
               <a-upload
                 name="file"
                 accept="application/pdf"
+                :file-list="fileList2"
+                :remove="handleRemove2" :before-upload="beforeUpload2"
                 v-decorator="[
                   'national_id_doc',
                   {
@@ -162,6 +168,8 @@
               <a-upload
               name="file"
               accept="application/pdf"
+              :file-list="fileList3"
+                :remove="handleRemove3" :before-upload="beforeUpload3"
                 v-decorator="[
                   'practise_cert',
                   {
@@ -209,6 +217,9 @@ export default {
       admissionfile: [],
       idfile: [],
       uploading: false,
+      fileList1:[],
+      fileList2:[],
+      fileList3:[]
     };
   },
   watch: {
@@ -220,16 +231,51 @@ export default {
     },
   },
   methods: {
+    // lsk cert
+    beforeUpload(file) {
+      this.fileList = [...this.fileList, file];
+      return false;
+    },
     handleRemove(file) {
       const index = this.fileList.indexOf(file);
       const newFileList = this.fileList.slice();
       newFileList.splice(index, 1);
       this.fileList = newFileList;
     },
-    beforeUpload(file) {
-      this.fileList = [...this.fileList, file];
+    // certificate of admission upload
+    beforeUpload1(file) {
+      this.fileList1 = [...this.fileList1, file];
       return false;
     },
+    handleRemove1(file) {
+      const index = this.fileList1.indexOf(file);
+      const newFileList = this.fileList1.slice();
+      newFileList.splice(index, 1);
+      this.fileList1 = newFileList;
+    },
+    // upload ID
+    beforeUpload2(file) {
+      this.fileList2 = [...this.fileList2, file];
+      return false;
+    },
+    handleRemove2(file) {
+      const index = this.fileList2.indexOf(file);
+      const newFileList = this.fileList2.slice();
+      newFileList.splice(index, 1);
+      this.fileList2 = newFileList;
+    },
+    // practise cert upload
+    beforeUpload3(file) {
+      this.fileList3 = [...this.fileList3, file];
+      return false;
+    },
+    handleRemove3(file) {
+      const index = this.fileList3.indexOf(file);
+      const newFileList = this.fileList3.slice();
+      newFileList.splice(index, 1);
+      this.fileList3 = newFileList;
+    },
+
     transformFile(file) {
       return new Promise((resolve) => {
         const reader = new FileReader();
