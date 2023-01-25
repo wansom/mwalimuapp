@@ -241,7 +241,7 @@
         <!-- <a-button type="" @click="handlePrevious" class="mx-10">
           Previous Section
         </a-button> -->
-        <a-button type="primary" @click="handleSubmit" :loading="loading"> Save Changes </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading"> Save and Continue </a-button>
       </div>
     </div>
   </a-card>

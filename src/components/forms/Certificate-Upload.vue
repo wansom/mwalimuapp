@@ -99,6 +99,7 @@
               <a-upload
                 label="LSK Letter of Good Standing"
                 name="file"
+                accept="application/pdf"
                 v-decorator="[
                   'lsk_letter',
                   {
@@ -119,6 +120,7 @@
             <a-form-item label="Certificate of Admission">
               <a-upload
                 name="file"
+                accept="application/pdf"
                 v-decorator="[
                   'admission_cert',
                   {
@@ -139,6 +141,7 @@
             <a-form-item label="National ID">
               <a-upload
                 name="file"
+                accept="application/pdf"
                 v-decorator="[
                   'national_id_doc',
                   {
@@ -158,6 +161,7 @@
             <a-form-item label="Practise Certificate">
               <a-upload
               name="file"
+              accept="application/pdf"
                 v-decorator="[
                   'practise_cert',
                   {

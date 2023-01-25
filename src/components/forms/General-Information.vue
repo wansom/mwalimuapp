@@ -87,7 +87,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="Current Location">
+            <a-form-item label="Current Location(County)">
               <a-select      
                 v-decorator="[
                   'location',
@@ -105,7 +105,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Job Ttile">
+            <a-form-item label="Job Title">
               <a-input
                 v-decorator="[
                   'job_title',
@@ -195,6 +195,7 @@
             <a-form-item label="Profile Picture">
               <a-upload-dragger
                 name="file"
+                accept="image/png, image/jpeg"
                 :multiple="false"
                 list-type="picture"
                 :transform-file="transformFile"
@@ -222,7 +223,7 @@
         </a-row>
       </a-form>
       <div>
-        <a-button type="primary" @click="handleSubmit" :loading="loading">Save Changes </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading">Save and Continue </a-button>
       </div>
     </div>
   </a-card>
