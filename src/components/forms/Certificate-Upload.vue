@@ -11,6 +11,7 @@
           <a-col :span="12">
             <a-form-item label="Date of Admission">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'practise_start',
                   {
@@ -203,6 +204,7 @@
 <script>
 import { mapState } from 'vuex';
 import * as fb from "../../firebase";
+import moment from 'moment';
 export default {
   props:['user'],
   data() {
@@ -231,6 +233,11 @@ export default {
     },
   },
   methods: {
+    moment,
+    disabledDate(current) {
+      // Can not select days before today and today
+      return current && current > moment().endOf('day');
+    },
     // lsk cert
     beforeUpload(file) {
       this.fileList = [...this.fileList, file];

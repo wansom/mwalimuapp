@@ -31,6 +31,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'law_starting',
                   { initialValue: user.law_starting,
@@ -44,6 +45,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'law_ending',
                   { initialValue: user.law_ending,
@@ -73,6 +75,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'postgraduate_diploma_start',
                   { initialValue: user.postgraduate_diploma_start,
@@ -86,6 +89,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'postgraduate_diploma_end',
                   { initialValue: user.postgraduate_diploma_end,
@@ -114,6 +118,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'school2_start',
                   { initialValue: user.school2_start,
@@ -127,6 +132,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'school2_end',
                   { initialValue: user.school2_end,
@@ -151,6 +157,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import moment from 'moment';
 export default {
   props:['user'],
   data() {
@@ -171,6 +178,11 @@ export default {
     },
   },
   methods: {
+    moment,
+    disabledDate(current) {
+      // Can not select days before today and today
+      return current && current > moment().endOf('day');
+    },
     prev1disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {

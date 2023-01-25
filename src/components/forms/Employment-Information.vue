@@ -31,6 +31,7 @@
           <a-col :span="6">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'current_starting',
                   { initialValue: user.current_starting,
@@ -67,6 +68,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev1starting',
                   { initialValue: user.prev1starting,
@@ -82,6 +84,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev1ending',
                   { initialValue: user.prev1ending,
@@ -114,6 +117,8 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev2starting',
                   { initialValue: user.prev2starting,
@@ -129,6 +134,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev2ending',
                   { initialValue: user.prev2ending,
@@ -161,6 +167,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev3starting',
                   { initialValue: user.prev3starting,
@@ -176,6 +183,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev3ending',
                   { initialValue: user.prev3ending,
@@ -208,6 +216,7 @@
           <a-col :span="4">
             <a-form-item label="Starting Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev4starting',
                   { initialValue: user.prev4starting,
@@ -223,6 +232,7 @@
           <a-col :span="4">
             <a-form-item label="Ending Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'prev4ending',
                   { initialValue: user.prev4ending,
@@ -249,6 +259,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import moment from 'moment';
 export default {
   props:['user'],
   data() {
@@ -269,6 +280,11 @@ export default {
     },
   },
   methods: {
+    moment,
+    disabledDate(current) {
+      // Can not select days before today and today
+      return current && current > moment().endOf('day');
+    },
     prev1disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {
