@@ -80,36 +80,6 @@
               </div>
             </section>
             <span class="line"></span> -->
-                <section class="section size">
-                  <h6>
-                    YEARS OF EXPERIENCE <span class="btn-section"> - </span>
-                  </h6>
-
-                  <div class="wrapper">
-                    <a-row>
-                      <a-col :span="12">
-                        <a-slider
-                          v-model="inputValue"
-                          :min="1"
-                          :max="50"
-                          @change="setExperience(inputValue)"
-                        />
-                      </a-col>
-                      <a-col :span="4">
-                        <a-input-number
-                          v-model="inputValue"
-                          :min="1"
-                          :max="50"
-                          style="marginleft: 1px"
-                          @change="setExperience(inputValue)"
-                        />
-                      </a-col>
-                    </a-row>
-                  </div>
-                  <!-- <a href="#" class="btn">View full size chart ></a> -->
-                  <div class="space2"></div>
-                </section>
-                <span class="line"></span>
                 <a-collapse default-active-key="1" :bordered="false">
                   <template #expandIcon="props">
                     <a-icon
@@ -117,13 +87,27 @@
                       :rotate="props.isActive ? 90 : 0"
                     />
                   </template>
+                  <a-collapse-panel key="4" header=" YEARS OF EXPERIENCE">
+                    <section class="section size">
+                      <a-slider
+                        range
+                        :default-value="[3, 10]"
+                        @change="setExperience"
+                      />
+                      <div class="space2"></div>
+                    </section>
+                  </a-collapse-panel>
                   <a-collapse-panel key="2" header="PRACTISE AREAS">
                     <section class="section size">
                       <div
                         v-for="category in categories"
                         :key="category"
                         class="checkbox"
-                        @change="setActive(category)"
+                        @change="
+                          () => {
+                            setActive(category);
+                          }
+                        "
                       >
                         <label>
                           <input type="checkbox" /><span
@@ -181,8 +165,6 @@
           <a-col :span="24" :lg="18">
             <div id="product-list-wrapper">
               <div class="col-sm-12">
-                
-          
                 <div class="tagsdiv">
                   <div
                     v-for="filterAppied in filtersAppied"
@@ -197,19 +179,15 @@
                     </a-button>
                   </div>
 
-                 
-
-                  
-                    <transition name="fade">
-                      <a-button
-                        v-if="filtersAppied.length > 0"
-                        class="clear-values"
-                        @click.prevent="filtersAppied = []"
-                      >
-                        Clear All</a-button
-                      >
-                    </transition>
-                 
+                  <transition name="fade">
+                    <a-button
+                      v-if="filtersAppied.length > 0"
+                      class="clear-values"
+                      @click.prevent="filtersAppied = []"
+                    >
+                      Clear All</a-button
+                    >
+                  </transition>
                 </div>
                 <div class="wrapper-product-list">
                   <div class="dropdown sort-by">
@@ -250,6 +228,7 @@
 </template>
 
 <script>
+import { type } from "os";
 import { mapState } from "vuex";
 import CardInfo from "../components/Cards/CardInfo.vue";
 import DefaultHeader from "../components/Headers/DefaultHeader.vue";
@@ -264,7 +243,7 @@ export default {
       county: null,
       category: null,
       counties: [
-      "Nairobi",
+        "Nairobi",
         "Mombasa",
         "Kwale",
         "Kilifi",
@@ -311,7 +290,6 @@ export default {
         "Migori",
         "Kisii",
         "Nyamira",
-
       ],
       categories: [
         "Family",
@@ -365,16 +343,18 @@ export default {
       this.filtersAppied.splice(itemIndex, 1);
     },
     setExperience(element) {
-      //find number elements
-      const onlyNumbers = this.filtersAppied.filter(
-        (element) => typeof element === "number"
+      // //find range  elements
+      const oldRange = this.filtersAppied.filter(
+        (element) => Array.isArray(element)
       );
-      //remove experience
-      onlyNumbers.forEach((e) => {
+      // //remove experience range
+      oldRange.forEach((e) => {
         this.filtersAppied.pop(e);
       });
-      //add new experience
-      this.filtersAppied.push(element);
+      // //add new experience
+      this.filtersAppied.push(element); 
+      console.log(this.filtersAppied)  
+  
     },
     setActive: function (element) {
       if (this.filtersAppied.indexOf(element) > -1) {
@@ -397,9 +377,15 @@ export default {
         let experience =
           new Date().getFullYear() -
           new Date(product.practise_start).getFullYear();
+          const oldRange = this.filtersAppied.filter(
+        (element) => Array.isArray(element)
+      );
         return this.filtersAppied.every((filterAppied) => {
-          if (experience.toString().includes(filterAppied)) {
-            return experience.toString().includes(filterAppied);
+          if (experience.toString()>=oldRange) {
+            return experience.toString()>=oldRange[0];
+          }
+          if (experience.toString()<=oldRange) {
+            return experience.toString()<=oldRange[1];
           }
           if (product.specialisation.includes(filterAppied)) {
             return product.specialisation.includes(filterAppied);
@@ -408,17 +394,6 @@ export default {
             return product.location.includes(filterAppied);
           }
         });
-      });
-    },
-
-    sortByLowPrice: function () {
-      return this.products.sort(function (a, b) {
-        return a.price - b.price;
-      });
-    },
-    sortByHigherPrice: function () {
-      return this.products.sort(function (a, b) {
-        return a.price - b.price;
       });
     },
     resultQuery() {
