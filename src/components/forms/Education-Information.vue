@@ -145,10 +145,10 @@
           </a-col>
         </a-row>
       </a-form>
-      <div>
-        <!-- <a-button type="" @click="handlePrevious" class="mx-10">
-          Previous Section
-        </a-button> -->
+      <div style="display:flex;">
+        <a-button type="dark" @click="handlePrevious" class="mx-10">
+          Previous
+        </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading">Save and Continue</a-button>
       </div>
     </div>
@@ -205,7 +205,9 @@ export default {
     prev1handleEndOpenChange(open) {
       this.endOpen = open;
     },
-    handlePrevious() {},
+    handlePrevious() {
+      this.$store.dispatch("changeStep", 2);
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {

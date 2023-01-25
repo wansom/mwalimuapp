@@ -190,9 +190,9 @@
    
       </a-form>
       <div>
-        <!-- <a-button class="mx-10" @click="handlePrevious"
+        <a-button type="dark" class="mx-10" @click="handlePrevious"
           >Previous Section
-        </a-button> -->
+        </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading"
           >Submit for Review
         </a-button>
@@ -301,6 +301,9 @@ export default {
           };
         };
       });
+    },
+    handlePrevious() {
+      this.$store.dispatch("changeStep", 3);
     },
     handleSubmit(e) {
       e.preventDefault();
