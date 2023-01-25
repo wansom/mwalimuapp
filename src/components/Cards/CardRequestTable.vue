@@ -5,7 +5,7 @@
 		<template #title>
 			<a-row type="flex" align="middle">
 				<a-col :span="24" :md="12">
-					<h5 class="font-semibold m-0">Approval Requests</h5>
+					<h5 class="font-semibold m-0">Approve Requests({{ requests.length }})</h5>
 				</a-col>
 				<!-- <a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 					<a-radio-group v-model="authorsHeaderBtns" size="small">

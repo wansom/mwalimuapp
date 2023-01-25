@@ -8,7 +8,7 @@
 				<!-- Footer Copyright Notice -->
 				<p class="copyright">
 					© 2021
-					 <a href="https://creative-tim.com">CM ADVOCATES</a>
+					 <a href="https://acelitigator.com/">Acelitigator</a>
 				</p>
 				<!-- / Footer Copyright Notice -->
 
@@ -17,10 +17,10 @@
 
 				<!-- Footer Navigation Menu -->
 				<a-menu mode="horizontal">
-					<a-menu-item>Creative Tim</a-menu-item>
-					<a-menu-item>About Us</a-menu-item>
-					<a-menu-item>Blog</a-menu-item>
-					<a-menu-item>License</a-menu-item>
+					<a-menu-item><a href="https://acelitigator.com/about-us">About Us</a></a-menu-item>
+					<a-menu-item><a href="https://acelitigator.com/litigation-documents/">Documents Portal</a></a-menu-item>
+					<a-menu-item><a href="https://acelitigator.com/about-us">Privacy Policy</a></a-menu-item>
+					<a-menu-item><a href="https://acelitigator.com/about-us">Support</a></a-menu-item>
 				</a-menu>
 				<!-- / Footer Navigation Menu -->
 
