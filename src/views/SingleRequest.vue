@@ -111,6 +111,18 @@ export default {
   font-size: 24;
   font-weight: bold;
 }
+.icon-card:hover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 200px;
+  background-color: #db1c22;
+}
+.icon-card:hover {
+ color:#ffffff
+}
 .icon-list {
   font-size: 68px;
   margin-bottom: 10px;
