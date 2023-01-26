@@ -94,7 +94,7 @@
         type="password"
             placeholder="Password"
           >
-          <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+          <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
           </a-input-password>
         </a-form-item>
         <a-form-item class="mb-5" label="Confirm Password" has-feedback>
