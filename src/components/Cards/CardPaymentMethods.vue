@@ -199,6 +199,7 @@ export default {
         .get()
         .then((doc) => {
           let data = doc.data();
+          console.log(data)
           if (doc.exists && data.amount == 5) {
             this.paymentConfirmed = true;
             let user = fb.auth.currentUser;
