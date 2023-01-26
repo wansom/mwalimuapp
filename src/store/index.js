@@ -169,20 +169,20 @@ export default new Vuex.Store({
         //mpesa
         async intiatePayments({ dispatch }, values) {
           const result = await axios.get(
-            `https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/payments/pay/${values.amount}/${values.phone_number}`
+            `https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mpesa/pay/${values.amount}/${values.phone_number}`
           );
           return result;
         },
         async confirmPayments({ dispatch }) {
           const result = await axios.get(
-            "https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/payments/callback"
+            "https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mpesa/callback"
           );
           return result;
         },
         //send email
         async sendMail({ dispatch }, values) {
           await axios.post(
-            "https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/mail/sendmail",
+            "https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mail/sendmail",
             {
               name: values.name,
               email: values.email,
