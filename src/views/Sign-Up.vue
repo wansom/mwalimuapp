@@ -82,6 +82,10 @@
                 message: 'Please input your password!',
               },
               {
+                  min:8,
+                  message:'Password must be 8 characters or more'
+              },
+              {
                 validator: validateToNextPassword,
               },
             ],
@@ -90,6 +94,7 @@
         type="password"
             placeholder="Password"
           >
+          <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
           </a-input-password>
         </a-form-item>
         <a-form-item class="mb-5" label="Confirm Password" has-feedback>
@@ -152,6 +157,18 @@
 </template>
 
 <script>
+function validetPasswordLength(value) {
+  if (value.length>8) {
+    return {
+      validateStatus: 'success',
+      errorMsg: null,
+    };
+  }
+  return {
+    validateStatus: 'error',
+    errorMsg: 'Password must be greater than 8 characters',
+  };
+}
 export default {
   data() {
     return {
