@@ -83,7 +83,7 @@ export default {
   components: { GeneralInfoWidget, EmploymentInfoWidget, EducationWidget, CertificateWidget },
   data(){
     return{
-        current:0
+        current:1
     }
   },
   methods: {

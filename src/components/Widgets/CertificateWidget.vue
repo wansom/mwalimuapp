@@ -29,7 +29,7 @@
               </a-form-item>
             </a-col>
             <a-col :span="12">
-              <a-form-item label="Certificate Renewal Date">
+              <a-form-item label="Last Certificate Renewal Date">
                 <a-date-picker
                   v-decorator="[
                     'cert_renewal_date',
@@ -144,22 +144,26 @@
         fb.usersCollection.doc(this.user.uid).update({
           status:status,
           notifications:fb.types.FieldValue.arrayUnion({
-              notification:`your account has been approved pending payment`,
+              notification:`your account has been approved proceed to payment`,
               date:new Date()
             })
 
         }).then(()=>{
           router.push("/dashboard")
+          this.$store.dispatch("sendMail",{
+            name: this.user.first_name,
+              email: this.user.email,
+              subject: "Acelitigator Account",
+              content:"Your account has been successfully approved . Please proceed to the website to complete payment"
+
+          })
           this.loading=false
         })
       },
     },
     computed: {
-      ...mapState([]),
     },
     mounted() {
-      let user = fb.auth.currentUser;
-      this.$store.dispatch("fetchUserProfile", user);
     },
   };
   </script>

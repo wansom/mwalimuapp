@@ -146,7 +146,7 @@ export default new Vuex.Store({
               date:new Date()
             })
           })
-        if(data.status){
+        if(data.status=="pending approval"){
           fb.usersCollection.doc(user.uid).update({
             notifications:fb.types.FieldValue.arrayUnion({
               notification:`your account details have been submitted successfully for review`,
@@ -182,11 +182,12 @@ export default new Vuex.Store({
         //send email
         async sendMail({ dispatch }, values) {
           await axios.post(
-            "https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mail/sendmail",
+            "http://127.0.0.1:5001/scanpal-f74da/us-central1/barizi/mail/send",
             {
               name: values.name,
               email: values.email,
               subject: values.subject,
+              content:values.content
             }
           );
         },

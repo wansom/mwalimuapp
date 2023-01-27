@@ -30,7 +30,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Certificate Renewal Date">
+            <a-form-item label="Last Certificate Renewal Date">
               <a-date-picker
                 v-decorator="[
                   'cert_renewal_date',
@@ -346,7 +346,7 @@ export default {
             lsk_letter: lsk_letter,
             admission_cert: admission_cert,
             national_id_doc: national_id_doc,
-            step: "certifacates",
+            step: "certificates",
             status: "pending approval",
             current:5
           };
@@ -360,6 +360,13 @@ export default {
             this.$message.error("please complete the employment section");
           } else {
             this.$store.dispatch("updateUser", payload);
+           this.$store.dispatch("sendMail",{
+              name: this.user.first_name,
+                email: this.user.email,
+                subject: "Acelitigator Account",
+                content:"Thank You for submitting your account details,our team will review it and get back to you."
+  
+            })
             this.loading=false
           }
         }
