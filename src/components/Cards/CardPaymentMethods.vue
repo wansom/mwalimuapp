@@ -89,6 +89,20 @@ export default {
     showModal() {
       this.visible = true;
     },
+    formatNumber(value){
+      if(value.startsWith("254")){
+        return value
+      }else if(value.startsWith("07")){
+        return  "254" +value.substring(1)
+      }else if(value.startsWith("+254")){
+        return  "254" +value.substring(2)
+      }else if(value.startsWith("01")){
+        return  "254" +value.substring(1)
+      }else{
+        return value
+      }
+
+    },
     payWithCard(){
       swal({
               title: "OOPS!",
@@ -97,12 +111,11 @@ export default {
             });
     },
     intiatePayment() {
-      if (this.user.phone.startsWith("254")) {
-        this.loading = true;
+      this.loading = true;
         this.$store
           .dispatch("intiatePayments", {
             amount: 5,
-            phone_number: this.user.phone,
+            phone_number: this.formatNumber(this.user.phone) ,
           })
           .then((response) => {
             // handle success
@@ -124,39 +137,6 @@ export default {
               icon: "error",
             });
           });
-      } else if (this.user.phone.startsWith("07")) {
-        this.loading = true;
-        this.$store
-          .dispatch("intiatePayments", {
-            amount: 5,
-            phone_number: this.user.phone,
-          })
-          .then((response) => {
-            // handle success
-            console.log(response);
-            if (response.status == 200) {
-              let id = response.data.CheckoutRequestID;
-              localStorage.setItem("transactionID", JSON.stringify(id));
-              this.loading = false;
-            }
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-            swal({
-              title: "OOPS!",
-              text: `something went wrong`,
-              icon: "error",
-            });
-          });
-      } else {
-        swal({
-          title: "OOPS!",
-          text: `phone number form 254705****21`,
-          icon: "error",
-        });
-        this.loading = false;
-      }
     },
     confirmPayment() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
@@ -222,6 +202,13 @@ export default {
               .then(() => {
                 let user = fb.auth.currentUser;
                 this.$store.dispatch("fetchUserProfile", user);
+                this.$store.dispatch("sendMail",{
+              name: this.user.first_name,
+                email: this.user.email,
+                subject: "Acelitigator Account",
+                content:`Your Account has been activated successfully valid till ${new Date()}`
+  
+            })
               });
           } else {
             swal({
