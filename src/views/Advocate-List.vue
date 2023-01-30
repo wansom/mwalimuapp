@@ -121,7 +121,7 @@
                       <div class="space2"></div>
                     </section>
                   </a-collapse-panel>
-                  <a-collapse-panel key="2" header="COUNTIES">
+                  <a-collapse-panel key="3" header="COUNTIES">
                     <section class="section size">
                       <a-row>
                         <a-col
@@ -198,7 +198,7 @@
                       <!-- Loop products  -->
                       <div class="col-sm-12">
                         <h3 v-if="filteredItems.length == 0">
-                          No Lawyers fit your search!
+                          No Lawyers fit your search
                         </h3>
                       </div>
                       <a-list
