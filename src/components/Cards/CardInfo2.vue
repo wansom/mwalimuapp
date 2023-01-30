@@ -2,7 +2,7 @@
 
 	<!-- Information Card 2 -->
 	<a-card :bordered="false" class="card-info-2 h-full">
-		<div class="col-content h-full" style="background-image: url('images/info-card-2.jpg')">
+		<div class="col-content h-full" style="background-color:#141414;">
 			<div class="card-content">
 				<h5>{{user.profile_visits}} Profile Visits</h5>
 				<!-- <p>Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p> -->

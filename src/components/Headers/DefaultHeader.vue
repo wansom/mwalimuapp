@@ -80,7 +80,10 @@
     </div>
     <a-divider type="vertical" style="height: 100%;"/>
     <div class="header-col header-btn mx-5">
-      <a-button href="/sign-in" type="link" class="text-white"
+      <router-link  v-if="user" to="/dashboard">
+        <a-avatar :src="user.profile_photo" :size="60" style="object-fit:contain"/>
+      </router-link>   
+      <a-button href="/sign-in" type="link" class="text-white" v-else
         >LOGIN</a-button
       >
     </div>
@@ -90,6 +93,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -97,7 +101,14 @@ export default {
       // Binded model property for "Collapsible Navigation Menu" collapsed status .
       collapseNav: 0,
     };
+
   },
+  computed: {
+    ...mapState(["user"]),
+  },
+  mounted(){
+
+  }
 };
 </script>
 

@@ -27,7 +27,7 @@
 								<path d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z" fill="#111827"/>
 							</svg>
 						</span>
-						<span class="label" v-if="user.status=='active'">Dashboard</span>
+						<span class="label" v-if="user.status=='active'">My Profile</span>
 						<span class="label" v-else-if="user.status=='admin'">Admin Dashboard</span>
 						<span class="label" v-else>Create Profile</span>
 					</router-link>
