@@ -80,12 +80,22 @@
     </div>
     <a-divider type="vertical" style="height: 100%;"/>
     <div class="header-col header-btn mx-5">
-      <router-link  v-if="user" to="/dashboard">
-        <a-avatar :src="user.profile_photo" :size="60" style="object-fit:contain"/>
-      </router-link>   
-      <a-button href="/sign-in" type="link" class="text-white" v-else
-        >LOGIN</a-button
-      >
+      <a-menu  mode="horizontal">
+      <a-sub-menu>
+        <span slot="title" class="submenu-title-wrapper"
+          ><a-icon type="user" />Account</span
+        >
+        <a-menu-item key="setting:1"><a-icon type="setting" />
+            Profile
+          </a-menu-item>
+          <a-menu-item key="setting:2"><a-icon type="logout" />
+           Logout
+          </a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+      <!-- <a-button href="/sign-in" type="link" class="text-white" 
+        >LOGIN{{ user.first_name }}</a-button
+      > -->
     </div>
     
   </a-layout-header>
@@ -107,7 +117,7 @@ export default {
     ...mapState(["user"]),
   },
   mounted(){
-
+    this.$store.dispatch("fetchUserProfile")
   }
 };
 </script>
