@@ -54,19 +54,22 @@
             <div id="filters">
               <div class="sidebar">
                 <!-- sidebar  -->
-                <!-- <div id="shopbypanel" class="collapse">
-              <h3><a href="#">SHOP BY </a> </br></h3>
+                <div id="shopbypanel" class="collapse">
+                  <h3><a href="#">SEARCH </a> <br /></h3>
 
-              <div class="shopbypanel ">
-            <ul class="">
-              <li><h4><a href="#" class="text-center ">SHOE TYPE</a></h4></li>
-              <li><h4><a href="#" class="text-center ">COLLECTION</a></h4></li>
-              <li><h4><a href="#" class="text-center ">ACTIVITY</a></h4></li>
-              <li><h4><a href="#" class="text-center ">INJURY</a></h4></li>
-              <li><h4><a href="#" class="text-center ">ATHLETES</a></h4></li>
-            </ul>
-          </div>
-            </div> -->
+                  <div class="shopbypanel">
+                    <ul class="">
+                      <li>
+                        <a-input-search
+                          placeholder="input search text"
+                          enter-button
+                          @search="onSearch"
+                        />
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
                 <h5>FILTERS</h5>
                 <span class="line"></span>
 
@@ -228,7 +231,6 @@
 </template>
 
 <script>
-import { type } from "os";
 import { mapState } from "vuex";
 import CardInfo from "../components/Cards/CardInfo.vue";
 import DefaultHeader from "../components/Headers/DefaultHeader.vue";
@@ -335,6 +337,7 @@ export default {
         },
         pageSize: 3,
       },
+      searchName:""
     };
   },
   methods: {
@@ -344,17 +347,16 @@ export default {
     },
     setExperience(element) {
       // //find range  elements
-      const oldRange = this.filtersAppied.filter(
-        (element) => Array.isArray(element)
+      const oldRange = this.filtersAppied.filter((element) =>
+        Array.isArray(element)
       );
       // //remove experience range
       oldRange.forEach((e) => {
         this.filtersAppied.pop(e);
       });
       // //add new experience
-      this.filtersAppied.push(element); 
-      console.log(this.filtersAppied)  
-  
+      this.filtersAppied.push(element);
+      console.log(this.filtersAppied);
     },
     setActive: function (element) {
       if (this.filtersAppied.indexOf(element) > -1) {
@@ -369,6 +371,13 @@ export default {
     formatter(value) {
       return `${value} Years`;
     },
+    onSearch(element){
+      if (this.filtersAppied.indexOf(element) > -1) {
+        this.filtersAppied.pop(element);
+      } else {
+        this.filtersAppied.push(element);
+      }
+    }
   },
   computed: {
     ...mapState(["advocates", "user"]),
@@ -377,15 +386,21 @@ export default {
         let experience =
           new Date().getFullYear() -
           new Date(product.practise_start).getFullYear();
-          const oldRange = this.filtersAppied.filter(
-        (element) => Array.isArray(element)
-      );
+        const oldRange = this.filtersAppied.filter((element) =>
+          Array.isArray(element)
+        );
         return this.filtersAppied.every((filterAppied) => {
-          if (experience.toString()>=oldRange) {
-            return experience.toString()>=oldRange[0];
+          if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+            return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
           }
-          if (experience.toString()<=oldRange) {
-            return experience.toString()<=oldRange[1];
+          if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+            return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
+          }
+          if (experience.toString() >= oldRange) {
+            return experience.toString() >= oldRange[0];
+          }
+          if (experience.toString() <= oldRange) {
+            return experience.toString() <= oldRange[1];
           }
           if (product.specialisation.includes(filterAppied)) {
             return product.specialisation.includes(filterAppied);
