@@ -3,7 +3,7 @@
 	<!-- Invoices Card -->
 	<a-card :bordered="false" class="header-solid h-full" :bodyStyle="{paddingTop: 0, paddingBottom: '16px' }">
 		<template #title>
-			<h6 class="font-semibold m-0">Invoices</h6>
+			<h6 class="font-semibold m-0">Receipts</h6>
 		</template>
 		<!-- <template slot="extra" class="mb-0">
 			<a-button type="primary">
