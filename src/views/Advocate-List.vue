@@ -61,7 +61,7 @@
                     <ul class="">
                       <li>
                         <a-input-search
-                          placeholder="input search text"
+                          placeholder="Enter first or last name"
                           enter-button
                           @search="onSearch"
                         />
