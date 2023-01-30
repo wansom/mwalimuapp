@@ -108,13 +108,18 @@ export default new Vuex.Store({
     },
 
     fetchUserProfile({ commit }, data) {
-      let user = fb.auth.currentUser
-      fb.usersCollection
-        .doc(user.uid)
+      let currentUser =fb.auth.currentUser;
+      if(currentUser){
+        fb.usersCollection
+        .doc(currentUser.uid)
         .get()
         .then((result) => {
           commit("setUserProfile", result.data());
         });
+      }else{
+        commit("setUserProfile", {}); 
+      }
+      
     },
     logout({dispatch}){
       fb.auth.signOut().then(()=>{

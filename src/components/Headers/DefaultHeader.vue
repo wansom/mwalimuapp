@@ -80,22 +80,23 @@
     </div>
     <a-divider type="vertical" style="height: 100%;"/>
     <div class="header-col header-btn mx-5">
-      <a-menu  mode="horizontal">
+      <a-menu  mode="horizontal" v-if="user.status">
       <a-sub-menu>
         <span slot="title" class="submenu-title-wrapper"
-          ><a-icon type="user" />Account</span
+          ><a-icon type="user" />My Account</span
         >
         <a-menu-item key="setting:1"><a-icon type="setting" />
-            Profile
+           My Profile
+           <router-link to="dashboard"></router-link>
           </a-menu-item>
-          <a-menu-item key="setting:2"><a-icon type="logout" />
-           Logout
+          <a-menu-item key="setting:2"><a-icon type="logout" @click="logout"/>
+          <a-button type="link" @click="logout"> Logout</a-button>
           </a-menu-item>
       </a-sub-menu>
     </a-menu>
-      <!-- <a-button href="/sign-in" type="link" class="text-white" 
-        >LOGIN{{ user.first_name }}</a-button
-      > -->
+      <a-button href="/sign-in" type="link" class="text-white" v-else
+        >LOGIN</a-button
+      >
     </div>
     
   </a-layout-header>
@@ -113,11 +114,17 @@ export default {
     };
 
   },
+  methods:{
+logout(){
+  this.$store.dispatch("logout")
+}
+  },
   computed: {
     ...mapState(["user"]),
   },
   mounted(){
     this.$store.dispatch("fetchUserProfile")
+    
   }
 };
 </script>
