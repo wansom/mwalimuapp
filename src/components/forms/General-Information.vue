@@ -87,7 +87,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="Current Location(County)">
+            <a-form-item label="Primary Location(County)">
               <a-select      
                 v-decorator="[
                   'location',
@@ -102,6 +102,47 @@
                 <a-select-option v-for="county in counties" :key="county" :value="county"> {{county}} </a-select-option>
               </a-select>
              
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="Other Counties">
+              <a-select
+                mode="tags"
+                style="width: 100%"
+                placeholder="Type or search"
+                v-decorator="[
+                  'other_counties',
+                  {
+                    initialValue: user.other_counties,
+                    rules: [{ required: false, message: 'field is required' }],
+                  },
+                ]"
+              >
+                <a-select-option v-for="i in counties" :key="i">
+                  {{ i }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="16">
+          <a-col :span="12">
+            <a-form-item label="Website">
+              <a-input
+                v-decorator="[
+                  'website',
+                  {
+                    initialValue: user.website,
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please enter your job title',
+                      },
+                    ],
+                  },
+                ]"
+                style="width: 100%"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -126,9 +167,8 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="Practice Areas (Select all that apply)">
+            <a-form-item label="Primary Practice Area">
               <a-select
-                mode="tags"
                 style="width: 100%"
                 placeholder="Type or search"
                 v-decorator="[
@@ -146,22 +186,23 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Website">
-              <a-input
+            <a-form-item label="Other Practice Areas (Select all that apply)">
+              <a-select
+                mode="tags"
+                style="width: 100%"
+                placeholder="Type or search"
                 v-decorator="[
-                  'website',
+                  'practise_areas',
                   {
-                    initialValue: user.website,
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please enter your job title',
-                      },
-                    ],
+                    initialValue: user.practise_areas,
+                    rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
-                style="width: 100%"
-              />
+              >
+                <a-select-option v-for="i in categories" :key="i">
+                  {{ i }}
+                </a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
@@ -361,6 +402,8 @@ export default {
             location: values.location ?? "",
             webiste: values.webiste ?? "",
             specialisation: values.specialisation ?? "",
+            practise_areas:values.practise_areas,
+            
             step: "general information",
             profile_photo: url,
             current:2
