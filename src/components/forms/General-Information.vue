@@ -402,8 +402,8 @@ export default {
             location: values.location ?? "",
             webiste: values.webiste ?? "",
             specialisation: values.specialisation ?? "",
-            practise_areas:values.practise_areas,
-            
+            practise_areas:values.practise_areas??"",
+            other_counties:values.other_counties,
             step: "general information",
             profile_photo: url,
             current:2
