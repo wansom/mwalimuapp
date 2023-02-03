@@ -149,7 +149,8 @@
         <a-button type="dark" @click="handlePrevious" class="mx-10">
           Previous
         </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading">Save and Continue</a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-if="user.status==='pending approval'">Save and Continue </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-else>Save and Continue </a-button>
       </div>
     </div>
   </a-card>
