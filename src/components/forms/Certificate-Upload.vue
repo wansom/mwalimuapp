@@ -193,7 +193,10 @@
         <a-button type="dark" class="mx-10" @click="handlePrevious"
           >Previous Section
         </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading"
+        <a-button type="primary" @click="handleSubmit" :loading="loading"  disabled v-if="user.status==='pending approval'"
+          >Submit for Review
+        </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
           >Submit for Review
         </a-button>
       </div>

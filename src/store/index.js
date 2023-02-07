@@ -47,7 +47,7 @@ export default new Vuex.Store({
   },
   actions: {
     //register new user
-    signUp({ commit }, data) {
+    signUp({ commit,dispatch }, data) {
       commit("setLoading",true)
       fb.auth
         .createUserWithEmailAndPassword(data.email.replace(/\s/g, ''), data.password)
@@ -67,11 +67,11 @@ export default new Vuex.Store({
               })
             })
             .then(() => {
-              axios.post("http://127.0.0.1:5001/scanpal-f74da/us-central1/barizi/mail/auth",{
-                content:"Your Account has been created successfully. Please proceed to complete your profile",
-                email:data.email
-              }).then((res)=>{
-                console.log(res)
+              dispatch("sendMail",{
+                name: data.first_name,
+                email: data.email,
+                subject: "Acelitigator Account",
+                content:"Your Account has been created successfully. Please proceed to complete your profile"
               })
               commit("setLoading",false)
               router.push("/sign-in");
@@ -188,7 +188,7 @@ export default new Vuex.Store({
         //send email
         async sendMail({ dispatch }, values) {
           await axios.post(
-            "http://127.0.0.1:5001/scanpal-f74da/us-central1/barizi/mail/send",
+            "https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mail/send",
             {
               name: values.name,
               email: values.email,

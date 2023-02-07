@@ -265,7 +265,7 @@
       </a-form>
       <div>
         <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-if="user.status==='pending approval'">Save and Continue </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-else>Save and Continue </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else>Save and Continue </a-button>
       </div>
     </div>
   </a-card>
@@ -401,7 +401,7 @@ export default {
             biography: values.biography ?? "",
             email: values.email ?? "",
             location: values.location ?? "",
-            webiste: values.webiste ?? "",
+            webiste: values.website ?? "",
             specialisation: values.specialisation ?? "",
             practise_areas:values.practise_areas??"",
             other_counties:values.other_counties,
