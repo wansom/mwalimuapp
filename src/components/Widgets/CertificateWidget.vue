@@ -96,20 +96,19 @@
           </a-col>
         </a-row>
         <a-row :gutter="16" class="mb-5">
-          <a-col :span="24">
-            <a :href="user.practise_certificate" target="blank">
-              <a-button icon="download">Download Certifcate</a-button></a
-            >
+          <a-col :span="6">
+
+            <a-button icon="download" :href="user.practise_certificate" target="blank">Practise Certificate</a-button>
+
           </a-col>
-        </a-row>
-        <a-row :gutter="16" class="mb-5">
-          <a-col :span="24">
-            <p>View Cert</p>
-            <PDFViewer
-              :source="user.practise_certificate"
-              style="height: 50vh; width: 50vw"
-              @download="handleDownload"
-            />
+          <a-col :span="6">
+            <a-button icon="download" :href="user.lsk_letter" target="blank">LSK Letter of Good Standing</a-button>
+          </a-col>
+          <a-col :span="6">
+            <a-button icon="download" :href="user.admission_cert" target="blank">Certificate of Admission</a-button>
+          </a-col>
+          <a-col :span="6">
+            <a-button icon="download" :href="user.national_id_doc" target="blank">National ID</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -143,11 +142,10 @@
 import * as fb from "../../firebase";
 import router from "../../router/index";
 // import PDFViewer from "pdf-viewer-vue";
-import PDFViewer from 'pdf-viewer-vue/dist/vue2-pdf-viewer'
 export default {
   props: ["user"],
   components: {
-    PDFViewer,
+
   },
   data() {
     return {
@@ -156,7 +154,8 @@ export default {
       endOpen: false,
       form: this.$form.createForm(this, { name: "coordinated" }),
       loading: false,
-      visible:false
+      visible:false,
+      url:""
     };
   },
   watch: {
@@ -169,6 +168,13 @@ export default {
   },
   methods: {
     handleDownload(){},
+    viewPDF(value){
+      this.url=value
+      this.visible =!this.visible
+    },
+    onClose(){
+      this.visible=false
+    },
     handleChange() {},
     handlePrevious() {},
     handleSubmit(status) {
@@ -184,13 +190,24 @@ export default {
         })
         .then(() => {
           router.push("/dashboard");
-          this.$store.dispatch("sendMail", {
+          if(status=="declined"){
+            this.$store.dispatch("sendMail", {
             name: this.user.first_name,
             email: this.user.email,
             subject: "Acelitigator Account",
             content:
-              "Your account has been successfully approved . Please proceed to the website to complete payment",
+              "Your account request has been declined please contact admin for more information",
           });
+          }else{
+            this.$store.dispatch("sendMail", {
+            name: this.user.first_name,
+            email: this.user.email,
+            subject: "Acelitigator Account",
+            content:
+              "Your account request has been approved.please login and proceed to make payment",
+          });  
+          }
+          
           this.loading = false;
         });
     },
