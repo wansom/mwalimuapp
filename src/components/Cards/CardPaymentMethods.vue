@@ -54,9 +54,9 @@
           :md="12"
           style="display: flex; align-items: center; justify-content: flex-end"
         >
-          <a-button type="primary" @click="confirmPayment">
+          <!-- <a-button type="primary" @click="confirmPayment">
             VERIFY PAYMENT
-          </a-button>
+          </a-button> -->
         </a-col>
       </a-row>
     </template>
@@ -121,6 +121,8 @@ export default {
               text: `Payment method not available`,
               icon: "error",
             });
+            let date=new Date().setMonth(new Date().getMonth() + 1)
+            console.log(new Date(date).toDateString())
     },
     intiatePayment() {
       this.loading = true;
@@ -166,12 +168,16 @@ export default {
                 text: `You have cancelled the transaction,please try again`,
                 icon: "error",
               });
+              this.sdkSent=false
+              this.visible=false
             } else if (data.resultCode == 1037) {
               swal({
                 title: "SORRY!",
                 text: `DS timeout user cannot be reached`,
                 icon: "error",
               });
+              this.sdkSent=false
+              this.visible=false
             } else {
               this.verifyAmount();
             }
@@ -199,9 +205,10 @@ export default {
               .doc(user.uid)
               .update({
                 status: "active",
-                subscription_date: new Date(),
+
+                subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
                 notifications:fb.types.FieldValue.arrayUnion({
-                  notification:"payment has been made succcessfully",
+                  notification:"payment has been made succcessfully,your acoount is active till new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()",
                   date:new Date()
 
                 }),
@@ -218,7 +225,7 @@ export default {
               name: this.user.first_name,
                 email: this.user.email,
                 subject: "Acelitigator Account",
-                content:`Your Account has been activated successfully valid till ${new Date()}`
+                content:`Your Account has been activated successfully valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()}`
   
             })
               });

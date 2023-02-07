@@ -66,7 +66,7 @@
                     ],
                   },
                 ]"
-                placeholder="Select date"
+                placeholder=""
                 style="width: 100%"
               />
             </a-form-item>
