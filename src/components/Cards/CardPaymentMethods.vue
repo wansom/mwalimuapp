@@ -13,11 +13,21 @@
             key="submit"
             type="primary"
             :loading="loading"
+            @click="confirmPayment"
+            v-if="sdkSent"
+          >
+            verify payment
+          </a-button>
+          <a-button
+            type="primary"
+            :loading="loading"
             @click="intiatePayment"
+            v-else
           >
             Proceed to Checkout
           </a-button>
         </template>
+        <a-skeleton active v-if="loading" />
         <a-result
           status="info"
           title="KES 1500.00!"
@@ -26,8 +36,10 @@
             user.phone +
             'enter MPESA PIN to complete payment'
           "
+          v-else
         >
         </a-result>
+       
       </a-modal>
     </div>
 
@@ -49,13 +61,13 @@
       </a-row>
     </template>
     <a-row :gutter="[24, 24]">
-      <a-col :span="24" :md="8">
+      <!-- <a-col :span="24" :md="8">
         <a-card class="payment-method-card">
           <img src="images/logos/mastercard-logo.png" alt="" />
           <h6 class="card-number">CREDIT CARD</h6>
           <a-button type="dashed" @click="payWithCard"> PAY </a-button>
         </a-card>
-      </a-col>
+      </a-col> -->
       <a-col :span="24" :md="8">
         <a-card class="payment-method-card">
           <img src="images/mpesa.png" alt="" />
@@ -63,12 +75,12 @@
           <a-button type="dahsed" @click="showModal"> Pay </a-button>
         </a-card>
       </a-col>
-      <a-col :span="24" :md="8">
+      <!-- <a-col :span="24" :md="8">
         <a-card class="payment-method-card">
           <h6 class="card-number">DIRECT BANK TRANSFER</h6>
           <a-button type="dashed" @click="payWithCard"> PAY </a-button>
         </a-card>
-      </a-col>
+      </a-col> -->
     </a-row>
   </a-card>
   <!-- Payment Methods Card -->
@@ -125,7 +137,7 @@ export default {
               localStorage.setItem("transactionID", JSON.stringify(id));
               this.sdkSent=true
               this.loading = false;
-              this.visible=false
+              // this.visible=false
             }
           })
           .catch(function (error) {

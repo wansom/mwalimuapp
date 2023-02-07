@@ -98,17 +98,17 @@
         <a-row :gutter="16" class="mb-5">
           <a-col :span="6">
 
-            <a-button icon="download" :href="user.practise_certificate" target="blank">Practise Certificate</a-button>
+            <a-button icon="download" :href="user.practise_certificate" target="blank">view Practise Certificate</a-button>
 
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.lsk_letter" target="blank">LSK Letter of Good Standing</a-button>
+            <a-button icon="download" :href="user.lsk_letter" target="blank">view LSK Letter of Good Standing</a-button>
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.admission_cert" target="blank">Certificate of Admission</a-button>
+            <a-button icon="download" :href="user.admission_cert" target="blank">view Certificate of Admission</a-button>
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.national_id_doc" target="blank">National ID</a-button>
+            <a-button icon="download" :href="user.national_id_doc" target="blank">view National ID</a-button>
           </a-col>
         </a-row>
       </a-form>
