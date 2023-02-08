@@ -14,32 +14,25 @@
 					:data="user.invoices"
           :date="user.subscription_date"
 				></CardInvoices> 
-
 			</a-col>
 		</a-row>
 		<!-- / Charts -->
 
 		<!-- Table & Timeline -->
-		<a-row :gutter="24" type="flex" align="stretch">
-			<!-- Table -->
+		<!-- <a-row :gutter="24" type="flex" align="stretch">
+
 			<a-col :span="24" :lg="16" class="mb-24">
-				
-				<!-- Projects Table Card -->
-				<CardProjectTable
+				<TopLawyers
 					:data="tableData"
 					:columns="tableColumns"
-				></CardProjectTable>
-				<!-- / Projects Table Card -->
-				
+				></TopLawyers>			
 			</a-col>
-			<!-- / Table -->
-
-			<!-- Timeline -->
+			
 			<a-col :span="24" :lg="8" class="mb-24">
 				<CardOrderHistory :notifications="user.notifications"></CardOrderHistory>
 			</a-col>
-			<!-- / Timeline -->
-		</a-row>
+		
+		</a-row> -->
     <admin-dashboard v-if="user.status=='admin'"></admin-dashboard>
     <!-- / Table & Timeline -->
     <!-- / Charts -->
@@ -58,7 +51,7 @@ import CardLineChart from "../components/Cards/CardLineChart";
 import WidgetCounter from "../components/Widgets/WidgetCounter";
 
 // "Projects" table component.
-import CardProjectTable from "../components/Cards/CardProjectTable";
+import TopLawyers from "../components/Cards/TopLawyers";
 
 // Order History card component.
 import CardOrderHistory from "../components/Cards/CardOrderHistory";
@@ -76,23 +69,29 @@ import AdminDashboard from './AdminDashboard.vue';
 	// "Projects" table list of columns and their properties.
 	const tableColumns = [
 		{
-			title: 'COMPANIES',
+			title: 'Name',
 			dataIndex: 'company',
 			scopedSlots: { customRender: 'company' },
 			width: 300,
 		},
+
 		{
-			title: 'MEMBERS',
-			dataIndex: 'members',
-			scopedSlots: { customRender: 'members' },
-		},
-		{
-			title: 'BUDGET',
+			title: 'Email',
 			dataIndex: 'budget',
 			class: 'font-bold text-muted text-sm',
 		},
 		{
-			title: 'COMPLETION',
+			title: 'Location',
+			dataIndex: 'budget',
+			class: 'font-bold text-muted text-sm',
+		},
+		{
+			title: 'Practise Areas',
+			dataIndex: 'budget',
+			class: 'font-bold text-muted text-sm',
+		},
+		{
+			title: 'Profile Views',
 			scopedSlots: { customRender: 'completion' },
 			dataIndex: 'completion',
 		},
@@ -100,26 +99,6 @@ import AdminDashboard from './AdminDashboard.vue';
 
 	// "Projects" table list of rows and their properties.
 	const tableData = [
-		{
-			key: '1',
-			company: {
-				name: 'Soft UI Shopify Version',
-				logo: 'images/logos/logo-shopify.svg',
-			},
-			members: [ "images/face-1.jpg", "images/face-4.jpg", "images/face-2.jpg", "images/face-3.jpg", ],
-			budget: '$14,000',
-			completion: 60,
-		},
-		{
-			key: '2',
-			company: {
-				name: 'Progress Track',
-				logo: 'images/logos/logo-atlassian.svg',
-			},
-			members: [ "images/face-4.jpg", "images/face-3.jpg", ],
-			budget: '$3,000',
-			completion: 10,
-		},
 		{
 			key: '3',
 			company: {
@@ -158,27 +137,13 @@ import AdminDashboard from './AdminDashboard.vue';
 			budget: '$4,000',
 			completion: 80,
 		},
-		{
-			key: '6',
-			company: {
-				name: 'Redesign Online Store',
-				logo: 'images/logos/logo-invision.svg',
-			},
-			members: [ "images/face-1.jpg", "images/face-4.jpg", "images/face-3.jpg", ],
-			budget: '$2,000',
-			completion: {
-				label: 'Cancelled',
-				status: 'exception',
-				value: 100,
-			},
-		},
 	];
 export default {
   components: {
     CardBarChart,
     CardLineChart,
     WidgetCounter,
-    CardProjectTable,
+    TopLawyers,
     CardOrderHistory,
     CardInfo,
     CardInfo2,

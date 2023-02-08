@@ -102,7 +102,7 @@
 	import WidgetCounter from '../components/Widgets/WidgetCounter' ;
 
 	// "Projects" table component.
-	import CardProjectTable from '../components/Cards/CardProjectTable' ;
+	import CardProjectTable from '../components/Cards/TopLawyers' ;
 
 	// "Projects" table component.
 	import CardOrderHistory from '../components/Cards/CardOrderHistory' ;

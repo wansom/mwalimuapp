@@ -17,10 +17,130 @@
 
           <!-- Header Page Title -->
           <div class="ant-page-header-heading">
-            <a-alert message="Account Waiting approval" banner  v-if="user.status=='pending approval'"/>
-			<a-alert message="Your account has been approved.Proceed to Payment" banner  type="success" v-if="user.status=='approved'"/>
+            <a-alert
+              message="Account Waiting approval"
+              banner
+              v-if="user.status == 'pending approval'"
+            />
+            <a-alert
+              message="Your account has been approved.Proceed to Payment"
+              banner
+              type="success"
+              v-if="user.status == 'approved'"
+            />
           </div>
           <!-- / Header Page Title -->
+        </a-col>
+        <a-col :span="24" :md="18" class="header-control">
+          <!-- Header Control Buttons -->
+          <a-dropdown
+            :trigger="['click']"
+            overlayClassName="header-notifications-dropdown"
+            :getPopupContainer="() => wrapper"
+          >
+            <a-badge :count="user.notifications.length">
+              <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 2C6.68632 2 4.00003 4.68629 4.00003 8V11.5858L3.29292 12.2929C3.00692 12.5789 2.92137 13.009 3.07615 13.3827C3.23093 13.7564 3.59557 14 4.00003 14H16C16.4045 14 16.7691 13.7564 16.9239 13.3827C17.0787 13.009 16.9931 12.5789 16.7071 12.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z"
+                    fill="#111827"
+                  />
+                  <path
+                    d="M10 18C8.34315 18 7 16.6569 7 15H13C13 16.6569 11.6569 18 10 18Z"
+                    fill="#111827"
+                  />
+                </svg>
+              </a>
+            </a-badge>
+
+            <a-list
+              item-layout="horizontal"
+              class="header-notifications-list"
+              :data-source="user.notifications"
+              slot="overlay"
+              :loading="loading"
+            >
+              <!-- <div
+                v-if="showLoadingMore"
+                slot="loadMore"
+                :style="{
+                  textAlign: 'center',
+                  marginTop: '12px',
+                  height: '32px',
+                  lineHeight: '32px',
+                }"
+              >
+                <a-spin v-if="loadingMore" />
+                <a-button v-else @click="onLoadMore"> loading more </a-button>
+              </div> -->
+              <a-list-item slot="renderItem" slot-scope="item">
+                <a-list-item-meta>
+                  <template #description>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM11 6C11 5.44772 10.5523 5 10 5C9.44772 5 9 5.44772 9 6V10C9 10.2652 9.10536 10.5196 9.29289 10.7071L12.1213 13.5355C12.5118 13.9261 13.145 13.9261 13.5355 13.5355C13.9261 13.145 13.9261 12.5118 13.5355 12.1213L11 9.58579V6Z"
+                        fill="#111827"
+                      />
+                    </svg>
+                    <span>{{ item.date.toDate().toDateString() }}</span>
+                  </template>
+                  <a slot="title" href="#">{{ item.notification }}</a>
+                </a-list-item-meta>
+              
+                  <a slot="actions"> <a-icon type="close" /></a>
+              </a-list-item>
+            </a-list>
+          </a-dropdown>
+          <a-button
+            type="link"
+            class="sidebar-toggler"
+            @click="
+              $emit('toggleSidebar', !sidebarCollapsed), resizeEventHandler()
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              />
+            </svg>
+          </a-button>
+          <a-button @click="logout">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10ZM12 7C12 8.10457 11.1046 9 10 9C8.89543 9 8 8.10457 8 7C8 5.89543 8.89543 5 10 5C11.1046 5 12 5.89543 12 7ZM9.99993 11C7.98239 11 6.24394 12.195 5.45374 13.9157C6.55403 15.192 8.18265 16 9.99998 16C11.8173 16 13.4459 15.1921 14.5462 13.9158C13.756 12.195 12.0175 11 9.99993 11Z"
+                fill="#111827"
+              />
+            </svg>
+            <span>Sign Out</span></a-button
+          >
+          <!-- / Header Control Buttons -->
         </a-col>
       </a-row>
     </a-layout-header>
@@ -57,7 +177,10 @@ export default {
 
       // The wrapper element to attach dropdowns to.
       wrapper: document.body,
-      lists:[]
+      lists: [],
+      loading: false,
+      loadingMore: false,
+      showLoadingMore: true,
     };
   },
   methods: {
@@ -68,9 +191,16 @@ export default {
       // scroller is anywhere but the top of the page.
     },
     onSearch(value) {},
-    logout(){
-      this.$store.dispatch('logout')
-    }
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    onLoadMore() {
+      this.loadingMore = true;
+      this.loadingMore = false;
+        this.$nextTick(() => {
+          window.dispatchEvent(new Event('resize'));
+        });
+    },
   },
   computed: {
     ...mapState(["user"]),
