@@ -7,9 +7,13 @@
 			<!-- <p>this month <span class="text-success">+20%</span></p>	 -->
 		</template>
 		<a-timeline pending="Recording..." :reverse="timelineReverse">
-			<a-timeline-item color="blue" v-for="notification of notifications.slice(-5)" :key="notification">
-				{{ notification.notification }}
-				<p>{{ notification.date.toDate().toDateString() }}</p>
+			<a-timeline-item color="blue" v-for="notification of notifications.slice(-4)" :key="notification">	
+				<a-card title="Notification">
+      <a slot="extra" href="#"><a-icon type="close" /></a>
+	  <h6>{{ notification.notification}}</h6>
+	  
+      <p>{{ notification.date.toDate().toDateString() }}</p>
+    </a-card>
 			</a-timeline-item>
 			<!-- <a-timeline-item color="gray">
 				New order #46282344
@@ -30,7 +34,7 @@
 				<path d="M3 11C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H7C7.55228 13 8 12.5523 8 12C8 11.4477 7.55228 11 7 11H3Z" fill="#111827"/>
 				<path d="M15 8C15 7.44772 14.5523 7 14 7C13.4477 7 13 7.44771 13 8L13 13.5858L11.7071 12.2929C11.3166 11.9024 10.6834 11.9024 10.2929 12.2929C9.90237 12.6834 9.90237 13.3166 10.2929 13.7071L13.2929 16.7071C13.4804 16.8946 13.7348 17 14 17C14.2652 17 14.5196 16.8946 14.7071 16.7071L17.7071 13.7071C18.0976 13.3166 18.0976 12.6834 17.7071 12.2929C17.3166 11.9024 16.6834 11.9024 16.2929 12.2929L15 13.5858L15 8Z" fill="#111827"/>
 			</svg>
-			REVERSE
+			CLEAR ALL
 		</a-button>
 	</a-card>
 	<!-- / Orders History Timeline Card -->

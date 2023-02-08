@@ -208,7 +208,7 @@ export default {
 
                 subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
                 notifications:fb.types.FieldValue.arrayUnion({
-                  notification:"payment has been made succcessfully,your acoount is active till new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()",
+                  notification:`payment has been made succcessfully,your acoount is active till new ${Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()}`,
                   date:new Date()
 
                 }),

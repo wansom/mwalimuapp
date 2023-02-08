@@ -5,7 +5,7 @@
 			<a-col :span="24" :lg="16" class="mb-24">
 
 				<!-- Active Users Card -->
-				<CardBarChart></CardBarChart>
+				<CardBarChart :visitors="user.profile_visits"></CardBarChart>
 				<!-- Active Users Card -->
 
 			</a-col>

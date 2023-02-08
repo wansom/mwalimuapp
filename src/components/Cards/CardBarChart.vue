@@ -4,18 +4,18 @@
 	<a-card :bordered="false" class="dashboard-bar-chart">
 		<chart-bar :height="220" :data="barChartData"></chart-bar>
 		<div class="card-title">
-			<h6>Active Users</h6>
-			<p>than last week <span class="text-success">+23%</span></p>
+			
+			<!-- <p>than last week <span class="text-success">+23%</span></p> -->
 		</div>
-		<div class="card-content">
+		<!-- <div class="card-content">
 			<p>We have created multiple options for you to put together and customise into pixel perfect pages.</p>
-		</div>
-		<a-row class="card-footer" type="flex" justify="center" align="top">
+		</div> -->
+		<a-row class="card-footer" type="flex" justify="start" align="top">
 			<a-col :span="6">
-				<h4>3,6K</h4>
-				<span>Users</span>
+				<h6>Total Profile Views</h6>
+				<h4>{{ visitors }}</h4>
 			</a-col>
-			<a-col :span="6">
+			<!-- <a-col :span="6">
 				<h4>2m</h4>
 				<span>Clicks</span>
 			</a-col>
@@ -26,7 +26,7 @@
 			<a-col :span="6">
 				<h4>82</h4>
 				<span>Items</span>
-			</a-col>
+			</a-col> -->
 		</a-row>
 	</a-card>
 	<!-- Active Users Card -->
@@ -39,6 +39,7 @@
 	import ChartBar from '../Charts/ChartBar' ;
 
 	export default ({
+		props:['visitors'],
 		components: {
 			ChartBar,
 		},
