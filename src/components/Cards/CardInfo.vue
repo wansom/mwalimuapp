@@ -36,9 +36,10 @@
           </p>
 
           <div style="display: flex; flex-wrap: wrap">
+            <a-button>{{ advocate.specialisation}}</a-button>
             <div
               class="my-5 mx-5"
-              v-for="i of advocate.specialisation"
+              v-for="i of advocate.practise_areas"
               :key="i"
             >
               <a-button>{{ i }}</a-button>

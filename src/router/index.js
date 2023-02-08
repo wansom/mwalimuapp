@@ -62,7 +62,7 @@ let routes = [
 		path: '/profile',
 		name: 'Profile',
 		layout: "dashboard",
-		component: () => import('../views/Billing.vue'),
+		component: () => import('../views/ActiveProfile.vue'),
 	},
 	{
 		path: '/sign-in',

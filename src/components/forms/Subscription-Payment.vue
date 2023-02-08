@@ -16,7 +16,7 @@
     v-else-if="user.status == 'active'"
     status="success"
     title="Your Account currently is Active!"
-    :sub-title="'You will be required to renew your subscription on' +'-'+ user.subscription_date.toDate().toDateString()"
+    :sub-title="'You will be required to renew your subscription on' +'-'+ user.subscription_date"
   >
   </a-result>
     <a-result

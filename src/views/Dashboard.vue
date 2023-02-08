@@ -1,29 +1,52 @@
 <template>
   <div>
-    <!-- Table & Timeline -->
-    <a-row
-      :gutter="24"
-      type="flex"
-      align="stretch"
-      v-if="user.status == 'active'"
-    >
-      <!-- Table -->
-      <a-col :span="24" :lg="8" class="mb-24">
-        <!-- Projects Table Card -->
-        
-        <CardInfo2></CardInfo2>
-        <!-- / Projects Table Card -->
-      </a-col>
-      <a-col :span="24" :lg="16" class="mb-24">
+    <!-- Charts -->
+		<a-row :gutter="24" type="flex" align="stretch"  v-if="user.status == 'active'">
+			<a-col :span="24" :lg="16" class="mb-24">
+
+				<!-- Active Users Card -->
+				<CardBarChart></CardBarChart>
+				<!-- Active Users Card -->
+
+			</a-col>
+			<a-col :span="24" :lg="8" class="mb-24">
         <CardInvoices
 					:data="user.invoices"
-				></CardInvoices> </a-col>
+				></CardInvoices> 
 
-    </a-row>
+			</a-col>
+		</a-row>
+		<!-- / Charts -->
+
+		<!-- Table & Timeline -->
+		<a-row :gutter="24" type="flex" align="stretch">
+			<!-- Table -->
+			<a-col :span="24" :lg="16" class="mb-24">
+				
+				<!-- Projects Table Card -->
+				<CardProjectTable
+					:data="tableData"
+					:columns="tableColumns"
+				></CardProjectTable>
+				<!-- / Projects Table Card -->
+				
+			</a-col>
+			<!-- / Table -->
+
+			<!-- Timeline -->
+			<a-col :span="24" :lg="8" class="mb-24">
+
+				<!-- Orders History Timeline Card -->
+				<CardOrderHistory></CardOrderHistory>
+				<!-- / Orders History Timeline Card -->
+
+			</a-col>
+			<!-- / Timeline -->
+		</a-row>
     <admin-dashboard v-if="user.status=='admin'"></admin-dashboard>
     <!-- / Table & Timeline -->
     <!-- / Charts -->
-    <profile-information v-if="user.status!='admin'"></profile-information>
+    <profile-information v-if="user.status!='admin'&&user.status !='active'"></profile-information>
   </div>
 </template>
 
@@ -50,75 +73,109 @@ import CardInfo from "../components/Cards/CardInfo";
 // Information card 2.
 import CardInfo2 from "../components/Cards/CardInfo2";
 import CardInvoices from "../components/Cards/CardInvoices"
-
-// "Invoices" list data.
-const invoiceData = [
-  {
-    title: "June, 25, 2019",
-    code: "#QW-103578",
-    amount: "400",
-  },
-  {
-    title: "March, 03, 2019",
-    code: "#AR-803481",
-    amount: "700",
-  },
-];
-
-// "Your Transactions" list data.
-const transactionsData = [
-  {
-    period: "NEWEST",
-  },
-  {
-    title: "Netflix",
-    datetime: "27 March 2021, at 12:30 PM",
-    amount: "2,500",
-    type: -1, // 0 is for pending, 1 is for deposit, -1 is for withdrawal.
-    status: "danger",
-  },
-  {
-    title: "Apple",
-    datetime: "27 March 2021, at 04:30 AM",
-    amount: "2,000",
-    type: 1,
-    status: "success",
-  },
-  {
-    period: "YESTERDAY",
-  },
-  {
-    title: "Stripe",
-    datetime: "26 March 2021, at 12:30 AM",
-    amount: "750",
-    type: 1,
-    status: "success",
-  },
-  {
-    title: "HubSpot",
-    datetime: "26 March 2021, at 11:30 AM",
-    amount: "1,050",
-    type: 1,
-    status: "success",
-  },
-  {
-    title: "Creative Tim",
-    datetime: "26 March 2021, at 07:30 AM",
-    amount: "2,400",
-    type: 1,
-    status: "success",
-  },
-  {
-    title: "Webflow",
-    datetime: "26 March 2021, at 04:00 AM",
-    amount: "Pending",
-    type: 0,
-    status: "warning",
-  },
-];
 import { mapState } from "vuex";
 import * as fb from "../firebase";
 import AdminDashboard from './AdminDashboard.vue';
+	// "Projects" table list of columns and their properties.
+	const tableColumns = [
+		{
+			title: 'COMPANIES',
+			dataIndex: 'company',
+			scopedSlots: { customRender: 'company' },
+			width: 300,
+		},
+		{
+			title: 'MEMBERS',
+			dataIndex: 'members',
+			scopedSlots: { customRender: 'members' },
+		},
+		{
+			title: 'BUDGET',
+			dataIndex: 'budget',
+			class: 'font-bold text-muted text-sm',
+		},
+		{
+			title: 'COMPLETION',
+			scopedSlots: { customRender: 'completion' },
+			dataIndex: 'completion',
+		},
+	];
+
+	// "Projects" table list of rows and their properties.
+	const tableData = [
+		{
+			key: '1',
+			company: {
+				name: 'Soft UI Shopify Version',
+				logo: 'images/logos/logo-shopify.svg',
+			},
+			members: [ "images/face-1.jpg", "images/face-4.jpg", "images/face-2.jpg", "images/face-3.jpg", ],
+			budget: '$14,000',
+			completion: 60,
+		},
+		{
+			key: '2',
+			company: {
+				name: 'Progress Track',
+				logo: 'images/logos/logo-atlassian.svg',
+			},
+			members: [ "images/face-4.jpg", "images/face-3.jpg", ],
+			budget: '$3,000',
+			completion: 10,
+		},
+		{
+			key: '3',
+			company: {
+				name: 'Fix Platform Errors',
+				logo: 'images/logos/logo-slack.svg',
+			},
+			members: [ "images/face-1.jpg", "images/face-2.jpg", "images/face-3.jpg", ],
+			budget: 'Not Set',
+			completion: {
+				label: '100',
+				status: 'success',
+				value: 100,
+			},
+		},
+		{
+			key: '4',
+			company: {
+				name: 'Launch new Mobile App',
+				logo: 'images/logos/logo-spotify.svg',
+			},
+			members: [ "images/face-1.jpg", "images/face-2.jpg", ],
+			budget: '$20,600',
+			completion: {
+				label: '100',
+				status: 'success',
+				value: 100,
+			},
+		},
+		{
+			key: '5',
+			company: {
+				name: 'Add the New Landing Page',
+				logo: 'images/logos/logo-jira.svg',
+			},
+			members: [ "images/face-1.jpg", "images/face-4.jpg", "images/face-2.jpg", "images/face-3.jpg", ],
+			budget: '$4,000',
+			completion: 80,
+		},
+		{
+			key: '6',
+			company: {
+				name: 'Redesign Online Store',
+				logo: 'images/logos/logo-invision.svg',
+			},
+			members: [ "images/face-1.jpg", "images/face-4.jpg", "images/face-3.jpg", ],
+			budget: '$2,000',
+			completion: {
+				label: 'Cancelled',
+				status: 'exception',
+				value: 100,
+			},
+		},
+	];
 export default {
   components: {
     CardBarChart,
@@ -134,12 +191,8 @@ export default {
   },
   data() {
     return {
-
-      // Associating "Invoices" list data with its corresponding property.
-      invoiceData,
-
-      // Associating "Your Transactions" list data with its corresponding property.
-      transactionsData,
+      tableColumns,
+      tableData
     };
   },
 

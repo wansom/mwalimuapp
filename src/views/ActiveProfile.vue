@@ -1,31 +1,10 @@
-<!-- 
-	This is the billing page, it uses the dashboard layout in: 
-	"./layouts/Dashboard.vue" .
- -->
-
 <template>
 	<div>
 
 		<a-row type="flex" :gutter="24">
-
-			<!-- Billing Info Column -->
-			<a-col :span="24" :md="16">
+			<a-col :span="24">
 				<profile-information></profile-information>
 			</a-col>
-			<!-- / Billing Info Column -->
-			
-			<!-- Invoices Column -->
-			<a-col :span="24" :md="8" class="mb-24">
-
-				<!-- Invoices Card -->
-				<CardInvoices
-					:data="invoiceData"
-				></CardInvoices>
-				<!-- / Invoices Card -->
-
-			</a-col>
-			<!-- / Invoices Column -->
-
 		</a-row>
 	</div>
 </template>
