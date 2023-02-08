@@ -5,11 +5,11 @@
 		<template #title>
 			<h6 class="font-semibold m-0">Receipts</h6>
 		</template>
-		<!-- <template slot="extra" class="mb-0">
+		<template slot="extra" class="mb-0">
 			<a-button type="primary">
-				VIEW ALL
+				Next Payment:{{ date }}
 			</a-button>
-		</template> -->
+		</template>
 		<a-list
 			class="invoice-list"
 			item-layout="horizontal"
@@ -25,7 +25,7 @@
 				</a-button>
 				<a-list-item-meta
 				:description="item.number"
-					:title="'PAYMENT FOR:'+item.date.toDate().toDateString()"
+					:title="item.date.toDate().toDateString()"
 					
 				></a-list-item-meta>
 				<div class="amount"><span class="mx-4">KSH</span>{{ item.amount }}</div>
@@ -39,12 +39,7 @@
 <script>
 
 	export default ({
-		props: {
-			data: {
-				type: Array,
-				default: () => [],
-			},
-		},
+		props: ['data','date'],
 		data() {
 			return {
 			}

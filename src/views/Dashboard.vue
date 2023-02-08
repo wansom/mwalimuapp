@@ -12,6 +12,7 @@
 			<a-col :span="24" :lg="8" class="mb-24">
         <CardInvoices
 					:data="user.invoices"
+          :date="user.subscription_date"
 				></CardInvoices> 
 
 			</a-col>
