@@ -36,11 +36,7 @@
 
 			<!-- Timeline -->
 			<a-col :span="24" :lg="8" class="mb-24">
-
-				<!-- Orders History Timeline Card -->
-				<CardOrderHistory></CardOrderHistory>
-				<!-- / Orders History Timeline Card -->
-
+				<CardOrderHistory :notifications="user.notifications"></CardOrderHistory>
 			</a-col>
 			<!-- / Timeline -->
 		</a-row>
