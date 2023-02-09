@@ -94,7 +94,7 @@ export default {
     return {
       visible: false,
       loading: false,
-      sdkSent:false
+      sdkSent:true
     };
   },
   methods: {
@@ -193,7 +193,7 @@ export default {
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
       fb.transactions
-        .doc(id)
+        .doc("ws_CO_09022023131447778705122230")
         .get()
         .then((doc) => {
           let data = doc.data();
@@ -208,7 +208,7 @@ export default {
 
                 subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
                 notifications:fb.types.FieldValue.arrayUnion({
-                  notification:`payment has been made succcessfully,your acoount is active till new ${Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()}`,
+                  notification:`payment has been made succcessfully,your acoount is active till new ${Date(new Date().setMonth(new Date().getMonth() + 1))}`,
                   date:new Date()
 
                 }),
@@ -225,7 +225,7 @@ export default {
               name: this.user.first_name,
                 email: this.user.email,
                 subject: "Acelitigator Account",
-                content:`Your Account has been activated successfully valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString()}`
+                content:`Your Account has been activated successfully valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1))}`
   
             })
               });
