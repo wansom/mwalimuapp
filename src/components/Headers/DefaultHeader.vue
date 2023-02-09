@@ -2,7 +2,8 @@
   <!-- Layout Header ( Navbar ) -->
   <a-layout-header>
     <div class="header-col header-brand">
-      <img src="images/logo.png" alt="" style="height: 80px" class="bg-dark" />
+      <img src="images/logo.png" alt="" style="height: 80px;" class="bg-dark" />
+    
 
       <!-- Trigger Button For Navigation Menu For Small Screens -->
       <a-button
