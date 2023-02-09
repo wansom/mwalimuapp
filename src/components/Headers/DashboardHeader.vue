@@ -151,6 +151,7 @@
 </template>
 
 <script>
+import * as fb from "../../firebase";
 export default {
   props: {
     user:{
