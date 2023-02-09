@@ -389,25 +389,31 @@ export default {
         const oldRange = this.filtersAppied.filter((element) =>
           Array.isArray(element)
         );
+        
         return this.filtersAppied.every((filterAppied) => {
-          if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-            return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
-          }
-          if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-            return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
-          }
-          if (experience.toString() >= oldRange) {
-            return experience.toString() >= oldRange[0];
-          }
-          if (experience.toString() <= oldRange) {
-            return experience.toString() <= oldRange[1];
-          }
-          if (product.specialisation.includes(filterAppied)) {
-            return product.specialisation.includes(filterAppied);
+          // if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+          //   return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
+          // }
+          // if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+          //   return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
+          // }
+       
+          if (product.practise_areas.includes(filterAppied)) {
+            return product.practise_areas.includes(filterAppied);
           }
           if (product.location.includes(filterAppied)) {
             return product.location.includes(filterAppied);
           }
+         if(oldRange){
+          console.log(oldRange,experience)
+          if (experience>= oldRange[0][0]&&experience <= oldRange[0][1]) {
+            return experience >= oldRange[0][0]&&experience <= oldRange[0][1];
+          }
+         
+          // if (experience >= oldRange[0][1]) {
+          //   return experience >= oldRange[0][1];
+          // }
+         }
         });
       });
     },
