@@ -24,7 +24,7 @@
 					PDF
 				</a-button>
 				<a-list-item-meta
-				:description="item.number"
+				:description="item.number.slice(0,20)+'...'"
 					:title="item.date.toDate().toDateString()"
 					
 				></a-list-item-meta>
