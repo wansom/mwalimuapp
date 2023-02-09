@@ -193,7 +193,7 @@ export default {
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
       fb.transactions
-        .doc("ws_CO_09022023131447778705122230")
+        .doc(id)
         .get()
         .then((doc) => {
           let data = doc.data();
