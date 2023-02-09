@@ -151,11 +151,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import * as fb from "../../firebase";
-
 export default {
   props: {
+    user:{
+      default:{}
+    },
     // Header fixed status.
     navbarFixed: {
       type: Boolean,
@@ -208,10 +208,6 @@ export default {
     },
   },
   computed: {
-    ...mapState(["allAdvocates"]),
-    user(){
-      return this.allAdvocates.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
-    }
   },
   mounted: function () {
     // Set the wrapper to the proper element, layout wrapper.

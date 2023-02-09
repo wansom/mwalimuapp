@@ -117,9 +117,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
 	export default ({
 		props: {
+			user:{
+				
+				dafault:{}
+			},
 			// Sidebar collapsed status.
 			sidebarCollapsed: {
 				type: Boolean,
@@ -149,9 +152,6 @@ import { mapState } from "vuex"
 				this.$store.dispatch("logout")
 			}
 		},
-		computed: {
-    ...mapState(["clients", "user"]),
-  },
 	})
 
 </script>
