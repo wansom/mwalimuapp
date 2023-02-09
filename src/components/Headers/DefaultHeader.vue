@@ -121,9 +121,9 @@ logout(){
   },
   computed: {
     ...mapState(["user"]),
+
   },
   mounted(){
-    this.$store.dispatch("fetchUserProfile")
     
   }
 };

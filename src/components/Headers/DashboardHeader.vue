@@ -14,7 +14,6 @@
             <a-breadcrumb-item>{{ this.$route.name }}</a-breadcrumb-item>
           </a-breadcrumb>
           <!-- / Header Breadcrumbs -->
-
           <!-- Header Page Title -->
           <div class="ant-page-header-heading">
             <a-alert
@@ -66,7 +65,7 @@
               slot="overlay"
               :loading="loading"
             >
-              <!-- <div
+              <div
                 v-if="showLoadingMore"
                 slot="loadMore"
                 :style="{
@@ -77,8 +76,8 @@
                 }"
               >
                 <a-spin v-if="loadingMore" />
-                <a-button v-else @click="onLoadMore"> loading more </a-button>
-              </div> -->
+                <!-- <a-button v-else @click="onLoadMore"> loading more </a-button> -->
+              </div>
               <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta>
                   <template #description>
@@ -100,8 +99,10 @@
                   </template>
                   <a slot="title" href="#">{{ item.notification }}</a>
                 </a-list-item-meta>
-              
-                  <a slot="actions"> <a-icon type="close" /></a>
+
+                <a slot="actions">
+                  <a-icon type="close" @click="()=>{removeNotification(item)}"
+                /></a>
               </a-list-item>
             </a-list>
           </a-dropdown>
@@ -194,22 +195,27 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
-    onLoadMore() {
-      this.loadingMore = true;
-      this.loadingMore = false;
-        this.$nextTick(() => {
-          window.dispatchEvent(new Event('resize'));
-        });
+    removeNotification(item) {
+      this.loading=true
+      fb.usersCollection
+        .doc(fb.auth.currentUser.uid)
+        .update({ notifications: fb.types.FieldValue.arrayRemove(item)}).then(()=>{
+          this.loading=false
+        }).catch((err)=>{
+          console.log(err)
+          this.loading=false
+        })
     },
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["allAdvocates"]),
+    user(){
+      return this.allAdvocates.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
+    }
   },
   mounted: function () {
     // Set the wrapper to the proper element, layout wrapper.
     this.wrapper = document.getElementById("layout-dashboard");
-    let user = fb.auth.currentUser;
-    this.$store.dispatch("fetchUserProfile", user);
   },
   created() {
     // Registering window resize event listener to fix affix elements size

@@ -36,7 +36,8 @@ auth.onAuthStateChanged((user) => {
     }).$mount("#app");
   }
   if (user) {
-    store.dispatch("fetchUserProfile", user);
-    store.dispatch("fetchAdvocates");
+    store.dispatch("fetAllAdvocates")
   }
+  store.dispatch("fetAllAdvocates")
+  store.dispatch("fetchUserProfile")
 });

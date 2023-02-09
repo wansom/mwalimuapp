@@ -107,19 +107,14 @@ export default new Vuex.Store({
         });
     },
 
-    fetchUserProfile({ commit }, data) {
+    fetchUserProfile({ commit}) {
       let currentUser =fb.auth.currentUser;
       if(currentUser){
-        fb.usersCollection
-        .doc(currentUser.uid)
-        .get()
-        .then((result) => {
-          commit("setUserProfile", result.data());
-        });
+      let user =this.state.allAdvocates.filter((i)=>i.id===currentUser.uid)[0]
+      commit("setUserProfile", user)
       }else{
         commit("setUserProfile", {}); 
       }
-      
     },
     logout({dispatch}){
       fb.auth.signOut().then(()=>{
