@@ -27,7 +27,7 @@
               </div>
               <div>
                 <a-icon type="clock-circle" class="mx-5" />Member since
-                {{ advocate.subscription_date.toDate().toDateString() }}
+                {{ advocate.subscription_date }}
               </div>
             </a-col>
           </a-row>
