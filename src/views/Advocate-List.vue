@@ -64,6 +64,7 @@
                           placeholder="Enter first or last name"
                           enter-button
                           @search="onSearch"
+                          v-model="searchString"
                         />
                       </li>
                      
@@ -337,7 +338,8 @@ export default {
         },
         pageSize: 3,
       },
-      searchName:""
+      searchName:"",
+      searchString:""
     };
   },
   methods: {
@@ -388,15 +390,17 @@ export default {
           new Date(product.practise_start).getFullYear();
         const oldRange = this.filtersAppied.filter((element) =>
           Array.isArray(element)
-        );
+        )
         
         return this.filtersAppied.every((filterAppied) => {
-          // if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-          //   return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
-          // }
-          // if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-          //   return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
-          // }
+        //  if(this.searchString.length){
+        //   if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+        //     return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
+        //   }
+        //   if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+        //     return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
+        //   }
+        //  }
        
           if (product.practise_areas.includes(filterAppied)) {
             return product.practise_areas.includes(filterAppied);
@@ -404,15 +408,11 @@ export default {
           if (product.location.includes(filterAppied)) {
             return product.location.includes(filterAppied);
           }
-         if(oldRange){
-          console.log(oldRange,experience)
+         if(oldRange.length){
           if (experience>= oldRange[0][0]&&experience <= oldRange[0][1]) {
             return experience >= oldRange[0][0]&&experience <= oldRange[0][1];
           }
          
-          // if (experience >= oldRange[0][1]) {
-          //   return experience >= oldRange[0][1];
-          // }
          }
         });
       });
