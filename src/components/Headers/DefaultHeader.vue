@@ -75,7 +75,7 @@
       <!-- / Collapsible Navigation Menu For Small Screens -->
     </div>
     <div class="header-col header-btn">
-      <a-button href="/sign-up" type="primary" shape="round"
+      <a-button href="/sign-up" type="primary" 
         >ADVOCATE SIGN UP</a-button
       >
     </div>
@@ -105,8 +105,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 export default {
+  props:["user"],
   data() {
     return {
       // Collapse navigation value.
@@ -121,8 +121,6 @@ logout(){
 }
   },
   computed: {
-    ...mapState(["user"]),
-
   },
   mounted(){
     

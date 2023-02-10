@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <DefaultHeader />
+    <DefaultHeader :user="user" />
     <!-- <div class="img-banner">
     </div> -->
     <!-- Header Breadcrumbs -->
@@ -235,6 +235,7 @@
 import { mapState } from "vuex";
 import CardInfo from "../components/Cards/CardInfo.vue";
 import DefaultHeader from "../components/Headers/DefaultHeader.vue";
+import * as fb from "../firebase";
 export default {
   components: {
     DefaultHeader,
@@ -382,7 +383,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(["advocates", "user"]),
+    ...mapState(["advocates", "user","allAdvocates"]),
+    user() {
+      return this.allAdvocates.filter(
+        (i) => i.id == fb.auth.currentUser.uid
+      )[0];
+    },
     filteredItems: function () {
       return this.advocates.filter((product) => {
         let experience =
