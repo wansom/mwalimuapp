@@ -34,7 +34,7 @@
           <p>
             {{ advocate.biography.slice(0,150) }}
           </p>
-
+            <h6>Practise Areas</h6>
           <div style="display: flex; flex-wrap: wrap">
             <div class="my-5 mx-5">
               <a-button><a-icon type="up-circle" style="color:#DB1C22;" />{{ advocate.specialisation}}</a-button>
