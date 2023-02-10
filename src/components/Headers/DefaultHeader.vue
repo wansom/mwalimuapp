@@ -2,7 +2,7 @@
   <!-- Layout Header ( Navbar ) -->
   <a-layout-header>
     <div class="header-col header-brand">
-      <img src="images/logo.png" alt="" style="height: 80px;" class="bg-dark" />
+      <img src="images/logo-lg.png" alt="" style="height: 70px;" />
     
 
       <!-- Trigger Button For Navigation Menu For Small Screens -->
@@ -95,7 +95,7 @@
           </a-menu-item>
       </a-sub-menu>
     </a-menu>
-      <a-button href="/sign-in" type="link" class="text-white" v-else
+      <a-button href="/sign-in" type="link" class="text-white login-btn" v-else
         >LOGIN</a-button
       >
     </div>
@@ -139,10 +139,14 @@ logout(){
 .ant-menu-submenu-popup {
   width: 100%;
 }
+.login-btn{
+    border: solid 1px #DB1C22;
+  }
 @media only screen and (max-width: 600px){
 	/*Big smartphones [426px -> 600px]*/
   .header-btn{
     display: none;
   }
+ 
 }
 </style>

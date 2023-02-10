@@ -55,20 +55,16 @@
               <div class="sidebar">
                 <!-- sidebar  -->
                 <div id="shopbypanel" class="collapse">
-                  <h3><a href="#">SEARCH </a> <br /></h3>
+                 
 
                   <div class="shopbypanel">
-                    <ul class="">
-                      <li>
+                    
                         <a-input-search
                           placeholder="Enter first or last name"
                           enter-button
                           @search="onSearch"
                           v-model="searchString"
                         />
-                      </li>
-                     
-                    </ul>
                   </div>
                 </div>
                 <h5>FILTERS</h5>
@@ -385,9 +381,12 @@ export default {
   computed: {
     ...mapState(["advocates", "user","allAdvocates"]),
     user() {
-      return this.allAdvocates.filter(
+    if(fb.auth.currentUser) 
+     return this.allAdvocates.filter(
         (i) => i.id == fb.auth.currentUser.uid
       )[0];
+      else 
+        return {}
     },
     filteredItems: function () {
       return this.advocates.filter((product) => {
