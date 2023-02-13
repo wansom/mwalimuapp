@@ -97,7 +97,7 @@
                       <div class="space2"></div>
                     </section>
                   </a-collapse-panel>
-                  <a-collapse-panel key="2" header="PRACTISE AREAS">
+                  <a-collapse-panel key="2" header="PRIMARY PRACTISE AREAS">
                     <section class="section size">
                       <div
                         v-for="category in categories"
@@ -121,7 +121,55 @@
                       <div class="space2"></div>
                     </section>
                   </a-collapse-panel>
-                  <a-collapse-panel key="3" header="COUNTIES">
+                  <a-collapse-panel key="2" header="SECONDARY PRACTISE AREAS">
+                    <section class="section size">
+                      <div
+                        v-for="category in categories"
+                        :key="category"
+                        class="checkbox"
+                        @change="
+                          () => {
+                            setActive(category);
+                          }
+                        "
+                      >
+                        <label>
+                          <input type="checkbox" /><span
+                            class="checkbox-material"
+                            ><span class="check"></span
+                          ></span>
+                          {{ category }}
+                        </label>
+                      </div>
+
+                      <div class="space2"></div>
+                    </section>
+                  </a-collapse-panel>
+                  <a-collapse-panel key="3" header="COUNTY OF RESIDENCE">
+                    <section class="section size">
+                      <a-row>
+                        <a-col
+                          :span="24"
+                          :lg="12"
+                          v-for="county in counties"
+                          :key="county"
+                          @change="setActive(county)"
+                          class="checkbox"
+                        >
+                          <label>
+                            <input type="checkbox" /><span
+                              class="checkbox-material"
+                              ><span class="check"></span
+                            ></span>
+                            {{ county }}
+                          </label>
+                        </a-col>
+                      </a-row>
+
+                      <div class="space2"></div>
+                    </section>
+                  </a-collapse-panel>
+                  <a-collapse-panel key="3" header="OTHER COUNTIES OF PRACTISE">
                     <section class="section size">
                       <a-row>
                         <a-col
@@ -210,7 +258,7 @@
                         <a-list-item
                           slot="renderItem"
                           key="item.title"
-                          slot-scope="item, index"
+                          slot-scope="item"
                         >
                           <card-info :advocate="item"></card-info>
                         </a-list-item>
@@ -409,6 +457,9 @@ export default {
        
           if (product.practise_areas.includes(filterAppied)) {
             return product.practise_areas.includes(filterAppied);
+          }
+          if (product.specialisation.includes(filterAppied)) {
+            return product.specialisation.includes(filterAppied);
           }
           if (product.location.includes(filterAppied)) {
             return product.location.includes(filterAppied);
