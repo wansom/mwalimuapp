@@ -127,11 +127,14 @@ export default {
     SubscriptionPayment,
   },
   computed: {
-    ...mapState(["user", "current"]),
+    ...mapState(["allAdvocates", "current"]),
+    user() {
+      return this.allAdvocates.filter(
+        (i) => i.id == fb.auth.currentUser.uid
+      )[0];
+    },
   },
   mounted() {
-    let user = fb.auth.currentUser;
-    this.$store.dispatch("fetchUserProfile", user);
   },
 };
 </script>

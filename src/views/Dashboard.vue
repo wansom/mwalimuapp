@@ -11,8 +11,10 @@
 			</a-col>
 			<a-col :span="24" :lg="8" class="mb-24">
         <CardInvoices
-					:data="user.invoices"
-          :date="user.subscription_date"
+				:first_name="user.first_name"
+				:last_name="user.last_name"
+				:data="user.invoices"
+          		:date="user.subscription_date"
 				></CardInvoices> 
 			</a-col>
 		</a-row>

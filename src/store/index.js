@@ -130,10 +130,8 @@ export default new Vuex.Store({
     updateUser({ dispatch,commit }, data) {
       commit("setLoading",true)
       let user = fb.auth.currentUser;
+      console.log(data)
       fb.usersCollection.doc(user.uid).update(data).then(()=>{
-    
-
-        dispatch("fetchUserProfile",user)
         swal({
           title: "Success!",
           text: `Info updated Successfully!`,
@@ -159,6 +157,7 @@ export default new Vuex.Store({
         dispatch("changeStep",data.current)
 
       }).catch((err)=>{
+        console.log(err)
         commit("setLoading",false)
         swal({
           title: "OOPS!",

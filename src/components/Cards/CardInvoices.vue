@@ -80,7 +80,7 @@
               style="letter-spacing: 10px; text-transform: uppercase"
               class="pdf-sub-title"
             >
-              DATE:{{ new Date().toDateString() }}
+              {{first_name}}<span style="margin-left:10px;">{{ last_name }}</span>
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@
           <tr>
             <td><span class="pdf-asset-details">Amount:</span></td>
             <td>
-              <span class="pdf-asset-details">KSH{{
+              <span class="pdf-asset-details"><span  style="margin-right:10px">KSH</span>{{
                 item.amount
               }}</span>
             </td>
@@ -157,7 +157,7 @@
 import VueHtml2pdf from "vue-html2pdf";
 import VueBarcode from "vue-barcode";
 export default {
-  props: ["data", "date"],
+  props: ["first_name","last_name","data", "date"],
   components: {
     VueHtml2pdf,
     barcode: VueBarcode,

@@ -245,7 +245,7 @@
                 :before-upload="beforeUpload"
                 v-decorator="[
                   'photo',
-                  {
+                  {  initialValue: user.profile_photo,
                     rules: [
                       { required: true, message: 'Please choose a photo' },
                     ],
@@ -388,11 +388,10 @@ export default {
           console.log("Received values of form: ", values);
           const ref = fb.storage.ref();
 
-          const url = await ref
+          const url =this.user.profile_photo?values.photo: await ref
             .child(values.photo.file.name)
             .put(values.photo.file, values.photo.file.type)
             .then((snapshot) => snapshot.ref.getDownloadURL());
-          console.log(url);
           const payload = {
             first_name: values.first_name ?? "",
             last_name: values.last_name ?? "",
@@ -401,12 +400,12 @@ export default {
             biography: values.biography ?? "",
             email: values.email ?? "",
             location: values.location ?? "",
-            webiste: values.website ?? "",
+            website: values.website ?? "",
             specialisation: values.specialisation ?? "",
             practise_areas:values.practise_areas??"",
             other_counties:values.other_counties,
             step: "general information",
-            profile_photo: url,
+            profile_photo:values.profile_photo?? url,
             current:2
           };
           this.$store.dispatch("updateUser", payload);

@@ -13,7 +13,7 @@
       <a-form :form="form" layout="vertical">
         <h5 class="my-5">Your Current Employer</h5>
         <a-row :gutter="16">
-          <a-col :span="18">
+          <a-col :span="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -31,8 +31,9 @@
             </a-input>
             </a-form-item>
           </a-col>
-          <a-col :span="6">
+          <a-col :span="8">
             <a-form-item label="Starting Date">
+             
               <a-date-picker
               :disabled-date="disabledDate"
                 v-decorator="[
@@ -68,9 +69,9 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
-            <a-form-item label="Starting Date">
-              <a-date-picker
+          <a-col :span="8">
+            <a-form-item label="Dates">
+              <!-- <a-date-picker
               :disabled-date="disabledDate"
                 v-decorator="[
                   'prev1starting',
@@ -81,23 +82,17 @@
                   },
                 ]"
                 placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
+              /> -->
+              <a-range-picker 
               :disabled-date="disabledDate"
-                v-decorator="[
-                  'prev1ending',
-                  { initialValue: user.prev1ending,
+              v-decorator="[
+                  'prev1starting',
+                  { 
                     rules: [
-                      { required: false, message: 'Field is required' },
+                      { required: true, message: 'Field is required' },
                     ],
                   },
-                ]"
-                placeholder="End"
-              />
+                ]"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -117,37 +112,18 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
+          <a-col :span="8">
             <a-form-item label="Starting Date">
-              <a-date-picker
-              
+              <a-range-picker 
               :disabled-date="disabledDate"
-                v-decorator="[
+              v-decorator="[
                   'prev2starting',
-                  { initialValue: user.prev2starting,
+                  { 
                     rules: [
-                      { required: false, message: 'Field is required' },
+                      { required: true, message: 'Field is required' },
                     ],
                   },
-                ]"
-                placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'prev2ending',
-                  { initialValue: user.prev2ending,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                placeholder="End"
-              />
+                ]"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -167,36 +143,18 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
+          <a-col :span="8">
             <a-form-item label="Starting Date">
-              <a-date-picker
+              <a-range-picker 
               :disabled-date="disabledDate"
-                v-decorator="[
+              v-decorator="[
                   'prev3starting',
-                  { initialValue: user.prev3starting,
+                  { 
                     rules: [
-                      { required: false, message: 'Field is required' },
+                      { required: true, message: 'Field is required' },
                     ],
                   },
-                ]"
-                placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'prev3ending',
-                  { initialValue: user.prev3ending,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                placeholder="End"
-              />
+                ]"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -216,36 +174,18 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
+          <a-col :span="8">
             <a-form-item label="Starting Date">
-              <a-date-picker
+              <a-range-picker 
               :disabled-date="disabledDate"
-                v-decorator="[
+              v-decorator="[
                   'prev4starting',
-                  { initialValue: user.prev4starting,
+                  { 
                     rules: [
-                      { required: false, message: 'Field is required' },
+                      { required: true, message: 'Field is required' },
                     ],
                   },
-                ]"
-                placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'prev4ending',
-                  { initialValue: user.prev4ending,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                placeholder="End"
-              />
+                ]"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -289,6 +229,9 @@ export default {
       // Can not select days before today and today
       return current && current > moment().endOf('day');
     },
+    onChange(val){
+      console.log(val)
+    },
     prev1disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {
@@ -320,24 +263,23 @@ export default {
         if (!err) {
           const payload = {
             current_employer:values.current_employer?? "",
-            current_starting: values.current_starting.format()??"",
+            current_starting:values.current_starting.format()??"",
 
             prev1:values.prev1?? "",
-            prev1ending:values.prev1ending?values.prev1ending.format(): "",
-            prev1starting:values.prev1starting?values.prev1starting.format():"",
+            prev1ending:values.prev1starting[1].format()?? "",
+            prev1starting:values.prev1starting?values.prev1starting[0].format():"",
             prev2:values.prev2?values.prev2: "",
-            prev2ending:values.prev2ending?values.prev2ending.format():"",
-            prev2starting:values.prev2starting? values.prev2starting.format():"",
+            prev2ending:values.prev2ending?values.prev2starting[1].format():"",
+            prev2starting:values.prev2starting[0].format()??"",
             prev3:values.prev3?prev3: "",
-            prev3ending: values.prev3ending?values.prev3ending.format():"",
-            prev3starting: values.prev3starting?values.prev3starting.format():"",
+            prev3ending: values.prev3starting[1].format()??"",
+            prev3starting:values.prev3starting[0].format()??"",
             prev4: values.prev4??"",
-            prev4ending:  values.prev4ending?values.prev4ending.format():"",
-            prev4starting:values.prev4starting?values.prev4starting.format(): "",
+            prev4ending: values.prev4starting[1].format()??"",
+            prev4starting:values.prev4starting[0].format()??"",
             step:"employment information",
             current:3
           };
-          console.log(payload)
           this.$store.dispatch("updateUser",payload);
         }
       });

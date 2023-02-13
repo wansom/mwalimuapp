@@ -32,6 +32,7 @@
           <a-col :span="12">
             <a-form-item label="Last Certificate Renewal Date">
               <a-date-picker
+              :disabled-date="disabledDate"
                 v-decorator="[
                   'cert_renewal_date',
                   {

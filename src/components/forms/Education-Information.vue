@@ -28,31 +28,17 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
-            <a-form-item label="Starting Date">
-              <a-date-picker
+          <a-col :span="8">
+            <a-form-item label=" Dates">
+              <a-range-picker 
               :disabled-date="disabledDate"
                 v-decorator="[
                   'law_starting',
-                  { initialValue: user.law_starting,
+                  {
                     rules: [{ required: true, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'law_ending',
-                  { initialValue: user.law_ending,
-                    rules: [{ required: true, message: 'Field is required' }],
-                  },
-                ]"
-                placeholder="End"
               />
             </a-form-item>
           </a-col>
@@ -72,31 +58,16 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
-            <a-form-item label="Starting Date">
-              <a-date-picker
+          <a-col :span="8">
+            <a-form-item label="Dates">
+              <a-range-picker 
               :disabled-date="disabledDate"
                 v-decorator="[
                   'postgraduate_diploma_start',
-                  { initialValue: user.postgraduate_diploma_start,
+                  {
                     rules: [{ required: true, message: 'Field is required' }],
                   },
                 ]"
-                placeholder="Starting Date"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'postgraduate_diploma_end',
-                  { initialValue: user.postgraduate_diploma_end,
-                    rules: [{ required: true, message: 'Field is required' }],
-                  },
-                ]"
-                placeholder="Date Ended"
               />
             </a-form-item>
           </a-col>
@@ -115,31 +86,17 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="4">
-            <a-form-item label="Starting Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
+          <a-col :span="8">
+            <a-form-item label="Dates">
+              <a-range-picker 
+           
                 v-decorator="[
                   'school2_start',
-                  { initialValue: user.school2_start,
+                  {
                     rules: [{ required: false, message: 'field is required' }],
                   },
                 ]"
                 placeholder="Start"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="4">
-            <a-form-item label="Ending Date">
-              <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
-                  'school2_end',
-                  { initialValue: user.school2_end,
-                    rules: [{ required: false, message: 'field is required' }],
-                  },
-                ]"
-                placeholder="End"
               />
             </a-form-item>
           </a-col>
@@ -214,15 +171,15 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           const payload = {
-            law_ending: values.law_ending?.format() ?? "",
+            law_ending: values.law_starting[1]?.format() ?? "",
             law_school: values.law_school ?? "",
-            law_starting: values.law_starting?.format() ?? "",
+            law_starting: values.law_starting[0]?.format() ?? "",
             postgraduate_diploma: values.postgraduate_diploma ?? "",
-            postgraduate_diploma_end: values.postgraduate_diploma_end?.format() ?? "",
-            postgraduate_diploma_start: values.postgraduate_diploma_start?.format()?? "",
+            postgraduate_diploma_end: values.postgraduate_diploma_start[1]?.format() ?? "",
+            postgraduate_diploma_start: values.postgraduate_diploma_start[0]?.format()?? "",
             school2: values.school2 ?? "",
-            school2_end: values.school2_end?.format() ?? "",
-            school2_start: values.school2_start?.format()??"",
+            school2_end: values.school2_start[0]?.format() ?? "",
+            school2_start: values.school2_start[1]?.format()??"",
             step:"education Information ",
             current:4
           };
