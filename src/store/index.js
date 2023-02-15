@@ -16,7 +16,21 @@ export default new Vuex.Store({
     allAdvocates:[],
     request:{},
     loading:false,
-    current:1
+    current:1,
+    practiseAreas: [
+      "Family",
+      "Employment",
+      "Criminal Defense",
+      "Real Estate",
+      "Business",
+      "Immigration",
+      "Personal Injury",
+      "Wills, Trusts & Estates",
+      "Bankruptcy & Finances",
+      "Government",
+      "Products & Services",
+      "Intellectual Property",
+    ],
   },
   getters: {},
   mutations: {

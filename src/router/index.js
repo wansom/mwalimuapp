@@ -18,6 +18,11 @@ let routes = [
 		component: () => import('../views/Advocate-List.vue'),
 	},
 	{
+		path: '/landing',
+		name: 'Landing',
+		component: () => import('../views/Home.vue'),
+	},
+	{
 		path: '/dashboard',
 		name: 'Dashboard',
 		meta: {

@@ -12,6 +12,8 @@ import VueSocialSharing from 'vue-social-sharing'
 // import './plugins/click-away'
 
 import './scss/app.scss';
+import '../public/home/css/style.css'
+import "../public/home/js/main.js"
 
 import store from './store'
 import { auth } from "./firebase";
