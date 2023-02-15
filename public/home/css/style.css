@@ -34,7 +34,7 @@
 html,
 body {
 	height: 100%;
-	font-family: "Muli", sans-serif;
+	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -48,7 +48,7 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Muli", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 h1 {
@@ -709,7 +709,6 @@ ol {
     grid-row-gap: 20px;
     justify-items: stretch;
     align-items: stretch
-
 }
 
 .nav-item .nav-depart .depart-btn .depart-hover li {
@@ -814,11 +813,11 @@ ol {
 /*---------------------
   Hero Section
 -----------------------*/
-
-.hero-items .single-hero-items {
+ .single-hero-items {
 	height: 725px;
 	padding-top: 210px;
 	background-image: url(../../images/hero-1.jpg);
+
 }
 
 .hero-items .single-hero-items span {
