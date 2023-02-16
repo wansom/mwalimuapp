@@ -123,12 +123,12 @@
                   placeholder="Re-Type Password"
                 />
               </a-form-item>
-              <button type="submit" class="site-btn register-btn">
-                REGISTER
+              <button type="submit" :class="[loading?'site-btn-active disabled' : 'site-btn', 'register-btn']">
+                REGISTER  <a-spin v-if="loading"/> 
               </button>
             </a-form>
             <div class="switch-login">
-              <a href="./login.html" class="or-login">Or Login</a>
+              <router-link to="sign-in" class="or-login">Or Login</router-link>
             </div>
           </div>
         </div>
