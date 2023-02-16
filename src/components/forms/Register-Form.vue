@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
-                        <h2>Register</h2>
+                        <h2>CREATE ACCOUNT</h2>
                         <form action="#">
                             <div class="group-input">
                                 <label for="username">First Name *</label>

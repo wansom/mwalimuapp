@@ -11,7 +11,7 @@
                         <span>/ month subscription</span>
                     </div>
                 </div>
-                <div class="countdown-timer" id="countdown">
+                <!-- <div class="countdown-timer" id="countdown">
                     <div class="cd-item">
                         <span>56</span>
                         <p>Days</p>
@@ -28,7 +28,7 @@
                         <span>52</span>
                         <p>Secs</p>
                     </div>
-                </div>
+                </div> -->
                 <a href="#" class="primary-btn">Signup Now</a>
             </div>
         </div>
