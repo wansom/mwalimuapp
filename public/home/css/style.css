@@ -1733,6 +1733,9 @@ ol {
 .product-shop {
 	padding-top: 80px;
 	padding-bottom: 80px;
+	padding-right: 65px;
+	padding-left: 65px;
+	
 }
 
 .filter-widget {

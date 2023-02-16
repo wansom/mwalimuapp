@@ -2,7 +2,7 @@
   <div>
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 
               <filters></filters>
