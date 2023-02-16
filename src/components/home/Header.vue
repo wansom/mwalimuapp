@@ -133,7 +133,7 @@
         <div class="nav-depart">
           <div class="depart-btn">
             <i class="fa fa-bars"></i>
-            <span>aLL PRACTISE AREAS</span>
+            <span>FIND LAWYERS</span>
             <ul class="depart-hover">
               <li class="active" v-for="area of practiseAreas" :key="area"><a href="#">{{ area }}</a></li>
             </ul>

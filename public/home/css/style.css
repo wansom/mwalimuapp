@@ -999,6 +999,7 @@ ol {
 
 .single-banner img {
 	min-width: 100%;
+	height: 350px;
 }
 
 .single-banner .inner-text {
@@ -1043,7 +1044,7 @@ ol {
 	margin-right: -15px;
 	text-align: center;
 	padding-top: 285px;
-	background-image: url(../../images/home/products/women-large.jpg);
+	background-image: url(https://acelitigator.com/wp-content/uploads/2023/01/Susan-Mwango.jpg);
 }
 
 .product-large h2 {
@@ -1154,6 +1155,7 @@ ol {
 
 .product-item {
 	margin-bottom: 26px;
+	margin-right: 15px;
 }
 
 .product-item:hover .pi-pic .icon {
@@ -1264,7 +1266,7 @@ ol {
 	font-size: 14px;
 	font-weight: 400;
 	color: #b2b2b2;
-	text-decoration: line-through;
+	margin-right: 5px;
 }
 .flag-bg{
 	background-image: url(../../images/home/flag-1.jpg);

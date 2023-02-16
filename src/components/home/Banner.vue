@@ -4,25 +4,25 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="images/balance.jpg" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2022/01/s2-new.jpg" alt="">
                         <div class="inner-text">
-                            <h4>Men’s</h4>
+                            <h4>Get A Lawyer</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="images/balance.jpg" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png" alt="">
                         <div class="inner-text">
-                            <h4>Women’s</h4>
+                            <h4>Lawyers In Practise</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="images/balance.jpg" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2023/02/IMG_20230206_122940.jpg" alt="">
                         <div class="inner-text">
-                            <h4>Kid’s</h4>
+                            <h4>Know Your Court</h4>
                         </div>
                     </div>
                 </div>
