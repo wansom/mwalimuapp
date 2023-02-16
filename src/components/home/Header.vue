@@ -143,9 +143,9 @@
         
         <nav class="nav-menu mobile-menu">
           <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./shop.html">About Us</a></li>
-            <li><a href="./blog.html">Know Your Courts</a></li>
+            <li class="active"><router-link to="/">Home</router-link></li>
+            <li><router-link to="/">About Us</router-link></li>
+            <li><router-link to="know-your-courts">Know Your Courts</router-link></li>
             <li>
               <a href="#">Resources</a>
               <ul class="dropdown">
@@ -157,7 +157,7 @@
                 <li><a href="./login.html">Login</a></li>
               </ul>
             </li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><router-link to="contact-us">Contact</router-link></li>
            
           </ul>
         </nav>

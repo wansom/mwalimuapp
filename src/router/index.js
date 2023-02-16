@@ -23,6 +23,16 @@ let routes = [
 		component: () => import('../views/Lawyer-Details.vue'),
 	},
 	{
+		path: '/contact-us',
+		name: 'Contact-Us',
+		component: () => import('../views/Contact.vue'),
+	},
+	{
+		path: '/know-your-courts',
+		name: 'Know-Your-Courts',
+		component: () => import('../views/Know-Your-Courts.vue'),
+	},
+	{
 		path: '/landing',
 		name: 'Landing',
 		component: () => import('../views/Advocate-List.vue'),
