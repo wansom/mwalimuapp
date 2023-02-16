@@ -21,10 +21,11 @@
     </a>
     <a-menu slot="overlay" @click="onClick">
       <a-menu-item key="1">
-        Create Account
+        <router-link to="sign-up">Create Account</router-link>
       </a-menu-item>
       <a-menu-item key="2">
-        Login
+        <router-link to="sign-in">Login</router-link>
+        
       </a-menu-item>
     
     </a-menu>
