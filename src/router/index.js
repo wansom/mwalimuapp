@@ -15,12 +15,17 @@ let routes = [
 	{
 		path: '/',
 		name: 'Home',
-		component: () => import('../views/Advocate-List.vue'),
+		component: () => import('../views/Home.vue'),
+	},
+	{
+		path: '/advocate',
+		name: 'Advocate',
+		component: () => import('../views/Lawyer-Details.vue'),
 	},
 	{
 		path: '/landing',
 		name: 'Landing',
-		component: () => import('../views/Home.vue'),
+		component: () => import('../views/Advocate-List.vue'),
 	},
 	{
 		path: '/dashboard',

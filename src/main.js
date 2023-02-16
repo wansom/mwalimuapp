@@ -13,7 +13,10 @@ import VueSocialSharing from 'vue-social-sharing'
 
 import './scss/app.scss';
 import '../public/home/css/style.css'
+import '../public/home/css/nice-select.css'
 import "../public/home/js/main.js"
+import '../public/home/css/themify-icons.css'
+import '../public/home/css/elegant-icons.css'
 
 import store from './store'
 import { auth } from "./firebase";

@@ -18,7 +18,7 @@
                     </div>
                   
                         <carousel :autoplay="true" :nav="false" class="product-slider ">
-                            <div class="product-item owl-carousel-item">
+                            <div class="product-item ">
                             <div class="pi-pic">
                                 <img src="https://acelitigator.com/wp-content/uploads/2023/01/MicrosoftTeams-image-9.png" alt="">
                                 <div class="sale">Verified</div>

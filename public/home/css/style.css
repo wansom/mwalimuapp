@@ -1045,6 +1045,7 @@ ol {
 	text-align: center;
 	padding-top: 285px;
 	background-image: url(https://acelitigator.com/wp-content/uploads/2023/01/Susan-Mwango.jpg);
+	
 }
 
 .product-large h2 {
@@ -1853,7 +1854,7 @@ ol {
 	background: #E6353B;
 }
 
-.filter-widget .filter-btn {
+ .filter-btn {
 	font-size: 14px;
 	color: #ffffff;
 	font-weight: 700;
@@ -2198,7 +2199,6 @@ ol {
 	font-size: 18px;
 	font-weight: 400;
 	color: #b7b7b7;
-	text-decoration: line-through;
 	display: inline-block;
 	margin-left: 13px;
 }
@@ -2268,12 +2268,15 @@ ol {
 	color: #252525;
 	font-weight: 700;
 	height: 40px;
-	width: 47px;
+	padding: 0 20px;
 	border: 1px solid #ebebeb;
 	text-align: center;
 	line-height: 40px;
-	text-transform: uppercase;
+	text-transform: none;
 	cursor: pointer;
+}
+.product-details .pd-size-choose .sc-item i {
+	margin-right: 10px;
 }
 
 .product-details .pd-size-choose .sc-item label.active {
