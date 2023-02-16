@@ -1,11 +1,11 @@
 <template>
-	<div>
-<Header></header>
-	<Breadcrum></Breadcrum>
-	<LoginForm></LoginForm>
-	<Footer></Footer>
-		
-		<!-- <a-row type="flex" :gutter="[24,24]" justify="space-around" align="middle">
+  <div>
+    <Header></Header>
+    <Breadcrum></Breadcrum>
+    <LoginForm></LoginForm>
+    <Footer></Footer>
+
+    <!-- <a-row type="flex" :gutter="[24,24]" justify="space-around" align="middle">
 			<a-col :span="24" :md="12" :lg="{span: 12, offset: 0}" :xl="{span: 6, offset: 2}" class="col-form">
 				<h1 class="mb-15">Welcome Back</h1>
 				<h5 class="font-regular text-muted">Enter your email and password to sign in</h5>
@@ -43,51 +43,48 @@
 			<a-col :span="24" :md="12" :lg="12" :xl="12" class="col-img  sign-img">		
 			</a-col>
 		</a-row> -->
-		
-	</div>
+  </div>
 </template>
 
 <script>
-import Header from '../components/home/Header.vue';
-import Footer from '../components/home/Footer.vue';
-import Breadcrum from '../components/Widgets/Breadcrum.vue';
+import Header from "../components/home/Header.vue";
+import Footer from "../components/home/Footer.vue";
+import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import LoginForm from "../components/forms/Login-Form.vue";
-	export default ({
-		components:{Header,Footer,Breadcrum,LoginForm},
-		data() {
-			return {
-				// Binded model property for "Sign In Form" switch button for "Remember Me" .
-				rememberMe: true,
-				loading:this.$store.state.loading
-			}
-		},
-		beforeCreate() {
-			// Creates the form and adds to it component's "form" property.
-			this.form = this.$form.createForm(this, { name: 'normal_login' });
-		},
-		methods: {
-			// Handles input validation after submission.
-			handleSubmit(e) {
-				e.preventDefault();
-				this.form.validateFields((err, values) => {
-					if ( !err ) {
-						this.$store.dispatch("login",values)
-					}
-				});
-			},
-		},
-	})
-
+export default {
+  components: { Header, Footer, Breadcrum, LoginForm },
+  data() {
+    return {
+      // Binded model property for "Sign In Form" switch button for "Remember Me" .
+      rememberMe: true,
+      loading: this.$store.state.loading,
+    };
+  },
+  beforeCreate() {
+    // Creates the form and adds to it component's "form" property.
+    this.form = this.$form.createForm(this, { name: "normal_login" });
+  },
+  methods: {
+    // Handles input validation after submission.
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.$store.dispatch("login", values);
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-	body {
-		background-color: #ffffff;
-	}
-	.sign-img{
-		background-image: url("../../public/images/bg-signin.png");
-		height: 80vh;
-		background-size: cover;
-		
-	}
+body {
+  background-color: #ffffff;
+}
+.sign-img {
+  background-image: url("../../public/images/bg-signin.png");
+  height: 80vh;
+  background-size: cover;
+}
 </style>

@@ -5,7 +5,7 @@
         <div class="col-lg-3">
           <div class="footer-left">
             <div class="footer-logo">
-              <a href="#"><img src="images/logo.png" alt="" /></a>
+              <a href="#"><img src="images/logo.png" alt="" style="height: 80px; object-fit: contain;"/></a>
             </div>
             <ul>
               <li>Address: 60-49 Road 11378 New York</li>

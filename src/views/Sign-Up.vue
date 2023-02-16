@@ -1,17 +1,13 @@
-<!-- 
-	This is the sign up page, it uses the dashboard layout in: 
-	"./layouts/Default.vue" .
- -->
-
 <template>
   <div>
-    <!-- Sign Up Image And Headings -->
-    <div
+    <Header></Header>
+	<Breadcrum></Breadcrum>
+	<RegisterForm></RegisterForm>
+	<Footer></Footer>
+    <!-- <div
       class="sign-up-header"
       style="background-image: url('images/lsk.jpg')"
     ></div>
-    <!-- / Sign Up Image And Headings -->
-    <!-- Sign Up Form -->
     <a-card
       :bordered="false"
       class="card-signup header-solid h-full"
@@ -151,25 +147,17 @@
           >Sign In</router-link
         >
       </p>
-    </a-card>
-    <!-- / Sign Up Form -->
+    </a-card> -->
   </div>
 </template>
 
 <script>
-function validetPasswordLength(value) {
-  if (value.length>8) {
-    return {
-      validateStatus: 'success',
-      errorMsg: null,
-    };
-  }
-  return {
-    validateStatus: 'error',
-    errorMsg: 'Password must be greater than 8 characters',
-  };
-}
+import Header from '../components/home/Header.vue';
+import Footer from '../components/home/Footer.vue';
+import Breadcrum from '../components/Widgets/Breadcrum.vue';
+import RegisterForm from '../components/forms/Register-Form.vue';
 export default {
+  components:{Header,Footer,Breadcrum,RegisterForm},
   data() {
     return {
       loading:this.$store.state.loading
