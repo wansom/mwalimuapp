@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="loading-more">
-                        <i class="fa-solid fa-loader"></i>
+                        <i class="icon_loading"></i>
                         <a href="#">
                             Loading More
                         </a>

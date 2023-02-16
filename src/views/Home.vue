@@ -1,11 +1,12 @@
 <template>
  <div>
     <Header></Header>
-    <Hero></Hero>
+    <Hero/>
     <Banner></Banner>
     <top-lawyers></top-lawyers>
-    <KnowYourCourts></KnowYourCourts>
+    <SignupBanner/>
     <all-lawyers></all-lawyers>
+    <KnowYourCourts/>
     <Footer></Footer>
  
  </div>
@@ -19,8 +20,9 @@ import Footer from '../components/home/Footer.vue';
 import TopLawyers from '../components/home/Top-Lawyers.vue';
 import KnowYourCourts from '../components/home/Know-Your-Courts.vue';
 import AllLawyers from '../components/home/All-Lawyers.vue';
+import SignupBanner from '../components/home/Signup-Banner.vue';
 export default {
-  components: { Hero, Banner,Header, Footer, TopLawyers, KnowYourCourts, AllLawyers },
+  components: { Hero, Banner,Header, Footer, TopLawyers, KnowYourCourts, AllLawyers,SignupBanner },
   created() {
 }
 }
