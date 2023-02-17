@@ -102,7 +102,7 @@
 
 <script>
 import { mapState } from "vuex";
-import 'vue-range-component/dist/vue-range-slider.css'
+import '../../../public/home/css/range-slider.css'
 import VueRangeSlider from 'vue-range-component'
 export default {
   components: {
@@ -129,26 +129,5 @@ export default {
 </script>
 
 <style scoped>
-.vue-range-slider.slider-component .slider .slider-dot.slider-dot-focus {
-  -webkit-box-shadow: 0 0 2px 1px #E6353B;
-          box-shadow: 0 0 2px 1px #E6353B;
-}
-.vue-range-slider.slider-component .slider .slider-dot.slider-dot-dragging {
-  z-index: 5;
-}
-.vue-range-slider.slider-component .slider .slider-dot.slider-dot-disabled {
-  z-index: 4;
-}
-.vue-range-slider.slider-component .slider .slider-dot.slider-hover:hover .slider-tooltip-wrap {
-  display: block;
-}
-.vue-range-slider.slider-component .slider .slider-dot.slider-always .slider-tooltip-wrap {
-  display: block !important;
-}
-.vue-range-slider.slider-component .slider .slider-process {
-  position: absolute;
-  border-radius: 15px;
-  background-color: #E6353B;
-  z-index: 1;
-}
+
 </style>
