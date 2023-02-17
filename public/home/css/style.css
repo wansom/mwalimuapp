@@ -1090,7 +1090,7 @@ ol {
 	bottom: -4px;
 	width: 100%;
 	height: 2px;
-	background: #ffffff;
+	background: #E6353B;
 	content: "";
 }
 
@@ -1183,6 +1183,9 @@ ol {
 .product-item:hover .pi-pic .icon {
 	top: 15px;
 	opacity: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .product-item:hover .pi-pic ul {
@@ -1275,13 +1278,15 @@ ol {
 }
 
 .product-item .pi-text a h5 {
-	color: #252525;
-}
-
-.product-item .pi-text .product-price {
 	color: #E6353B;
 	font-size: 20px;
 	font-weight: 700;
+}
+
+.product-item .pi-text .product-price {
+	color: #252525;
+	font-size: 18px;
+	font-weight: 500;
 }
 
 .product-item .pi-text .product-price span {
