@@ -2,46 +2,33 @@
   <div
     class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter"
   >
-    <div class="filter-widget">
+    <!-- <div class="filter-widget">
       <h4 class="fw-title">Primary Practise Areas</h4>
       <ul class="filter-catagories">
         <li><a href="#">Men</a></li>
         <li><a href="#">Women</a></li>
         <li><a href="#">Kids</a></li>
       </ul>
-    </div>
+    </div> -->
     <div class="filter-widget">
-      <h4 class="fw-title">Secondary Practise Areas</h4>
-      <div class="fw-brand-check">
-        <div class="bc-item">
-          <label for="bc-calvin">
-            Calvin Klein
-            <input type="checkbox" id="bc-calvin" />
+      <a-collapse expand-icon-position="right" :bordered="false" default-active-key="1">
+        <template #expandIcon="props">
+        <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+      </template>
+      <a-collapse-panel key="1" header="Practise Areas" >
+        <div class="fw-brand-check">
+        <div class="bc-item" v-for="area of practiseAreas" :key="area">
+          <label :for="area">
+            {{ area }}
+            <input type="checkbox" :id="area" />
             <span class="checkmark"></span>
           </label>
         </div>
-        <div class="bc-item">
-          <label for="bc-diesel">
-            Diesel
-            <input type="checkbox" id="bc-diesel" />
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <div class="bc-item">
-          <label for="bc-polo">
-            Polo
-            <input type="checkbox" id="bc-polo" />
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <div class="bc-item">
-          <label for="bc-tommy">
-            Tommy Hilfiger
-            <input type="checkbox" id="bc-tommy" />
-            <span class="checkmark"></span>
-          </label>
-        </div>
+ 
       </div>
+      </a-collapse-panel>
+    </a-collapse>
+ 
     </div>
     <div class="filter-widget">
       <h4 class="fw-title">Years of Experience</h4>
@@ -70,33 +57,20 @@
       </div>
     </div>
     <div class="filter-widget">
-      <h4 class="fw-title">Counties</h4>
-      <div class="fw-color-choose">
-        <div class="cs-item">
-          <input type="radio" id="cs-black" />
-          <label class="cs-black" for="cs-black">Black</label>
-        </div>
-        <div class="cs-item">
-          <input type="radio" id="cs-violet" />
-          <label class="cs-violet" for="cs-violet">Violet</label>
-        </div>
-        <div class="cs-item">
-          <input type="radio" id="cs-blue" />
-          <label class="cs-blue" for="cs-blue">Blue</label>
-        </div>
-        <div class="cs-item">
-          <input type="radio" id="cs-yellow" />
-          <label class="cs-yellow" for="cs-yellow">Yellow</label>
-        </div>
-        <div class="cs-item">
-          <input type="radio" id="cs-red" />
-          <label class="cs-red" for="cs-red">Red</label>
-        </div>
-        <div class="cs-item">
-          <input type="radio" id="cs-green" />
-          <label class="cs-green" for="cs-green">Green</label>
+      <a-collapse v-model="activeKey" expand-icon-position="right" :bordered="false">
+        <template #expandIcon="props">
+        <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+      </template>
+      <a-collapse-panel key="1" header="Counties" >
+        <div class="fw-color-choose">
+        <div class="cs-item" v-for="county of counties" :key="county">
+          <input type="radio" :id="county"  :value="county"/>
+          <label class="cs-red" :for="county">{{county}}</label>
         </div>
       </div>
+      </a-collapse-panel>
+    </a-collapse>
+    
     </div>
     <!-- <div class="filter-widget">
                         <h4 class="fw-title">Size</h4>
@@ -119,7 +93,7 @@
                             </div>
                         </div>
                     </div> -->
-    <div class="filter-widget">
+    <div class="filter-widget mt-4">
       <h4 class="fw-title">Tags</h4>
       <div class="fw-tags">
         <a href="#">Male</a>

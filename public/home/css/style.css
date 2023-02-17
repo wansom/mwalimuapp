@@ -1065,7 +1065,7 @@ ol {
 	margin-right: -15px;
 	text-align: center;
 	padding-top: 285px;
-	background-image: url(https://acelitigator.com/wp-content/uploads/2023/01/Susan-Mwango.jpg);
+	background-image: url(../../images/home/black\ woman.jpg);
 	
 }
 
@@ -1757,7 +1757,20 @@ ol {
 .filter-widget {
 	margin-bottom: 45px;
 }
-
+.ant-collapse-header{
+	color: #252525 !important;
+	font-size: 22px !important;
+	font-weight: 700 !important;
+	margin-bottom: 26px !important;
+	background-color: transparent !important;
+	border: none !important;
+	padding-left: 0px !important;
+	margin-left: 0px !important;
+}
+.ant-collapse-item{
+	background-color: transparent !important;
+	border: none !important;	
+}
 .filter-widget .fw-title {
 	color: #252525;
 	font-size: 22px;
@@ -1778,6 +1791,7 @@ ol {
 
 .filter-widget .fw-brand-check .bc-item {
 	margin-bottom: 3px;
+	margin-right: 3px;
 }
 
 .filter-widget .fw-brand-check .bc-item label {
@@ -1902,7 +1916,15 @@ ol {
 
 .filter-widget .fw-color-choose .cs-item input {
 	position: absolute;
-	visibility: hidden;
+	width: 20px;
+	height: 20px;
+}
+.filter-widget .fw-color-choose .cs-item input[type="radio"]:checked {
+	 position: absolute;
+	width: 19px;
+	height: 19px;
+	background-color: #DC3232;
+	border-color: #000;
 }
 
 .filter-widget .fw-color-choose .cs-item label {
@@ -1913,27 +1935,9 @@ ol {
 	color: #636363;
 }
 
-.filter-widget .fw-color-choose .cs-item label.cs-violet:before {
-	background: #8230E3;
-}
 
-.filter-widget .fw-color-choose .cs-item label.cs-blue:before {
-	background: #2773BE;
-}
 
-.filter-widget .fw-color-choose .cs-item label.cs-yellow:before {
-	background: #EEEE21;
-}
-
-.filter-widget .fw-color-choose .cs-item label.cs-red:before {
-	background: #DC3232;
-}
-
-.filter-widget .fw-color-choose .cs-item label.cs-green:before {
-	background: #81D742;
-}
-
-.filter-widget .fw-color-choose .cs-item label:before {
+/* .filter-widget .fw-color-choose .cs-item label:checked {
 	position: absolute;
 	left: 0;
 	top: 4px;
@@ -1942,7 +1946,7 @@ ol {
 	background: #252525;
 	border-radius: 50%;
 	content: "";
-}
+} */
 
 .filter-widget .fw-size-choose .sc-item {
 	display: inline-block;
@@ -2221,7 +2225,7 @@ ol {
 
 .product-details .pd-desc h4 {
 	color: #E6353B;
-	font-weight: 700;
+	font-weight: 400;
 }
 
 .product-details .pd-desc h4 span {
