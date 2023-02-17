@@ -740,6 +740,17 @@ ol {
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
+.nav-item .nav-depart .depart-btn .depart-hover .header-title{
+	display: block;
+	font-size: 16px;
+	color: #E6353B;
+	padding-left: 40px;
+	padding-top: 16px;
+	padding-right: 30px;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
 
 .nav-item .nav-depart .depart-btn .depart-hover li a:hover {
 	color: #E6353B;

@@ -136,7 +136,11 @@
             <i class="fa fa-bars"></i>
             <span>FIND LAWYERS</span>
             <ul class="depart-hover">
-              <li class="active" v-for="area of practiseAreas" :key="area"><a href="#">{{ area }}</a></li>
+              <span class="header-title">Practise Areas</span>
+              <li class="active" v-for="area of practiseAreas" :key="area"><a href="#">{{ area }}</a></li><br><br><br>
+
+              <span class="header-title">Counties</span><br/>
+              <li class="active" v-for="county of counties" :key="county"><a href="#">{{ county }}</a></li>
             </ul>
           </div>
         </div>
@@ -176,7 +180,7 @@ export default {
         }
     },
     computed: {
-    ...mapState(["practiseAreas"]),}
+    ...mapState(["practiseAreas","counties"]),}
 };
 </script>
 
