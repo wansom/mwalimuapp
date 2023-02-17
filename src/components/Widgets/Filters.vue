@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="filter-widget">
-      <h4 class="fw-title">Location</h4>
+      <h4 class="fw-title">Counties</h4>
       <div class="fw-color-choose">
         <div class="cs-item">
           <input type="radio" id="cs-black" />
@@ -124,11 +124,11 @@
       <div class="fw-tags">
         <a href="#">Male</a>
         <a href="#">Female</a>
-        <a href="#">Coat</a>
-        <a href="#">Dresses</a>
-        <a href="#">Trousers</a>
-        <a href="#">Men's hats</a>
-        <a href="#">Backpack</a>
+        <a href="#">Magistrate</a>
+        <a href="#">Judges</a>
+        <a href="#">Advocates</a>
+        <a href="#">Niceties</a>
+        <a href="#">Port Harcourt</a>
       </div>
     </div>
     <a href="#" class="filter-btn">Filter</a>
@@ -136,7 +136,12 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["practiseAreas", "counties"]),
+  },
+};
 </script>
 
 <style></style>

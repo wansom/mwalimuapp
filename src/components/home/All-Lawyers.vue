@@ -10,16 +10,23 @@
               <div class="row">
                 <div class="col-lg-7 col-md-7">
                   <div class="select-option">
-                    <select class="sorting">
-                      <option value="">Default Sorting</option>
-                    </select>
-                    <select class="p-show">
-                      <option value="">Show:</option>
-                    </select>
+                    <a-select
+                    placeholder="Sort By..."
+                      style="width: 250px"
+                      @change="handleChange"
+                      class="sorting"
+                    >
+
+                      <a-select-option value="jack">
+                        Years of Experience
+                      </a-select-option>
+                      <a-select-option value="lucy"> Gender </a-select-option>
+                    </a-select>
+
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-5 text-right">
-                  <p>Show 01- 09 Of 36 Product</p>
+                  <p>Show 01- 09 Of 36 Advocates</p>
                 </div>
               </div>
             </div>
@@ -287,7 +294,7 @@
 </template>
 
 <script>
-import Filters from "../Shared/Filters.vue";
+import Filters from "../../components/Widgets/Filters.vue";
 export default {
   components: { Filters },
 };

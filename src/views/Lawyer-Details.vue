@@ -19,12 +19,11 @@
 import Header from "../components/home/Header.vue";
 import Footer from "../components/home/Footer.vue";
 import Breadcrum from "../components/Widgets/Breadcrum.vue";
-import Filters from "../components/Shared/Filters.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
 export default {
-  components: { Header, Footer, Breadcrum, Filters, DetailCard, RelatedAdvocates },
+  components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },
 };
-</script>
+</script> 
 
 <style></style>
