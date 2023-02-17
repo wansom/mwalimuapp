@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Product Shop Section Begin -->
-    <section class="product-shop spad">
+    <section class="product-shop spad" id="all-lawyers">
         <div class="container-fluid">
             <div class="row">
                 
