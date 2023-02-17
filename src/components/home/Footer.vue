@@ -10,7 +10,7 @@
             <ul>
               <li>Address: 60-49 Road 11378 New York</li>
               <li>Phone: +65 11.188.888</li>
-              <li>Email: hello.colorlib@gmail.com</li>
+              <li>Email: info@acelitigator.com</li>
             </ul>
             <div class="footer-social">
               <a href="#"><i class="fa fa-facebook"></i></a>
@@ -22,12 +22,12 @@
         </div>
         <div class="col-lg-2 offset-lg-1">
           <div class="footer-widget">
-            <h5>Information</h5>
+            <h5>COMPANY</h5>
             <ul>
               <li><a href="#">About Us</a></li>
-              <li><a href="#">Checkout</a></li>
+              <li><a href="#">Terms and Conditions</a></li>
+              <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Contact</a></li>
-              <li><a href="#">Serivius</a></li>
             </ul>
           </div>
         </div>
@@ -35,17 +35,18 @@
           <div class="footer-widget">
             <h5>ADVOCATES</h5>
             <ul>
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Shopping Cart</a></li>
-              <li><a href="#">Shop</a></li>
+              
+              <li><router-link to="sign-up">Create Account</router-link></li>
+              <li><router-link to="sign-in">Login</router-link></li>
+              <li><router-link to="know-your-courts">Know Your Courts</router-link></li>
+              <li><a href="#">Advocates In Practise</a></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="newslatter-item">
             <h5>Join Our Newsletter Now</h5>
-            <p>Get E-mail updates about our latest shop and special offers.</p>
+            <p>Get E-mail updates about our latest articles and event offers.</p>
             <form action="#" class="subscribe-form">
               <input type="text" placeholder="Enter Your Mail" />
               <button type="button">Subscribe</button>
@@ -62,9 +63,8 @@
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
              {{ new Date().getFullYear() }}
-              All rights reserved | This template is made with
-              <i class="fa fa-heart-o" aria-hidden="true"></i> by
-              <a href="https://colorlib.com" target="_blank">Colorlib</a>
+              All rights reserved | 
+              <a href="https://acelitigator.com" target="_blank">ACELITIGATOR</a>
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>
             <div class="payment-pic">
