@@ -74,9 +74,9 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="site-btn disabled register-btn">
+                <router-link to="know-your-courts" class="site-btn disabled register-btn">
                 View All
-              </button>
+                </router-link>
             </div>
            
         </div>

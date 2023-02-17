@@ -5,7 +5,7 @@
         <div class="col-lg-3">
           <div class="product-large set-bg">
             <h2>Top Lawyers</h2>
-            <a href="#">Discover More</a>
+            <a href="#all-lawyers">Discover More</a>
           </div>
         </div>
         <div class="col-lg-8 offset-lg-1">
