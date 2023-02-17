@@ -11,66 +11,57 @@
       </ul>
     </div> -->
     <div class="filter-widget">
-      <a-collapse expand-icon-position="right" :bordered="false" default-active-key="1">
+      <a-collapse
+        expand-icon-position="right"
+        :bordered="false"
+        default-active-key="1"
+      >
         <template #expandIcon="props">
-        <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
-      </template>
-      <a-collapse-panel key="1" header="Practise Areas" >
-        <div class="fw-brand-check">
-        <div class="bc-item" v-for="area of practiseAreas" :key="area">
-          <label :for="area">
-            {{ area }}
-            <input type="checkbox" :id="area" />
-            <span class="checkmark"></span>
-          </label>
-        </div>
- 
-      </div>
-      </a-collapse-panel>
-    </a-collapse>
- 
+          <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+        </template>
+        <a-collapse-panel key="1" header="Practise Areas">
+          <div class="fw-brand-check">
+            <div class="bc-item" v-for="area of practiseAreas" :key="area">
+              <label :for="area">
+                {{ area }}
+                <input type="checkbox" :id="area" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </a-collapse-panel>
+      </a-collapse>
     </div>
     <div class="filter-widget">
       <h4 class="fw-title">Years of Experience</h4>
-      <div class="filter-range-wrap">
-        <div class="range-slider">
-          <div class="price-input">
-            <input type="text" id="minamount" />
-            <input type="text" id="maxamount" />
-          </div>
-        </div>
-        <div
-          class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-          data-min="33"
-          data-max="98"
-        >
-          <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-          <span
-            tabindex="0"
-            class="ui-slider-handle ui-corner-all ui-state-default"
-          ></span>
-          <span
-            tabindex="0"
-            class="ui-slider-handle ui-corner-all ui-state-default"
-          ></span>
-        </div>
+      <div class="filter-range-wrap position-relative">
+        <!-- <a-slider
+          range
+          :default-value="[3, 50]"
+          @change="setExperience"
+          :tooltip-visible="toolTip"
+        /> -->
+        <vue-range-slider ref="slider" v-model="value"></vue-range-slider>
       </div>
     </div>
     <div class="filter-widget">
-      <a-collapse v-model="activeKey" expand-icon-position="right" :bordered="false">
+      <a-collapse
+        v-model="activeKey"
+        expand-icon-position="right"
+        :bordered="false"
+      >
         <template #expandIcon="props">
-        <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
-      </template>
-      <a-collapse-panel key="1" header="Counties" >
-        <div class="fw-color-choose">
-        <div class="cs-item" v-for="county of counties" :key="county">
-          <input type="radio" :id="county"  :value="county"/>
-          <label class="cs-red" :for="county">{{county}}</label>
-        </div>
-      </div>
-      </a-collapse-panel>
-    </a-collapse>
-    
+          <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+        </template>
+        <a-collapse-panel key="1" header="Counties">
+          <div class="fw-color-choose">
+            <div class="cs-item" v-for="county of counties" :key="county">
+              <input type="radio" :id="county" :value="county" />
+              <label class="cs-red" :for="county">{{ county }}</label>
+            </div>
+          </div>
+        </a-collapse-panel>
+      </a-collapse>
     </div>
     <!-- <div class="filter-widget">
                         <h4 class="fw-title">Size</h4>
@@ -111,11 +102,33 @@
 
 <script>
 import { mapState } from "vuex";
+import 'vue-range-component/dist/vue-range-slider.css'
+import VueRangeSlider from 'vue-range-component'
 export default {
+  components: {
+    VueRangeSlider
+  },
+  data() {
+    return {
+      toolTip: false,
+      value: [0,50],
+    };
+  },
+  methods: {
+    setExperience(element) {
+      this.toolTip = true;
+      console.log(element);
+    },
+  },
+
   computed: {
     ...mapState(["practiseAreas", "counties"]),
   },
+  mounted() {},
 };
 </script>
 
-<style></style>
+<style scoped>
+.slider{
+  width: 100%;
+}</style>
