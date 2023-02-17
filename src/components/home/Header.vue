@@ -153,12 +153,9 @@
             <li>
               <a href="#">Resources</a>
               <ul class="dropdown">
-                <li><a href="./blog-details.html">Blog Details</a></li>
-                <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                <li><a href="./check-out.html">Checkout</a></li>
-                <li><a href="./faq.html">Faq</a></li>
-                <li><a href="./register.html">Register</a></li>
-                <li><a href="./login.html">Login</a></li>
+                <li><a href="acelitigator.com">Legal Documents</a></li>
+                <li><a href="acelitigator.com">Articles</a></li>
+                <li><a href="acelitigator.com">Webiners</a></li>
               </ul>
             </li>
             <li><router-link to="contact-us">Contact</router-link></li>
