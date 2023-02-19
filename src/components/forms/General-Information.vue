@@ -209,6 +209,46 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
+          <a-col :span="12">
+            <a-form-item label="Your LinkedIn link">
+              <a-input
+                v-decorator="[
+                  'linkedIn',
+                  {
+                    initialValue: user.linkedIn,
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Filed is required',
+                      },
+                    ],
+                  },
+                ]"
+                style="width: 100%"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="Your Twitter Link">
+              <a-input
+                v-decorator="[
+                  'twitter',
+                  {
+                    initialValue: user.twitter,
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please enter your job title',
+                      },
+                    ],
+                  },
+                ]"
+                style="width: 100%"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="16">
           <a-col :span="24">
             <a-form-item label="Short Biography">
               <a-textarea
@@ -344,7 +384,9 @@ export default {
             other_counties:values.other_counties,
             step: "general information",
             profile_photo:values.profile_photo?? url,
-            current:2
+            current:2,
+            twitter:values.twitter??"https://www.twitter.com/",
+            linkedIn:values.linkedIn??"https://www.linkedin.com/"
           };
           console.log(payload)
           this.$store.dispatch("updateUser", payload);
