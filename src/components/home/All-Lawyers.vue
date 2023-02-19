@@ -26,7 +26,7 @@
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-5 text-right">
-                  <p>Show 01- 09 Of 36 Advocates</p>
+                  <p>Show 01- 09 Of {{ advocates.length }} Advocates</p>
                 </div>
               </div>
             </div>
