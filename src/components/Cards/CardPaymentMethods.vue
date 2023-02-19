@@ -47,7 +47,7 @@
       <a-row type="flex" align="middle">
         <a-col :span="24" :md="12" class="my-5">
           <h6 class="font-semibold mb-5">Account Subscription</h6>
-          <p>Your account has been approved ,make payment to activate it</p>
+          <p>Make payment to complete your profile</p>
         </a-col>
         <a-col
           :span="24"
@@ -94,12 +94,23 @@ export default {
     return {
       visible: false,
       loading: false,
-      sdkSent:true
+      sdkSent:false
     };
   },
   methods: {
     showModal() {
-      this.visible = true;
+      if (!this.user.biography) {
+            this.$message.error(
+              "please complete the general information section"
+            );
+          } else if (!this.user.law_school) {
+            this.$message.error("please complete the education section");
+          } else if (!this.user.law_school) {
+            this.$message.error("please complete the employment section");
+          } else {
+            this.visible = true;
+            this.loading=false
+          }
     },
     formatNumber(value){
       if(value.startsWith("254")){
@@ -156,7 +167,7 @@ export default {
       let id = JSON.parse(localStorage.getItem("transactionID"));
       console.log(id);
       fb.mpesaCollection
-        .doc(id)
+        .doc("ws_CO_03022023094539553705122230")
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -193,22 +204,23 @@ export default {
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
       fb.transactions
-        .doc(id)
+        .doc("ws_CO_03022023094539553705122230")
         .get()
         .then((doc) => {
           let data = doc.data();
           console.log(data)
           if (doc.exists && data.amount == 5) {
             this.paymentConfirmed = true;
+            localStorage.clear()
             let user = fb.auth.currentUser;
             fb.usersCollection
               .doc(user.uid)
               .update({
-                status: "active",
+                status: "pending approval",
 
-                subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
+                payment_date: new Date(),
                 notifications:fb.types.FieldValue.arrayUnion({
-                  notification:`payment has been made succcessfully,your acoount is active till new ${Date(new Date().setMonth(new Date().getMonth() + 1))}`,
+                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
                   date:new Date()
 
                 }),
@@ -219,16 +231,15 @@ export default {
                 })
               })
               .then(() => {
-                let user = fb.auth.currentUser;
-                this.$store.dispatch("fetchUserProfile", user);
                 this.$store.dispatch("sendMail",{
               name: this.user.first_name,
                 email: this.user.email,
                 subject: "Acelitigator Account",
-                content:`Your Account has been activated successfully valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1))}`
+                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback`
   
             })
               });
+              this.visible=false
           } else {
             swal({
               title: "SORRY!",

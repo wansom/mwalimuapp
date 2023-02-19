@@ -24,7 +24,7 @@ const types = firebase.firestore;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion();
 
 // collection references
-const usersCollection = db.collection("lawyers");
+const usersCollection = db.collection("nigeria_lawyers");
 const businessCollection = db.collection("clients");
 const adminCollections =db.collection("admins");
 const mpesaCollection = db.collection("mpesa_responses");

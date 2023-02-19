@@ -8,10 +8,9 @@
       v-if="user.status == 'pending approval'"
       status="404"
       title="Account Pending review"
-      sub-title="Your Details are currently being reviewed,you will be notified to make payments once your account has been approved"
+      sub-title="Your Details are currently being reviewed,your account will be activated once the review is done"
     > 
     </a-result>
-    <CardPaymentMethods v-else-if="user.status == 'approved'" :user="user"></CardPaymentMethods>
     <a-result
     v-else-if="user.status == 'active'"
     status="success"
@@ -19,7 +18,8 @@
     :sub-title="'You will be required to renew your subscription on' +'-'+ user.subscription_date"
   >
   </a-result>
-    <a-result
+  <CardPaymentMethods v-else :user="user"></CardPaymentMethods>
+    <!-- <a-result
       v-else
       status="500"
       title="Profile Not Submitted"
@@ -28,7 +28,7 @@
       <template #extra>
         <a-button type="primary"> Submit Profile </a-button>
       </template>
-    </a-result>
+    </a-result> -->
   </a-card>
 </template>
 

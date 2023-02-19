@@ -30,7 +30,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Last Certificate Renewal Date">
+            <a-form-item label="Last Practising Certificate Renewal Date">
               <a-date-picker
               :disabled-date="disabledDate"
                 v-decorator="[
@@ -53,7 +53,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="National ID/Passport">
+            <a-form-item label="National ID/Passport Number">
               <a-input
                 v-decorator="[
                   'national_id',
@@ -97,21 +97,21 @@
 
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="LSK Letter of Good Standing" style="width: 100%">
+            <a-form-item label="Curriculum Vitae/Resume" style="width: 100%">
               <a-upload
-                label="LSK Letter of Good Standing"
+                label="Curriculum Vitae/Resume"
                 name="file"
                 accept="application/pdf"
                 :file-list="fileList"
                 :remove="handleRemove" :before-upload="beforeUpload"
                 v-decorator="[
-                  'lsk_letter',
+                  'resume',
                   {
                     rules: [
                       {
                         required: true,
                         message:
-                          'Please upload a letter of good standing from LSK',
+                          'Please upload a resume or Curriculum vitae',
                       },
                     ],
                   },
@@ -121,24 +121,26 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Certificate of Admission">
+        
+            <a-form-item label="Practise Certificate">
               <a-upload
-                name="file"
-                accept="application/pdf"
-                :file-list="fileList1"
-                :remove="handleRemove1" :before-upload="beforeUpload1"
+              name="file"
+              accept="application/pdf"
+              :file-list="fileList3"
+                :remove="handleRemove3" :before-upload="beforeUpload3"
                 v-decorator="[
-                  'admission_cert',
+                  'practise_cert',
                   {
                     rules: [
                       {
                         required: true,
-                        message: 'Please upload Certificate of Admission',
+                        message: 'Please upload a valid certificate',
                       },
                     ],
                   },
                 ]"
-              > <a-button> <a-icon type="upload" block/> Click to Upload </a-button></a-upload>
+              >  <a-button> <a-icon type="upload" /> Click to Upload </a-button>
+            </a-upload>
             </a-form-item>
           </a-col>
         </a-row>
@@ -166,25 +168,24 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Practise Certificate">
+            <a-form-item label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)">
               <a-upload
-              name="file"
-              accept="application/pdf"
-              :file-list="fileList3"
-                :remove="handleRemove3" :before-upload="beforeUpload3"
+                name="file"
+                accept="application/pdf"
+                :file-list="fileList1"
+                :remove="handleRemove1" :before-upload="beforeUpload1"
                 v-decorator="[
-                  'practise_cert',
+                  'residence_evidence',
                   {
                     rules: [
                       {
                         required: true,
-                        message: 'Please upload a valid certificate',
+                        message: 'Please upload Certificate of Admission',
                       },
                     ],
                   },
                 ]"
-              >  <a-button> <a-icon type="upload" /> Click to Upload </a-button>
-            </a-upload>
+              > <a-button> <a-icon type="upload" block/> Click to Upload </a-button></a-upload>
             </a-form-item>
           </a-col>
         </a-row>
@@ -195,10 +196,10 @@
           >Previous Section
         </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading"  disabled v-if="user.status==='pending approval'"
-          >Submit for Review
+          >Save and Continue
         </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
-          >Submit for Review
+          >Save and Continue
         </a-button>
       </div>
     </div>
@@ -323,14 +324,14 @@ export default {
             .put(values.practise_cert.file, values.practise_cert.file.type)
             .then((snapshot) => snapshot.ref.getDownloadURL());
           //letter from lsk
-          const lsk_letter = await ref
-            .child(values.lsk_letter.file.name)
-            .put(values.lsk_letter.file, values.lsk_letter.file.type)
+          const resume = await ref
+            .child(values.resume.file.name)
+            .put(values.resume.file, values.resume.file.type)
             .then((snapshot) => snapshot.ref.getDownloadURL());
           // letter of admission
-          const admission_cert = await ref
-            .child(values.admission_cert.file.name)
-            .put(values.admission_cert.file, values.admission_cert.file.type)
+          const residence_evidence = await ref
+            .child(values.residence_evidence.file.name)
+            .put(values.residence_evidence.file, values.residence_evidence.file.type)
             .then((snapshot) => snapshot.ref.getDownloadURL());
           //  national id url
           const national_id_doc = await ref
@@ -347,32 +348,14 @@ export default {
             national_id: values.national_id ?? "",
             practise_number: values.practise_number ?? "",
             practise_certificate: url,
-            lsk_letter: lsk_letter,
-            admission_cert: admission_cert,
+            resume: resume,
+            residence_evidence: residence_evidence,
             national_id_doc: national_id_doc,
             step: "certificates",
-            status: "pending approval",
             current:5
           };
-          if (!this.user.biography) {
-            this.$message.error(
-              "please complete the general information section"
-            );
-          } else if (!this.user.law_school) {
-            this.$message.error("please complete the education section");
-          } else if (!this.user.law_school) {
-            this.$message.error("please complete the employment section");
-          } else {
-            this.$store.dispatch("updateUser", payload);
-           this.$store.dispatch("sendMail",{
-              name: this.user.first_name,
-                email: this.user.email,
-                subject: "Acelitigator Account",
-                content:"Thank You for submitting your account details,our team will review it and get back to you."
-  
-            })
-            this.loading=false
-          }
+          this.$store.dispatch("updateUser", payload);
+          
         }
       });
     },

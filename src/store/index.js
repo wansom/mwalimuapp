@@ -126,7 +126,7 @@ export default new Vuex.Store({
               uid: result.user.uid,
               status: "incomplete",
               notifications:fb.types.FieldValue.arrayUnion({
-                notification:`Your account was created successfully proceed to fill your profile`,
+                notification:`Your account was created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile`,
                 date:new Date()
               })
             })
@@ -135,7 +135,7 @@ export default new Vuex.Store({
                 name: data.first_name,
                 email: data.email,
                 subject: "Acelitigator Account",
-                content:"Your Account has been created successfully. Please proceed to complete your profile"
+                content:"Your Account has been created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile"
               })
               commit("setLoading",false)
               router.push("/sign-in");
