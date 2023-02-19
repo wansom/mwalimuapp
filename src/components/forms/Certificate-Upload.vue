@@ -180,7 +180,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please upload Certificate of Admission',
+                        message: 'Please upload proof of residence',
                       },
                     ],
                   },
@@ -323,7 +323,7 @@ export default {
             .child(values.practise_cert.file.name)
             .put(values.practise_cert.file, values.practise_cert.file.type)
             .then((snapshot) => snapshot.ref.getDownloadURL());
-          //letter from lsk
+          //resume
           const resume = await ref
             .child(values.resume.file.name)
             .put(values.resume.file, values.resume.file.type)

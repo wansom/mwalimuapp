@@ -102,17 +102,17 @@
 
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.lsk_letter" target="blank">view LSK Letter of Good Standing</a-button>
+            <a-button icon="download" :href="user.resume" target="blank">view Resume/CV</a-button>
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.admission_cert" target="blank">view Certificate of Admission</a-button>
+            <a-button icon="download" :href="user.residence_evidence" target="blank">view Proof of residence</a-button>
           </a-col>
           <a-col :span="6">
             <a-button icon="download" :href="user.national_id_doc" target="blank">view National ID</a-button>
           </a-col>
         </a-row>
       </a-form>
-      <div class="my-5">
+      <div style="margin-top:40px;">
         <a-button
           class="mx-10"
           @click="
@@ -182,7 +182,8 @@ export default {
       fb.usersCollection
         .doc(this.user.uid)
         .update({
-          status: status,
+          status: status=="approved"?'active':'declined',
+          subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
           notifications: fb.types.FieldValue.arrayUnion({
             notification: `your account has been approved proceed to payment`,
             date: new Date(),
@@ -204,7 +205,7 @@ export default {
             email: this.user.email,
             subject: "Acelitigator Account",
             content:
-              "Your account request has been approved.please login and proceed to make payment",
+              `Your account request has been activated successfully. You have an active subscription valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1))}`,
           });  
           }
           

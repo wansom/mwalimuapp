@@ -238,6 +238,13 @@ export default {
                 content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback`
   
             })
+            this.$store.dispatch("sendMail",{
+              name: "Admin",
+                email: "owarren@barizicommunications.com",
+                subject: "Account creation",
+                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application. advocatelisting.acelitigator.com `
+  
+            })
               });
               this.visible=false
           } else {
