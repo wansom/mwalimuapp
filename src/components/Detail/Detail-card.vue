@@ -7,6 +7,7 @@
             class="product-big-img"
             :src="advocate.profile_photo"
             alt=""
+            style="height:650px;object-fit: contain;"
           />
           <!-- <div class="zoom-icon">
             <i class="fa fa-search-plus"></i>
@@ -36,8 +37,8 @@
         <div class="product-details">
           <div class="pd-title">
             <span>{{ advocate.job_title }}</span>
-            <h3>{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h3>
-            <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+            <h3 style="white-space:nowrap">{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h3>
+            <!-- <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a> -->
           </div>
           <div class="pd-rating">
             <i class="fa fa-star"></i>
@@ -61,23 +62,23 @@
           <div class="pd-size-choose">
             <div class="sc-item">
               <input type="radio" id="sm-size" />
-              <label for="sm-size"> <i class="fa fa-phone"></i>+254705122230</label>
+              <label for="sm-size"> <i class="fa fa-phone"></i>{{advocate.phone}}</label>
             </div>
             <div class="sc-item">
               <input type="radio" id="sm-size" />
-              <label for="sm-size"> <i class="fa fa-envelope"></i>warren@adanianlabs.io</label>
+              <label for="sm-size"> <i class="fa fa-envelope"></i>{{ advocate.email}}</label>
             </div>
             <div class="sc-item">
               <input type="radio" id="lg-size" />
-              <label for="lg-size"><a href="#"><i class="ti-linkedin"></i></a></label>
+              <label for="lg-size"> <a :href="'//' +advocate.linkedIn"  target="_blank"><i class="ti-linkedin"></i></a></label>
             </div>
             <div class="sc-item">
               <input type="radio" id="xl-size" />
-              <label for="xl-size"><a href="#"><i class="ti-twitter-alt"></i></a></label>
+              <label for="xl-size">  <a :href="'//' + advocate.twitter"  target="_blank"><i class="ti-twitter-alt"></i></a></label>
             </div>
             <div class="sc-item">
               <input type="radio" id="xl-size" />
-              <label for="xl-size"><a href="#"><i class="ti-facebook"></i></a></label>
+              <label for="xl-size">  <a  :href="'//' + advocate.website" target="_blank"><i class="fa fa-globe"></i></a></label>
             </div>
           </div>
          
@@ -119,13 +120,9 @@
             <div class="product-content">
               <div class="row">
                 <div class="col-lg-7">
-                  <h5>About Stella</h5>
+                  <h5>{{ advocate.first_name }}<sapn class="mr-2"></sapn>{{ advocate.last_name }}</h5>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in
+                   {{ advocate.biography }}
                   </p>
 
                 </div>
@@ -154,19 +151,19 @@
                 <tr>
                   <td class="p-catagory">LAW SCHOOL</td>
                   <td>
-                    <div class="p-price">UNIVERSITY OF NAIROBI</div>
+                    <div class="p-price">{{ advocate.law_school }}</div>
                   </td>
                 </tr>
                 <tr>
                   <td class="p-catagory">POSTGRADUATE DIPLOMA</td>
                   <td>
-                    <div class="cart-add">Kenya School of Law</div>
+                    <div class="cart-add">{{ advocate.postgraduate_diploma }}</div>
                   </td>
                 </tr>
                 <tr>
                   <td class="p-catagory">OTHER CERTIFICATION</td>
                   <td>
-                    <div class="p-stock"></div>
+                    <div class="p-stock">{{advocate.school2 }}</div>
                   </td>
                 </tr>
               </table>
@@ -189,31 +186,31 @@
                   </td>
                 </tr> -->
                 <tr>
-                  <td class="p-catagory">CM ADVOCATES</td>
+                  <td class="p-catagory">{{ advocate.current_employer }}</td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">{{new Date( advocate.current_starting).toDateString() }}</div>
                     
                   </td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">PRESENT</div>
                   </td>
                 </tr>
-                <tr>
-                  <td class="p-catagory">ORENGO ADVOCATES</td>
+                <tr v-if="advocate.prev1">
+                  <td class="p-catagory">{{ advocate.prev1 }}</td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">{{new Date( advocate.prev1starting).toDateString() }}</div>
                   </td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">{{new Date( advocate.prev1ending).toDateString() }}</div>
                   </td>
                 </tr>
-                <tr>
-                  <td class="p-catagory">ORENGO ADVOCATES</td>
+                <tr v-if="advocate.prev2">
+                  <td class="p-catagory">{{ advocate.prev2 }}</td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">{{new Date( advocate.prev2ending).toDateString() }}</div>
                   </td>
                   <td>
-                    <div class="cart-add">MAY 8 2020</div>
+                    <div class="cart-add">{{new Date( advocate.prev2ending).toDateString() }}</div>
                   </td>
                 </tr>
                

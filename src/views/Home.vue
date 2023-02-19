@@ -3,7 +3,7 @@
     <Header></Header>
     <Hero/>
     <Banner></Banner>
-    <top-lawyers :advocates="advocates"></top-lawyers>
+    <!-- <top-lawyers :advocates="advocates"></top-lawyers> -->
     <SignupBanner/>
     <all-lawyers :advocates="advocates"></all-lawyers>
     <KnowYourCourts/>
