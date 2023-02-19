@@ -18,7 +18,7 @@ let routes = [
 		component: () => import('../views/Home.vue'),
 	},
 	{
-		path: '/advocate',
+		path: '/advocate/:id',
 		name: 'Advocate',
 		component: () => import('../views/Lawyer-Details.vue'),
 	},

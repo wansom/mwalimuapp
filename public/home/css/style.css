@@ -1426,6 +1426,8 @@ ol {
 .latest-blog {
 	padding-top: 72px;
 	padding-bottom: 80px;
+	padding-left: 65px;
+	padding-right: 65px;
 }
 
 .latest-blog .section-title {

@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="card-info">
+  <a-card :bordered="false" class="card-info" style="max-width: 920px;">
     <a-row type="flex">
       <a-col class="col-content" :span="24" :xl="12">
         <div class="card-content">
@@ -48,8 +48,8 @@
             </div>
           </div>
         </div>
-        <div class="card-footer">
-          <router-link :to="'/details/'+advocate.id">
+        <div>
+          <router-link :to="'/advocate/'+advocate.id">
            <a-button type="primary" block>
             View Profile
        

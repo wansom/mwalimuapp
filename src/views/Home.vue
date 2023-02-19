@@ -3,9 +3,9 @@
     <Header></Header>
     <Hero/>
     <Banner></Banner>
-    <top-lawyers></top-lawyers>
+    <top-lawyers :advocates="advocates"></top-lawyers>
     <SignupBanner/>
-    <all-lawyers></all-lawyers>
+    <all-lawyers :advocates="advocates"></all-lawyers>
     <KnowYourCourts/>
     <Footer></Footer>
  
@@ -21,9 +21,18 @@ import TopLawyers from '../components/home/Top-Lawyers.vue';
 import KnowYourCourts from '../components/home/Know-Your-Courts.vue';
 import AllLawyers from '../components/home/All-Lawyers.vue';
 import SignupBanner from '../components/home/Signup-Banner.vue';
+import { mapState } from 'vuex';
 export default {
   components: { Hero, Banner,Header, Footer, TopLawyers, KnowYourCourts, AllLawyers,SignupBanner },
   created() {
+},
+computed:{
+  ...mapState(['allAdvocates']),
+  advocates(){
+    return this.allAdvocates.filter((advocate)=>advocate.status==='active')
+
+  }
+
 }
 }
 </script>

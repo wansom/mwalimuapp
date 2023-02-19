@@ -30,17 +30,33 @@
                 </div>
               </div>
             </div>
-            <div class="product-list">
+            <!-- <div class="product-list">
               <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                  <card-profile></card-profile>
+                <div class="col-lg-12 col-sm-12" v-for="advocate of advocates" :key="advocate">
+                  <card-info :advocate="item"></card-info>
                 </div>
               </div>
-            </div>
-            <div class="loading-more">
+            </div> -->
+            <a-list
+                        item-layout="vertical"
+                        size="large"
+                        :pagination="pagination"
+                        :data-source="advocates"
+                       
+                      >
+                        <a-list-item
+                          slot="renderItem"
+                          key="item.title"
+                          slot-scope="item"
+                         
+                        >
+                          <card-info :advocate="item"></card-info>
+                        </a-list-item>
+                      </a-list>
+            <!-- <div class="loading-more">
               <i class="icon_loading"></i>
               <a href="#"> Loading More </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -52,8 +68,20 @@
 <script>
 import Filters from "../../components/Widgets/Filters.vue";
 import CardProfile from '../Cards/CardProfile.vue';
+import CardInfo from "../../components/Cards/CardInfo.vue";
 export default {
-  components: { Filters, CardProfile },
+  props:["advocates"],
+  components: { Filters, CardProfile,CardInfo },
+  data(){
+    return{
+      pagination: {
+        onChange: (page) => {
+          console.log(page);
+        },
+        pageSize: 3,
+      },
+    }
+  }
 };
 </script>
 

@@ -19,7 +19,10 @@
           </div>
 
           <carousel :autoplay="true" :nav="false" class="product-slider">
-          <card-profile></card-profile>
+            <div v-for="advocate of advocates" :key="advocate" class="col-lg-4 col-sm-6">
+              <card-profile :advocate="advocate"></card-profile>
+            </div>
+        
           </carousel>
         </div>
       </div>
@@ -32,6 +35,7 @@ import carousel from "vue-owl-carousel";
 import { mapState } from "vuex";
 import CardProfile from '../Cards/CardProfile.vue';
 export default {
+  props:["advocates"],
   components: { carousel,CardProfile },
   computed: {
     ...mapState(["practiseAreas"]),

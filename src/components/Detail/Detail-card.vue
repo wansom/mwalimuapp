@@ -5,7 +5,7 @@
         <div class="product-pic-zoom">
           <img
             class="product-big-img"
-            src="https://acelitigator.com/wp-content/uploads/2023/01/MicrosoftTeams-image-9.png"
+            :src="advocate.profile_photo"
             alt=""
           />
           <!-- <div class="zoom-icon">
@@ -35,8 +35,8 @@
       <div class="col-lg-6">
         <div class="product-details">
           <div class="pd-title">
-            <span>Advocate</span>
-            <h3>Stella Orengo</h3>
+            <span>{{ advocate.job_title }}</span>
+            <h3>{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h3>
             <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
           </div>
           <div class="pd-rating">
@@ -49,16 +49,14 @@
           </div>
           <div class="pd-desc">
             <p>
-              Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod
-              tempor sum dolor sit amet, consectetur adipisicing elit, sed do
-              mod tempor
+             {{ advocate.biography }}
             </p>
-            <h4><i class="fa fa-business-time mr-2"></i>Commercial Law<span>(Primary Practise Area)</span></h4>
-            <h4><i class="fa fa-location-dot mr-2"></i>Nairobi<span>(Primary Location)</span></h4>
+            <h4><i class="fa fa-business-time mr-2"></i>{{advocate.specialisation }}<span>(Primary Practise Area)</span></h4>
+            <h4><i class="fa fa-location-dot mr-2"></i>{{advocate.location}}<span>(Primary Location)</span></h4>
           </div>
           <ul class="pd-tags">
-            <li><span>PRACTISE AREAS</span>: More Accessories, Wallets & Cases</li>
-            <li><span>lOCATIONS</span>: Clothing, T-shirt, Woman</li>
+            <li class="row align-items-center"><span  class="mr-3">PRACTISE AREAS:</span><p class="mr-2 mt-2" v-for="area of advocate.practise_areas" :key="area">{{ area }},</p></li>
+            <li class="row align-items-center"><span  class="mr-3">lOCATIONS:</span><p class="mr-2 mt-2" v-for="area of advocate.other_counties" :key="area">{{ area }},</p></li>
           </ul>
           <div class="pd-size-choose">
             <div class="sc-item">
@@ -297,7 +295,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:['advocate']
+};
 </script>
 
 <style></style>
