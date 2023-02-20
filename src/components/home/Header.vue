@@ -3,6 +3,11 @@
     <div class="header-top">
       <div class="container">
         <div class="ht-left">
+          <div class="logo">
+              <router-link to="/">
+                <img src="images/logo-lg.png" alt="" style="height: 80px; object-fit: contain;" />
+              </router-link>
+            </div>
           <div class="mail-service">
             <i class="fa fa-envelope"></i>
             info@acelitigator.com
@@ -48,7 +53,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <!-- <div class="container">
       <div class="inner-header">
         <div class="row">
           <div class="col-lg-2 col-md-2">
@@ -69,7 +74,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-3 text-right col-md-3">
+          <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
                                 <a href="#">
@@ -125,10 +130,10 @@
                             </li>
                             <li class="cart-price">$150.00</li>
                         </ul>
-                    </div> -->
+                    </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="nav-item">
       <div class="container">
         <div class="nav-depart">
