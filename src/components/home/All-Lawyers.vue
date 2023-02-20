@@ -49,17 +49,16 @@
               </div>
             </div> -->
             <a-list
-                        item-layout="vertical"
+                        item-layout="horizontal"
                         size="large"
                         :pagination="pagination"
                         :data-source="advocates"
-                       
+                      
                       >
                         <a-list-item
                           slot="renderItem"
                           key="item.title"
                           slot-scope="item"
-                         
                         >
                           <card-info :advocate="item"></card-info>
                         </a-list-item>
@@ -92,6 +91,10 @@ export default {
         pageSize: 3,
       },
     }
+   
+  },
+  method:{
+    handleChange(){}
   }
 };
 </script>

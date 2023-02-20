@@ -81,6 +81,7 @@ export default new Vuex.Store({
       "Kisii",
       "Nyamira",
     ],
+    courts:["Supreme Court",'Court of Appeal','National Industrial Court','High Court','Federal Tribunals','State Tribunals']
   },
   getters: {},
   mutations: {

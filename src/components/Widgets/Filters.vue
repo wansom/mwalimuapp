@@ -112,6 +112,7 @@ export default {
     return {
       toolTip: false,
       value: [0,50],
+      activeKey:0
     };
   },
   methods: {
