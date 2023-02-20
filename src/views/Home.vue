@@ -3,10 +3,11 @@
     <Header></Header>
     <Hero/>
     <Banner></Banner>
-    <!-- <top-lawyers :advocates="advocates"></top-lawyers> -->
+    
     <SignupBanner/>
     <all-lawyers :advocates="advocates"></all-lawyers>
-    <KnowYourCourts/>
+    <top-lawyers :advocates="advocates"></top-lawyers>
+    <!-- <KnowYourCourts/> -->
     <Footer></Footer>
  
  </div>
