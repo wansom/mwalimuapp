@@ -9,6 +9,7 @@
             <div class="product-show-option">
               <div class="row">
                 <div class="col-lg-7 col-md-7">
+                 <div class="row">
                   <div class="select-option">
                     <a-select
                     placeholder="Sort By..."
@@ -24,6 +25,16 @@
                     </a-select>
 
                   </div>
+                  <div class="advanced-search">
+              <button type="button" class="category-btn">SEARCH FOR </button>
+              <div class="input-group">
+                <input type="text" placeholder="advocates you need?" />
+                <button type="button">
+                  <i class="fa fa-magnifying-glass"></i>
+                </button>
+              </div>
+                 </div>
+            </div>
                 </div>
                 <div class="col-lg-5 col-md-5 text-right">
                   <p>Show 01- 09 Of {{ advocates.length }} Advocates</p>
