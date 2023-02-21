@@ -5,7 +5,7 @@
 		<template #title>
 			<a-row type="flex" align="middle">
 				<a-col :span="24" :md="12">
-					<h5 class="font-semibold m-0">Approve Requests({{ requests.length }})</h5>
+					<h5 class="font-semibold m-0">{{title}}</h5>
 				</a-col>
 				<!-- <a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 					<a-radio-group v-model="authorsHeaderBtns" size="small">
@@ -15,7 +15,7 @@
 				</a-col> -->
 			</a-row>
 		</template>
-		<a-table :columns="columns" :data-source="requests" :pagination="false">
+		<a-table :columns="columns" :data-source="tableData" :pagination="false">
 
 			<template slot="author" slot-scope="author">
 				<div class="table-avatar-info">
@@ -57,50 +57,15 @@
 import { mapState } from "vuex";
 
 	// "Authors" table list of columns and their properties.
-	const columns = [
-		{
-			title: 'First Name',
-			dataIndex: 'first_name',
-		},
-		{
-			title: 'Last Name',
-			dataIndex: 'last_name',
-		},
-		{
-			title: 'Email',
-			dataIndex: 'email',
-			scopedSlots: { customRender: 'email' },
-		},
-		{
-			title: 'Phone',
-			dataIndex: 'phone',
-		},
-		{
-			title: '',
-			scopedSlots: { customRender: 'editBtn' },
-			width: 50,
-		},
-	];
 	export default ({
-		props: {
-			data: {
-				type: Array,
-				default: () => [],
-			},
-		},
+		props: ['columns','tableData','title'],
 		data() {
 			return {
 				// Active button for the "Authors" table's card header radio button group.
 				authorsHeaderBtns: 'all',
-				columns
 			}
 		},
-		computed: {
-    ...mapState(["requests", "user"]),
-  },
-  mounted(){
-    this.$store.dispatch("fetchRequests")
-  }
+
 	})
 
 </script>

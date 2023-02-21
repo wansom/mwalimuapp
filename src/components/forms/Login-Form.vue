@@ -10,13 +10,12 @@
               :form="form"
               class="login-form"
               @submit.prevent="handleSubmit"
-              :hideRequiredMark="true"
+            
             >
               <a-form-item class="group-input">
-                <label for="username">Username or email address *</label>
+                <label for="username">Email *</label>
                 <a-input
-                  type="text"
-                  id="username"
+                  autocomplete="off"
                   v-decorator="[
                     'email',
                     {
@@ -45,7 +44,7 @@
                       ],
                     },
                   ]"
-                  type="password"
+                  autocomplete="off"
                 >
                   <a-icon
                     slot="prefix"
@@ -93,11 +92,11 @@ export default {
       // Binded model property for "Sign In Form" switch button for "Remember Me" .
       rememberMe: true,
       loading: this.$store.state.loading,
+      form:this.$form.createForm(this, { name: "normal_login" })
     };
   },
   beforeCreate() {
-    // Creates the form and adds to it component's "form" property.
-    this.form = this.$form.createForm(this, { name: "normal_login" });
+
   },
   methods: {
     // Handles input validation after submission.

@@ -1,17 +1,53 @@
 <template>
   <div>
-    <card-request-table></card-request-table>
+    <CardRequestTable :columns="columns" :tableData="requests" :title="title"></CardRequestTable>
   </div>
 </template>
 
 <script>
-import CardRequestTable from '../components/Cards/CardRequestTable.vue'
+import { mapState } from "vuex";
+import Table from "../components/Tables/DataTable.vue";
+import CardRequestTable from "../components/Cards/CardRequestTable.vue";
+const columns = [
+	
+  {
+    title: "First Name",
+    dataIndex: "first_name",
+  },
+  {
+    title: "Last Name",
+    dataIndex: "last_name",
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    scopedSlots: { customRender: "email" },
+  },
+  {
+    title: "Phone",
+    dataIndex: "phone",
+  },
+  {
+    title: "",
+    scopedSlots: { customRender: "editBtn" },
+    width: 50,
+  },
+];
 export default {
-  components: {CardRequestTable },
-
-}
+  components: { Table, CardRequestTable },
+  data() {
+    return {
+      columns,
+      title: "Approve requests",
+    };
+  },
+  computed: {
+    ...mapState(["requests"]),
+  },
+  mounted() {
+    this.$store.dispatch("fetchRequests");
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

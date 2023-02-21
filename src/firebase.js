@@ -29,6 +29,7 @@ const businessCollection = db.collection("clients");
 const adminCollections =db.collection("admins");
 const mpesaCollection = db.collection("mpesa_responses");
 const transactions = db.collection("transactions");
+const courtCollection= db.collection("courts")
 const capture = firebase.auth
 
 // export utils/refs
@@ -44,5 +45,6 @@ export {
   capture,
   adminCollections,
   mpesaCollection,
-  transactions
+  transactions,
+  courtCollection
 };

@@ -81,7 +81,8 @@ export default new Vuex.Store({
       "Kisii",
       "Nyamira",
     ],
-    courts:["Supreme Court",'Court of Appeal','National Industrial Court','High Court','Federal Tribunals','State Tribunals']
+    courts:["Supreme Court",'Court of Appeal','National Industrial Court','High Court','Federal Tribunals','State Tribunals'],
+    courtData:[]
   },
   getters: {},
   mutations: {
@@ -106,8 +107,10 @@ export default new Vuex.Store({
     },
     setRequest(state,val){
       state.request=val
-    }
-
+    },
+setCourtData(state,val){
+  state.courtData =val
+}
     
   },
   actions: {
@@ -275,6 +278,16 @@ export default new Vuex.Store({
             commit("setAdvocates", loadedAdvocates);
           });
         },
+        async fetchCourts({ commit }) {
+          fb.courtCollection.onSnapshot((snapshot) => {
+            const loadedCourts = [];
+            snapshot.forEach((doc) => {
+              const loadedCourt = doc.data();
+              (loadedCourt.id = doc.id), loadedCourts.push(loadedCourt);
+            });
+            commit("setCourtData", loadedCourts);
+          });
+        },
         
         async fetchRequests({ commit }) {
           fb.usersCollection.where("status","==","pending approval").onSnapshot((snapshot) => {
@@ -306,7 +319,31 @@ export default new Vuex.Store({
         changeLoading({commit},data){
           commit("setLoading",data)
 
+        },
+
+      async  addCourt({dispatch},data){
+        dispatch("changeLoading",true)
+        const ref = fb.storage.ref();
+        const url = await ref
+        .child(data.photo.file.name)
+        .put(data.photo.file, data.photo.file.type)
+        .then((snapshot) => snapshot.ref.getDownloadURL());
+        const payload={
+          court_number:data.court_number,
+          name_of_judge:data.name_of_judge,
+          type_of_court:data.type_of_court,
+          location:data.location,
+          name_of_registrar:data.name_of_registrar,
+          contact_of_registrar:data.contact_of_registrar,
+          image_url:url
         }
+        fb.courtCollection.add(payload).then(()=>{
+          dispatch("changeLoading",false)
+        }).catch((err)=>{
+          console.log(err)
+          dispatch("changeLoading",false)
+        })
+      }
   },
   modules: {},
 });

@@ -64,6 +64,12 @@ let routes = [
 		component: () => import('../views/Requests.vue'),
 	},
 	{
+		path: '/courts',
+		name: 'Courts',
+		layout: "dashboard",
+		component: () => import('../views/Courts.vue'),
+	},
+	{
 		path: '/request/:id',
 		name: 'Request',
 		layout: "dashboard",
