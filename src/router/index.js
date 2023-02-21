@@ -70,6 +70,12 @@ let routes = [
 		component: () => import('../views/Courts.vue'),
 	},
 	{
+		path: '/chat',
+		name: 'Chat',
+		layout: "dashboard",
+		component: () => import('../views/Chat.vue'),
+	},
+	{
 		path: '/request/:id',
 		name: 'Request',
 		layout: "dashboard",

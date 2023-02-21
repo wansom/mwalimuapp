@@ -6,6 +6,7 @@ module.exports = {
 			.plugin('html')
 			.tap(args => {
 				args[0].title = 'Ace Litigator'
+				
 				return args
 			})
 	}
