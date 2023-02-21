@@ -788,6 +788,11 @@ ol {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  background-color: #ffffff !important;
+  
+}
+.nav-item .nav-depart .depart-btn .depart-hover br{
+  background-color: #ffffff !important;
 }
 .nav-item .nav-depart .depart-btn .depart-hover .header-title {
   display: block;
@@ -803,6 +808,7 @@ ol {
 
 .nav-item .nav-depart .depart-btn .depart-hover li a:hover {
   color: #e6353b;
+  background-color: #ffffff;
 }
 
 .nav-item .nav-menu {
@@ -821,7 +827,9 @@ ol {
 
 .nav-item .nav-menu li.active a {
   background: #e6353b;
+ 
 }
+
 
 .nav-item .nav-menu li a {
   font-size: 14px;

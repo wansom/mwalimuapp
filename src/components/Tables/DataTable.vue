@@ -148,7 +148,7 @@
         }"
       >
         <a-button :style="{ marginRight: '8px' }" @click="onClose">
-          Cancel
+          Close
         </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading">
           Submit

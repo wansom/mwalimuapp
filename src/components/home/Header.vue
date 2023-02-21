@@ -142,10 +142,10 @@
             <span>FIND LAWYERS</span>
             <ul class="depart-hover">
               <span class="header-title">Practise Areas</span>
-              <li class="active" v-for="area of practiseAreas" :key="area"><a href="#">{{ area }}</a></li><br><br><br>
+              <li v-for="area of practiseAreas" :key="area"><a href="#">{{ area }}</a></li><br><br><br>
 
-              <span class="header-title">Counties</span><br/>
-              <li class="active" v-for="county of counties" :key="county"><a href="#">{{ county }}</a></li>
+              <span class="header-title">Counties</span>
+              <li v-for="county of counties" :key="county"><a href="#">{{ county }}</a></li>
             </ul>
           </div>
         </div>
