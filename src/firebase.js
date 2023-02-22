@@ -1,7 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { getFirestore,collection,arrayUnion } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
+import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDMsPInM58uPksNu3E9iQ5EhnWBz67CPeQ",
@@ -13,24 +13,23 @@ const firebaseConfig = {
   appId: "1:702443834173:web:a4148356cf434a6fda1354",
   measurementId: "G-37KL0M4ESD"
 };
-firebase.initializeApp(firebaseConfig);
+
+const app =initializeApp(firebaseConfig);
 
 // utils
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-const types = firebase.firestore;
+const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-const arrayUnion = firebase.firestore.FieldValue.arrayUnion();
+const arrayunion = arrayUnion();
 
 // collection references
-const usersCollection = db.collection("nigeria_lawyers");
-const businessCollection = db.collection("clients");
-const adminCollections =db.collection("admins");
-const mpesaCollection = db.collection("mpesa_responses");
-const transactions = db.collection("transactions");
-const courtCollection= db.collection("courts")
-const capture = firebase.auth
+const usersCollection = collection(db,"nigeria_lawyers");
+const businessCollection = collection(db,"clients");
+const adminCollections =collection(db,"admins");
+const mpesaCollection =collection(db,"mpesa_responses");
+const transactions = collection(db,"transactions");
+const courtCollection= collection(db,"courts")
 
 // export utils/refs
 
@@ -38,11 +37,9 @@ export {
   db,
   auth,
   storage,
-  types,
-  arrayUnion,
+  arrayunion,
   usersCollection,
   businessCollection,
-  capture,
   adminCollections,
   mpesaCollection,
   transactions,
