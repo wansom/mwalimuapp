@@ -31,7 +31,7 @@ const adminCollections ='admins'
 const MPESA_PATH='mpesa_responses'
 const usersCollection = 'nigeria_lawyers';
 const TRANSACTIONS_PATH = 'transactions';
-const courtCollection= 'courts'
+const COURTS_PATH= 'courts'
 const MESSAGE_PATH = roomId => {
 	return `${ROOMS_PATH}/${roomId}/${MESSAGES_PATH}`
 }
@@ -94,6 +94,13 @@ export const getAllRequests=()=>{
 	return query(advocatesRef,where("status","===","pending approval"))
 	
 }
+//COURTS
+const courtsRef = collection(firestoreDb, COURTS_PATH)
+export const getAllCourts =()=>{
+	return getDocuments(query(courtsRef))
+}
+
+
 // USERS
 const usersRef = collection(firestoreDb, USERS_PATH)
 

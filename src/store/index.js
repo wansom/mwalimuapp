@@ -6,7 +6,8 @@ import {
   getAllAdvocates,
   getAllRequests,
   addLawyer,
-  updateAdvocate
+  updateAdvocate,
+  getAllCourts
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser ,signIn,logout} from "../database/auth";
@@ -298,14 +299,9 @@ export default new Vuex.Store({
         });
     },
     async fetchCourts({ commit }) {
-      fb.courtCollection.onSnapshot((snapshot) => {
-        const loadedCourts = [];
-        snapshot.forEach((doc) => {
-          const loadedCourt = doc.data();
-          (loadedCourt.id = doc.id), loadedCourts.push(loadedCourt);
-        });
-        commit("setCourtData", loadedCourts);
-      });
+      getAllCourts().then(({data})=>{
+        commit("setCourtData", data);
+      })
     },
 
     async fetchRequests({ commit }) {

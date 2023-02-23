@@ -42,10 +42,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(["requests"]),
+    ...mapState(["allAdvocates"]),
+    requests(){
+      return this.allAdvocates.filter((advocate)=>advocate.status==='pending approval')
+    }
   },
   mounted() {
-    this.$store.dispatch("fetchRequests");
   },
 };
 </script>

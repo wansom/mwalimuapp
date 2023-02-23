@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { auth } from "../database/auth";	
+import { auth } from "../database/index";	
 import {updateAdvocate} from "../database/firestore";
 import {FieldValue} from 'firebase/firestore';
 
