@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { auth } from "../firebase";	
-import * as fb from "../firebase";
+import { auth } from "../database/auth";	
+import {updateAdvocate} from "../database/firestore";
+import {FieldValue} from 'firebase/firestore';
 
 
 Vue.use(VueRouter)
@@ -153,8 +154,8 @@ router.beforeEach((to, from, next) => {
 
   router.afterEach((to, from) => {
 	if(to.params.id){
-		fb.usersCollection.doc(to.params.id).update({
-			profile_visits:fb.types.FieldValue.increment(1)
+		updateAdvocate(to.params.id,{
+			profile_visits:FieldValue.increment(1)
 		})
 
 	}

@@ -9,7 +9,7 @@ import {
   updateAdvocate
 } from "../database/firestore";
 import swal from "sweetalert";
-import { createUser ,signIn} from "../database/auth";
+import { createUser ,signIn,logout} from "../database/auth";
 import { arrayUnion } from "firebase/firestore";
 const axios = require("axios").default;
 
@@ -202,9 +202,10 @@ export default new Vuex.Store({
       }
     },
     logout({ dispatch }) {
-      fb.auth.signOut().then(() => {
+      logout().then(()=>{
         router.push("/sign-in");
-      });
+        localStorage.clear()
+      })
     },
     restPassword({ commit }, values) {
       commit("setLoading", true);
