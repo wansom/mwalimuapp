@@ -11,7 +11,7 @@
           <a-col :span="12">
             <a-form-item label="Date of Admission">
               <a-date-picker
-              :disabled-date="disabledDate"
+                :disabled-date="disabledDate"
                 v-decorator="[
                   'practise_start',
                   {
@@ -32,7 +32,7 @@
           <a-col :span="12">
             <a-form-item label="Last Practising Certificate Renewal Date">
               <a-date-picker
-              :disabled-date="disabledDate"
+                :disabled-date="disabledDate"
                 v-decorator="[
                   'cert_renewal_date',
                   {
@@ -103,31 +103,34 @@
                 name="file"
                 accept="application/pdf"
                 :file-list="fileList"
-                :remove="handleRemove" :before-upload="beforeUpload"
+                :remove="handleRemove"
+                :before-upload="beforeUpload"
                 v-decorator="[
                   'resume',
                   {
                     rules: [
                       {
                         required: true,
-                        message:
-                          'Please upload a resume or Curriculum vitae',
+                        message: 'Please upload a resume or Curriculum vitae',
                       },
                     ],
                   },
                 ]"
-                
-              > <a-button> <a-icon type="upload" block /> Click to Upload </a-button></a-upload>
+              >
+                <a-button>
+                  <a-icon type="upload" block /> Click to Upload
+                </a-button></a-upload
+              >
             </a-form-item>
           </a-col>
           <a-col :span="12">
-        
             <a-form-item label="Practise Certificate">
               <a-upload
-              name="file"
-              accept="application/pdf"
-              :file-list="fileList3"
-                :remove="handleRemove3" :before-upload="beforeUpload3"
+                name="file"
+                accept="application/pdf"
+                :file-list="fileList3"
+                :remove="handleRemove3"
+                :before-upload="beforeUpload3"
                 v-decorator="[
                   'practise_cert',
                   {
@@ -139,8 +142,9 @@
                     ],
                   },
                 ]"
-              >  <a-button> <a-icon type="upload" /> Click to Upload </a-button>
-            </a-upload>
+              >
+                <a-button> <a-icon type="upload" /> Click to Upload </a-button>
+              </a-upload>
             </a-form-item>
           </a-col>
         </a-row>
@@ -151,7 +155,8 @@
                 name="file"
                 accept="application/pdf"
                 :file-list="fileList2"
-                :remove="handleRemove2" :before-upload="beforeUpload2"
+                :remove="handleRemove2"
+                :before-upload="beforeUpload2"
                 v-decorator="[
                   'national_id_doc',
                   {
@@ -163,17 +168,23 @@
                     ],
                   },
                 ]"
-              >  <a-button> <a-icon type="upload" block/> Click to Upload </a-button>
-            </a-upload>
+              >
+                <a-button>
+                  <a-icon type="upload" block /> Click to Upload
+                </a-button>
+              </a-upload>
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)">
+            <a-form-item
+              label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)"
+            >
               <a-upload
                 name="file"
                 accept="application/pdf"
                 :file-list="fileList1"
-                :remove="handleRemove1" :before-upload="beforeUpload1"
+                :remove="handleRemove1"
+                :before-upload="beforeUpload1"
                 v-decorator="[
                   'residence_evidence',
                   {
@@ -185,17 +196,25 @@
                     ],
                   },
                 ]"
-              > <a-button> <a-icon type="upload" block/> Click to Upload </a-button></a-upload>
+              >
+                <a-button>
+                  <a-icon type="upload" block /> Click to Upload
+                </a-button></a-upload
+              >
             </a-form-item>
           </a-col>
         </a-row>
-   
       </a-form>
       <div>
         <a-button type="dark" class="mx-10" @click="handlePrevious"
           >Previous Section
         </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading"  disabled v-if="user.status==='pending approval'"
+        <a-button
+          type="primary"
+          @click="handleSubmit"
+          :loading="loading"
+          disabled
+          v-if="user.status === 'pending approval'"
           >Save and Continue
         </a-button>
         <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
@@ -207,11 +226,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import moment from 'moment';
-import { listenDocumentUploadProgress } from "@/database/storage";
+import { mapState } from "vuex";
+import moment from "moment";
+import {
+  listenDocumentUploadProgress,
+  uploadFileAndGetDownloadURL,
+} from "@/database/storage";
+import { arrayUnion } from "firebase/firestore";
 export default {
-  props:['user'],
+  props: ["user"],
   data() {
     return {
       startValue: null,
@@ -224,9 +247,11 @@ export default {
       admissionfile: [],
       idfile: [],
       uploading: false,
-      fileList1:[],
-      fileList2:[],
-      fileList3:[]
+      fileList1: [],
+      fileList2: [],
+      fileList3: [],
+      progress: 0,
+      imageUrls: [],
     };
   },
   watch: {
@@ -241,7 +266,7 @@ export default {
     moment,
     disabledDate(current) {
       // Can not select days before today and today
-      return current && current > moment().endOf('day');
+      return current && current > moment().endOf("day");
     },
     // lsk cert
     beforeUpload(file) {
@@ -310,64 +335,50 @@ export default {
     handlePrevious() {
       this.$store.dispatch("changeStep", 3);
     },
+
     handleSubmit(e) {
       e.preventDefault();
-      let urls=[]
       this.form.validateFields(async (err, values) => {
         if (!err) {
-          this.$store.dispatch("changeLoading",true)
-          const files=[values.practise_cert,values.resume,values.residence_evidence,values.national_id_doc]
-          for(let i=0;i<=files.length;i++){
-            return new Promise(resolve => {
-            listenDocumentUploadProgress(
-            this.user.id,
-            values.photo.file,
-            values.photo.file.type,
-            (progress) => {
-              this.updateFileProgress( progress);
-            },
-            (_error) => {
-              resolve(false);
-            },
-            async (url) => {
-              urls.push(url)
-              resolve(true);
-            }
-          );
-          
-          })
-
-          }
-          console.log(urls)
-          // const payload = {
-          //   practise_start: this.user.practise_start
-          //     ? this.user.practise_start
-          //     : values.practise_start.format(),
-          //   cert_renewal_date: this.user.cert_renewal_date
-          //     ? this.user.cert_renewal_date
-          //     : values.cert_renewal_date.format() ?? "",
-          //   national_id: values.national_id ?? "",
-          //   practise_number: values.practise_number ?? "",
-          //   practise_certificate: url,
-          //   resume: resume,
-          //   residence_evidence: residence_evidence,
-          //   national_id_doc: national_id_doc,
-          //   step: "certificates",
-          //   current:5
-          // };
-          // this.$store.dispatch("updateUser", payload);
-
-         
-          
+          this.$store.dispatch("changeLoading", true);
+          const files = [
+            values.practise_cert,
+            values.resume,
+            values.residence_evidence,
+            values.national_id_doc,
+          ];
+          // Upload each file to Firebase Storage and get download URLs
+          const downloadURLs = await Promise.all([
+            uploadFileAndGetDownloadURL(this.user.id,files[0]),
+            uploadFileAndGetDownloadURL(this.user.id,files[1]),
+            uploadFileAndGetDownloadURL(this.user.id,files[2]),
+            uploadFileAndGetDownloadURL(this.user.id,files[3]),
+          ]);
+          const payload = {
+            practise_start: this.user.practise_start
+              ? this.user.practise_start
+              : values.practise_start.format(),
+            cert_renewal_date: this.user.cert_renewal_date
+              ? this.user.cert_renewal_date
+              : values.cert_renewal_date.format() ?? "",
+            national_id: values.national_id ?? "",
+            practise_number: values.practise_number ?? "",
+            practise_certificate: downloadURLs[0],
+            resume: downloadURLs[1],
+            residence_evidence: downloadURLs[2],
+            national_id_doc: downloadURLs[3],
+            step: "certificates",
+            current:5
+          };
+          await  
+          this.$store.dispatch("updateUser", payload);
         }
       });
     },
-
   },
   computed: {
     ...mapState(["loading"]),
-  }
-
+  },
 };
 </script>
 

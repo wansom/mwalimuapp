@@ -5,6 +5,7 @@ import {
   getDownloadURL,
   ref,
   uploadBytesResumable,
+  uploadBytes
 } from "firebase/storage";
 
 const FILES_PATH = "files";
@@ -113,3 +114,13 @@ export const listenDocumentUploadProgress = (
     }
   );
 };
+
+
+export const uploadFileAndGetDownloadURL=async (userId,file)=> {
+  const storageRef = documentRef(
+    userId,file
+  );;
+  await uploadBytes(storageRef, file);
+  const downloadURL = await getDownloadURL(storageRef);
+  return downloadURL;
+}

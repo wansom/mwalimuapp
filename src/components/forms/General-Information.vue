@@ -331,7 +331,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { listenDocumentUploadProgress } from "@/database/storage";
+import { listenDocumentUploadProgress} from "@/database/storage";
 export default {
   props: ["user"],
   data() {
