@@ -28,9 +28,9 @@ const MESSAGES_PATH = 'messages'
 const LAWYERS_PATH='nigeria_lawyers'
 const businessCollection='clients'
 const adminCollections ='admins'
-const mpesaCollection='mpesa_responses'
+const MPESA_PATH='mpesa_responses'
 const usersCollection = 'nigeria_lawyers';
-const transactions = 'transactions';
+const TRANSACTIONS_PATH = 'transactions';
 const courtCollection= 'courts'
 const MESSAGE_PATH = roomId => {
 	return `${ROOMS_PATH}/${roomId}/${MESSAGES_PATH}`
@@ -124,6 +124,27 @@ export const updateUser = (userId, data) => {
 export const deleteUser = userId => {
 	return deleteDocument(USERS_PATH, userId)
 }
+//MPESA
+const mpesaRef = id => {
+	return doc(firestoreDb, MPESA_PATH, id)
+}
+const transactionRef = id => {
+	return doc(firestoreDb, TRANSACTIONS_PATH, id)
+}
+
+const transactionsRef=collection(firestoreDb, TRANSACTIONS_PATH)
+
+export const getMpesaReference = id => {
+	return getDocument(mpesaRef(id))
+}
+
+export const getTransactionReference = id => {
+	return getDocument(transactionRef(id))
+}
+export const getTransactions=()=>{
+	return getDocuments(query(transactionsRef))
+}
+
 
 // ROOMS
 const roomsRef = collection(firestoreDb, ROOMS_PATH)

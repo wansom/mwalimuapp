@@ -87,7 +87,8 @@
 </template>
 
 <script>
-import * as fb from "../../firebase";
+import {getMpesaReference,getTransactionReference,getTransactions} from "@/database/firestore"
+import {arrayUnion} from "firebase/firestore"
 export default {
   props: ["user"],
   data() {
@@ -124,7 +125,6 @@ export default {
       }else{
         return value
       }
-
     },
     payWithCard(){
       swal({
@@ -144,7 +144,6 @@ export default {
           })
           .then((response) => {
             // handle success
-            console.log(response);
             if (response.status == 200) {
               let id = response.data.CheckoutRequestID;
               localStorage.setItem("transactionID", JSON.stringify(id));
@@ -165,14 +164,8 @@ export default {
     },
     confirmPayment() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      console.log(id);
-      fb.mpesaCollection
-        .doc("ws_CO_03022023094539553705122230")
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            let data = doc.data();
-            console.log(data.resultDesc);
+      getMpesaReference(id).then((data)=>{
+        if (data) {
             if (data.resultCode == 1032) {
               swal({
                 title: "SORRY!",
@@ -199,39 +192,46 @@ export default {
               icon: "error",
             });
           }
-        });
+
+      })
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      fb.transactions
-        .doc("ws_CO_03022023094539553705122230")
-        .get()
-        .then((doc) => {
-          let data = doc.data();
-          console.log(data)
-          if (doc.exists && data.amount == 5) {
+      getTransactionReference(id).then(({data})=>{
+        if (data && data.amount == 5) {
             this.paymentConfirmed = true;
             localStorage.clear()
-            let user = fb.auth.currentUser;
-            fb.usersCollection
-              .doc(user.uid)
-              .update({
+            this.$store.dispatch("updateUser", {
                 status: "pending approval",
-
                 payment_date: new Date(),
-                notifications:fb.types.FieldValue.arrayUnion({
+                notifications:arrayUnion({
                   notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
                   date:new Date()
 
                 }),
-                invoices:fb.types.FieldValue.arrayUnion({
+                invoices:arrayUnion({
                   date: new Date(),
                   amount:data.amount,
                   number: id
                 })
-              })
-              .then(() => {
-                this.$store.dispatch("sendMail",{
+              });
+              this.sendMail()
+              this.visible=false
+          } else {
+            swal({
+              title: "SORRY!",
+              text: `Wrong amount`,
+              icon: "error",
+            });
+          }
+
+      })
+    },
+    handleCancel() {
+      this.visible = false;
+    },
+    SendMail(){
+      this.$store.dispatch("sendMail",{
               name: this.user.first_name,
                 email: this.user.email,
                 subject: "Acelitigator Account",
@@ -245,20 +245,7 @@ export default {
                 content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application. advocatelisting.acelitigator.com `
   
             })
-              });
-              this.visible=false
-          } else {
-            swal({
-              title: "SORRY!",
-              text: `Wrong amount`,
-              icon: "error",
-            });
-          }
-        });
-    },
-    handleCancel() {
-      this.visible = false;
-    },
+    }
   },
 };
 </script>
