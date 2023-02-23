@@ -11,7 +11,7 @@ import {
   addCourt
 } from "../database/firestore";
 import swal from "sweetalert";
-import { createUser ,signIn,logout} from "../database/auth";
+import { createUser ,signIn,logout,passwordReset} from "../database/auth";
 import { arrayUnion } from "firebase/firestore";
 import {auth} from "../database/index"
 const axios = require("axios").default;
@@ -210,17 +210,16 @@ export default new Vuex.Store({
         localStorage.clear()
       })
     },
+
+    
     restPassword({ commit }, values) {
-      commit("setLoading", true);
-      fb.auth
-        .sendPasswordResetEmail(values.email)
-        .then(() => {
-          commit("setLoading", false);
-          router.push("/sign-in");
-        })
-        .catch((err) => {
-          commit("setLoading", false);
-        });
+      dispatch("changeLoading", true);
+      passwordReset(values.email).then(()=>{
+        dispatch("changeLoading", false);
+      }).catch((err)=>{
+        dispatch("changeLoading", false);
+      })
+
     },
     /*
     user registration start

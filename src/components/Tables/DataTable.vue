@@ -14,6 +14,7 @@
           :span="24"
           :md="12"
           style="display: flex; align-items: center; justify-content: flex-end"
+          v-if="user"
         >
           <a-radio-group v-model="authorsHeaderBtns" size="small">
             <a-radio-button value="all" @click="openDrawer"
@@ -217,7 +218,8 @@ export default {
       authorsHeaderBtns: "all",
       visible: false,
       form: this.$form.createForm(this, { name: "coordinated" }),
-      uploadProgress:0
+      uploadProgress:0,
+      user:auth.currentUser
     };
   },
   methods: {
