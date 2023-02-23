@@ -88,7 +88,7 @@
         <a-row :gutter="16">
           <a-col :span="12">
             <a-form-item label="Primary Location(County)">
-              <a-select      
+              <a-select
                 v-decorator="[
                   'location',
                   {
@@ -99,9 +99,14 @@
                   },
                 ]"
               >
-                <a-select-option v-for="county in counties" :key="county" :value="county"> {{county}} </a-select-option>
+                <a-select-option
+                  v-for="county in counties"
+                  :key="county"
+                  :value="county"
+                >
+                  {{ county }}
+                </a-select-option>
               </a-select>
-             
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -186,7 +191,9 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Other Practice Areas (Select upto 3 that apply)">
+            <a-form-item
+              label="Other Practice Areas (Select upto 3 that apply)"
+            >
               <a-select
                 mode="tags"
                 :maxTagCount="3"
@@ -196,8 +203,7 @@
                   'practise_areas',
                   {
                     initialValue: user.practise_areas,
-                    rules: [{ required: true, message: 'field is required' },
-                  ],
+                    rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
               >
@@ -272,7 +278,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" v-if="user.profile_photo">
-            <img :src="user.profile_photo" alt="" style="height:100px;"/>
+            <img :src="user.profile_photo" alt="" style="height: 100px" />
           </a-col>
           <a-col :span="24">
             <a-form-item label="Profile Picture">
@@ -287,7 +293,8 @@
                 :before-upload="beforeUpload"
                 v-decorator="[
                   'photo',
-                  {  initialValue: user.profile_photo,
+                  {
+                    initialValue: user.profile_photo,
                     rules: [
                       { required: true, message: 'Please choose a photo' },
                     ],
@@ -306,8 +313,17 @@
         </a-row>
       </a-form>
       <div>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-if="user.status==='pending approval'">Save and Continue </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else>Save and Continue </a-button>
+        <a-button
+          type="primary"
+          @click="handleSubmit"
+          :loading="loading"
+          disabled
+          v-if="user.status === 'pending approval'"
+          >Save and Continue
+        </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
+          >Save and Continue
+        </a-button>
       </div>
     </div>
   </a-card>
@@ -315,9 +331,9 @@
 
 <script>
 import { mapState } from "vuex";
-import * as fb from "../../firebase";
+import { listenDocumentUploadProgress } from "@/database/storage";
 export default {
-  props:['user'],
+  props: ["user"],
   data() {
     return {
       formLayout: "horizontal",
@@ -325,7 +341,7 @@ export default {
       image: null,
       fileList: [],
       uploading: false,
-
+      uploadProgress:0
     };
   },
 
@@ -359,18 +375,29 @@ export default {
         };
       });
     },
+    
+		updateFileProgress( progress) {
+			this.uploadProgress=progress
+		},
     async handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
-          const ref = fb.storage.ref();
-
-          const url =this.user.profile_photo?values.photo: await ref
-            .child(values.photo.file.name)
-            .put(values.photo.file, values.photo.file.type)
-            .then((snapshot) => snapshot.ref.getDownloadURL());
-          const payload = {
+          return new Promise(resolve => {
+            listenDocumentUploadProgress(
+            this.user.id,
+            values.photo.file,
+            values.photo.file.type,
+            (progress) => {
+              this.updateFileProgress( progress);
+            },
+            (_error) => {
+              resolve(false);
+            },
+            async (url) => {
+            
+              console.log(url)
+              const payload = {
             first_name: values.first_name ?? "",
             last_name: values.last_name ?? "",
             phone: values.phone ?? "",
@@ -380,16 +407,22 @@ export default {
             location: values.location ?? "",
             website: values.website ?? "",
             specialisation: values.specialisation ?? "",
-            practise_areas:values.practise_areas.slice(0,3)??[],
-            other_counties:values.other_counties,
+            practise_areas: values.practise_areas.slice(0, 3) ?? [],
+            other_counties: values.other_counties,
             step: "general information",
-            profile_photo:values.profile_photo?? url,
-            current:2,
-            twitter:values.twitter??"https://www.twitter.com/",
-            linkedIn:values.linkedIn??"https://www.linkedin.com/"
+            profile_photo: url,
+            current: 2,
+            twitter: values.twitter ?? "https://www.twitter.com/",
+            linkedIn: values.linkedIn ?? "https://www.linkedin.com/",
           };
-          console.log(payload)
           this.$store.dispatch("updateUser", payload);
+
+              resolve(true);
+            }
+          );
+          
+          })
+         
         }
       });
     },
@@ -401,10 +434,9 @@ export default {
     },
   },
   computed: {
-    ...mapState(["loading","counties","practiseAreas"]),
+    ...mapState(["loading", "counties", "practiseAreas"]),
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 

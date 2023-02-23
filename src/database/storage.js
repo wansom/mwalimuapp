@@ -70,3 +70,46 @@ export const listenUploadImageProgress = (
     }
   );
 };
+
+//ADVOCATE DOCUMENTS
+const documentRef = (currentUserId,file) => {
+  return ref(
+    storage,
+    `${FILES_PATH}/${currentUserId}/${file.name}.${file.type}`
+  );
+};
+export const uploadDocumentTask = (currentUserId,file) => {
+  const uploadFileRef = documentRef(
+    currentUserId,file
+  );
+
+  return uploadBytesResumable(uploadFileRef, file);
+};
+
+export const listenDocumentUploadProgress = (
+  currentUserId,
+  file,
+  type,
+  callback,
+  error,
+  success
+) => {
+  const uploadTask = uploadDocumentTask(currentUserId,file);
+
+  uploadTask.on(
+    "state_changed",
+    (snap) => {
+      const progress = Math.round(
+        (snap.bytesTransferred / snap.totalBytes) * 100
+      );
+      callback(progress);
+    },
+    (_error) => {
+      error(_error);
+    },
+    async () => {
+      const url = await getFileDownloadUrl(uploadTask.snapshot.ref);
+      success(url);
+    }
+  );
+};

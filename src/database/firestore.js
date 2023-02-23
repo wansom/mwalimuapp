@@ -72,11 +72,21 @@ const deleteDocument = (ref, docId) => {
 }
 //ADVOCATES
 const advocatesRef = collection(firestoreDb, LAWYERS_PATH)
+const advocateRef = userId => {
+	return doc(firestoreDb, LAWYERS_PATH, userId)
+}
 export const getAllAdvocates = () => {
 	return getDocuments(query(advocatesRef))
 }
 export const addLawyer=(values)=>{
 return setDocument(LAWYERS_PATH,values.uid,values)
+}
+
+export const getAdvocate = userId => {
+	return getDocument(advocatesRef(userId))
+}
+export const updateAdvocate = (userId, data) => {
+	return updateDocument(advocateRef(userId), data)
 }
 
 //REQUESTS

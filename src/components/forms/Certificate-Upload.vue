@@ -208,8 +208,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as fb from "../../firebase";
 import moment from 'moment';
+import { listenDocumentUploadProgress } from "@/database/storage";
 export default {
   props:['user'],
   data() {
@@ -312,49 +312,52 @@ export default {
     },
     handleSubmit(e) {
       e.preventDefault();
+      let urls=[]
       this.form.validateFields(async (err, values) => {
         if (!err) {
           this.$store.dispatch("changeLoading",true)
-          this.loading=true
+          const files=[values.practise_cert,values.resume,values.residence_evidence,values.national_id_doc]
+          for(let i=0;i<=files.length;i++){
+            return new Promise(resolve => {
+            listenDocumentUploadProgress(
+            this.user.id,
+            values.photo.file,
+            values.photo.file.type,
+            (progress) => {
+              this.updateFileProgress( progress);
+            },
+            (_error) => {
+              resolve(false);
+            },
+            async (url) => {
+              urls.push(url)
+              resolve(true);
+            }
+          );
+          
+          })
 
-          const ref = fb.storage.ref();
+          }
+          console.log(urls)
+          // const payload = {
+          //   practise_start: this.user.practise_start
+          //     ? this.user.practise_start
+          //     : values.practise_start.format(),
+          //   cert_renewal_date: this.user.cert_renewal_date
+          //     ? this.user.cert_renewal_date
+          //     : values.cert_renewal_date.format() ?? "",
+          //   national_id: values.national_id ?? "",
+          //   practise_number: values.practise_number ?? "",
+          //   practise_certificate: url,
+          //   resume: resume,
+          //   residence_evidence: residence_evidence,
+          //   national_id_doc: national_id_doc,
+          //   step: "certificates",
+          //   current:5
+          // };
+          // this.$store.dispatch("updateUser", payload);
 
-          const url = await ref
-            .child(values.practise_cert.file.name)
-            .put(values.practise_cert.file, values.practise_cert.file.type)
-            .then((snapshot) => snapshot.ref.getDownloadURL());
-          //resume
-          const resume = await ref
-            .child(values.resume.file.name)
-            .put(values.resume.file, values.resume.file.type)
-            .then((snapshot) => snapshot.ref.getDownloadURL());
-          // letter of admission
-          const residence_evidence = await ref
-            .child(values.residence_evidence.file.name)
-            .put(values.residence_evidence.file, values.residence_evidence.file.type)
-            .then((snapshot) => snapshot.ref.getDownloadURL());
-          //  national id url
-          const national_id_doc = await ref
-            .child(values.national_id_doc.file.name)
-            .put(values.national_id_doc.file, values.national_id_doc.file.type)
-            .then((snapshot) => snapshot.ref.getDownloadURL());
-          const payload = {
-            practise_start: this.user.practise_start
-              ? this.user.practise_start
-              : values.practise_start.format(),
-            cert_renewal_date: this.user.cert_renewal_date
-              ? this.user.cert_renewal_date
-              : values.cert_renewal_date.format() ?? "",
-            national_id: values.national_id ?? "",
-            practise_number: values.practise_number ?? "",
-            practise_certificate: url,
-            resume: resume,
-            residence_evidence: residence_evidence,
-            national_id_doc: national_id_doc,
-            step: "certificates",
-            current:5
-          };
-          this.$store.dispatch("updateUser", payload);
+         
           
         }
       });

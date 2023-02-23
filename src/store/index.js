@@ -6,6 +6,7 @@ import {
   getAllAdvocates,
   getAllRequests,
   addLawyer,
+  updateAdvocate
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser ,signIn} from "../database/auth";
@@ -221,12 +222,9 @@ export default new Vuex.Store({
     user registration start
     */
     updateUser({ dispatch, commit }, data) {
-      commit("setLoading", true);
+      dispatch("changeLoading", true);
       let user = fb.auth.currentUser;
-      console.log(data);
-      fb.usersCollection
-        .doc(user.uid)
-        .update(data)
+     updateAdvocate(user.uid,data)
         .then(() => {
           swal({
             title: "Success!",
@@ -234,26 +232,26 @@ export default new Vuex.Store({
             icon: "success",
           });
 
-          fb.usersCollection.doc(user.uid).update({
-            notifications: fb.types.FieldValue.arrayUnion({
+          updateAdvocate(user.uid,{
+            notifications: arrayUnion({
               notification: `your ${data.step} have been updated successfully`,
               date: new Date(),
             }),
           });
           if (data.status == "pending approval") {
-            fb.usersCollection.doc(user.uid).update({
-              notifications: fb.types.FieldValue.arrayUnion({
+            updateAdvocate(user.uid,{
+              notifications: arrayUnion({
                 notification: `your account details have been submitted successfully for review`,
                 date: new Date(),
               }),
             });
           }
-          commit("setLoading", false);
+          dispatch("changeLoading", false);
           dispatch("changeStep", data.current);
         })
         .catch((err) => {
           console.log(err);
-          commit("setLoading", false);
+          dispatch("changeLoading", false)
           swal({
             title: "OOPS!",
             text: `${err.message}`,
