@@ -7,11 +7,13 @@ import {
   getAllRequests,
   addLawyer,
   updateAdvocate,
-  getAllCourts
+  getAllCourts,
+  addCourt
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser ,signIn,logout} from "../database/auth";
 import { arrayUnion } from "firebase/firestore";
+import {auth} from "../database/index"
 const axios = require("axios").default;
 
 Vue.use(Vuex);
@@ -192,7 +194,7 @@ export default new Vuex.Store({
     },
 
     fetchUserProfile({ commit }) {
-      let currentUser = fb.auth.currentUser;
+      let currentUser = auth.currentUser;
       if (currentUser) {
         let user = this.state.allAdvocates.filter(
           (i) => i.id === currentUser.uid
@@ -225,7 +227,7 @@ export default new Vuex.Store({
     */
     updateUser({ dispatch, commit }, data) {
       dispatch("changeLoading", true);
-      let user = fb.auth.currentUser;
+      let user = auth.currentUser;
      updateAdvocate(user.uid,data)
         .then(() => {
           swal({
@@ -286,18 +288,6 @@ export default new Vuex.Store({
         }
       );
     },
-    async fetchAdvocates({ commit }) {
-      fb.usersCollection
-        .where("status", "==", "active")
-        .onSnapshot((snapshot) => {
-          const loadedAdvocates = [];
-          snapshot.forEach((doc) => {
-            const loadedAdvocate = doc.data();
-            (loadedAdvocate.id = doc.id), loadedAdvocates.push(loadedAdvocate);
-          });
-          commit("setAdvocates", loadedAdvocates);
-        });
-    },
     async fetchCourts({ commit }) {
       getAllCourts().then(({data})=>{
         commit("setCourtData", data);
@@ -323,9 +313,6 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    fetchSingleRequest({ commit }, uid) {
-      fb.usersCollection.doc(uid).get();
-    },
     changeStep({ commit }, value) {
       commit("setStep", value);
     },
@@ -334,30 +321,12 @@ export default new Vuex.Store({
     },
 
     async addCourt({ dispatch }, data) {
+      
       dispatch("changeLoading", true);
-      const ref = fb.storage.ref();
-      const url = await ref
-        .child(data.photo.file.name)
-        .put(data.photo.file, data.photo.file.type)
-        .then((snapshot) => snapshot.ref.getDownloadURL());
-      const payload = {
-        court_number: data.court_number,
-        name_of_judge: data.name_of_judge,
-        type_of_court: data.type_of_court,
-        location: data.location,
-        name_of_registrar: data.name_of_registrar,
-        contact_of_registrar: data.contact_of_registrar,
-        image_url: url,
-      };
-      fb.courtCollection
-        .add(payload)
-        .then(() => {
-          dispatch("changeLoading", false);
-        })
-        .catch((err) => {
-          console.log(err);
-          dispatch("changeLoading", false);
-        });
+      addCourt(data).then(()=>{
+        dispatch("changeLoading", false);
+        location.reload()
+      })
     },
   },
   modules: {},

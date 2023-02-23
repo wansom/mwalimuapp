@@ -96,10 +96,17 @@ export const getAllRequests=()=>{
 }
 //COURTS
 const courtsRef = collection(firestoreDb, COURTS_PATH)
+const courtRef = id => {
+	return doc(firestoreDb, COURTS_PATH, id)
+}
+
 export const getAllCourts =()=>{
 	return getDocuments(query(courtsRef))
 }
 
+export const addCourt=(data)=>{
+	return addDocument(courtsRef,data)
+	}
 
 // USERS
 const usersRef = collection(firestoreDb, USERS_PATH)

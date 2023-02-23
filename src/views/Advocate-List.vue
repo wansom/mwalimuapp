@@ -508,10 +508,8 @@ export default {
   },
   updated() {},
   mounted() {
-    this.$store.dispatch("fetchAdvocates");
   },
   created() {
-    this.$store.dispatch("fetchAdvocates");
   },
 };
 </script>

@@ -18,7 +18,7 @@ import '../public/home/css/themify-icons.css'
 import '../public/home/css/elegant-icons.css'
 
 import store from './store'
-import { auth } from "./firebase";
+import { auth } from "./database/index";
 
 Vue.use(Antd);
 Vue.use(VueSocialSharing);
