@@ -94,6 +94,9 @@ export const getAllRequests=()=>{
 	return query(advocatesRef,where("status","===","pending approval"))
 	
 }
+export const updateRequest=(id,data)=>{
+	return updateDocument(advocateRef(id), data)
+}
 //COURTS
 const courtsRef = collection(firestoreDb, COURTS_PATH)
 const courtRef = id => {

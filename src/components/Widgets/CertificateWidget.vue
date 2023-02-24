@@ -97,22 +97,37 @@
         </a-row>
         <a-row :gutter="16" class="mb-5">
           <a-col :span="6">
-
-            <a-button icon="download" :href="user.practise_certificate" target="blank">view Practise Certificate</a-button>
-
+            <a-button
+              icon="download"
+              :href="user.practise_certificate"
+              target="blank"
+              >view Practise Certificate</a-button
+            >
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.resume" target="blank">view Resume/CV</a-button>
+            <a-button icon="download" :href="user.resume" target="blank"
+              >view Resume/CV</a-button
+            >
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.residence_evidence" target="blank">view Proof of residence</a-button>
+            <a-button
+              icon="download"
+              :href="user.residence_evidence"
+              target="blank"
+              >view Proof of residence</a-button
+            >
           </a-col>
           <a-col :span="6">
-            <a-button icon="download" :href="user.national_id_doc" target="blank">view National ID</a-button>
+            <a-button
+              icon="download"
+              :href="user.national_id_doc"
+              target="blank"
+              >view National ID</a-button
+            >
           </a-col>
         </a-row>
       </a-form>
-      <div style="margin-top:40px;">
+      <div style="margin-top: 40px">
         <a-button
           class="mx-10"
           @click="
@@ -139,14 +154,13 @@
 </template>
 
 <script>
-import * as fb from "../../firebase";
 import router from "../../router/index";
+import { arrayUnion } from "@firebase/firestore";
+import { updateRequest } from "../../database/firestore";
 // import PDFViewer from "pdf-viewer-vue";
 export default {
   props: ["user"],
-  components: {
-
-  },
+  components: {},
   data() {
     return {
       startValue: null,
@@ -154,8 +168,8 @@ export default {
       endOpen: false,
       form: this.$form.createForm(this, { name: "coordinated" }),
       loading: false,
-      visible:false,
-      url:""
+      visible: false,
+      url: "",
     };
   },
   watch: {
@@ -167,50 +181,52 @@ export default {
     },
   },
   methods: {
-    handleDownload(){},
-    viewPDF(value){
-      this.url=value
-      this.visible =!this.visible
+    handleDownload() {},
+    viewPDF(value) {
+      this.url = value;
+      this.visible = !this.visible;
     },
-    onClose(){
-      this.visible=false
+    onClose() {
+      this.visible = false;
     },
     handleChange() {},
     handlePrevious() {},
     handleSubmit(status) {
       this.loading = true;
-      fb.usersCollection
-        .doc(this.user.uid)
-        .update({
-          status: status=="approved"?'active':'declined',
-          subscription_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toDateString(),
-          notifications: fb.types.FieldValue.arrayUnion({
-            notification: `your account has been approved proceed to payment`,
-            date: new Date(),
-          }),
-        })
-        .then(() => {
-          router.push("/dashboard");
-          if(status=="declined"){
-            this.$store.dispatch("sendMail", {
+      const payload = {
+        status: status == "approved" ? "active" : "declined",
+        subscription_date: new Date(
+          new Date().setMonth(new Date().getMonth() + 1)
+        ).toDateString(),
+        notifications: arrayUnion({
+          notification: `your account has been approved proceed to payment`,
+          date: new Date(),
+        }),
+      };
+      
+      updateRequest(this.user.uid, payload).then(() => {
+        router.push("/dashboard");
+        if (status == "declined") {
+          this.$store.dispatch("sendMail", {
             name: this.user.first_name,
             email: this.user.email,
             subject: "Acelitigator Account",
             content:
               "Your account request has been declined please contact admin for more information",
           });
-          }else{
-            this.$store.dispatch("sendMail", {
+        } else {
+          this.$store.dispatch("sendMail", {
             name: this.user.first_name,
             email: this.user.email,
             subject: "Acelitigator Account",
-            content:
-              `Your account request has been activated successfully. You have an active subscription valid till ${new Date(new Date().setMonth(new Date().getMonth() + 1))}`,
-          });  
-          }
-          
-          this.loading = false;
-        });
+            content: `Your account request has been activated successfully. You have an active subscription valid till ${new Date(
+              new Date().setMonth(new Date().getMonth() + 1)
+            )}`,
+          });
+        }
+
+        this.loading = false;
+      });
     },
   },
   computed: {},
