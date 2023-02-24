@@ -6,8 +6,8 @@
     
     <SignupBanner/>
     <all-lawyers :advocates="advocates"></all-lawyers>
-    <top-lawyers :advocates="advocates"></top-lawyers>
-    <!-- <KnowYourCourts/> -->
+    <!-- <top-lawyers :advocates="advocates"></top-lawyers> -->
+    <KnowYourCourts/>
     <Footer></Footer>
  
  </div>
@@ -23,12 +23,19 @@ import KnowYourCourts from '../components/home/Know-Your-Courts.vue';
 import AllLawyers from '../components/home/All-Lawyers.vue';
 import SignupBanner from '../components/home/Signup-Banner.vue';
 import { mapState } from 'vuex';
+
 export default {
   components: { Hero, Banner,Header, Footer, TopLawyers, KnowYourCourts, AllLawyers,SignupBanner },
+  data(){
+    return{
+      columns
+    }
+  },
   created() {
+
 },
 computed:{
-  ...mapState(['allAdvocates']),
+  ...mapState(['allAdvocates',"courtData"]),
   advocates(){
     return this.allAdvocates.filter((advocate)=>advocate.status==='active')
 

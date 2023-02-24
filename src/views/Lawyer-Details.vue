@@ -20,6 +20,7 @@ import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
 import {getAdvocate} from '../database/firestore'
+import {FieldValue} from "firebase/firestore"
 export default {
   components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },
   data(){

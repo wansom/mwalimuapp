@@ -14,7 +14,7 @@
           :span="24"
           :md="12"
           style="display: flex; align-items: center; justify-content: flex-end"
-          v-if="user"
+          v-if="advocate.status=='admin'"
         >
           <a-radio-group v-model="authorsHeaderBtns" size="small">
             <a-radio-button value="all" @click="openDrawer"
@@ -178,7 +178,11 @@
           </div>
         </div>
       </template>
-
+      <template slot="image_url" slot-scope="image_url">
+				<h6 class="m-0">
+					<img :src="image_url" width="25" class="mr-10">
+				</h6>
+			</template>
       <template slot="func" slot-scope="func">
         <div class="author-info">
           <h6 class="m-0">{{ func.job }}</h6>
@@ -210,8 +214,43 @@
 import { mapState } from "vuex";
 import {auth} from "../../database/index"
 import { listenDocumentUploadProgress} from "@/database/storage";
+const columns = [
+	
+{
+    title: "Presiding Judge",
+    dataIndex: "image_url",
+    scopedSlots: { customRender: "image_url" },
+  },
+  {
+    title: "Court Number",
+    dataIndex: "court_number",
+  },
+
+  {
+    title: "Name of Presiding Judge",
+    dataIndex: "name_of_judge",
+  },
+  {
+    title: "Location",
+    dataIndex: "location",
+    scopedSlots: { customRender: "location" },
+  },
+  {
+    title: "Name of Court Registrar",
+    dataIndex: "name_of_registrar",
+  },
+  {
+    title: "Contact of Court Registrar",
+    dataIndex: "contact_of_registrar",
+  },
+  {
+    title: "",
+    scopedSlots: { customRender: "editBtn" },
+    width: 50,
+  },
+];
 export default {
-  props: ["columns", "tableData", "title"],
+  props: [ "tableData", "title"],
   data() {
     return {
       // Active button for the "Authors" table's card header radio button group.
@@ -219,7 +258,8 @@ export default {
       visible: false,
       form: this.$form.createForm(this, { name: "coordinated" }),
       uploadProgress:0,
-      user:auth.currentUser
+      user:auth.currentUser,
+      columns
     };
   },
   methods: {
@@ -270,7 +310,15 @@ export default {
     },
   },
   computed: {
-    ...mapState(["courts", "loading"]),
+    ...mapState(["courts", "loading",'allAdvocates']),
+    advocate(){
+      if(auth.currentUser){
+        return this.allAdvocates.find((a)=>a.id=== auth.currentUser.uid)
+      }else{
+        return {}
+      }
+     
+    }
   },
 };
 </script>
