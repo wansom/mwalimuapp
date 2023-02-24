@@ -19,7 +19,7 @@ import Footer from "../components/home/Footer.vue";
 import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
-import * as fb from "../firebase";
+import {getAdvocate} from '../database/firestore'
 export default {
   components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },
   data(){
@@ -34,18 +34,18 @@ export default {
 
     },
     fetchDetails() {
-      fb.usersCollection
-        .doc(this.$route.params.id)
-        .get()
-        .then((doc) => {
-          this.advocate = doc.data();
-        });
+      getAdvocate(this.$route.params.id).then((data)=>{
+       this.advocate=data
+        // this.$store.dispatch('updateUser',{
+          
+        // })
+      })
     },
-    updateProfileVisits() {
-      fb.usersCollection.doc(this.$route.params.id).update({
-        profile_visits: fb.types.FieldValue.increment(),
-      });
-    },
+    // updateProfileVisits() {
+    //   fb.usersCollection.doc(this.$route.params.id).update({
+    //     profile_visits: fb.types.FieldValue.increment(),
+    //   });
+    // },
   },
   mounted() {
     this.fetchDetails();

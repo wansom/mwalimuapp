@@ -83,7 +83,7 @@ return setDocument(LAWYERS_PATH,values.uid,values)
 }
 
 export const getAdvocate = userId => {
-	return getDocument(advocatesRef(userId))
+	return getDocument(advocateRef(userId))
 }
 export const updateAdvocate = (userId, data) => {
 	return updateDocument(advocateRef(userId), data)

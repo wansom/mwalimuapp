@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router/index";
-import * as fb from "../firebase";
 import {
   getAllAdvocates,
   getAllRequests,
@@ -204,6 +203,8 @@ export default new Vuex.Store({
         commit("setUserProfile", {});
       }
     },
+
+
     logout({ dispatch }) {
       logout().then(()=>{
         router.push("/sign-in");
@@ -211,7 +212,6 @@ export default new Vuex.Store({
       })
     },
 
-    
     restPassword({ commit }, values) {
       dispatch("changeLoading", true);
       passwordReset(values.email).then(()=>{
