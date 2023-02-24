@@ -215,15 +215,15 @@ import { mapState } from "vuex";
 import {auth} from "../../database/index"
 import { listenDocumentUploadProgress} from "@/database/storage";
 const columns = [
-	
-{
-    title: "Presiding Judge",
-    dataIndex: "image_url",
-    scopedSlots: { customRender: "image_url" },
-  },
+
   {
     title: "Court Number",
     dataIndex: "court_number",
+  },
+  {
+    title: "Presiding Judge",
+    dataIndex: "image_url",
+    scopedSlots: { customRender: "image_url" },
   },
 
   {
