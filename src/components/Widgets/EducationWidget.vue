@@ -158,7 +158,7 @@
   </template>
   
   <script>
-  import * as fb from "../../firebase";
+
   import { mapState } from "vuex";
   const moment = require("moment");
   export default {
@@ -208,7 +208,6 @@
         e.preventDefault();
         this.form.validateFields((err, values) => {
           if (!err) {
-            console.log(values);
             const payload = {
               law_ending: values.law_ending?.format() ?? "",
               law_school: values.law_school ?? "",
@@ -234,8 +233,6 @@
       ...mapState([]),
     },
     mounted() {
-      let user = fb.auth.currentUser;
-      this.$store.dispatch("fetchUserProfile", user);
     },
   };
   </script>

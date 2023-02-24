@@ -262,7 +262,6 @@
   </template>
   
   <script>
-  import * as fb from "../../firebase";
   import { mapState } from "vuex";
   const moment =require("moment");
   export default {
@@ -340,8 +339,6 @@
       ...mapState([]),
     },
     mounted() {
-      let user = fb.auth.currentUser;
-      this.$store.dispatch("fetchUserProfile", user);
     },
   };
   </script>

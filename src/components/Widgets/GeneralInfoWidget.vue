@@ -218,7 +218,7 @@
   
   <script>
   import { mapState } from "vuex";
-  import * as fb from "../../firebase";
+  import {auth} from "../../database/index"
   export default {
     props:['user'],
     data() {
@@ -299,7 +299,7 @@
       ...mapState(["general_information",]),
     },
     mounted(){
-      let user =fb.auth.currentUser
+      let user =auth.currentUser
       this.$store.dispatch("fetchUserProfile",user)
     }
   };

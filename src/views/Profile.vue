@@ -105,6 +105,7 @@ import CardProject from "../components/Cards/CardProject";
 
 
 import * as fb from "../firebase";
+import { FieldValue } from "@firebase/firestore";
 import router from "../router/index";
 export default {
   components: {
@@ -135,7 +136,7 @@ export default {
     },
     updateProfileVisits() {
       fb.usersCollection.doc(this.$route.params.id).update({
-        profile_visits: fb.types.FieldValue.increment(),
+        profile_visits: FieldValue.increment(1),
       });
     },
   },

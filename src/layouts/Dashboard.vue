@@ -68,7 +68,7 @@ import DashboardHeader from "../components/Headers/DashboardHeader";
 import DashboardFooter from "../components/Footers/DashboardFooter";
 import DashboardSettingsDrawer from "../components/Sidebars/DashboardSettingsDrawer";
 import { mapState } from "vuex";
-import * as fb from "../firebase";
+import {auth} from "../database/index"
 
 export default {
   components: {
@@ -121,7 +121,7 @@ export default {
 
     user() {
       return this.allAdvocates.filter(
-        (i) => i.id == fb.auth.currentUser.uid
+        (i) => i.id == auth.currentUser.uid
       )[0];
     },
   },

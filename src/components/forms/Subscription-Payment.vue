@@ -34,8 +34,8 @@
 
 <script>
 import CardPaymentMethods from "../Cards/CardPaymentMethods.vue";
-import * as fb from "../../firebase";
 import { mapState } from "vuex";
+import {auth} from "../../database/index"
 export default {
   data() {
     return {
@@ -45,11 +45,15 @@ export default {
   },
   components: { CardPaymentMethods },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["allAdvocates"]),
+
+    user() {
+      return this.allAdvocates.filter(
+        (i) => i.id == auth.currentUser.uid
+      )[0];
+    },
   },
   mounted() {
-    let user = fb.auth.currentUser;
-    this.$store.dispatch("fetchUserProfile", user);
   },
 };
 </script>

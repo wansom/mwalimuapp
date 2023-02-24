@@ -105,7 +105,7 @@ import EmploymentInformation from "./Employment-Information.vue";
 import EducationInformation from "./Education-Information.vue";
 import CertificateUpload from "./Certificate-Upload.vue";
 import SubscriptionPayment from "./Subscription-Payment.vue";
-import * as fb from "../../firebase";
+import { auth } from "../../database/index";
 import { mapState } from "vuex";
 export default {
   data() {
@@ -130,7 +130,7 @@ export default {
     ...mapState(["allAdvocates", "current"]),
     user() {
       return this.allAdvocates.filter(
-        (i) => i.id == fb.auth.currentUser.uid
+        (i) => i.id == auth.currentUser.uid
       )[0];
     },
   },
