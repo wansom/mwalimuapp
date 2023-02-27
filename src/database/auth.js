@@ -12,7 +12,7 @@ return signInWithEmailAndPassword(auth,values.email,values.password)
 export const logout=()=>{
     return signOut(auth)
 }
-const passwordReset=(email)=>{
+export const passwordReset=(email)=>{
     sendPasswordResetEmail(auth,email)
 }
 

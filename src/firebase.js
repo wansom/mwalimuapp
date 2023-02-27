@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection,arrayUnion } from 'firebase/firestore';
+import { getFirestore,collection } from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
@@ -21,8 +21,6 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-const arrayunion = arrayUnion();
-
 // collection references
 const usersCollection = collection(db,"nigeria_lawyers");
 const businessCollection = collection(db,"clients");
@@ -37,7 +35,6 @@ export {
   db,
   auth,
   storage,
-  arrayunion,
   usersCollection,
   businessCollection,
   adminCollections,

@@ -1,220 +1,181 @@
 <template>
-  <div class="container-fluid">
-    <DefaultHeader :user="user" />
-    <!-- <div class="img-banner">
+  <div
+    class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter"
+  >
+    <!-- <div class="filter-widget">
+      <h4 class="fw-title">Primary Practise Areas</h4>
+      <ul class="filter-catagories">
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Kids</a></li>
+      </ul>
     </div> -->
-    <!-- Header Breadcrumbs -->
-    <hr class="divider" />
-    <!-- / Header Breadcrumbs -->
-    <!-- <div class="mx-5 find-by-focus">
-  <h3>FIND LAWYERS BY FOCUS</h3>
-  <a-row type="flex" :gutter="[24,24]" justify="space-around" align="middle" :lg="{span: 12, offset: 0}" :xl="{span: 6, offset: 2}">
-            <a-col  :span="24" :md="6" v-for="i of focus_areas" :key="i">
-              <p>Real Estate</p>
-            </a-col>
-
-          </a-row>
-</div> -->
-    <div id="product-list" class="container">
-      <div class="">
-        <div class="breadcrumbs" style="margin-left: 25px">
-          <ul>
-            <li>
-              <a href="#"><strong>Home</strong> | </a>
-            </li>
-            <li><a href="#">Advocate Listing </a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- <div class="col-sm-12">
-        <transition name="fade">
-          <div v-if="shopbymenu" class="panel shopbymenu">
-            <div class="col-sm-12">
-              <div class="col-sm-8">
-                <h2>FIND LAWYERS BY FOCUS:</h2>
-              </div>
-              <div class="col-sm-4 text-right">
-                <h2 style="margin-top: 4px">
-                  <a
-                    @click="shopbymenu = false"
-                    class="text-right"
-                    style="font-size: 24px"
-                    >X
-                  </a>
-                </h2>
-              </div>
+    <div class="filter-widget">
+      <a-collapse
+        expand-icon-position="right"
+        :bordered="false"
+        default-active-key="1"
+      >
+        <template #expandIcon="props">
+          <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+        </template>
+        <a-collapse-panel key="1" header="Practise Areas">
+          <div class="fw-brand-check">
+            <div
+              class="bc-item"
+              v-for="(area, index) of practiseAreas"
+              :key="index"
+            >
+              <label :for="area">
+                {{ area }}
+                <input
+                  type="checkbox"
+                  :id="area"
+                  :value="area"
+                  v-model="selectedPractiseArea"
+                  @change="
+                    () => {
+                      setActive(area);
+                    }
+                  "
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
           </div>
-        </transition>
-      </div> -->
-
-      <div class="col-sm-12 product-list-all">
-        <a-row>
-          <a-col :span="24" :lg="6">
-            <div id="filters">
-              <div class="sidebar">
-                <!-- sidebar  -->
-                <div id="shopbypanel" class="collapse">
-                 
-
-                  <div class="shopbypanel">
-                    
-                        <a-input-search
-                          placeholder="Enter first or last name"
-                          enter-button
-                          @search="onSearch"
-                          v-model="searchString"
-                        />
-                  </div>
-                </div>
-                <h5>FILTERS</h5>
-                <span class="line"></span>
-
-                <!-- <section class="gender">
-              <h6>GENDER</h6>
-              <div class="tabsCustom">
-                <ul>
-                  <li><a href="#">MEN</a></li>
-                  <li class="selected"><a href="#">WOMEN</a></li>
-                </ul>
-              </div>
-            </section>
-            <span class="line"></span> -->
-                <a-collapse default-active-key="1" :bordered="false">
-                  <template #expandIcon="props">
-                    <a-icon
-                      type="caret-right"
-                      :rotate="props.isActive ? 90 : 0"
-                    />
-                  </template>
-                  <a-collapse-panel key="4" header=" YEARS OF EXPERIENCE">
-                    <section class="section size">
-                      <a-slider
-                        range
-                        :default-value="[3, 10]"
-                        @change="setExperience"
-                      />
-                      <div class="space2"></div>
-                    </section>
-                  </a-collapse-panel>
-                  <a-collapse-panel key="2" header="PRIMARY PRACTISE AREAS">
-                    <section class="section size">
-                      <div
-                        v-for="category in categories"
-                        :key="category"
-                        class="checkbox"
-                        @change="
-                          () => {
-                            setActive(category);
-                          }
-                        "
-                      >
-                        <label>
-                          <input type="checkbox" /><span
-                            class="checkbox-material"
-                            ><span class="check"></span
-                          ></span>
-                          {{ category }}
-                        </label>
-                      </div>
-
-                      <div class="space2"></div>
-                    </section>
-                  </a-collapse-panel>
-                  <a-collapse-panel key="2" header="SECONDARY PRACTISE AREAS">
-                    <section class="section size">
-                      <div
-                        v-for="category in categories"
-                        :key="category"
-                        class="checkbox"
-                        @change="
-                          () => {
-                            setActive(category);
-                          }
-                        "
-                      >
-                        <label>
-                          <input type="checkbox" /><span
-                            class="checkbox-material"
-                            ><span class="check"></span
-                          ></span>
-                          {{ category }}
-                        </label>
-                      </div>
-
-                      <div class="space2"></div>
-                    </section>
-                  </a-collapse-panel>
-                  <a-collapse-panel key="3" header="COUNTY OF RESIDENCE">
-                    <section class="section size">
-                      <a-row>
-                        <a-col
-                          :span="24"
-                          :lg="12"
-                          v-for="county in counties"
-                          :key="county"
-                          @change="setActive(county)"
-                          class="checkbox"
-                        >
-                          <label>
-                            <input type="checkbox" /><span
-                              class="checkbox-material"
-                              ><span class="check"></span
-                            ></span>
-                            {{ county }}
-                          </label>
-                        </a-col>
-                      </a-row>
-
-                      <div class="space2"></div>
-                    </section>
-                  </a-collapse-panel>
-                  <a-collapse-panel key="3" header="OTHER COUNTIES OF PRACTISE">
-                    <section class="section size">
-                      <a-row>
-                        <a-col
-                          :span="24"
-                          :lg="12"
-                          v-for="county in counties"
-                          :key="county"
-                          @change="setActive(county)"
-                          class="checkbox"
-                        >
-                          <label>
-                            <input type="checkbox" /><span
-                              class="checkbox-material"
-                              ><span class="check"></span
-                            ></span>
-                            {{ county }}
-                          </label>
-                        </a-col>
-                      </a-row>
-
-                      <div class="space2"></div>
-                    </section>
-                  </a-collapse-panel>
-                </a-collapse>
-
-                <!-- <span class="line"></span>
-        <section class="section size">
-          <h6>FEATURE <span class='btn-section'> + </span></h6>
-        </section>
-        <div class="space2"></div>
-        <span class="line"></span>
-
-        <section class="section size">
-          <h6>FEELING <span class='btn-section'> + </span></h6>
-        </section>
-          <div class="space2"></div>
-        <span class="line"></span> -->
-              </div>
+        </a-collapse-panel>
+      </a-collapse>
+    </div>
+    <div class="filter-widget">
+      <h4 class="fw-title">Years of Experience</h4>
+      <div class="filter-range-wrap position-relative">
+        <!-- <a-slider
+          range
+         
+          @change="setExperience"
+          :tooltip-visible="toolTip"
+        /> -->
+        <vue-range-slider
+          ref="slider"
+          v-model="years_of_experience"
+        ></vue-range-slider>
+      </div>
+    </div>
+    <div class="filter-widget">
+      <a-collapse
+        v-model="activeKey"
+        expand-icon-position="right"
+        :bordered="false"
+      >
+        <template #expandIcon="props">
+          <a-icon type="caret-down" :rotate="props.isActive ? 180 : 0" />
+        </template>
+        <a-collapse-panel key="1" header="Counties">
+          <div class="fw-color-choose">
+            <!-- <div class="cs-item" v-for="county of counties" :key="county">
+              <input  type="radio" :id="county" :value="county" v-model="selectedCounty">
+              <label class="cs-red" :for="county">{{ county }}</label>
+            </div> -->
+            <div class="cs-item" v-for="item in counties" :key="item">
+              <input
+                type="radio"
+                :id="item"
+                :value="item"
+                v-model="selectedCounty"
+                @change="setActive(item)"
+              />
+              <label class="cs-red" :for="item">{{ item }}</label>
             </div>
-          </a-col>
-          <a-col :span="24" :lg="18">
-            <div id="product-list-wrapper">
-              <div class="col-sm-12">
-                <div class="tagsdiv">
-                  <div
+          </div>
+        </a-collapse-panel>
+      </a-collapse>
+  <a-collapse>
+    <a-collapse-panel key="8" header="PRIMARY PRACTISE AREAS">
+        <section >
+          <div
+            v-for="category in practiseAreas"
+            :key="category"
+            class="checkbox"
+            @change="
+              () => {
+                setActive(category);
+              }
+            "
+          >
+            <label>
+              <input type="checkbox" /><span class="checkbox-material"
+                ><span class="check"></span
+              ></span>
+              {{ category }}
+            </label>
+          </div>
+
+          <div class="space2"></div>
+        </section>
+      </a-collapse-panel>
+  </a-collapse>
+  <a-collapse>
+    <a-collapse-panel key="6" header="Counties">
+        <section class="section size">
+          <div
+            v-for="category in counties"
+            :key="category"
+            class="checkbox"
+            @change="
+              () => {
+                setActive(category);
+              }
+            "
+          >
+            <label>
+              <input type="checkbox" /><span class="checkbox-material"
+                ><span class="check"></span
+              ></span>
+              {{ category }}
+            </label>
+          </div>
+
+          <div class="space2"></div>
+        </section>
+      </a-collapse-panel>
+  </a-collapse>
+    </div>
+    <!-- <div class="filter-widget">
+                        <h4 class="fw-title">Size</h4>
+                        <div class="fw-size-choose">
+                            <div class="sc-item">
+                                <input type="radio" id="s-size">
+                                <label for="s-size">s</label>
+                            </div>
+                            <div class="sc-item">
+                                <input type="radio" id="m-size">
+                                <label for="m-size">m</label>
+                            </div>
+                            <div class="sc-item">
+                                <input type="radio" id="l-size">
+                                <label for="l-size">l</label>
+                            </div>
+                            <div class="sc-item">
+                                <input type="radio" id="xs-size">
+                                <label for="xs-size">xs</label>
+                            </div>
+                        </div>
+                    </div> -->
+    <!-- <div class="filter-widget mt-4">
+      <h4 class="fw-title">Tags</h4>
+      <div class="fw-tags">
+        <a href="#">Male</a>
+        <a href="#">Female</a>
+        <a href="#">Magistrate</a>
+        <a href="#">Judges</a>
+        <a href="#">Advocates</a>
+        <a href="#">Niceties</a>
+        <a href="#">Port Harcourt</a>
+      </div>
+    </div> -->
+    <button class="filter-btn px-5" @click="filterItems">Filter</button>
+    {{ filteredItems.length }}
+    <div
                     v-for="filterAppied in filtersAppied"
                     :key="filterAppied"
                   >
@@ -226,167 +187,48 @@
                       {{ filterAppied }}
                     </a-button>
                   </div>
-
-                  <transition name="fade">
-                    <a-button
-                      v-if="filtersAppied.length > 0"
-                      class="clear-values"
-                      @click.prevent="filtersAppied = []"
-                    >
-                      Clear All</a-button
-                    >
-                  </transition>
-                </div>
-                <div class="wrapper-product-list">
-                  <div class="dropdown sort-by">
-                    <h5>RESULTS:({{ filteredItems.length }})</h5>
-                  </div>
-                  <div class="grid-placehodler">
-                    <div class="grid-list">
-                      <!-- Loop products  -->
-                      <div class="col-sm-12">
-                        <h3 v-if="filteredItems.length == 0">
-                          No Lawyers fit your search
-                        </h3>
-                      </div>
-                      <a-list
-                        item-layout="vertical"
-                        size="large"
-                        :pagination="pagination"
-                        :data-source="filteredItems"
-                      >
-                        <a-list-item
-                          slot="renderItem"
-                          key="item.title"
-                          slot-scope="item"
-                        >
-                          <card-info :advocate="item"></card-info>
-                        </a-list-item>
-                      </a-list>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a-col>
-        </a-row>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import CardInfo from "../components/Cards/CardInfo.vue";
-import DefaultHeader from "../components/Headers/DefaultHeader.vue";
+import "../../../public/home/css/range-slider.css";
+import VueRangeSlider from "vue-range-component";
 export default {
+  props: ["advocates"],
   components: {
-    DefaultHeader,
-    CardInfo,
+    VueRangeSlider,
   },
   data() {
     return {
-      defaultCounty: null,
-      county: null,
-      category: null,
-      counties: [
-        "Nairobi",
-        "Mombasa",
-        "Kwale",
-        "Kilifi",
-        "Tana River",
-        "Lamu",
-        "Taita/Taveta",
-        " Garissa",
-        "Wajir",
-        "Mandera",
-        "Marsabit",
-        "Isiolo",
-        "Meru",
-        "Tharaka-Nithi",
-        "Embu",
-        "Kitui",
-        "Machakos",
-        "Makueni",
-        "Nyandarua",
-        "Nyeri",
-        "Kirinyaga",
-        "Murang'a",
-        " Kiambu",
-        "Turkana",
-        "West Pokot",
-        "Samburu",
-        "Trans Nzoia",
-        "Uasin Gishu",
-        "Elgeyo/Marakwet",
-        "Nandi",
-        " Baringo",
-        "Laikipia",
-        "Nakuru",
-        "Narok",
-        "Kajiado",
-        "Kericho",
-        "Bomet",
-        "Kakamega",
-        "Vihiga",
-        "Bungoma",
-        "Busia",
-        "Siaya",
-        "Kisumu",
-        "Homa Bay",
-        "Migori",
-        "Kisii",
-        "Nyamira",
+      toolTip: false,
+      value: [0, 50],
+      activeKey: 0,
+      selectedPractiseArea: [],
+      selectedCounty: "",
+      years_of_experience: [0, 50],
+      items: [
+        { value: "item1", label: "Item 1" },
+        { value: "item2", label: "Item 2" },
+        { value: "item3", label: "Item 3" },
       ],
-      categories: [
-        "Family",
-        "Employment",
-        "Criminal Defense",
-        "Real Estate",
-        "Business",
-        "Immigration",
-        "Personal Injury",
-        "Wills, Trusts & Estates",
-        "Bankruptcy & Finances",
-        "Government",
-        "Products & Services",
-        "Intellectual Property",
-      ],
-      experience: 2,
-      data: [],
-      message: "Hello",
-      shopbymenu: true,
-      inputValue: 0,
-      productItemsNumbers: 19,
-      filtertoApply: ["size"],
-      filtersAppied: ["Nairobi"],
-      genders: ["male", "female"],
-      colors: ["red", "blue", "black", "white", "gold"],
-      materials: [
-        "leather",
-        "recycled cork",
-        "microfiber",
-        "mesh",
-        "wool",
-        "canvas",
-        "knit",
-        "Rubber",
-      ],
-      experience: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-      colorsActive: [],
-      sizesActive: [],
-      filteredItems2: [],
-      pagination: {
-        onChange: (page) => {
-          console.log(page);
-        },
-        pageSize: 3,
-      },
-      searchName:"",
-      searchString:""
+      selectedValue: "",
+      filtersAppied: [],
     };
   },
   methods: {
+    setExperience(element) {
+      this.toolTip = true;
+      console.log(element);
+    },
+    filterItems() {
+      this.$store.dispatch("filterItems", {
+        advocates: this.advocates,
+        selectedPractiseArea: this.selectedPractiseArea,
+        selectedCounty: this.selectedCounty,
+        years_of_experience: this.years_of_experience,
+      });
+    },
     removeTags: function (item) {
       var itemIndex = this.filtersAppied.indexOf(item);
       this.filtersAppied.splice(itemIndex, 1);
@@ -410,7 +252,6 @@ export default {
       } else {
         this.filtersAppied.push(element);
       }
-      console.log(this.filtersAppied)
     },
     isActive: function (menuItem) {
       return this.filtersAppied.indexOf(menuItem) > -1;
@@ -418,24 +259,17 @@ export default {
     formatter(value) {
       return `${value} Years`;
     },
-    onSearch(element){
+    onSearch(element) {
       if (this.filtersAppied.indexOf(element) > -1) {
         this.filtersAppied.pop(element);
       } else {
         this.filtersAppied.push(element);
       }
-    }
-  },
-  computed: {
-    ...mapState(["advocates", "user","allAdvocates"]),
-    user() {
-    if(fb.auth.currentUser) 
-     return this.allAdvocates.filter(
-        (i) => i.id == fb.auth.currentUser.uid
-      )[0];
-      else 
-        return {}
     },
+  },
+
+  computed: {
+    ...mapState(["practiseAreas", "counties","allAdvocates"]),
     filteredItems: function () {
       return this.advocates.filter((product) => {
         let experience =
@@ -443,18 +277,18 @@ export default {
           new Date(product.practise_start).getFullYear();
         const oldRange = this.filtersAppied.filter((element) =>
           Array.isArray(element)
-        )
-        
+        );
+
         return this.filtersAppied.every((filterAppied) => {
-        //  if(this.searchString.length){
-        //   if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-        //     return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
-        //   }
-        //   if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
-        //     return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
-        //   }
-        //  }
-       
+          //  if(this.searchString.length){
+          //   if (product.first_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+          //     return product.first_name.toLowerCase().includes(filterAppied.toLowerCase());
+          //   }
+          //   if (product.last_name.toLowerCase().includes(filterAppied.toLowerCase())) {
+          //     return product.last_name.toLowerCase().includes(filterAppied.toLowerCase());
+          //   }
+          //  }
+
           if (product.practise_areas.includes(filterAppied)) {
             return product.practise_areas.includes(filterAppied);
           }
@@ -464,53 +298,18 @@ export default {
           if (product.location.includes(filterAppied)) {
             return product.location.includes(filterAppied);
           }
-         if(oldRange.length){
-          if (experience>= oldRange[0][0]&&experience <= oldRange[0][1]) {
-            return experience >= oldRange[0][0]&&experience <= oldRange[0][1];
+          if (oldRange.length) {
+            if (experience >= oldRange[0][0] && experience <= oldRange[0][1]) {
+              return (
+                experience >= oldRange[0][0] && experience <= oldRange[0][1]
+              );
+            }
           }
-         
-         }
         });
       });
     },
-    resultQuery() {
-      if (this.category && this.category != "All") {
-        return this.advocates.filter((item) => {
-          return this.category
-            .toString()
-            .toLowerCase()
-            .split(" ")
-            .every((v) =>
-              item.specialisation.join("").toString().toLowerCase().includes(v)
-            );
-        });
-      }
-      if (this.category || this.county == "All") {
-        return this.advocates;
-      }
-      if (this.county) {
-        return this.advocates.filter((item) => {
-          item.location == this.county;
-        });
-      } else if (this.category || this.county == "All") {
-        return this.advocates;
-      } else {
-        this.data = this.advocates;
-        return this.advocates;
-      }
-    },
-    reso() {
-      return this.search(this.$store.state.advocates)
-        .searchBySpecialisation("Family")
-        .searchByLocation("Nairobi")
-        .run();
-    },
   },
-  updated() {},
-  mounted() {
-  },
-  created() {
-  },
+  mounted() {},
 };
 </script>
 
@@ -535,13 +334,13 @@ export default {
   height: 2px;
   border: none;
 }
-.img-banner {
+/* .img-banner {
   background-image: url("../../public/images/lsk.jpg");
   height: 50vh;
   background-size: cover;
   align-items: center;
   display: flex;
-}
+} */
 /**
  * EasyZoom core styles
  */

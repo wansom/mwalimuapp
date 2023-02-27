@@ -59,7 +59,7 @@
       </a-col>
       <a-col class="col-img" :span="24" :md="12">
         <div>
-          <a-avatar :src="advocate.profile_photo" :size="124" style="object-fit:contain"/>
+          <a-avatar :src="advocate.profile_photo" :size="124" style="object-fit:contain" loading="lazy"/>
           <!-- <img :src="advocate.profile_photo" alt="" style="width:100%; height: 200px; object-fit: contain;" /> -->
         </div>
         <!-- <a-row type="flex" class="my-10 icons-list">
@@ -89,7 +89,6 @@
 
 <script>
 import { Icon } from "ant-design-vue";
-import { type } from "os";
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",

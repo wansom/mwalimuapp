@@ -327,6 +327,47 @@ export default new Vuex.Store({
         location.reload()
       })
     },
+
+    //filter advocates
+    filterItems({ commit },data) {
+      // Get the selected filter values
+      const selectedPractiseArea = data.selectedPractiseArea;
+      const selectedCounty = data.selectedCounty;
+      const years_of_experience = data.years_of_experience;
+
+      // Filter the items based on the selected filter values
+      let filteredItems = data.advocates.filter((item) => {
+        let practiseAreaMatch = true;
+        let countyMatch = true;
+        let experienceMatch = true;
+
+        // Check if the item matches the selected color
+        for(let i=0; i<=selectedPractiseArea,i++;){
+          if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
+            practiseAreaMatch = false;
+          }
+        }
+     
+
+        // Check if the item matches the selected size
+        if (selectedCounty !== "all" && item.location !== selectedCounty) {
+          countyMatch = false;
+        }
+
+        // Check if the item matches the selected price range
+        if (years_of_experience !== "all") {
+          if (item.years_of_experience < years_of_experience[0] || item.years_of_experience > years_of_experience[1]) {
+            experienceMatch = false;
+          }
+        }
+        // Return true only if all the filter conditions are met
+      return practiseAreaMatch && countyMatch && experienceMatch;
+    });
+
+    // Update the items to display the filtered items
+    this.displayedItems = filteredItems;
+    commit("setAllAdvocates",filteredItems)
+    },
   },
   modules: {},
 });

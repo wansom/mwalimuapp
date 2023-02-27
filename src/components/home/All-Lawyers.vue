@@ -4,43 +4,9 @@
     <section class="product-shop spad" id="all-lawyers">
       <div class="container-fluid">
         <div class="row">
-          <filters></filters>
+          <filters :advocates="advocates"></filters>
           <div class="col-lg-9 order-1 order-lg-2">
-            <div class="product-show-option">
-              <div class="row">
-                <div class="col-lg-7 col-md-7">
-                 <div class="row">
-                  <div class="select-option">
-                    <a-select
-                    placeholder="Sort By..."
-                      style="width: 250px"
-                      @change="handleChange"
-                      class="sorting"
-                    >
 
-                      <a-select-option value="jack">
-                        Years of Experience
-                      </a-select-option>
-                      <a-select-option value="lucy"> Gender </a-select-option>
-                    </a-select>
-
-                  </div>
-                  <div class="advanced-search">
-              <button type="button" class="category-btn">SEARCH FOR </button>
-              <div class="input-group">
-                <input type="text" placeholder="advocates you need?" />
-                <button type="button">
-                  <i class="fa fa-magnifying-glass"></i>
-                </button>
-              </div>
-                 </div>
-            </div>
-                </div>
-                <div class="col-lg-5 col-md-5 text-right">
-                  <p>Show 01- 09 Of {{ advocates.length }} Advocates</p>
-                </div>
-              </div>
-            </div>
             <!-- <div class="product-list">
               <div class="row">
                 <div class="col-lg-12 col-sm-12" v-for="advocate of advocates" :key="advocate">
@@ -48,21 +14,16 @@
                 </div>
               </div>
             </div> -->
-            <a-list
-                        item-layout="horizontal"
-                        size="large"
-                        :pagination="pagination"
-                        :data-source="advocates"
-                      
-                      >
-                        <a-list-item
-                          slot="renderItem"
-                          key="item.title"
-                          slot-scope="item"
-                        >
-                          <card-info :advocate="item"></card-info>
-                        </a-list-item>
-                      </a-list>
+            <!-- <a-list
+              item-layout="horizontal"
+              size="large"
+              :pagination="pagination"
+              :data-source="advocates"
+            >
+              <a-list-item slot="renderItem" key="item.title" slot-scope="item">
+                <card-info :advocate="item"></card-info>
+              </a-list-item>
+            </a-list> -->
             <!-- <div class="loading-more">
               <i class="icon_loading"></i>
               <a href="#"> Loading More </a>
@@ -77,25 +38,65 @@
 
 <script>
 import Filters from "../../components/Widgets/Filters.vue";
-import CardProfile from '../Cards/CardProfile.vue';
+import CardProfile from "../Cards/CardProfile.vue";
 import CardInfo from "../../components/Cards/CardInfo.vue";
 export default {
-  props:["advocates"],
-  components: { Filters, CardProfile,CardInfo },
-  data(){
-    return{
+  props: ["advocates"],
+  components: { Filters, CardProfile, CardInfo },
+  data() {
+    return {
       pagination: {
         onChange: (page) => {
           console.log(page);
         },
         pageSize: 3,
       },
-    }
-   
+      displayedItems:[],
+      selectedPractiseArea:"",
+      selectedCounty:"",
+      years_of_experience:""
+    };
   },
-  method:{
-    handleChange(){}
-  }
+  method: {
+    handleChange() {},
+    filterItems(advocates,filters) {
+      // Get the selected filter values
+      const selectedPractiseArea = filters.selectedPractiseArea;
+      const selectedCounty = filters.selectedCounty;
+      const years_of_experience = filters.years_of_experience;
+
+      // Filter the items based on the selected filter values
+      let filteredItems = advocates.filter((item) => {
+        let practiseAreaMatch = true;
+        let countyMatch = true;
+        let experienceMatch = true;
+
+        // Check if the item matches the selected color
+        if (selectedPractiseArea !== "all" && item.specialisation !== selectedPractiseArea) {
+          practiseAreaMatch = false;
+        }
+
+        // Check if the item matches the selected size
+        if (selectedCounty !== "all" && item.location !== selectedCounty) {
+          countyMatch = false;
+        }
+
+        // Check if the item matches the selected price range
+        if (years_of_experience !== "all") {
+          const [minPrice, maxPrice] = years_of_experience.split("-");
+          if (item.years_of_experience < minPrice || item.years_of_experience > maxPrice) {
+            experienceMatch = false;
+          }
+        }
+        // Return true only if all the filter conditions are met
+      return practiseAreaMatch && countyMatch && experienceMatch;
+    });
+
+    // Update the items to display the filtered items
+    this.displayedItems = filteredItems;
+    console.log(filteredItems)
+    },
+  },
 };
 </script>
 

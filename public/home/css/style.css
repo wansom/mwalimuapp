@@ -2006,16 +2006,17 @@ ol {
   .ui-slider-range.ui-corner-all.ui-widget-header:last-child {
   background: #e6353b;
 }
-
 .filter-btn {
   font-size: 14px;
   color: #ffffff;
   font-weight: 700;
   background: #e6353b;
-  padding: 7px 20px 5px;
+  padding: 7px 40px 5px;
   border-radius: 2px;
   display: inline-block;
   text-transform: uppercase;
+  border: none;
+  width: 80%;
 }
 
 .filter-widget .fw-color-choose .cs-item {

@@ -48,8 +48,10 @@ import DataTable from '../Tables/DataTable.vue';
   export default {
     props: ["advocates"],
     data() {
+     
       return {
         list: [1, 2, 3, 4, 5, 6],
+        title:"courts",
         currentPage: 1,
         itemsPerPage:4,
         visibleItems: [],

@@ -94,6 +94,7 @@
 <script>
 import { mapState } from "vuex";
 import * as fb from "../../firebase";
+import {arrayUnion} from "firebase/firestore"
 
 // "Projects" table list of columns and their properties.
 const columns = [
@@ -143,7 +144,7 @@ export default {
 	updateStatus(uid,status){
 		fb.usersCollection.doc(uid).update({
 			status:status,
-      notifications:fb.types.FieldValue.arrayUnion({
+      notifications:arrayUnion({
         notification:"your account has been approved",
         date:new Date()
       })
