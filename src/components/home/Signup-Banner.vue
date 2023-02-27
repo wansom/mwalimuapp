@@ -29,7 +29,7 @@
                           <p>Secs</p>
                       </div>
                   </div> -->
-                  <a href="#" class="primary-btn">Signup Now</a>
+                  <a href="/sign-up" class="primary-btn">Signup Now</a>
               </div>
           </div>
       </section>

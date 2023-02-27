@@ -26,10 +26,10 @@
     </a>
     <a-menu slot="overlay">
       <a-menu-item key="1">
-        <router-link to="sign-up">Create Account</router-link>
+        <a href="/sign-up">Create Account</a>
       </a-menu-item>
       <a-menu-item key="2">
-        <router-link to="sign-in">Login</router-link>
+        <a href="/sign-in">Login</a>
         
       </a-menu-item>
     
