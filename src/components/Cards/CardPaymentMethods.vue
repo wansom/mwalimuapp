@@ -197,7 +197,7 @@ export default {
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      getTransactionReference(id).then(({data})=>{
+      getTransactionReference(id).then((data)=>{
         if (data && data.amount == 5) {
             this.paymentConfirmed = true;
             localStorage.clear()
@@ -217,6 +217,7 @@ export default {
               });
               this.sendMail()
               this.visible=false
+              location.reload()
           } else {
             swal({
               title: "SORRY!",

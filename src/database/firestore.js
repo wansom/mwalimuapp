@@ -26,10 +26,7 @@ const USERS_PATH = 'users'
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
 const LAWYERS_PATH='nigeria_lawyers'
-const businessCollection='clients'
-const adminCollections ='admins'
 const MPESA_PATH='mpesa_responses'
-const usersCollection = 'nigeria_lawyers';
 const TRANSACTIONS_PATH = 'transactions';
 const COURTS_PATH= 'courts'
 const MESSAGE_PATH = roomId => {

@@ -1,17 +1,35 @@
 <template>
   <div class="window-container" :class="{ 'window-mobile': isDevice }">
     <form v-if="addNewRoom" @submit.prevent="createRoom">
-      <a-row>
+      <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
-          <a-input
+          <a-select
+            show-search
             v-model="addRoomUsername"
-            type="text"
-            placeholder="Add username"
-          />
+            style="width: 100%"
+            placeholder="type or select username"
+            option-label-prop="label"
+          >
+            <a-select-option
+              :value="item.id"
+              :label="item.last_name"
+              v-for="item in advocates"
+              :key="item.id"
+            >
+              <span role="img" aria-label="China">
+                {{ item.first_name }}
+              </span>
+              {{ item.last_name }}
+            </a-select-option>
+          </a-select>
         </a-col>
         <a-col span="4">
-          <a-button type="submit" :disabled="disableForm || !addRoomUsername">
-            Create Room
+          <a-button
+            type="submit"
+            :disabled="disableForm || !addRoomUsername"
+            @click="createRoom"
+          >
+            Start Chat
           </a-button>
         </a-col>
         <a-col span="4">
@@ -23,15 +41,39 @@
     </form>
 
     <form v-if="inviteRoomId" @submit.prevent="addRoomUser">
-      <a-input
-        v-model="invitedUsername"
-        type="text"
-        placeholder="Add username"
-      />
-      <button type="submit" :disabled="disableForm || !invitedUsername">
-        Add User
-      </button>
-      <button class="button-cancel" @click="inviteRoomId = null">Cancel</button>
+      <a-row type="flex" justify="space-around" align="middle">
+        <a-col span="16">
+		  <a-select
+            show-search
+            v-model="invitedUsername"
+            style="width: 100%"
+            placeholder="type or select username"
+            option-label-prop="label"
+          >
+            <a-select-option
+              :value="item.id"
+              :label="item.last_name"
+              v-for="item in advocates"
+              :key="item.id"
+            >
+              <span role="img" aria-label="China">
+                {{ item.first_name }}
+              </span>
+              {{ item.last_name }}
+            </a-select-option>
+          </a-select>
+        </a-col>
+        <a-col span="4">
+          <a-button type="submit" :disabled="disableForm || !invitedUsername" @click="addRoomUser">
+            Add User
+          </a-button>
+        </a-col>
+        <a-col span="4">
+          <a-button class="button-cancel" @click="inviteRoomId = null"
+            >Cancel</a-button
+          >
+        </a-col>
+      </a-row>
     </form>
 
     <form v-if="removeRoomId" @submit.prevent="deleteRoomUser">
@@ -100,6 +142,7 @@ import { parseTimestamp, formatTimestamp } from "@/utils/dates";
 import logoAvatar from "../../assets/logo.png";
 
 import { register } from "vue-advanced-chat";
+import { mapState } from "vuex";
 // import { register } from './../../dist/vue-advanced-chat.es.js'
 // import { register } from './../../src/lib/index.js'
 register();
@@ -171,16 +214,46 @@ export default {
         },
       ],
       // ,dbRequestCount: 0
+      selectedItems: "",
     };
   },
-
+  watch: {
+    selectedItems(val) {
+      console.log(`selected:`, val);
+    },
+  },
   computed: {
+    ...mapState(["allAdvocates"]),
+    advocates() {
+      return this.allAdvocates.filter(
+        (a) => a.status === "active" && a.id != this.currentUserId
+      );
+    },
     loadedRooms() {
       return this.rooms.slice(0, this.roomsLoadedCount);
     },
     screenHeight() {
       return this.isDevice ? window.innerHeight + "px" : "calc(100vh - 80px)";
     },
+
+	 nonRoomMembers( array2) {
+  const uniqueValues = [];
+  // Loop through array1
+  for (let i = 0; i < this.advocates.length; i++) {
+    // If the value is not in array2, add it to uniqueValues
+    if (array2.indexOf(this.advocates[i]) === -1) {
+      uniqueValues.push(this.advocates[i]);
+    }
+  }
+  // Loop through array2
+  for (let i = 0; i < array2.length; i++) {
+    // If the value is not in array1, add it to uniqueValues
+    if (array1.indexOf(array2[i]) === -1) {
+      uniqueValues.push(array2[i]);
+    }
+  }
+  return uniqueValues;
+}
   },
 
   mounted() {
@@ -198,6 +271,9 @@ export default {
       // 	style.innerHTML = styles.default
       // 	this.$refs.chatWindow.shadowRoot.appendChild(style)
       // }
+    },
+    handleChange(selectedItems) {
+      this.selectedItems = selectedItems;
     },
     resetRooms() {
       this.loadingRooms = true;
@@ -798,14 +874,17 @@ export default {
 
     async createRoom() {
       this.disableForm = true;
-
-      const { id } = await firestoreService.addUser({
-        username: this.addRoomUsername,
-      });
-      await firestoreService.updateUser(id, { _id: id });
+      console.log(this.addRoomUsername, "no data");
+      let advocate = this.advocates.find((a) => a.id === this.addRoomUsername);
+      let user = {
+        _id: advocate.id,
+        username: advocate.first_name,
+        avatar: advocate.profile_photo,
+      };
+      await firestoreService.addIdentifiedUser(advocate.id, user);
 
       await firestoreService.addRoom({
-        users: [id, this.currentUserId],
+        users: [advocate.id, this.currentUserId],
         lastUpdated: new Date(),
       });
 
@@ -822,12 +901,16 @@ export default {
     async addRoomUser() {
       this.disableForm = true;
 
-      const { id } = await firestoreService.addUser({
-        username: this.invitedUsername,
-      });
-      await firestoreService.updateUser(id, { _id: id });
+	  let advocate = this.advocates.find((a) => a.id === this.invitedUsername);
+      let user = {
+        _id: advocate.id,
+        username: advocate.first_name,
+        avatar: advocate.profile_photo,
+      };
+      await firestoreService.addIdentifiedUser(advocate.id, user);
 
-      await firestoreService.addRoomUser(this.inviteRoomId, id);
+
+      await firestoreService.addRoomUser(this.inviteRoomId, advocate.id);
 
       this.inviteRoomId = null;
       this.invitedUsername = "";
@@ -923,6 +1006,7 @@ button {
   font-size: 14px;
   transition: 0.3s;
   vertical-align: middle;
+  margin-left: 10px;
 
   &:hover {
     opacity: 0.8;
@@ -942,7 +1026,7 @@ button {
 .button-cancel {
   color: #a8aeb3;
   background: none;
-  margin-left: 5px;
+  margin-left: 0px;
 }
 
 select {

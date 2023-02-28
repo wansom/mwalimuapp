@@ -52,6 +52,7 @@ import * as firestoreService from '@/database/firestore'
 import * as storageService from '@/database/storage'
 
 import ChatContainer from '../components/Widgets/ChatBox.vue'
+import {auth} from "../database/index"
 
 export default {
 	components: {
@@ -80,7 +81,7 @@ export default {
 						'https://vignette.wikia.nocookie.net/teamavatarone/images/4/45/Yoda.jpg/revision/latest?cb=20130224160049'
 				}
 			],
-			currentUserId: 'Bhskj4r8oSqjITc4IXPT',
+			currentUserId: auth.currentUser.uid,
 			isDevice: false,
 			showDemoOptions: true,
 			updatingData: false

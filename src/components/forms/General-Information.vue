@@ -383,6 +383,7 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (!err) {
+          this.$store.dispatch("changeLoading",true)
           return new Promise(resolve => {
             listenDocumentUploadProgress(
             this.user.id,
