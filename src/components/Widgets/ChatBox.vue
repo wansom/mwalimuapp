@@ -43,7 +43,7 @@
     <form v-if="inviteRoomId" @submit.prevent="addRoomUser">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
-		  <a-select
+          <a-select
             show-search
             v-model="invitedUsername"
             style="width: 100%"
@@ -64,7 +64,11 @@
           </a-select>
         </a-col>
         <a-col span="4">
-          <a-button type="submit" :disabled="disableForm || !invitedUsername" @click="addRoomUser">
+          <a-button
+            type="submit"
+            :disabled="disableForm || !invitedUsername"
+            @click="addRoomUser"
+          >
             Add User
           </a-button>
         </a-col>
@@ -77,16 +81,30 @@
     </form>
 
     <form v-if="removeRoomId" @submit.prevent="deleteRoomUser">
-      <select v-model="removeUserId">
-        <option default value="">Select User</option>
-        <option v-for="user in removeUsers" :key="user._id" :value="user._id">
-          {{ user.username }}
-        </option>
-      </select>
-      <button type="submit" :disabled="disableForm || !removeUserId">
-        Remove User
-      </button>
-      <button class="button-cancel" @click="removeRoomId = null">Cancel</button>
+      <a-row type="flex" justify="space-around" align="middle">
+        <a-col span="16">
+          <a-select v-model="removeUserId">
+            <a-select-option default value="">Select User</a-select-option>
+            <a-select-option
+              v-for="user in removeUsers"
+              :key="user._id"
+              :value="user._id"
+            >
+              {{ user.username }}
+            </a-select-option>
+          </a-select>
+        </a-col>
+        <a-col span="4">
+          <a-button type="submit" :disabled="disableForm || !removeUserId">
+            Remove User
+          </a-button>
+        </a-col>
+        <a-col span="4">
+          <a-button class="button-cancel" @click="removeRoomId = null"
+            >Cancel</a-button
+          >
+        </a-col>
+      </a-row>
     </form>
 
     <vue-advanced-chat
@@ -236,24 +254,24 @@ export default {
       return this.isDevice ? window.innerHeight + "px" : "calc(100vh - 80px)";
     },
 
-	 nonRoomMembers( array2) {
-  const uniqueValues = [];
-  // Loop through array1
-  for (let i = 0; i < this.advocates.length; i++) {
-    // If the value is not in array2, add it to uniqueValues
-    if (array2.indexOf(this.advocates[i]) === -1) {
-      uniqueValues.push(this.advocates[i]);
-    }
-  }
-  // Loop through array2
-  for (let i = 0; i < array2.length; i++) {
-    // If the value is not in array1, add it to uniqueValues
-    if (array1.indexOf(array2[i]) === -1) {
-      uniqueValues.push(array2[i]);
-    }
-  }
-  return uniqueValues;
-}
+    nonRoomMembers(array2) {
+      const uniqueValues = [];
+      // Loop through array1
+      for (let i = 0; i < this.advocates.length; i++) {
+        // If the value is not in array2, add it to uniqueValues
+        if (array2.indexOf(this.advocates[i]) === -1) {
+          uniqueValues.push(this.advocates[i]);
+        }
+      }
+      // Loop through array2
+      for (let i = 0; i < array2.length; i++) {
+        // If the value is not in array1, add it to uniqueValues
+        if (array1.indexOf(array2[i]) === -1) {
+          uniqueValues.push(array2[i]);
+        }
+      }
+      return uniqueValues;
+    },
   },
 
   mounted() {
@@ -901,14 +919,13 @@ export default {
     async addRoomUser() {
       this.disableForm = true;
 
-	  let advocate = this.advocates.find((a) => a.id === this.invitedUsername);
+      let advocate = this.advocates.find((a) => a.id === this.invitedUsername);
       let user = {
         _id: advocate.id,
         username: advocate.first_name,
         avatar: advocate.profile_photo,
       };
       await firestoreService.addIdentifiedUser(advocate.id, user);
-
 
       await firestoreService.addRoomUser(this.inviteRoomId, advocate.id);
 
