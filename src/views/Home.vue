@@ -6,7 +6,6 @@
     
     <SignupBanner/>
     <all-lawyers :advocates="advocates"></all-lawyers>
-    <!-- <top-lawyers :advocates="advocates"></top-lawyers> -->
     <KnowYourCourts/>
     <Footer></Footer>
  

@@ -107,8 +107,8 @@
                       SEARCH FOR
                     </button>
                     <div class="input-group">
-                      <input type="text" placeholder="advocates you need?" />
-                      <button type="button">
+                      <input type="text" placeholder="advocates you need?" v-model="searchString"/>
+                      <button type="button" @click="onSearch">
                         <i class="fa fa-magnifying-glass"></i>
                       </button>
                     </div>
@@ -328,12 +328,12 @@ export default {
     formatter(value) {
       return `${value} Years`;
     },
-    onSearch(element) {
-      if (this.filtersAppied.indexOf(element) > -1) {
-        this.filtersAppied.pop(element);
-      } else {
-        this.filtersAppied.push(element);
-      }
+    onSearch() {
+     if(this.searchString){
+      this.filtersAppied=false
+      return this.advocates.filter((a)=>a.username.includes(this.searchString))
+     }
+     return this.advocates
     },
    filterAdvocates(county, minExperience, maxExperience, practiceAreas, advocates) {
   return advocates.filter(advocate => {
