@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div id="product-list" class="container">
+    <div id="product-list">
       <div class="col-sm-12 product-list-all">
         <a-row>
           <a-col :span="24" :lg="6">
@@ -57,15 +57,9 @@
                 <div class="filter-widget">
                   <h4 class="fw-title">Years of Experience</h4>
                   <div class="filter-range-wrap position-relative">
-                    <!-- <a-slider
-          range
-          :default-value="[3, 50]"
-          @change="setExperience"
-          :tooltip-visible="toolTip"
-        /> -->
                     <vue-range-slider
                       ref="slider"
-                      v-model="value"
+                      v-model="years_of_experience"
                       @change="setExperience"
                     ></vue-range-slider>
                   </div>
@@ -73,7 +67,6 @@
 
                 <div class="filter-widget">
                   <a-collapse
-                    v-model="activeKey"
                     expand-icon-position="right"
                     :bordered="false"
                   >
@@ -85,35 +78,27 @@
                     </template>
                     <a-collapse-panel key="1" header="Counties">
                       <div class="fw-color-choose">
-                        <!-- <div class="cs-item" v-for="county of counties" :key="county">
-              <input  type="radio" :id="county" :value="county" v-model="selectedCounty">
-              <label class="cs-red" :for="county">{{ county }}</label>
-            </div> -->
                         <div
                           class="cs-item"
                           v-for="item in counties"
                           :key="item"
-                          @change="
-                            () => {
-                              setActive(item);
-                            }
-                          "
                         >
                           <input
                             type="radio"
                             :id="item"
                             :value="item"
                             v-model="selectedCounty"
-                            @change="setActive(item)"
                           />
                           <label class="cs-red" :for="item">{{ item }}</label>
                         </div>
                       </div>
                     </a-collapse-panel>
                   </a-collapse>
-                  <a-collapse> </a-collapse>
+                 
                 </div>
+               
               </div>
+              <button class="filter-btn px-5" @click="filterItems">Filter</button>
             </div>
           </a-col>
           <a-col :span="24" :lg="18">
@@ -134,7 +119,7 @@
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-5 text-right">
-                  <p>Showing {{ filteredItems.length }} Advocates</p>
+                  <p>Showing {{filterApplied?displayItems.length:advocates.length }} Advocates</p>
                 </div>
               </div>
             <div id="product-list-wrapper">
@@ -170,16 +155,12 @@
                   <div class="grid-placehodler">
                     <div class="grid-list">
                       <!-- Loop products  -->
-                      <div class="col-sm-12">
-                        <h3 v-if="filteredItems.length == 0">
-                          No Lawyers fit your search
-                        </h3>
-                      </div>
+                     
                       <a-list
                         item-layout="vertical"
                         size="large"
                         :pagination="pagination"
-                        :data-source="filteredItems"
+                        :data-source="filterApplied?displayItems:advocates"
                       >
                         <a-list-item
                           slot="renderItem"
@@ -207,6 +188,7 @@ import CardInfo from "../../components/Cards/CardInfo.vue";
 import DefaultHeader from "../../components/Headers/DefaultHeader.vue";
 import VueRangeSlider from "vue-range-component";
 import "../../../public/home/css/range-slider.css";
+import { getAllAdvocates } from "../../database/firestore";
 export default {
   props: ["advocates"],
   components: {
@@ -292,16 +274,6 @@ export default {
       filtersAppied: [],
       genders: ["male", "female"],
       colors: ["red", "blue", "black", "white", "gold"],
-      materials: [
-        "leather",
-        "recycled cork",
-        "microfiber",
-        "mesh",
-        "wool",
-        "canvas",
-        "knit",
-        "Rubber",
-      ],
       experience: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       colorsActive: [],
       sizesActive: [],
@@ -315,6 +287,11 @@ export default {
       searchName: "",
       searchString: "",
       value: [0, 50],
+      selectedPractiseArea: [],
+      selectedCounty: "",
+      years_of_experience: [0, 50],
+      displayItems:[],
+    filterApplied:false
     };
   },
   methods: {
@@ -339,12 +316,11 @@ export default {
       console.log(this.filtersAppied);
     },
     setActive: function (element) {
-      if (this.filtersAppied.indexOf(element) > -1) {
-        this.filtersAppied.pop(element);
+      if (this.selectedPractiseArea.indexOf(element) > -1) {
+        this.selectedPractiseArea.pop(element);
       } else {
-        this.filtersAppied.push(element);
+        this.selectedPractiseArea.push(element);
       }
-      console.log(this.filtersAppied);
     },
     isActive: function (menuItem) {
       return this.filtersAppied.indexOf(menuItem) > -1;
@@ -359,9 +335,53 @@ export default {
         this.filtersAppied.push(element);
       }
     },
+    filterItems() {
+      // Get the selected filter values
+      const selectedPractiseArea = this.selectedPractiseArea;
+      const selectedCounty = this.selectedCounty;
+      const years_of_experience = this.years_of_experience;
+
+      // Filter the items based on the selected filter values
+      let filteredItems = this.advocates.filter((item) => {
+        let practiseAreaMatch = true;
+        let countyMatch = true;
+        let experienceMatch = true;
+
+        // Check if the item matches the selected selected practise area
+       
+          for(let i=0; i<=selectedPractiseArea.length,i++;){
+            if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
+              practiseAreaMatch = false;
+            }
+          }
+     
+     
+
+        // Check if the item matches the selected county
+        if ( selectedCounty !== "all" && item.location !== selectedCounty) {
+          countyMatch = false;
+        }
+
+        // Check if the item matches the selected experience range
+        let experience =
+          new Date().getFullYear() -
+          new Date(item.practise_start).getFullYear();
+        if (years_of_experience.length) {
+          if (experience < years_of_experience[0] || experience > years_of_experience[1]) {
+            experienceMatch = false;
+          }
+        }
+        // Return true only if all the filter conditions are met
+      return practiseAreaMatch && countyMatch && experienceMatch;
+    });
+  
+    // Update the items to display the filtered items
+    this.displayItems=filteredItems
+    this.filterApplied=true
+    },
   },
   computed: {
-    ...mapState(["user", "allAdvocates", "practiseAreas"]),
+    ...mapState(["user", "allAdvocates", "practiseAreas","filteredItems"]),
 
     filteredItems: function () {
       return this.advocates.filter((product) => {

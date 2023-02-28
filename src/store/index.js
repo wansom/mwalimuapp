@@ -100,6 +100,7 @@ export default new Vuex.Store({
       "State Tribunals",
     ],
     courtData: [],
+    filteredItems:[]
   },
   getters: {},
   mutations: {
@@ -127,6 +128,9 @@ export default new Vuex.Store({
     setCourtData(state, val) {
       state.courtData = val;
     },
+    setFilteredItems(state,val){
+      state.filteredItems=val
+    }
   },
   actions: {
     //register new user
@@ -327,9 +331,12 @@ export default new Vuex.Store({
         location.reload()
       })
     },
-
+    filterTest({commit},data){
+      console.log(data)
+    },
     //filter advocates
     filterItems({ commit },data) {
+      console.log(data)
       // Get the selected filter values
       const selectedPractiseArea = data.selectedPractiseArea;
       const selectedCounty = data.selectedCounty;
@@ -341,32 +348,37 @@ export default new Vuex.Store({
         let countyMatch = true;
         let experienceMatch = true;
 
-        // Check if the item matches the selected color
-        for(let i=0; i<=selectedPractiseArea,i++;){
-          if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
-            practiseAreaMatch = false;
+        // Check if the item matches the selected selected practise area
+       
+          for(let i=0; i<=selectedPractiseArea.length,i++;){
+            if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
+              practiseAreaMatch = false;
+            }
           }
-        }
+     
      
 
-        // Check if the item matches the selected size
-        if (selectedCounty !== "all" && item.location !== selectedCounty) {
+        // Check if the item matches the selected county
+        if ( selectedCounty !== "all" && item.location !== selectedCounty) {
           countyMatch = false;
         }
 
-        // Check if the item matches the selected price range
-        if (years_of_experience !== "all") {
-          if (item.years_of_experience < years_of_experience[0] || item.years_of_experience > years_of_experience[1]) {
+        // Check if the item matches the selected experience range
+        let experience =
+          new Date().getFullYear() -
+          new Date(item.practise_start).getFullYear();
+        if (years_of_experience.length) {
+          if (experience < years_of_experience[0] || experience > years_of_experience[1]) {
             experienceMatch = false;
           }
         }
         // Return true only if all the filter conditions are met
       return practiseAreaMatch && countyMatch && experienceMatch;
     });
-
+  
     // Update the items to display the filtered items
-    this.displayedItems = filteredItems;
-    commit("setAllAdvocates",filteredItems)
+    console.log(filteredItems)
+    commit("setFilteredItems",filteredItems)
     },
   },
   modules: {},
