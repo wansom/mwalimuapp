@@ -15,10 +15,9 @@
 </template>
 
 <script>
-import { arrayUnion } from '../../firebase';
 
 export default {
-    components: { arrayUnion }
+    components: {  }
 }
 </script>
 

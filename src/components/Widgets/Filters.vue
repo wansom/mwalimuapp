@@ -139,7 +139,7 @@
               </div>
             <div id="product-list-wrapper">
               <div class="col-sm-12">
-                <div class="row">
+                <div class="row mt-4">
                   <div
                   class="col-3"
                     v-for="filterAppied in filtersAppied"
