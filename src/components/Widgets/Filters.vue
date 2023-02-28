@@ -66,10 +66,7 @@
                 </div>
 
                 <div class="filter-widget">
-                  <a-collapse
-                    expand-icon-position="right"
-                    :bordered="false"
-                  >
+                  <a-collapse expand-icon-position="right" :bordered="false">
                     <template #expandIcon="props">
                       <a-icon
                         type="caret-down"
@@ -94,39 +91,43 @@
                       </div>
                     </a-collapse-panel>
                   </a-collapse>
-                 
                 </div>
-               
               </div>
-              <button class="filter-btn px-5" @click="filterItems">Filter</button>
+              <button class="filter-btn px-5" @click="filterItems">
+                Filter
+              </button>
             </div>
           </a-col>
           <a-col :span="24" :lg="18">
-              <div class="row">
-                <div class="col-lg-7 col-md-7">
-                  <div class="row">
-                    <div class="advanced-search">
-                      <button type="button" class="category-btn">
-                        SEARCH FOR
+            <div class="row">
+              <div class="col-lg-7 col-md-7">
+                <div class="row">
+                  <div class="advanced-search">
+                    <button type="button" class="category-btn">
+                      SEARCH FOR
+                    </button>
+                    <div class="input-group">
+                      <input type="text" placeholder="advocates you need?" />
+                      <button type="button">
+                        <i class="fa fa-magnifying-glass"></i>
                       </button>
-                      <div class="input-group">
-                        <input type="text" placeholder="advocates you need?" />
-                        <button type="button">
-                          <i class="fa fa-magnifying-glass"></i>
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-5 col-md-5 text-right">
-                  <p>Showing {{filterApplied?displayItems.length:advocates.length }} Advocates</p>
-                </div>
               </div>
+              <div class="col-lg-5 col-md-5 text-right">
+                <p>
+                  Showing
+                  {{ filterApplied ? displayItems.length : advocates.length }}
+                  Advocates
+                </p>
+              </div>
+            </div>
             <div id="product-list-wrapper">
               <div class="col-sm-12">
                 <div class="row mt-4">
                   <div
-                  class="col-3"
+                    class="col-3"
                     v-for="filterAppied in filtersAppied"
                     :key="filterAppied"
                   >
@@ -134,7 +135,6 @@
                       class="filter-value"
                       @click="removeTags(filterAppied)"
                       icon="delete"
-                    
                     >
                       {{ filterAppied }}
                     </a-button>
@@ -155,12 +155,12 @@
                   <div class="grid-placehodler">
                     <div class="grid-list">
                       <!-- Loop products  -->
-                     
+
                       <a-list
                         item-layout="vertical"
                         size="large"
                         :pagination="pagination"
-                        :data-source="filterApplied?displayItems:advocates"
+                        :data-source="filterApplied ? displayItems : advocates"
                       >
                         <a-list-item
                           slot="renderItem"
@@ -290,8 +290,8 @@ export default {
       selectedPractiseArea: [],
       selectedCounty: "",
       years_of_experience: [0, 50],
-      displayItems:[],
-    filterApplied:false
+      displayItems: [],
+      filterApplied: false,
     };
   },
   methods: {
@@ -299,8 +299,8 @@ export default {
       var itemIndex = this.filtersAppied.indexOf(item);
       this.filtersAppied.splice(itemIndex, 1);
     },
-    clearTags(){
-      this.filtersAppied=[]
+    clearTags() {
+      this.filtersAppied = [];
     },
     setExperience(element) {
       // //find range  elements
@@ -335,104 +335,41 @@ export default {
         this.filtersAppied.push(element);
       }
     },
+   filterAdvocates(county, minExperience, maxExperience, practiceAreas, advocates) {
+  return advocates.filter(advocate => {
+    let experience =
+          new Date().getFullYear() -
+          new Date(advocate.practise_start).getFullYear();
+    // Check if the advocate's country matches the specified country
+    if (advocate.location !== county) {
+      return false;
+    }
+
+    // Check if the advocate's experience is within the specified range
+    if (experience < minExperience || experience > maxExperience) {
+      return false;
+    }
+
+    // Check if the advocate's practice areas include all the specified practice areas
+    return practiceAreas.every(practiceArea => {
+      return advocate.practise_areas.includes(practiceArea);
+    });
+  });
+},
+
     filterItems() {
       // Get the selected filter values
       const selectedPractiseArea = this.selectedPractiseArea;
       const selectedCounty = this.selectedCounty;
       const years_of_experience = this.years_of_experience;
-
-      // Filter the items based on the selected filter values
-      let filteredItems = this.advocates.filter((item) => {
-        let practiseAreaMatch = true;
-        let countyMatch = true;
-        let experienceMatch = true;
-
-        // Check if the item matches the selected selected practise area
-       
-          for(let i=0; i<=selectedPractiseArea.length,i++;){
-            if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
-              practiseAreaMatch = false;
-            }
-          }
-     
-     
-
-        // Check if the item matches the selected county
-        if ( selectedCounty !== "all" && item.location !== selectedCounty) {
-          countyMatch = false;
-        }
-
-        // Check if the item matches the selected experience range
-        let experience =
-          new Date().getFullYear() -
-          new Date(item.practise_start).getFullYear();
-        if (years_of_experience.length) {
-          if (experience < years_of_experience[0] || experience > years_of_experience[1]) {
-            experienceMatch = false;
-          }
-        }
-        // Return true only if all the filter conditions are met
-      return practiseAreaMatch && countyMatch && experienceMatch;
-    });
-  
-    // Update the items to display the filtered items
-    this.displayItems=filteredItems
-    this.filterApplied=true
+      console.log(this.filterAdvocates(selectedCounty, years_of_experience[0], years_of_experience[1], selectedPractiseArea, this.advocates))
+      // Update the items to display the filtered items
+      this.displayItems = this.filterAdvocates(selectedCounty, years_of_experience[0], years_of_experience[1], selectedPractiseArea, this.advocates);
+      this.filterApplied = true;
     },
   },
   computed: {
-    ...mapState(["user", "allAdvocates", "practiseAreas","filteredItems"]),
-
-    filteredItems: function () {
-      return this.advocates.filter((product) => {
-        let experience =
-          new Date().getFullYear() -
-          new Date(product.practise_start).getFullYear();
-        const oldRange = this.filtersAppied.filter((element) =>
-          Array.isArray(element)
-        );
-
-        return this.filtersAppied.every((filterAppied) => {
-          if (this.searchString.length) {
-            if (
-              product.first_name
-                .toLowerCase()
-                .includes(filterAppied.toLowerCase())
-            ) {
-              return product.first_name
-                .toLowerCase()
-                .includes(filterAppied.toLowerCase());
-            }
-            if (
-              product.last_name
-                .toLowerCase()
-                .includes(filterAppied.toLowerCase())
-            ) {
-              return product.last_name
-                .toLowerCase()
-                .includes(filterAppied.toLowerCase());
-            }
-          }
-
-          if (product.practise_areas.includes(filterAppied)) {
-            return product.practise_areas.includes(filterAppied);
-          }
-          if (product.specialisation.includes(filterAppied)) {
-            return product.specialisation.includes(filterAppied);
-          }
-          if (product.location.includes(filterAppied)) {
-            return product.location.includes(filterAppied);
-          }
-          if (oldRange.length) {
-            if (experience >= oldRange[0][0] && experience <= oldRange[0][1]) {
-              return (
-                experience >= oldRange[0][0] && experience <= oldRange[0][1]
-              );
-            }
-          }
-        });
-      });
-    },
+    ...mapState(["user", "allAdvocates", "practiseAreas"]),
   },
   updated() {},
   mounted() {},
