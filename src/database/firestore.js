@@ -51,7 +51,6 @@ const getDocuments = query => {
 const getDocument = ref => {
 	return getDoc(ref).then(doc => formatQueryDataObject(doc))
 }
-
 const addDocument = (ref, data) => {
 	return addDoc(ref, data)
 }
@@ -79,6 +78,7 @@ export const addLawyer=(values)=>{
 return setDocument(LAWYERS_PATH,values.uid,values)
 }
 
+
 export const getAdvocate = userId => {
 	return getDocument(advocateRef(userId))
 }
@@ -102,6 +102,20 @@ const courtRef = id => {
 
 export const getAllCourts =()=>{
 	return getDocuments(query(courtsRef))
+}
+
+export const courtSnapshots=()=>{
+	let docs=[]
+	const getData =firestoreListener(advocatesRef,(snapshot)=>{
+		snapshot.forEach((doc)=>{
+			docs.push({
+				id: doc.id,
+				...doc.data()
+			  })
+			  console.log(doc)
+		})
+	})
+	return getData()
 }
 
 export const addCourt=(data)=>{

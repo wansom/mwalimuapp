@@ -8,7 +8,7 @@
     <template #title>
       <a-row type="flex" align="middle">
         <a-col :span="24" :md="12">
-          <h5 class="font-semibold m-0">{{ title }}</h5>
+          <h5 class="font-semibold m-0">Courts</h5>
         </a-col>
         <a-col
           :span="24"
@@ -250,7 +250,7 @@ const columns = [
   },
 ];
 export default {
-  props: [ "tableData", "title"],
+  props: [ "tableData"],
   data() {
     return {
       // Active button for the "Authors" table's card header radio button group.

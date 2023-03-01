@@ -21,23 +21,8 @@
         <div class="col-lg-8 offset-lg-1">
           <a-tabs :default-active-key="courts[0]" class="filter-control">
             <a-tab-pane :tab="court" v-for="court of courts" :key="court">
-              <!-- <div class="row">
-                  <div
-                    v-for="advocate of visibleItems"
-                    :key="advocate"
-                    class="col-sm-12 col-md-4"
-                  >
-                  <card-profile></card-profile>
-                  </div>
-                </div>
-                <div class="loading-more"  @click="loadMore" v-if="canLoadMore">
-                <i class="icon_loading"></i>
-                <span> Loading More </span>
-              </div> -->
               <data-table
-                :columns="columns"
                 :tableData="courtData"
-                :title="title"
               ></data-table>
             </a-tab-pane>
           </a-tabs>
@@ -62,7 +47,6 @@ export default {
       itemsPerPage: 4,
       visibleItems: [],
       numVisibleItems: 3,
-      columns,
     };
   },
   components: { CardProfile, Pagination, DataTable },

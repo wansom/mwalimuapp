@@ -7,12 +7,13 @@ import {
   addLawyer,
   updateAdvocate,
   getAllCourts,
-  addCourt
+  addCourt,
+  courtSnapshots
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser ,signIn,logout,passwordReset} from "../database/auth";
-import { arrayUnion } from "firebase/firestore";
-import {auth} from "../database/index"
+import { arrayUnion,onSnapshot,collection} from "firebase/firestore";
+import {auth,firestoreDb} from "../database/index"
 const axios = require("axios").default;
 
 Vue.use(Vuex);
@@ -306,15 +307,35 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-
+    subscribeToCollection({ commit }) {
+      const LAWYERS_PATH='nigeria_lawyers'
+      const myCollection = collection(firestoreDb, LAWYERS_PATH);
+  
+      const unsubscribe = onSnapshot(myCollection, (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        commit('setAdvocates', data);
+      });
+  
+      // Return a function to detach the listener when the action is no longer needed
+      return unsubscribe;
+    },
     async fetAllAdvocates({ commit }) {
-      getAllAdvocates()
-        .then(({ data }) => {
-          commit("setAllAdvocates", data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const LAWYERS_PATH='nigeria_lawyers'
+      const myCollection = collection(firestoreDb, LAWYERS_PATH);
+  
+      const unsubscribe = onSnapshot(myCollection, (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        commit('setAllAdvocates', data);
+      });
+  
+      // Return a function to detach the listener when the action is no longer needed
+      return unsubscribe;
     },
     changeStep({ commit }, value) {
       commit("setStep", value);
@@ -331,55 +352,7 @@ export default new Vuex.Store({
         location.reload()
       })
     },
-    filterTest({commit},data){
-      console.log(data)
-    },
-    //filter advocates
-    filterItems({ commit },data) {
-      console.log(data)
-      // Get the selected filter values
-      const selectedPractiseArea = data.selectedPractiseArea;
-      const selectedCounty = data.selectedCounty;
-      const years_of_experience = data.years_of_experience;
 
-      // Filter the items based on the selected filter values
-      let filteredItems = data.advocates.filter((item) => {
-        let practiseAreaMatch = true;
-        let countyMatch = true;
-        let experienceMatch = true;
-
-        // Check if the item matches the selected selected practise area
-       
-          for(let i=0; i<=selectedPractiseArea.length,i++;){
-            if (selectedPractiseArea !== "all" && item.practise_areas.includes(selectedPractiseArea[i])) {
-              practiseAreaMatch = false;
-            }
-          }
-     
-     
-
-        // Check if the item matches the selected county
-        if ( selectedCounty !== "all" && item.location !== selectedCounty) {
-          countyMatch = false;
-        }
-
-        // Check if the item matches the selected experience range
-        let experience =
-          new Date().getFullYear() -
-          new Date(item.practise_start).getFullYear();
-        if (years_of_experience.length) {
-          if (experience < years_of_experience[0] || experience > years_of_experience[1]) {
-            experienceMatch = false;
-          }
-        }
-        // Return true only if all the filter conditions are met
-      return practiseAreaMatch && countyMatch && experienceMatch;
-    });
-  
-    // Update the items to display the filtered items
-    console.log(filteredItems)
-    commit("setFilteredItems",filteredItems)
-    },
   },
   modules: {},
 });
