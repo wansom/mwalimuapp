@@ -2,13 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router/index";
 import {
-  getAllAdvocates,
   getAllRequests,
   addLawyer,
   updateAdvocate,
   getAllCourts,
   addCourt,
-  courtSnapshots
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser ,signIn,logout,passwordReset} from "../database/auth";
@@ -101,7 +99,8 @@ export default new Vuex.Store({
       "State Tribunals",
     ],
     courtData: [],
-    filteredItems:[]
+    filteredItems:[],
+    firebaseEror:""
   },
   getters: {},
   mutations: {
@@ -131,6 +130,9 @@ export default new Vuex.Store({
     },
     setFilteredItems(state,val){
       state.filteredItems=val
+    },
+    setFirebaseError(state,val){
+      state.firebaseEror=val
     }
   },
   actions: {
@@ -322,16 +324,20 @@ export default new Vuex.Store({
       // Return a function to detach the listener when the action is no longer needed
       return unsubscribe;
     },
-    async fetAllAdvocates({ commit }) {
+    async fetAllAdvocates({ dispatch,commit }) {
       const LAWYERS_PATH='nigeria_lawyers'
-      const myCollection = collection(firestoreDb, LAWYERS_PATH);
-  
+      const myCollection = collection(firestoreDb, LAWYERS_PATH); 
       const unsubscribe = onSnapshot(myCollection, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         commit('setAllAdvocates', data);
+       
+      }, (error) => {
+        dispatch("changeLoading", false);
+        commit("setFirebaseError", error.message)
+        console.log(error.message)
       });
   
       // Return a function to detach the listener when the action is no longer needed

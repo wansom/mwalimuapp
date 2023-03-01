@@ -41,7 +41,8 @@ auth.onAuthStateChanged((user) => {
   }
   if (user) {
     store.dispatch("fetAllAdvocates")
+
   }
   store.dispatch("fetAllAdvocates")
-  store.dispatch("fetchUserProfile")
+  store.dispatch("fetchCourts")
 });

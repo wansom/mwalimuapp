@@ -107,7 +107,11 @@
                       SEARCH FOR
                     </button>
                     <div class="input-group">
-                      <input type="text" placeholder="advocates you need?" v-model="searchString"/>
+                      <input
+                        type="text"
+                        placeholder="advocates you need?"
+                        v-model="searchString"
+                      />
                       <button type="button" @click="onSearch">
                         <i class="fa fa-magnifying-glass"></i>
                       </button>
@@ -155,8 +159,19 @@
                   <div class="grid-placehodler">
                     <div class="grid-list">
                       <!-- Loop products  -->
-
+                      <a-spin v-if="loading"></a-spin>
+                      <a-result
+                        status="500"
+                        title="500"
+                        sub-title="Sorry, the server is wrong."
+                        v-else-if="firebaseEror"
+                      >
+                        <template #extra>
+                          <a-button type="primary"> Back Home </a-button>
+                        </template>
+                      </a-result>
                       <a-list
+                        v-else
                         item-layout="vertical"
                         size="large"
                         :pagination="pagination"
@@ -188,7 +203,6 @@ import CardInfo from "../../components/Cards/CardInfo.vue";
 import DefaultHeader from "../../components/Headers/DefaultHeader.vue";
 import VueRangeSlider from "vue-range-component";
 import "../../../public/home/css/range-slider.css";
-import { getAllAdvocates } from "../../database/firestore";
 export default {
   props: ["advocates"],
   components: {
@@ -329,47 +343,75 @@ export default {
       return `${value} Years`;
     },
     onSearch() {
-     if(this.searchString){
-      this.filtersAppied=false
-      return this.advocates.filter((a)=>a.username.includes(this.searchString))
-     }
-     return this.advocates
+      if (this.searchString) {
+        this.filtersAppied = false;
+        return this.advocates.filter((a) =>
+          a.username.includes(this.searchString)
+        );
+      }
+      return this.advocates;
     },
-   filterAdvocates(county, minExperience, maxExperience, practiceAreas, advocates) {
-  return advocates.filter(advocate => {
-    let experience =
+    filterAdvocates(
+      county,
+      minExperience,
+      maxExperience,
+      practiceAreas,
+      advocates
+    ) {
+      return advocates.filter((advocate) => {
+        let experience =
           new Date().getFullYear() -
           new Date(advocate.practise_start).getFullYear();
-    // Check if the advocate's country matches the specified country
-    if (advocate.location !== county) {
-      return false;
-    }
+        // Check if the advocate's country matches the specified country
+        if (advocate.location !== county) {
+          return false;
+        }
 
-    // Check if the advocate's experience is within the specified range
-    if (experience < minExperience || experience > maxExperience) {
-      return false;
-    }
+        // Check if the advocate's experience is within the specified range
+        if (experience < minExperience || experience > maxExperience) {
+          return false;
+        }
 
-    // Check if the advocate's practice areas include all the specified practice areas
-    return practiceAreas.every(practiceArea => {
-      return advocate.practise_areas.includes(practiceArea);
-    });
-  });
-},
+        // Check if the advocate's practice areas include all the specified practice areas
+        return practiceAreas.every((practiceArea) => {
+          return advocate.practise_areas.includes(practiceArea);
+        });
+      });
+    },
 
     filterItems() {
       // Get the selected filter values
       const selectedPractiseArea = this.selectedPractiseArea;
       const selectedCounty = this.selectedCounty;
       const years_of_experience = this.years_of_experience;
-      console.log(this.filterAdvocates(selectedCounty, years_of_experience[0], years_of_experience[1], selectedPractiseArea, this.advocates))
+      console.log(
+        this.filterAdvocates(
+          selectedCounty,
+          years_of_experience[0],
+          years_of_experience[1],
+          selectedPractiseArea,
+          this.advocates
+        )
+      );
       // Update the items to display the filtered items
-      this.displayItems = this.filterAdvocates(selectedCounty, years_of_experience[0], years_of_experience[1], selectedPractiseArea, this.advocates);
+      this.displayItems = this.filterAdvocates(
+        selectedCounty,
+        years_of_experience[0],
+        years_of_experience[1],
+        selectedPractiseArea,
+        this.advocates
+      );
       this.filterApplied = true;
     },
   },
   computed: {
-    ...mapState(["user", "allAdvocates", "practiseAreas"]),
+    ...mapState([
+      "user",
+      "allAdvocates",
+      "practiseAreas",
+      "loading",
+      "firebaseEror",
+    ]),
   },
   updated() {},
   mounted() {},
