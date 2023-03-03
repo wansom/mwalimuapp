@@ -5,7 +5,7 @@
                 <div class="col-lg-4">
                     <a href="#all-lawyers">
                     <div class="single-banner">
-                        <img src="https://acelitigator.com/wp-content/uploads/2022/01/s2-new.jpg" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2022/01/s2-new.jpg" alt="lawyers" loading="lazy">
                         <div class="inner-text">
                             <h4>Get A Lawyer</h4>
                         </div>
@@ -14,20 +14,20 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png" alt="image" loading="lazy">
                         <div class="inner-text">
                             <h4>Lawyers In Practise</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <router-link to="know-your-courts">
+                    <a href="#courts">
                     <div class="single-banner">
-                        <img src="https://acelitigator.com/wp-content/uploads/2023/02/IMG_20230206_122940.jpg" alt="">
+                        <img src="https://acelitigator.com/wp-content/uploads/2023/02/IMG_20230206_122940.jpg" alt="know your courts" loading="lazy">
                         <div class="inner-text">
                             <h4>Know Your Court</h4>
                         </div>
-                    </div></router-link>
+                    </div></a>
                 </div>
             </div>
         </div>

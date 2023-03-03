@@ -15,7 +15,7 @@
               <a-form-item class="group-input">
                 <label for="username">Email *</label>
                 <a-input
-                  autocomplete="off"
+                
                   v-decorator="[
                     'email',
                     {
@@ -56,8 +56,8 @@
               <div class="group-input gi-check">
                 <div class="gi-more">
                   <label for="save-pass">
-                    Save Password
-                    <input type="checkbox" id="save-pass" />
+                    Remember Me
+                    <input type="checkbox" id="save-pass" checked />
                     <span class="checkmark"></span>
                   </label>
                   <router-link to="forgot-password" class="forget-pass">Forget your Password</router-link>
@@ -86,17 +86,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       // Binded model property for "Sign In Form" switch button for "Remember Me" .
       rememberMe: true,
-      loading: this.$store.state.loading,
       form:this.$form.createForm(this, { name: "normal_login" })
     };
   },
   beforeCreate() {
 
+  },
+  computed:{
+...mapState(["loading"])
   },
   methods: {
     // Handles input validation after submission.

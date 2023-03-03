@@ -182,9 +182,8 @@ export default new Vuex.Store({
     },
 
     //login user
-    login({ dispatch, commit }, data) {
+    login({ dispatch}, data) {
       dispatch("changeLoading", true);
-      console.log(data)
       signIn(data).then(()=>{
         dispatch("changeLoading", false);
         dispatch("fetchUserProfile");

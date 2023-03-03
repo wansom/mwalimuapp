@@ -6,7 +6,7 @@ export const createUser=(values)=>{
 }
 
 export const signIn=(values)=>{
-return signInWithEmailAndPassword(auth,values.email,values.password)
+return signInWithEmailAndPassword(auth,values.email.trim(),values.password.trim())
 }
 
 export const logout=()=>{

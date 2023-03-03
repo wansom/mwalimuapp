@@ -138,15 +138,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      loading: this.$store.state.loading,
     };
   },
   beforeCreate() {
     // Creates the form and adds to it component's "form" property.
     this.form = this.$form.createForm(this, { name: "normal_login" });
+  },
+  computed:{
+...mapState(["loading"])
   },
   methods: {
     // Handles input validation after submission.
