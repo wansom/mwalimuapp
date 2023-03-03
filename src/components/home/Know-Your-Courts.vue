@@ -19,10 +19,10 @@
           </div>
         </div>
         <div class="col-lg-8 offset-lg-1">
-          <a-tabs :default-active-key="courts[0]" class="filter-control">
-            <a-tab-pane :tab="court" v-for="court of courts" :key="court">
+          <a-tabs :default-active-key="courts[0]" class="filter-control" @change="callback">
+            <a-tab-pane :tab="court" v-for="court of courts" :key="court" >
               <data-table
-                :tableData="courtData"
+                :tableData="selectedCourts"
               ></data-table>
             </a-tab-pane>
           </a-tabs>
@@ -47,7 +47,9 @@ export default {
       itemsPerPage: 4,
       visibleItems: [],
       numVisibleItems: 3,
+      activeTab:""
     };
+ 
   },
   components: { CardProfile, Pagination, DataTable },
   computed: {
@@ -55,8 +57,16 @@ export default {
     canLoadMore() {
       return this.numVisibleItems < this.practiseAreas.length;
     },
+    selectedCourts(){
+      return this.courtData.filter((c)=>c.type_of_court==this.activeTab)
+    }
   },
   methods: {
+    callback(key){
+      this.activeTab=key
+      let cout =this.courtData.filter((c)=>c.type_of_court==this.activeTab)
+      console.log(this.activeTab,cout)
+    },
     handleChange(current) {
       console.log(curr);
     },
@@ -76,6 +86,7 @@ export default {
     this.updateVisibleItems();
     this.$store.dispatch("fetchCourts");
   },
+
 };
 </script>
 

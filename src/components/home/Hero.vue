@@ -11,7 +11,7 @@
                 Get free pricing proposals from vetted
 lawyers in our marketplace.
               </p>
-              <a href="#all-lawyers" class="primary-btn">SEARCH NOW</a>
+              <a href="#all-lawyers" class="primary-btn">START NOW</a>
             </div>
           </div>
           <!-- <div class="off-card">

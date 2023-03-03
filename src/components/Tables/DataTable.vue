@@ -180,7 +180,7 @@
       </template>
       <template slot="image_url" slot-scope="image_url">
 				<h6 class="m-0">
-					<img :src="image_url" width="25" class="mr-10">
+          <a-avatar :src="image_url"  :size="50"/>
 				</h6>
 			</template>
       <template slot="func" slot-scope="func">
