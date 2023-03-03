@@ -8,7 +8,7 @@
               <a href="#"><img src="images/logo.png" alt="" style="height: 80px; object-fit: contain;"/></a>
             </div>
             <ul>
-              <li>Address: 60-49 Road 11378 New York</li>
+              <li>Address: I&M Building 2nd Ngong Avenue, Nairobi, Kenya</li>
               <li>Phone: +65 11.188.888</li>
               <li>Email: info@acelitigator.com</li>
             </ul>
