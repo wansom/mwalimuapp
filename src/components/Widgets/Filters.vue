@@ -100,7 +100,7 @@
           </a-col>
           <a-col :span="24" :lg="18">
             <div class="row">
-              <div class="col-lg-7 col-md-7">
+              <!-- <div class="col-lg-7 col-md-7">
                 <div class="row">
                   <div class="advanced-search">
                     <button type="button" class="category-btn">
@@ -118,7 +118,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-lg-5 col-md-5 text-right">
                 <p>
                   Showing
@@ -384,15 +384,6 @@ export default {
       const selectedPractiseArea = this.selectedPractiseArea;
       const selectedCounty = this.selectedCounty;
       const years_of_experience = this.years_of_experience;
-      console.log(
-        this.filterAdvocates(
-          selectedCounty,
-          years_of_experience[0],
-          years_of_experience[1],
-          selectedPractiseArea,
-          this.advocates
-        )
-      );
       // Update the items to display the filtered items
       this.displayItems = this.filterAdvocates(
         selectedCounty,

@@ -1,6 +1,8 @@
 <template>
   <div class="window-container" :class="{ 'window-mobile': isDevice }">
-    <form v-if="addNewRoom" @submit.prevent="createRoom">
+  
+    <a-modal v-model="addNewRoom" title="Search or Select Advocate to start chat">
+      <form  @submit.prevent="createRoom">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
           <a-select
@@ -23,24 +25,20 @@
             </a-select-option>
           </a-select>
         </a-col>
-        <a-col span="4">
-          <a-button
-            type="submit"
-            :disabled="disableForm || !addRoomUsername"
-            @click="createRoom"
-          >
-            Start Chat
-          </a-button>
-        </a-col>
-        <a-col span="4">
-          <button class="button-cancel" @click="addNewRoom = false">
-            Cancel
-          </button>
-        </a-col>
       </a-row>
     </form>
-
-    <form v-if="inviteRoomId" @submit.prevent="addRoomUser">
+      <template slot="footer">
+        <a-button key="back" @click="addNewRoom = false">
+          Cancel
+        </a-button>
+        <a-button key="submit" type="primary" :loading="loading" :disabled="disableForm || !addRoomUsername"
+            @click="createRoom">
+          Start Chat
+        </a-button>
+      </template>
+    </a-modal>
+    <a-modal v-model="inviteRoomId" title="Type or search to add advocate to group chat">
+      <form  @submit.prevent="addRoomUser">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
           <a-select
@@ -63,22 +61,22 @@
             </a-select-option>
           </a-select>
         </a-col>
-        <a-col span="4">
-          <a-button
+      </a-row>
+    </form>
+      <template slot="footer">
+        <a-button key="back" @click="inviteRoomId = null" class="button-cancel" >
+          Cancel
+        </a-button>
+        <a-button
             type="submit"
             :disabled="disableForm || !invitedUsername"
             @click="addRoomUser"
           >
             Add User
           </a-button>
-        </a-col>
-        <a-col span="4">
-          <a-button class="button-cancel" @click="inviteRoomId = null"
-            >Cancel</a-button
-          >
-        </a-col>
-      </a-row>
-    </form>
+      </template>
+    </a-modal>
+   
 
     <form v-if="removeRoomId" @submit.prevent="deleteRoomUser">
       <a-row type="flex" justify="space-around" align="middle">
@@ -141,6 +139,16 @@
       @typing-message="typingMessage($event.detail[0])"
       @toggle-rooms-list="$emit('show-demo-options', $event.detail[0].opened)"
     >
+    <div slot="add-icon">
+      <img src="images/message-icon.png" alt="">
+    </div>
+    <div slot="rooms-empty">
+      <p>No Chats</p>
+
+    </div>
+    <div slot="no-room-selected" style="disply:flex; justify-content:center;align-items: center;">
+
+    </div>
       <!-- <div
 				v-for="message in messages"
 				:slot="'message_' + message._id"
@@ -207,12 +215,12 @@ export default {
       roomActions: [
         { name: "inviteUser", title: "Invite User" },
         { name: "removeUser", title: "Remove User" },
-        { name: "deleteRoom", title: "Delete Room" },
+        { name: "deleteRoom", title: "Delete chat" },
       ],
       menuActions: [
         { name: "inviteUser", title: "Invite User" },
         { name: "removeUser", title: "Remove User" },
-        { name: "deleteRoom", title: "Delete Room" },
+        { name: "deleteRoom", title: "Delete chat" },
       ],
       messageSelectionActions: [{ name: "deleteMessages", title: "Delete" }],
       // eslint-disable-next-line vue/no-unused-properties
