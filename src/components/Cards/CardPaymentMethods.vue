@@ -72,7 +72,7 @@
         <a-card class="payment-method-card">
           <img src="images/mpesa.png" alt="" />
           <h6 class="card-number">MPESA</h6>
-          <a-button type="dahsed" @click="showModal"> Pay </a-button>
+          <a-button type="dahsed" @click="byPassPayment"> Pay </a-button>
         </a-card>
       </a-col>
       <!-- <a-col :span="24" :md="8">
@@ -194,6 +194,27 @@ export default {
           }
 
       })
+    },
+    byPassPayment(){
+      this.paymentConfirmed = true;
+            localStorage.clear()
+            this.$store.dispatch("updateUser", {
+                status: "pending approval",
+                payment_date: new Date(),
+                notifications:arrayUnion({
+                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
+                  date:new Date()
+
+                }),
+                invoices:arrayUnion({
+                  date: new Date(),
+                  amount:1500,
+                  number: 1
+                })
+              });
+              this.sendMail()
+              this.visible=false
+              location.reload()
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
