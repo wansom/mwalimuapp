@@ -45,10 +45,10 @@
                     </div> -->
 
           <div class="top-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest"></i></a>
+            <a href="//https://www.linkedin.com/company/ace-litigator/"><i class="fa fa-facebook"></i></a>
+            <a href="//https://www.linkedin.com/company/ace-litigator/"><i class="fa fa-twitter"></i></a>
+            <a href="//https://www.linkedin.com/company/ace-litigator/"><i class="fa fa-linkedin"></i></a>
+            <a href="//https://www.linkedin.com/company/ace-litigator/"><i class="fa fa-pinterest"></i></a>
           </div>
         </div>
       </div>
@@ -137,17 +137,18 @@
     <div class="nav-item">
       <div class="container">
         <div class="nav-depart">
+          <a href="/#all-lawyers">
           <div class="depart-btn">
             <i class="fa fa-bars"></i>
             <span>FIND LAWYERS</span>
-            <ul class="depart-hover">
+            <!-- <ul class="depart-hover">
               <span class="header-title">Practise Areas</span>
               <li v-for="area of practiseAreas" :key="area"><a href="#all-lawyers">{{ area }}</a></li><br><br><br>
 
               <span class="header-title">Counties</span>
               <li v-for="county of counties" :key="county"><a href="#all-lawyers">{{ county }}</a></li>
-            </ul>
-          </div>
+            </ul> -->
+          </div></a>
         </div>
         
         <nav class="nav-menu mobile-menu">
@@ -158,9 +159,9 @@
             <li>
               <a href="#">Resources</a>
               <ul class="dropdown">
-                <li><a href="acelitigator.com">Legal Documents</a></li>
-                <li><a href="acelitigator.com">Articles</a></li>
-                <li><a href="acelitigator.com">Webiners</a></li>
+                <li><a href="//acelitigator.com" target="blank">Legal Documents</a></li>
+                <li><a href="//acelitigator.com" target="blank">Articles</a></li>
+                <li><a href="//acelitigator.com" target="blank">Webiners</a></li>
               </ul>
             </li>
             <li><router-link to="contact-us">Contact</router-link></li>

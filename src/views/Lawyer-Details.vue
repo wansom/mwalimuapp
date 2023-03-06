@@ -37,14 +37,14 @@ export default {
     fetchDetails() {
       getAdvocate(this.$route.params.id).then((data)=>{
        this.advocate=data
-        // this.$store.dispatch('updateUser',{
-          
-        // })
+        this.$store.dispatch('updateUser',{
+          profile_visits: FieldValue.increment(+1),
+        })
       })
     },
     // updateProfileVisits() {
     //   fb.usersCollection.doc(this.$route.params.id).update({
-    //     profile_visits: fb.types.FieldValue.increment(),
+    //     profile_visits: fb.types.FieldValue.increment(+1),
     //   });
     // },
   },
