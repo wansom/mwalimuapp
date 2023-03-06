@@ -351,33 +351,64 @@ export default {
       }
       return this.advocates;
     },
-    filterAdvocates(
-      county,
-      minExperience,
-      maxExperience,
-      practiceAreas,
-      advocates
-    ) {
-      return advocates.filter((advocate) => {
-        let experience =
+    // filterAdvocates(
+    //   county,
+    //   minExperience,
+    //   maxExperience,
+    //   practiceAreas,
+    //   advocates
+    // ) {
+    //   return advocates.filter((advocate) => {
+    //     let experience =
+    //       new Date().getFullYear() -
+    //       new Date(advocate.practise_start).getFullYear();
+    //     // Check if the advocate's country matches the specified country
+    //     if (advocate.location !== county) {
+    //       return false;
+    //     }
+
+    //     // Check if the advocate's experience is within the specified range
+    //     if (experience < minExperience || experience > maxExperience) {
+    //       return false;
+    //     }
+
+    //     // Check if the advocate's practice areas include all the specified practice areas
+    //     return practiceAreas.every((practiceArea) => {
+    //       return advocate.practise_areas.includes(practiceArea);
+    //     });
+    //   });
+    // },
+   filterAdvocates(county, minExperience, maxExperience, practiceAreas, advocates) {
+  // Filter advocates based on country
+  if (county) {
+    advocates = advocates.filter(advocate => advocate.location === county);
+  }
+
+  // Filter advocates based on years of experience
+  if (minExperience || maxExperience) {
+    advocates = advocates.filter(advocate => {
+      let experience =
           new Date().getFullYear() -
           new Date(advocate.practise_start).getFullYear();
-        // Check if the advocate's country matches the specified country
-        if (advocate.location !== county) {
-          return false;
-        }
+      if (minExperience && experience < minExperience) {
+        return false;
+      }
+      if (maxExperience && experience > maxExperience) {
+        return false;
+      }
+      return true;
+    });
+  }
 
-        // Check if the advocate's experience is within the specified range
-        if (experience < minExperience || experience > maxExperience) {
-          return false;
-        }
+  // Filter advocates based on practice areas
+  if (practiceAreas && practiceAreas.length > 0) {
+    advocates = advocates.filter(advocate => {
+      return practiceAreas.every(area => advocate.practise_areas.includes(area));
+    });
+  }
 
-        // Check if the advocate's practice areas include all the specified practice areas
-        return practiceAreas.every((practiceArea) => {
-          return advocate.practise_areas.includes(practiceArea);
-        });
-      });
-    },
+  return advocates;
+},
 
     filterItems() {
       // Get the selected filter values
@@ -385,7 +416,8 @@ export default {
       const selectedCounty = this.selectedCounty;
       const years_of_experience = this.years_of_experience;
       // Update the items to display the filtered items
-      this.displayItems = this.filterAdvocates(
+   
+        this.displayItems = this.filterAdvocates(
         selectedCounty,
         years_of_experience[0],
         years_of_experience[1],
@@ -393,6 +425,7 @@ export default {
         this.advocates
       );
       this.filterApplied = true;
+    
     },
   },
   computed: {
