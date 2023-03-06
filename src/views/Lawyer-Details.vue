@@ -20,7 +20,8 @@ import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
 import {getAdvocate} from '../database/firestore'
-import {FieldValue} from "firebase/firestore"
+import {increment} from "firebase/firestore"
+import { updateAdvocate } from "../database/firestore";
 export default {
   components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },
   data(){
@@ -37,16 +38,11 @@ export default {
     fetchDetails() {
       getAdvocate(this.$route.params.id).then((data)=>{
        this.advocate=data
-        this.$store.dispatch('updateUser',{
-          profile_visits: FieldValue.increment(+1),
+       updateAdvocate(this.$route.params.id,{
+          profile_visits: increment(1),
         })
       })
     },
-    // updateProfileVisits() {
-    //   fb.usersCollection.doc(this.$route.params.id).update({
-    //     profile_visits: fb.types.FieldValue.increment(+1),
-    //   });
-    // },
   },
   mounted() {
     this.fetchDetails();

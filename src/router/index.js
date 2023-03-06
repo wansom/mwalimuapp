@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { auth } from "../database/index";	
 import {updateAdvocate} from "../database/firestore";
-import {FieldValue} from 'firebase/firestore';
+import {increment} from 'firebase/firestore';
 
 
 Vue.use(VueRouter)
@@ -155,7 +155,7 @@ router.beforeEach((to, from, next) => {
   router.afterEach((to, from) => {
 	if(to.params.id){
 		updateAdvocate(to.params.id,{
-			profile_visits:FieldValue.increment(1)
+			profile_visits:increment(1)
 		})
 
 	}

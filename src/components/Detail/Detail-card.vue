@@ -120,7 +120,7 @@
             <div class="product-content">
               <div class="row">
                 <div class="col-lg-7">
-                  <h5>{{ advocate.first_name }}<sapn class="mr-2"></sapn>{{ advocate.last_name }}</h5>
+                  <h5>{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h5>
                   <p>
                    {{ advocate.biography }}
                   </p>
