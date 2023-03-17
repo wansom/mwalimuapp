@@ -1,6 +1,11 @@
 <template>
   <a-card :bordered="false" class="card-info" style="max-width: 920px;">
     <a-row type="flex">
+      <a-col class="col-img d-block d-md-none" :span="24" :md="12">
+        <div>
+          <img :src="advocate.profile_photo" alt=""  style="object-fit:contain; width: 100%; max-height: 300px;" loading="lazy">
+        </div>
+      </a-col>
       <a-col class="col-content" :span="24" :xl="12">
         <div class="card-content">
           <h5>{{ advocate.first_name }} {{ advocate.last_name }}</h5>
@@ -57,31 +62,10 @@
           </router-link>
         </div>
       </a-col>
-      <a-col class="col-img" :span="24" :md="12">
+      <a-col class="col-img d-none d-md-block" :span="24" :md="12">
         <div>
           <a-avatar :src="advocate.profile_photo" :size="124" style="object-fit:contain" loading="lazy"/>
-          <!-- <img :src="advocate.profile_photo" alt="" style="width:100%; height: 200px; object-fit: contain;" /> -->
         </div>
-        <!-- <a-row type="flex" class="my-10 icons-list">
-          <a-col :span="6">
-            <a-icon type="phone" />
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <a-icon type="skype" />
-            </div>
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <a-icon type="wechat" />
-            </div>
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <a-icon type="linkedin" />
-            </div>
-          </a-col>
-        </a-row> -->
       </a-col>
     </a-row>
   </a-card>

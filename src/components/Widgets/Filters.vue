@@ -1,22 +1,12 @@
 <template>
   <div class="container-fluid">
     <div id="product-list">
-      <div class="col-sm-12 product-list-all">
+      <div class="col-sm-12">
         <a-row>
           <a-col :span="24" :lg="6">
             <div id="filters">
               <div class="sidebar">
                 <!-- sidebar  -->
-                <div id="shopbypanel" class="collapse">
-                  <div class="shopbypanel">
-                    <a-input-search
-                      placeholder="Enter first or last name"
-                      enter-button
-                      @search="onSearch"
-                      v-model="searchString"
-                    />
-                  </div>
-                </div>
                 <h5>FILTERS</h5>
                 <span class="line"></span>
 
@@ -100,26 +90,7 @@
           </a-col>
           <a-col :span="24" :lg="18">
             <div class="row">
-              <!-- <div class="col-lg-7 col-md-7">
-                <div class="row">
-                  <div class="advanced-search">
-                    <button type="button" class="category-btn">
-                      SEARCH FOR
-                    </button>
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        placeholder="advocates you need?"
-                        v-model="searchString"
-                      />
-                      <button type="button" @click="onSearch">
-                        <i class="fa fa-magnifying-glass"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <div class="col-lg-5 col-md-5 text-right">
+              <div class="col-lg-5 col-12 text-right my-2">
                 <p>
                   Showing
                   {{ filterApplied ? displayItems.length : advocates.length }}
@@ -127,67 +98,36 @@
                 </p>
               </div>
             </div>
-            <div id="product-list-wrapper">
+            <div >
               <div class="col-sm-12">
-                <div class="row mt-4">
-                  <div
-                    class="col-3"
-                    v-for="filterAppied in filtersAppied"
-                    :key="filterAppied"
+               <!-- Loop products  -->
+                  <a-spin v-if="loading"></a-spin>
+                  <a-result
+                    status="500"
+                    title="500"
+                    sub-title="Sorry, the server is wrong."
+                    v-else-if="firebaseEror"
                   >
-                    <a-button
-                      class="filter-value"
-                      @click="removeTags(filterAppied)"
-                      icon="delete"
+                    <template #extra>
+                      <a-button type="primary"> Back Home </a-button>
+                    </template>
+                  </a-result>
+                  <a-list
+                    v-else
+                    item-layout="vertical"
+                    size="large"
+                    :pagination="pagination"
+                    :data-source="filterApplied ? displayItems : advocates"
+                  >
+                    <a-list-item
+                      slot="renderItem"
+                      key="item.title"
+                      slot-scope="item"
+                     
                     >
-                      {{ filterAppied }}
-                    </a-button>
-                  </div>
-
-                  <transition name="fade">
-                    <a-button
-                      v-if="filtersAppied.length > 0"
-                      class="clear-values"
-                      @click.prevent="clearTags"
-                      type="primary"
-                    >
-                      Clear All</a-button
-                    >
-                  </transition>
-                </div>
-                <div class="wrapper-product-list">
-                  <div class="grid-placehodler">
-                    <div class="grid-list">
-                      <!-- Loop products  -->
-                      <a-spin v-if="loading"></a-spin>
-                      <a-result
-                        status="500"
-                        title="500"
-                        sub-title="Sorry, the server is wrong."
-                        v-else-if="firebaseEror"
-                      >
-                        <template #extra>
-                          <a-button type="primary"> Back Home </a-button>
-                        </template>
-                      </a-result>
-                      <a-list
-                        v-else
-                        item-layout="vertical"
-                        size="large"
-                        :pagination="pagination"
-                        :data-source="filterApplied ? displayItems : advocates"
-                      >
-                        <a-list-item
-                          slot="renderItem"
-                          key="item.title"
-                          slot-scope="item"
-                        >
-                          <card-info :advocate="item"></card-info>
-                        </a-list-item>
-                      </a-list>
-                    </div>
-                  </div>
-                </div>
+                      <card-info :advocate="item"></card-info>
+                    </a-list-item>
+                  </a-list>
               </div>
             </div>
           </a-col>
@@ -378,37 +318,47 @@ export default {
     //     });
     //   });
     // },
-   filterAdvocates(county, minExperience, maxExperience, practiceAreas, advocates) {
-  // Filter advocates based on country
-  if (county) {
-    advocates = advocates.filter(advocate => advocate.location === county);
-  }
-
-  // Filter advocates based on years of experience
-  if (minExperience || maxExperience) {
-    advocates = advocates.filter(advocate => {
-      let experience =
-          new Date().getFullYear() -
-          new Date(advocate.practise_start).getFullYear();
-      if (minExperience && experience < minExperience) {
-        return false;
+    filterAdvocates(
+      county,
+      minExperience,
+      maxExperience,
+      practiceAreas,
+      advocates
+    ) {
+      // Filter advocates based on country
+      if (county) {
+        advocates = advocates.filter(
+          (advocate) => advocate.location === county
+        );
       }
-      if (maxExperience && experience > maxExperience) {
-        return false;
+
+      // Filter advocates based on years of experience
+      if (minExperience || maxExperience) {
+        advocates = advocates.filter((advocate) => {
+          let experience =
+            new Date().getFullYear() -
+            new Date(advocate.practise_start).getFullYear();
+          if (minExperience && experience < minExperience) {
+            return false;
+          }
+          if (maxExperience && experience > maxExperience) {
+            return false;
+          }
+          return true;
+        });
       }
-      return true;
-    });
-  }
 
-  // Filter advocates based on practice areas
-  if (practiceAreas && practiceAreas.length > 0) {
-    advocates = advocates.filter(advocate => {
-      return practiceAreas.every(area => advocate.practise_areas.includes(area));
-    });
-  }
+      // Filter advocates based on practice areas
+      if (practiceAreas && practiceAreas.length > 0) {
+        advocates = advocates.filter((advocate) => {
+          return practiceAreas.every((area) =>
+            advocate.practise_areas.includes(area)
+          );
+        });
+      }
 
-  return advocates;
-},
+      return advocates;
+    },
 
     filterItems() {
       // Get the selected filter values
@@ -416,8 +366,8 @@ export default {
       const selectedCounty = this.selectedCounty;
       const years_of_experience = this.years_of_experience;
       // Update the items to display the filtered items
-   
-        this.displayItems = this.filterAdvocates(
+
+      this.displayItems = this.filterAdvocates(
         selectedCounty,
         years_of_experience[0],
         years_of_experience[1],
@@ -425,7 +375,6 @@ export default {
         this.advocates
       );
       this.filterApplied = true;
-    
     },
   },
   computed: {

@@ -5,30 +5,6 @@
       <div class="container-fluid">
         <div class="row">
           <filters :advocates="advocates"></filters>
-          <div class="col-lg-9 order-1 order-lg-2">
-
-            <!-- <div class="product-list">
-              <div class="row">
-                <div class="col-lg-12 col-sm-12" v-for="advocate of advocates" :key="advocate">
-                  <card-info :advocate="item"></card-info>
-                </div>
-              </div>
-            </div> -->
-            <!-- <a-list
-              item-layout="horizontal"
-              size="large"
-              :pagination="pagination"
-              :data-source="advocates"
-            >
-              <a-list-item slot="renderItem" key="item.title" slot-scope="item">
-                <card-info :advocate="item"></card-info>
-              </a-list-item>
-            </a-list> -->
-            <!-- <div class="loading-more">
-              <i class="icon_loading"></i>
-              <a href="#"> Loading More </a>
-            </div> -->
-          </div>
         </div>
       </div>
     </section>
