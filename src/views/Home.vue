@@ -2,8 +2,7 @@
  <div>
     <Header></Header>
     <Hero/>
-    <Banner></Banner>
-    
+    <Banner></Banner> 
     <SignupBanner/>
     <all-lawyers :advocates="advocates"></all-lawyers>
     <KnowYourCourts/>

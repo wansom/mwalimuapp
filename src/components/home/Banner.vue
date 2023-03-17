@@ -1,5 +1,5 @@
 <template>
-     <div class="banner-section spad">
+     <div class="banner-sectionbanner-section spad">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4">
