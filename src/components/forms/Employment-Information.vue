@@ -271,7 +271,7 @@ export default {
             prev2:values.prev2?values.prev2: "",
             prev2ending:values.prev2ending?values.prev2starting[1]?.format():"",
             prev2starting:values.prev2starting?values.prev2starting[0]?.format():"",
-            prev3:values.prev3?prev3: "",
+            prev3:values.prev3?values.prev3: "",
             prev3ending:values.prev3starting?values.prev3starting[1]?.format():"",
             prev3starting:values.prev3starting?values.prev3starting[0]?.format():"",
             prev4: values.prev4??"",

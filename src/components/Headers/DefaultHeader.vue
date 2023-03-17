@@ -25,30 +25,6 @@
       <!-- Trigger Button For Navigation Menu For Small Screens -->
     </div>
     <div class="header-col header-nav">
-      <!-- Navigation Menu For Large Screens -->
-      <!-- <a-menu mode="horizontal" class="menu-large">
-        <a-menu-item>
-          <router-link
-            to="/marketplace"
-            class="nav-link"
-            @click="(e) => e.preventDefault()"
-          >
-            <span>Find Lawyers</span>
-
-          </router-link>
-        </a-menu-item>
-        <a-menu-item>
-          <router-link
-            to="/marketplace"
-            class="nav-link"
-            @click="(e) => e.preventDefault()"
-          >
-            <span>Resources</span>
-            
-          </router-link>
-        </a-menu-item>
-      </a-menu> -->
-      <!-- / Navigation Menu For Large Screens -->
 
       <!-- Collapsible Navigation Menu For Small Screens -->
       <div class="menu-small">
@@ -109,8 +85,6 @@ export default {
   props:["user"],
   data() {
     return {
-      // Collapse navigation value.
-      // Binded model property for "Collapsible Navigation Menu" collapsed status .
       collapseNav: 0,
     };
 

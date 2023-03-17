@@ -41,7 +41,6 @@ export default new Vuex.Store({
       "Intellectual Property",
     ],
     counties: [
-      "All",
       "Nairobi",
       "Mombasa",
       "Kwale",
