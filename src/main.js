@@ -11,8 +11,9 @@ import VueSocialSharing from 'vue-social-sharing'
 
 // import './plugins/click-away'
 
-import './scss/app.scss';
+
 import '../public/home/css/style.css'
+import './scss/app.scss'
 import '../public/home/css/nice-select.css'
 import '../public/home/css/themify-icons.css'
 import '../public/home/css/elegant-icons.css'

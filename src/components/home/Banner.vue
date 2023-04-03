@@ -1,8 +1,37 @@
 <template>
-     <div class="banner-sectionbanner-section spad">
+     <div class="banner-section banner-section spad">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4">
+                    <div class="banner-card d-flex flex-column align-items-center values-card">
+                        <div class="vx-icon flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-check-to-slot"></i>
+                        </div>
+                      
+                        <h3>Get Only Verified Lawyers</h3>
+                        <p>Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts</p>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4">
+                    <div class="banner-card d-flex flex-column align-items-center values-card">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <h3>Get Only Verified Lawyers</h3>
+                        <p>Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts</p>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4">
+                    <div class="banner-card d-flex flex-column align-items-center values-card">
+                        <i class="fa-solid fa-globe"></i>
+                        <h3>Global Network</h3>
+                        <p>Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts Every business, investor, buyer and advisor profile on SMERGERS is pre-screened by our analysts</p>
+                    </div>
+                    
+                </div>
+
+
+                <!-- <div class="col-lg-4">
                     <a href="#all-lawyers">
                     <div class="single-banner">
                         <img src="https://acelitigator.com/wp-content/uploads/2022/01/s2-new.jpg" alt="lawyers" loading="lazy">
@@ -28,7 +57,7 @@
                             <h4>Know Your Court</h4>
                         </div>
                     </div></a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

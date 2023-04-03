@@ -102,8 +102,8 @@
     display: inline-block;
   }
   
-  .active {
+  /* .active {
     background-color: #4AAE9B;
     color: #ffffff;
-  }
+  } */
   </style>
