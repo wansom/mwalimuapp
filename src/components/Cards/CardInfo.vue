@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="card-info" style="max-width: 920px;">
+  <a-card :bordered="false" class="card-info" style="max-width: 920px; width: 40vw;  height: 334px; margin-right:20px; border-radius: 10px;">
     <a-row type="flex">
       <a-col class="col-img d-block d-md-none" :span="24" :md="12">
         <div>
