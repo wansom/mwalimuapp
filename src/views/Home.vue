@@ -873,6 +873,7 @@ section.banner {
   font-weight: 700;
   text-align: center;
   color: #fcfcfc;
+  
 }
 
 .banner-text p {
@@ -893,6 +894,8 @@ section.banner {
   background: #fcfcfc;
   border-radius: 5px;
   margin: auto;
+  font-size: 24px;
+  color:#000000;
 }
 
 /* == || BANNER == */
