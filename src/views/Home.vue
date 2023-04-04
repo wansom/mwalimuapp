@@ -85,18 +85,16 @@
           </div>
           <div class="offer-content">
             <div class="offer-card">
-              <img
-                src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png"
-                alt="Kofi Annan Institute for Conflict Transformation Offers"
-              />
               <div class="offer-info">
-                <span>01</span>
+                <div class="process"><span>01</span></div>
+              
                 <h3>Create A free Account</h3>
                 <p>
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
                 <button>
+                  Get Started
                   <svg
                     width="24"
                     height="24"
@@ -126,18 +124,16 @@
               </div>
             </div>
             <div class="offer-card">
-              <img
-                src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png"
-                alt="Kofi Annan Institute for Conflict Transformation Offers"
-              />
+           
               <div class="offer-info">
-                <span>02</span>
+                <div class="process"><span>02</span></div>
                 <h3>Complete and submit Profile</h3>
                 <p>
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
                 <button>
+                  Get Started
                   <svg
                     width="24"
                     height="24"
@@ -167,18 +163,16 @@
               </div>
             </div>
             <div class="offer-card">
-              <img
-                src="https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png"
-                alt="Kofi Annan Institute for Conflict Transformation Offers"
-              />
+            
               <div class="offer-info">
-                <span>03</span>
+                <div class="process"><span>03</span></div>
                 <h3>Pay for monthly Subscription</h3>
                 <p>
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
                 <button>
+                  Get Started
                   <svg
                     width="24"
                     height="24"
@@ -1016,48 +1010,57 @@ overflow: hidden;
 
 .offer-content {
   padding: 10px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
 }
 
 .offer-card {
-  width: 280px;
+  width: 100%;
   z-index: 0;
   position: relative;
   margin: 30px 0px;
 }
+.offer-card .process{
+  height: 64px;
+  width: 64px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e6353b;
+  margin-top: -60px;
+  margin-bottom: 20px;
 
-.offer-card img {
-  position: relative;
-  z-index: 0;
-  height: 250px;
-  object-fit: cover;
+}
+
+.offer-card .process span{
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 33px;
+  line-height: 44px;
+  text-align: center;
+  color: #fcfcfc;
+  margin: 10px auto;
 }
 
 .offer-info {
-  width: 250px;
+  width: 100%;
   height: 313px;
   background: #fcfcfc;
   border: 1px solid #e0e2f1;
   border-radius: 5px;
-  position: relative;
   z-index: 5;
-  margin: -60px auto 0px;
+  margin:  auto 0px;
   text-align: center;
+  border-radius: 15px;
   padding: 32px 0px 0px;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 
-.offer-info span {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 44px;
-  text-align: center;
-  color: #1c1b1f;
-  margin: 10px auto;
 }
 
 .offer-info h3 {
@@ -1085,17 +1088,17 @@ overflow: hidden;
 
 .offer-info button {
   background: #e6353b;
-  width: 50px;
+  width: 220px;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
   border: 0px;
-  position: absolute;
-  bottom: -25px;
-  left: 100px;
+  margin-top:20px;
+  color: #ffffff;
+  
 }
 
 /* == || OFFERS == */
