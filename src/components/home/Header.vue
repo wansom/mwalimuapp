@@ -5,7 +5,7 @@
         <div class="ht-left">
           <div class="logo">
               <router-link to="/">
-                <img src="images/logo-lg.png" alt="" style="height: 80px; object-fit: contain;" />
+                <img src="images/dial-logo.png" alt="" style="height: 80px; object-fit: contain;" />
               </router-link>
             </div>
           <div class="mail-service">
