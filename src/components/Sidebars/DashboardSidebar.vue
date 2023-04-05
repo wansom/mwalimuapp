@@ -13,7 +13,7 @@
 		:class="['ant-layout-sider-' + sidebarColor, 'ant-layout-sider-' + sidebarTheme]"
 		theme="light"
 		:style="{ backgroundColor: 'transparent',}">
-			<div class=" bg-dark"><img src="images/logo.png" alt="" style="height:100px;"> <span></span></div>
+			<div ><img src="images/dial-logo.png" alt="" style="height:100px;"> <span></span></div>
 			<hr>
 
 			<!-- Sidebar Navigation Menu -->
