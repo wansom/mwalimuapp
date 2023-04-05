@@ -787,7 +787,7 @@ overflow: hidden;
 }
 .bottom .up-card .right {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -2281,7 +2281,7 @@ section.filter {
   .links a {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     width: 100% !important;
     height: 50px;
     color: #1c1b1f;

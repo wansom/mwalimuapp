@@ -68,19 +68,19 @@
           <a-button type="dashed" @click="payWithCard"> PAY </a-button>
         </a-card>
       </a-col> -->
-      <a-col :span="24" :md="8">
-        <a-card class="payment-method-card">
+      <a-col :span="24" :md="10">
+        <a-card class="payment-method-card p-2">
           <img src="images/mpesa.png" alt="" />
           <h6 class="card-number">MPESA</h6>
-          <a-button type="dahsed" @click="byPassPayment"> Pay </a-button>
+          <a-button type="primary" @click="byPassPayment">Proceed to checkout</a-button>
         </a-card>
       </a-col>
-      <!-- <a-col :span="24" :md="8">
-        <a-card class="payment-method-card">
-          <h6 class="card-number">DIRECT BANK TRANSFER</h6>
-          <a-button type="dashed" @click="payWithCard"> PAY </a-button>
+      <a-col :span="24" :md="10">
+        <a-card class="payment-method-card p-2">
+          <a-input class="mr-2" v-model="coupon"/>
+          <a-button type="primary" @click="payWithCard"> Enter Coupon Code </a-button>
         </a-card>
-      </a-col> -->
+      </a-col>
     </a-row>
   </a-card>
   <!-- Payment Methods Card -->
@@ -95,7 +95,8 @@ export default {
     return {
       visible: false,
       loading: false,
-      sdkSent:false
+      sdkSent:false,
+      coupon:""
     };
   },
   methods: {
@@ -126,14 +127,54 @@ export default {
         return value
       }
     },
+    SendMail(){
+      this.$store.dispatch("sendMail",{
+              name: this.user.first_name,
+                email: this.user.email,
+                subject: "Acelitigator Account",
+                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback`
+  
+            })
+            this.$store.dispatch("sendMail",{
+              name: "Admin",
+                email: "owarren@barizicommunications.com",
+                subject: "Account creation",
+                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application. advocatelisting.acelitigator.com `
+  
+            })
+    },
     payWithCard(){
-      swal({
+      if(this.coupon=="Warren123456"){
+        this.paymentConfirmed = true;
+            localStorage.clear()
+            this.$store.dispatch("updateUser", {
+                status: "pending approval",
+                payment_date: new Date(),
+                notifications:arrayUnion({
+                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
+                  date:new Date()
+
+                }),
+                invoices:arrayUnion({
+                  date: new Date(),
+                  amount:0,
+                  number: this.coupon
+                })
+              });
+              this.sendMail()
+              this.visible=false
+              location.reload()
+
+      }else{
+        swal({
               title: "OOPS!",
-              text: `Payment method not available`,
+              text: `Coupon code is unavailable or has expired`,
               icon: "error",
             });
-            let date=new Date().setMonth(new Date().getMonth() + 1)
-            console.log(new Date(date).toDateString())
+
+      }
+
+    
     },
     intiatePayment() {
       this.loading = true;
@@ -252,22 +293,6 @@ export default {
     handleCancel() {
       this.visible = false;
     },
-    SendMail(){
-      this.$store.dispatch("sendMail",{
-              name: this.user.first_name,
-                email: this.user.email,
-                subject: "Acelitigator Account",
-                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback`
-  
-            })
-            this.$store.dispatch("sendMail",{
-              name: "Admin",
-                email: "owarren@barizicommunications.com",
-                subject: "Account creation",
-                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application. advocatelisting.acelitigator.com `
-  
-            })
-    }
   },
 };
 </script>
