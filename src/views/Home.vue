@@ -2468,6 +2468,27 @@ section.filter {
 .upcoming-events{
 display: none;
 }
+.research-information {
+  margin: 40px 0px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.research-information.one {
+  background-image: url("https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png");
+}
+
+
+.research-card {
+  max-width: 620px;
+  min-width: 280px;
+  height: fit-content;
+  background: #ffffff;
+  padding: 40px;
+  position: absolute;
+  top:100px;
+}
 
 }
 
