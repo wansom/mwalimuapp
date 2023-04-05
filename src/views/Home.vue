@@ -66,6 +66,7 @@
               the summit will provide a platform for stakeholders to
               collaborate, learn, and shape the future of work in Africa
             </p>
+            <router-link to="sign-up"><button>Sign Up</button></router-link>
           </div>
           <div class="overview-images">
             <div class="col one">
@@ -707,6 +708,22 @@ section.sponsors {
   font-size: 16px;
   line-height: 150%;
   color: #00000a;
+  margin-bottom: 10px;
+}
+.overview-text button {
+  outline: none;
+  border: 0;
+  width: 95%;
+  height: 50px;
+  background: #000000;
+  border-radius: 5px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #fcfcfc;
+  margin: 10px auto;
 }
 
 .overview-images {
@@ -2423,6 +2440,35 @@ section.filter {
   padding-bottom: 10px;
 
 }
+.overview-images {
+  width: 100%;
+  max-width: 490px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.overview-images .col {
+  padding: 10px;
+  max-width: 100%;
+}
+
+.overview-images .col img:nth-child(1) {
+  margin-bottom: 20px;
+}
+.overview-images img {
+  height: 280px;
+  object-fit: cover;
+}
+
+.overview-images .col.one {
+  padding-top: 60px;
+}
+.upcoming-events{
+display: none;
+}
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
