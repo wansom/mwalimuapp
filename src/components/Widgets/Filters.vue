@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div id="product-list">
       <div class="col-sm-12">
         <a-row>
@@ -7,7 +7,7 @@
             <div id="filters">
               <div class="sidebar">
                 <!-- sidebar  -->
-                <h5>FILTERS</h5>
+                <!-- <h5>FILTERS</h5> -->
                 <span class="line"></span>
 
                 <div class="filter-widget">
