@@ -74,7 +74,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Practising Number">
+            <a-form-item label="Practising Certificate Number">
               <a-input
                 v-decorator="[
                   'practise_number',
