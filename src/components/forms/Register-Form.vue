@@ -11,7 +11,9 @@
               class="login-form"
               @submit="handleSubmit"
             >
-              <a-form-item class="group-input">
+            <a-row type="flex" justify="space-between" :gutter="16">
+              <a-col :span="24" :sm="{ span: 24 }" :lg="{ span: 12 }">
+                <a-form-item class="group-input">
                 <label for="username">First Name *</label>
                 <a-input
                   type="text"
@@ -28,8 +30,9 @@
                     },
                   ]"
                 />
-              </a-form-item>
-              <a-form-item class="group-input">
+              </a-form-item></a-col>
+              <a-col :span="24" :sm="{ span: 24 }" :lg="{ span: 12 }">
+                <a-form-item class="group-input">
                 <label for="username">Last Name *</label>
                 <a-input
                   type="text"
@@ -47,6 +50,10 @@
                   ]"
                 />
               </a-form-item>
+              </a-col>
+            </a-row>
+
+           
               <a-form-item class="group-input">
                 <label for="username">Email address *</label>
                 <a-input
