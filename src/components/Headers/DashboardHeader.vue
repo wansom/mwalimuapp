@@ -37,7 +37,7 @@
             overlayClassName="header-notifications-dropdown"
             :getPopupContainer="() => wrapper"
           >
-            <a-badge :count="user.notifications.length">
+            <a-badge :count="user.notifications.length" class="text-white">
               <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 <svg
                   width="20"
@@ -78,10 +78,11 @@
                 <a-spin v-if="loadingMore" />
                 <!-- <a-button v-else @click="onLoadMore"> loading more </a-button> -->
               </div>
-              <a-list-item slot="renderItem" slot-scope="item">
+              <a-list-item slot="renderItem" slot-scope="item" >
                 <a-list-item-meta>
-                  <template #description>
-                    <svg
+                  <template #description >
+                    <div class="flex align-items-center">
+                      <svg
                       width="20"
                       height="20"
                       viewBox="0 0 20 20"
@@ -95,7 +96,9 @@
                         fill="#111827"
                       />
                     </svg>
-                    <span>{{ item.date.toDate().toDateString() }}</span>
+                    <span >{{ item.date.toDate().toDateString() }}</span>
+                    </div>
+                  
                   </template>
                   <a slot="title" href="#">{{ item.notification }}</a>
                 </a-list-item-meta>
@@ -116,6 +119,7 @@
                 size="small"
                 @click="clearAll"
                 v-if="user.notifications.length"
+                class="flex align-items-center justify-content-center"
               >
                 <svg
                   width="16"
@@ -163,7 +167,7 @@
               />
             </svg>
           </a-button>
-          <a-button @click="logout">
+          <a-button @click="logout" class="flex align-items-center py-4">
             <svg
               width="20"
               height="20"
