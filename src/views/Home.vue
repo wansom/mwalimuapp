@@ -2481,8 +2481,7 @@ display: none;
 
 
 .research-card {
-  max-width: 620px;
-  min-width: 280px;
+  width: 100%;
   height: fit-content;
   background: #ffffff;
   padding: 40px;
