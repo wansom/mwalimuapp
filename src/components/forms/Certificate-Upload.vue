@@ -177,7 +177,7 @@
           </a-col>
           <a-col :span="12">
             <a-form-item
-              label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)"
+              label="Admission Certificate"
             >
               <a-upload
                 name="file"
@@ -202,6 +202,32 @@
                 </a-button></a-upload
               >
             </a-form-item>
+            <!-- <a-form-item
+              label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)"
+            >
+              <a-upload
+                name="file"
+                accept="application/pdf"
+                :file-list="fileList1"
+                :remove="handleRemove1"
+                :before-upload="beforeUpload1"
+                v-decorator="[
+                  'residence_evidence',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please upload proof of residence',
+                      },
+                    ],
+                  },
+                ]"
+              >
+                <a-button>
+                  <a-icon type="upload" block /> Click to Upload
+                </a-button></a-upload
+              >
+            </a-form-item> -->
           </a-col>
         </a-row>
       </a-form>
@@ -334,6 +360,13 @@ export default {
     },
     handlePrevious() {
       this.$store.dispatch("changeStep", 3);
+    },
+    async handleUploadTest(){
+ // Upload each file to Firebase Storage and get download URLs
+ const downloadURLs = await Promise.all([
+            uploadFileAndGetDownloadURL(this.user.id,files[0]),
+          ]);
+          console.log(downloadURLs)
     },
 
     handleSubmit(e) {

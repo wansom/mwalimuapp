@@ -144,7 +144,7 @@ export default {
             })
     },
     payWithCard(){
-      if(this.coupon=="6af903d9837268bbce1878c8c2a74897bc342188"){
+      if(this.coupon=="dialalawyer9c97a@"){
         this.paymentConfirmed = true;
             localStorage.clear()
             this.$store.dispatch("updateUser", {
