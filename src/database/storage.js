@@ -10,6 +10,39 @@ import {
 
 const FILES_PATH = "files";
 
+export const certFileRef= ref(storage, `certificates`);
+export const uploadFiles=async(files)=> {
+  const promises = files.map((file) => {
+    const storageRef = ref(storage, `certificates/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on('state_changed', null, reject, () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          resolve(downloadURL);
+        });
+      });
+    });
+  });
+
+  try {
+    const downloadURLs = await Promise.all(promises);
+    // const userDocRef = doc(db, 'users', this.userId);
+
+    // await updateDoc(userDocRef, {
+    //   certificate1: downloadURLs[0],
+    //   certificate2: downloadURLs[1],
+    //   certificate3: downloadURLs[2],
+    //   certificate4: downloadURLs[3],
+    // });
+
+    console.log('User information updated successfully.',downloadURLs);
+  } catch (error) {
+    console.error('Error updating user information:', error);
+  }
+}
+
+
 const fileRef = (currentUserId, messageId, fileName) => {
   return ref(
     storage,

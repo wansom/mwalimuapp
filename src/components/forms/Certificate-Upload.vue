@@ -176,9 +176,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item
-              label="Admission Certificate"
-            >
+            <a-form-item label="Admission Certificate">
               <a-upload
                 name="file"
                 accept="application/pdf"
@@ -254,11 +252,8 @@
 <script>
 import { mapState } from "vuex";
 import moment from "moment";
-import {
-  listenDocumentUploadProgress,
-  uploadFileAndGetDownloadURL,
-} from "@/database/storage";
-import { arrayUnion } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "@/database";
 export default {
   props: ["user"],
   data() {
@@ -361,50 +356,58 @@ export default {
     handlePrevious() {
       this.$store.dispatch("changeStep", 3);
     },
-    async handleUploadTest(){
- // Upload each file to Firebase Storage and get download URLs
- const downloadURLs = await Promise.all([
-            uploadFileAndGetDownloadURL(this.user.id,files[0]),
-          ]);
-          console.log(downloadURLs)
-    },
-
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (!err) {
           this.$store.dispatch("changeLoading", true);
           const files = [
-            values.practise_cert,
-            values.resume,
-            values.residence_evidence,
-            values.national_id_doc,
+            values.practise_cert.file,
+            values.resume.file,
+            values.residence_evidence.file,
+            values.national_id_doc.file,
           ];
+          const promises = files.map((file) => {
+            const storageRef = ref(storage, `certificates/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            return new Promise((resolve, reject) => {
+              uploadTask.on("state_changed", null, reject, () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  resolve(downloadURL);
+                });
+              });
+            });
+          });
+
+          try {
+            const downloadURLs = await Promise.all(promises);
+            const payload = {
+              practise_start: this.user.practise_start
+                ? this.user.practise_start
+                : values.practise_start.format(),
+              cert_renewal_date: this.user.cert_renewal_date
+                ? this.user.cert_renewal_date
+                : values.cert_renewal_date.format() ?? "",
+              national_id: values.national_id ?? "",
+              practise_number: values.practise_number ?? "",
+              practise_certificate: downloadURLs[0],
+              resume: downloadURLs[1],
+              residence_evidence: downloadURLs[2],
+              national_id_doc: downloadURLs[3],
+              step: "certificates",
+              current: 5,
+            };
+            await this.$store.dispatch("updateUser", payload);
+
+            console.log("User information updated successfully.", downloadURLs);
+          } catch (error) {
+            console.error("Error updating user information:", error);
+          }
           // Upload each file to Firebase Storage and get download URLs
-          const downloadURLs = await Promise.all([
-            uploadFileAndGetDownloadURL(this.user.id,files[0]),
-            uploadFileAndGetDownloadURL(this.user.id,files[1]),
-            uploadFileAndGetDownloadURL(this.user.id,files[2]),
-            uploadFileAndGetDownloadURL(this.user.id,files[3]),
-          ]);
-          const payload = {
-            practise_start: this.user.practise_start
-              ? this.user.practise_start
-              : values.practise_start.format(),
-            cert_renewal_date: this.user.cert_renewal_date
-              ? this.user.cert_renewal_date
-              : values.cert_renewal_date.format() ?? "",
-            national_id: values.national_id ?? "",
-            practise_number: values.practise_number ?? "",
-            practise_certificate: downloadURLs[0],
-            resume: downloadURLs[1],
-            residence_evidence: downloadURLs[2],
-            national_id_doc: downloadURLs[3],
-            step: "certificates",
-            current:5
-          };
-          await  
-          this.$store.dispatch("updateUser", payload);
+          const fileRefs = [];
+
+          this.$store.dispatch("changeLoading", false);
         }
       });
     },
