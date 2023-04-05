@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="height:fit-content;">
     <div id="product-list">
       <div class="col-sm-12">
         <a-row>
