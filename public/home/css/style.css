@@ -699,20 +699,14 @@ ol {
   z-index: 99;
 }
 
-/* .nav-item .nav-depart .depart-btn:before {
+.nav-item .nav-depart .depart-btn:before {
   position: absolute;
   color: #ffffff;
   right: 20px;
   top: 13px;
-  content: "";
-  font-family: FontAwesome;
   font-size: 18px;
-} */
-
-.nav-item .nav-depart .depart-btn i {
-  color: #ffffff;
-  font-size: 16px;
 }
+
 
 .nav-item .nav-depart .depart-btn span {
   font-size: 14px;
