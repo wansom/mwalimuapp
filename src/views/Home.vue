@@ -13,7 +13,7 @@
                 dedicated to promoting justice, equality, and fairness for all,
                 and empowering individuals and communities
               </p>
-              <button>Find A lawyer</button>
+             <router-link to="find-a-lawyer"> <button>Find A lawyer</button></router-link>
             </div>
           </div>
         </div>
@@ -36,7 +36,8 @@
                   society through leadership and governance training programs,
                   by providing a platform for discussion and through research.
                 </p>
-                <button>Find A Lawyer</button>
+                <router-link to="find-a-lawyer"><button>Find A Lawyer</button></router-link>
+                
               </div>
             </div>
             <div class="project">
@@ -132,7 +133,8 @@
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
-                <button>
+                <a href="sign-up">
+                  <button>
                   Get Started
                   <svg
                     width="24"
@@ -160,6 +162,8 @@
                     </g>
                   </svg>
                 </button>
+                </a>
+
               </div>
             </div>
             <div class="offer-card">
@@ -171,7 +175,8 @@
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
-                <button>
+                <a href="sign-in">
+                  <button>
                   Get Started
                   <svg
                     width="24"
@@ -199,6 +204,8 @@
                     </g>
                   </svg>
                 </button>
+                </a>
+
               </div>
             </div>
           </div>

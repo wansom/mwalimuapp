@@ -5,6 +5,7 @@ import {updateAdvocate} from "../database/firestore";
 import {increment} from 'firebase/firestore';
 
 
+
 Vue.use(VueRouter)
 
 let routes = [
@@ -32,6 +33,11 @@ let routes = [
 		path: '/know-your-courts',
 		name: 'Know-Your-Courts',
 		component: () => import('../views/Know-Your-Courts.vue'),
+	},
+	{
+		path: '/find-a-lawyer',
+		name: 'Find-a-Lawyer',
+		component: () => import('../views/FindaAawyer.vue'),
 	},
 	{
 		path: '/single-court',

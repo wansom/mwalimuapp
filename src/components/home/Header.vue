@@ -48,7 +48,7 @@
     <div class="nav-item">
       <div class="container">
         <div class="nav-depart">
-          <a href="/#all-lawyers">
+          <a href="/find-a-lawyer">
           <div class="depart-btn">
             <i class="fa fa-bars"></i>
             <span>FIND LAWYERS</span>
