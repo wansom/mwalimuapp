@@ -94,7 +94,8 @@
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
-                <button>
+                <a href="sign-up">
+                  <button>
                   Get Started
                   <svg
                     width="24"
@@ -122,6 +123,7 @@
                     </g>
                   </svg>
                 </button>
+                </a>
               </div>
             </div>
             <div class="offer-card">
@@ -175,7 +177,7 @@
                   We also launched the Mary Antoinette Brown Sherman Think
                   Tank...
                 </p>
-                <a href="sign-in">
+                <a href="sign-up">
                   <button>
                   Get Started
                   <svg
@@ -1038,6 +1040,7 @@ overflow: hidden;
   background: #e6353b;
   margin-top: -60px;
   margin-bottom: 20px;
+  padding-bottom: 15px;
 
 }
 
@@ -1065,8 +1068,7 @@ overflow: hidden;
   padding: 32px 0px 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  
+  align-items: center;  
 
 }
 
@@ -1105,6 +1107,7 @@ overflow: hidden;
   border: 0px;
   margin-top:20px;
   color: #ffffff;
+  
   
 }
 
@@ -2363,7 +2366,7 @@ section.filter {
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 640px) {
   .banner-text h1 {
     font-size: 30px;
     line-height: 35px;
@@ -2397,6 +2400,29 @@ section.filter {
   .tab-slide {
     justify-content: space-evenly !important;
   }
+  .offer-content {
+  padding: 10px 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+.offer-info {
+  width: 100%;
+  height: fit-content;
+  background: #fcfcfc;
+  border: 1px solid #e0e2f1;
+  border-radius: 5px;
+  z-index: 5;
+  margin:  auto 0px;
+  text-align: center;
+  border-radius: 15px;
+  padding: 32px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+
+}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
