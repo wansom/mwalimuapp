@@ -1,8 +1,7 @@
 <template>
-  <div class="container" style="height:fit-content;">
+  <div class="container">
     <div id="product-list">
-      <div class="col-sm-12">
-        <a-row>
+      <a-row :gutter="16">
           <a-col :span="24" :lg="6">
             <div id="filters">
               <div class="sidebar">
@@ -118,6 +117,7 @@
                     size="large"
                     :pagination="pagination"
                     :data-source="filterApplied ? displayItems : advocates"
+                    style="overflow: hidden !important;"
                   >
                     <a-list-item
                       slot="renderItem"
@@ -132,7 +132,6 @@
             </div>
           </a-col>
         </a-row>
-      </div>
     </div>
   </div>
 </template>
@@ -236,7 +235,7 @@ export default {
         onChange: (page) => {
           console.log(page);
         },
-        pageSize: 3,
+        pageSize: 10,
       },
       searchName: "",
       searchString: "",
