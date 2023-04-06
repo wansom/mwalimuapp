@@ -50,7 +50,7 @@
         <div class="nav-depart">
           <a href="/find-a-lawyer">
           <div class="depart-btn">
-            <i class="fa fa-bars"></i>
+            
             <span>FIND LAWYERS</span>
           </div></a>
         </div>
