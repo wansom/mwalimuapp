@@ -5,7 +5,7 @@
         <div class="col-lg-3">
           <div class="footer-left">
             <div class="footer-logo">
-              <a href="#"><img src="images/logo.png" alt="" style="height: 80px; object-fit: contain;"/></a>
+              <a href="#"><img src="images/dial-logo.png" alt="" style="height: 80px; object-fit: contain;"/></a>
             </div>
             <ul>
               <li>Address: I&M Building 2nd Ngong Avenue, Nairobi, Kenya</li>

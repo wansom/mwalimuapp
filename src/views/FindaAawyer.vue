@@ -3,15 +3,18 @@
     <Header></Header>
     <section class="single-research-banner"></section>
    <Filters :advocates="allAdvocates"></Filters>
+   <Footer></Footer>
   </div>
+ 
 </template>
 
 <script>
 import Header from '../components/home/Header.vue'
 import Filters from '../components/Widgets/Filters.vue'
 import { mapState } from 'vuex';
+import Footer from '../components/home/Footer.vue';
 export default {
-  components: { Header, Filters },
+  components: { Header, Filters, Footer },
   created() {},
   computed: {
     ...mapState(["allAdvocates", "courtData"]),
