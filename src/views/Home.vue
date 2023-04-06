@@ -645,11 +645,11 @@ section.banner {
   justify-content: center;
   align-items: center;
   padding: 16px 24px;
-  background: #fcfcfc;
+  background: #e6353b;
   border-radius: 5px;
   margin: auto;
   font-size: 24px;
-  color:#000000;
+  color:#ffffff;
 }
 
 /* == || BANNER == */
@@ -850,16 +850,6 @@ overflow: hidden;
   padding: 0px 0px 0px 20px;
 }
 
-.up-card-info .right a {
-  text-decoration: none;
-  cursor: pointer;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 36px;
-  color: #25518c;
-}
 
 .up-card-info .right span {
   font-family: "Montserrat";
@@ -925,15 +915,7 @@ overflow: hidden;
   justify-content: flex-start;
 }
 
-.up-right .news .top .left {
-  width: 149px;
-  height: 34px;
-  background: #25518c;
-  border-radius: 6px 0px 0px 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .up-right .news .top .left span {
   font-family: "Montserrat";
@@ -1057,7 +1039,6 @@ overflow: hidden;
   background: #e6353b;
   margin-top: -60px;
   margin-bottom: 20px;
-  padding-bottom: 15px;
 
 }
 
@@ -1113,10 +1094,10 @@ overflow: hidden;
 }
 
 .offer-info button {
-  background: #e6353b;
-  width: 220px;
+  background: #000000;
+  width: 240px;
   height: 50px;
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1200,7 +1181,7 @@ overflow: hidden;
   border: 0;
   width: 95%;
   height: 50px;
-  background: #000000;
+  background: #e6353b;
   border-radius: 5px;
   font-family: "Montserrat";
   font-style: normal;
@@ -1563,103 +1544,6 @@ footer {
 /* == || Footer == */
 
 
-/* == TEACHING AND TRAINING == */
-section.teaching-banner {
-  background-image: url("https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png") !important;
-}
-
-section.courses {
-  padding: 60px 0px;
-}
-
-.train-course {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
-  padding: 20px 0px;
-}
-
-.train-course .left {
-  position: relative;
-  z-index: -1;
-}
-
-.train-course .right {
-  position: relative;
-}
-
-.train-course .left img {
-  width: 100%;
-  max-width: 700px;
-  min-width: 280px;
-  position: relative;
-  z-index: -1;
-}
-
-.train-course-card {
-  width: 640px;
-  height: fit-content;
-  background: #efecec;
-  box-shadow: 0px 3px 20px rgba(2, 2, 2, 0.1);
-  padding: 60px 40px;
-  position: relative;
-  z-index: 1;
-}
-
-.train-course-card.right-card {
-  margin-left: -80px;
-}
-
-.train-course-card.left-card {
-  margin-right: -80px;
-  z-index: 6;
-}
-
-.train-course-card h2 {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 37px;
-  color: #25518c;
-  margin: 0px 0px 10px;
-}
-
-.train-course-card p {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  color: #1c1b1f;
-  margin: 10px 0px;
-}
-
-.train-course-card a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 272px;
-  height: 40px;
-  background: #25518c;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  color: #fcfcfc;
-  margin: 10px 0px 0px;
-}
-
-.train-course-card button svg {
-  margin-left: 16px;
-}
-
-/* == || TEACHING AND TRAINING == */
-
 
 /* == RESEARCH == */
 
@@ -1725,6 +1609,7 @@ section.courses {
   line-height: 150%;
   color: #000000;
   margin: 20px 0px;
+
 }
 
 .research-card a {
@@ -1734,7 +1619,14 @@ section.courses {
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  color: #e6353b;
+  color: #ffffff;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e6353b;
+  border-radius: 5px;
 }
 /* == || RESEARCH == */
 
@@ -2026,115 +1918,7 @@ section.filter {
   flex-wrap: wrap;
 }
 
-.filter-form form select,
-.filter-form form input {
-  width: 190px;
-  height: 40px;
-  border: 1px solid #e0e2f1;
-  background-color: #ffffff;
-  margin: 10px 20px 10px 0px;
-  padding: 5px 20px;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #9a9a9a;
-}
 
-.filter-form form select option {
-  width: 190px;
-  height: 40px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.filter-form form button {
-  border: 0;
-  outline: none;
-  width: 190px;
-  height: 40px;
-  background: #25518c;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  color: #fcfcfc;
-}
-
-.tab-btns {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding: 40px 0px 20px;
-}
-
-.tab-btns button {
-  background-color: #ffffff;
-  padding: 18px 30px;
-  outline: none;
-  height: 60px;
-  width: fit-content;
-  border: 2px solid #25518c;
-  margin: 10px 40px 10px 0px;
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #25518c;
-  cursor: pointer;
-}
-
-.tab-btns button:hover,
-.tab-btns button.active {
-  border: 2px solid #de4404 !important;
-  color: #de4404 !important;
-  transition: all 100ms !important;
-}
-
-.tab-slide {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.tab-card {
-  background: #ffffff;
-  /* shadow */
-  box-shadow: 10px 32px 72px rgba(51, 51, 51, 0.04);
-  border-radius: 5px;
-  height: 100%;
-  max-height: 382px;
-  min-height: 278px;
-  width: fit-content;
-  max-width: 384px;
-  min-width: 260px;
-  padding: 20px;
-  position: relative;
-  margin: 10px 5px;
-}
-
-.tab-card img {
-  width: 100%;
-}
-
-.tab-card .floating-card {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  height: fit-content;
-  width: 80%;
-  padding: 10px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .floating-card .hold {
   display: flex;
