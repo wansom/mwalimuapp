@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header></Header>
-	<Breadcrum></Breadcrum>
 	<RegisterForm></RegisterForm>
 	<Footer></Footer>
   </div>

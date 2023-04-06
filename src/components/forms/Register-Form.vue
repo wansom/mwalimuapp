@@ -14,7 +14,6 @@
             <a-row type="flex" justify="space-between" :gutter="16">
               <a-col :span="24" :sm="{ span: 24 }" :lg="{ span: 12 }">
                 <a-form-item class="group-input">
-                <label for="username">First Name *</label>
                 <a-input
                   type="text"
                   id="username"
@@ -26,14 +25,15 @@
                           required: true,
                           message: 'Please input your  first name!',
                         },
+                       
                       ],
                     },
                   ]"
+                   placeholder='Your First Name(required)'
                 />
               </a-form-item></a-col>
               <a-col :span="24" :sm="{ span: 24 }" :lg="{ span: 12 }">
                 <a-form-item class="group-input">
-                <label for="username">Last Name *</label>
                 <a-input
                   type="text"
                   id="username"
@@ -48,6 +48,7 @@
                       ],
                     },
                   ]"
+                   placeholder='Your Last Name(required)'
                 />
               </a-form-item>
               </a-col>
@@ -55,7 +56,6 @@
 
            
               <a-form-item class="group-input">
-                <label for="username">Email address *</label>
                 <a-input
                   type="text"
                   v-decorator="[
@@ -73,11 +73,10 @@
                       ],
                     },
                   ]"
+                  placeholder='Your Email(required)'
                 />
               </a-form-item>
               <a-form-item class="group-input">
-                <label for="pass">Password *</label>
-
                 <a-input-password
                   v-decorator="[
                     'password',
@@ -98,6 +97,7 @@
                     },
                   ]"
                   type="password"
+                  placeholder='Enter Password(required)'
                 
                 >
                   <a-icon
@@ -108,7 +108,6 @@
                 </a-input-password>
               </a-form-item>
               <a-form-item class="group-input">
-                <label for="con-pass">Confirm Password *</label>
                 <a-input
                   id="con-pass"
                   v-decorator="[
