@@ -11,7 +11,7 @@
         employemnt
       </p>
       <a-form :form="form" layout="vertical">
-        <h5 class="my-5">Your Current Employer</h5>
+        <h5 class="my-5">Your Current work place</h5>
         <a-row :gutter="16">
           <a-col :span="14">
             <a-form-item label="Company">
@@ -52,7 +52,7 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <h5 class="my-10">Your Previous Employers</h5>
+        <h5 class="my-10">Your Previous Work place</h5>
         <a-row type="flex" :gutter="16">
           <a-col :span="14">
             <a-form-item label="Company">

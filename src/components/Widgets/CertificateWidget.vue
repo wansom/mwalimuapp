@@ -214,11 +214,12 @@ export default {
       this.loading = true;
       const payload = {
         status: status == "approved" ? "active" : "declined",
+        date_joined:new Date(),
         subscription_date: new Date(
           new Date().setMonth(new Date().getMonth() + 1)
         ).toDateString(),
         notifications: arrayUnion({
-          notification: `your account has been approved proceed to payment`,
+          notification: `your account has been activated successfully`,
           date: new Date(),
         }),
       };

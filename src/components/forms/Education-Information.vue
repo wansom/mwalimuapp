@@ -11,7 +11,7 @@
         <h5 class="my-10">Education History</h5>
         <a-row type="flex" :gutter="16">
           <a-col :span="14">
-            <a-form-item label="Law School">
+            <a-form-item label="University">
               <a-input
                 v-decorator="[
                   'law_school',

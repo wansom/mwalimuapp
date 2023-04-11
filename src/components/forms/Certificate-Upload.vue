@@ -30,7 +30,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Last Practising Certificate Renewal Date">
+            <a-form-item label="Last Practicing Certificate Renewal Date">
               <a-date-picker
                 :disabled-date="disabledDate"
                 v-decorator="[
@@ -73,7 +73,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Practising Certificate Number">
+            <a-form-item label="Practicing Certificate Number">
               <a-input
                 v-decorator="[
                   'practise_number',
@@ -110,7 +110,7 @@
                   {
                     rules: [
                       {
-                        required: true,
+                        required: false,
                         message: 'Please upload a resume or Curriculum vitae',
                       },
                     ],
@@ -124,7 +124,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Practise Certificate">
+            <a-form-item label="Practice Certificate">
               <a-upload
                 name="file"
                 accept="application/pdf"
@@ -363,10 +363,12 @@ export default {
           this.$store.dispatch("changeLoading", true);
           const files = [
             values.practise_cert.file,
-            values.resume.file,
             values.residence_evidence.file,
             values.national_id_doc.file,
           ];
+          if(values.resume){
+            files.push(values.resume.file)
+          }
           const promises = files.map((file) => {
             const storageRef = ref(storage, `certificates/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
@@ -392,9 +394,9 @@ export default {
               national_id: values.national_id ?? "",
               practise_number: values.practise_number ?? "",
               practise_certificate: downloadURLs[0],
-              resume: downloadURLs[1],
-              residence_evidence: downloadURLs[2],
-              national_id_doc: downloadURLs[3],
+              resume: downloadURLs[3]??"",
+              residence_evidence: downloadURLs[1],
+              national_id_doc: downloadURLs[2],
               step: "certificates",
               current: 5,
             };
