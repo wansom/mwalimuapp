@@ -1,6 +1,21 @@
 <template>
   <div>
     <Header></Header>
+    <div class="d-block d-md-none ">
+      <div class="mobile-sm-menu pb-2">
+        <router-link to="/">
+          <img
+            src="images/dial-logo.png"
+            alt=""
+            style="height: 60px; object-fit: contain"
+          />
+        </router-link>
+        <div>
+          <a-icon type="bars" style="font-size:40px;"/>
+        </div>
+      </div>
+
+    </div>
     <main>
       <section class="banner">
         <div class="banner-mask">
@@ -13,7 +28,9 @@
                 dedicated to promoting justice, equality, and fairness for all,
                 and empowering individuals and communities
               </p>
-             <router-link to="find-a-lawyer"> <button>Find A lawyer</button></router-link>
+              <router-link to="find-a-lawyer">
+                <button>Find A lawyer</button></router-link
+              >
             </div>
           </div>
         </div>
@@ -36,8 +53,9 @@
                   society through leadership and governance training programs,
                   by providing a platform for discussion and through research.
                 </p>
-                <router-link to="find-a-lawyer"><button>Find A Lawyer</button></router-link>
-                
+                <router-link to="find-a-lawyer"
+                  ><button>Find A Lawyer</button></router-link
+                >
               </div>
             </div>
             <div class="project">
@@ -74,7 +92,7 @@
               <img src="images/Susan-Mwango.jpg" alt="" />
             </div>
             <div class="col two">
-              <img src="images/bg-signin.png" alt="" />
+              <img src="images/brian.png" alt="" />
               <img src="images/Mahmoud-Shalima.jpg" alt="" />
             </div>
           </div>
@@ -89,7 +107,7 @@
             <div class="offer-card">
               <div class="offer-info">
                 <div class="process"><span>01</span></div>
-              
+
                 <h3>Create A free Account</h3>
                 <p>
                   We also launched the Mary Antoinette Brown Sherman Think
@@ -97,38 +115,37 @@
                 </p>
                 <a href="sign-up">
                   <button>
-                  Get Started
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_69_173"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
+                    Get Started
+                    <svg
                       width="24"
                       height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_69_173)">
-                      <path
-                        d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
-                        fill="#FCFCFC"
-                      />
-                    </g>
-                  </svg>
-                </button>
+                      <mask
+                        id="mask0_69_173"
+                        style="mask-type: alpha"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="24"
+                        height="24"
+                      >
+                        <rect width="24" height="24" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_69_173)">
+                        <path
+                          d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
+                          fill="#FCFCFC"
+                        />
+                      </g>
+                    </svg>
+                  </button>
                 </a>
               </div>
             </div>
             <div class="offer-card">
-           
               <div class="offer-info">
                 <div class="process"><span>02</span></div>
                 <h3>Complete and submit Profile</h3>
@@ -138,39 +155,37 @@
                 </p>
                 <a href="sign-up">
                   <button>
-                  Get Started
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_69_173"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
+                    Get Started
+                    <svg
                       width="24"
                       height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_69_173)">
-                      <path
-                        d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
-                        fill="#FCFCFC"
-                      />
-                    </g>
-                  </svg>
-                </button>
+                      <mask
+                        id="mask0_69_173"
+                        style="mask-type: alpha"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="24"
+                        height="24"
+                      >
+                        <rect width="24" height="24" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_69_173)">
+                        <path
+                          d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
+                          fill="#FCFCFC"
+                        />
+                      </g>
+                    </svg>
+                  </button>
                 </a>
-
               </div>
             </div>
             <div class="offer-card">
-            
               <div class="offer-info">
                 <div class="process"><span>03</span></div>
                 <h3>Pay for monthly Subscription</h3>
@@ -180,35 +195,34 @@
                 </p>
                 <a href="sign-up">
                   <button>
-                  Get Started
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <mask
-                      id="mask0_69_173"
-                      style="mask-type: alpha"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="0"
+                    Get Started
+                    <svg
                       width="24"
                       height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_69_173)">
-                      <path
-                        d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
-                        fill="#FCFCFC"
-                      />
-                    </g>
-                  </svg>
-                </button>
+                      <mask
+                        id="mask0_69_173"
+                        style="mask-type: alpha"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="24"
+                        height="24"
+                      >
+                        <rect width="24" height="24" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_69_173)">
+                        <path
+                          d="M12 20L10.575 18.6L16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20Z"
+                          fill="#FCFCFC"
+                        />
+                      </g>
+                    </svg>
+                  </button>
                 </a>
-
               </div>
             </div>
           </div>
@@ -218,15 +232,19 @@
         <div class="upcoming-container container-fluid marquee">
           <h1>Lawyer Profiles</h1>
           <div class="up-left">
-            
-
             <div class="bottom">
-              <div class="flex card-scroll" v-for="i of allAdvocates" :key="i.id">
-  <card-info :advocate="i"></card-info>
-</div>
+              <div
+                class="flex card-scroll"
+                v-for="i of allAdvocates"
+                :key="i.id"
+              >
+                <card-info :advocate="i"></card-info>
+              </div>
             </div>
             <div class="bottom-more">
-              <button>View All Lawyers</button>
+              <router-link to="find-a-lawyer"
+                ><button>View All Lawyers</button></router-link
+              >
             </div>
           </div>
         </div>
@@ -294,9 +312,7 @@
           <div class="contact-details">
             <div class="title">
               <h1>Contact Us</h1>
-              <p>
-                Share your questions and our team will get back to you
-              </p>
+              <p>Share your questions and our team will get back to you</p>
             </div>
             <div class="details">
               <div class="detail">
@@ -488,7 +504,7 @@ import SignupBanner from "../components/home/Signup-Banner.vue";
 import CardInfo from "../components/Cards/CardInfo.vue";
 import { mapState } from "vuex";
 import Services from "../components/home/Services.vue";
-import Slick from 'vue-slick';
+import Slick from "vue-slick";
 export default {
   components: {
     Hero,
@@ -501,13 +517,13 @@ export default {
     SignupBanner,
     Services,
     CardInfo,
-    Slick
+    Slick,
   },
   data() {
     return {
       columns,
       lawyers: [1, 2, 3, 4, 5, 6, 6, 6, 7, 7],
-      animationDuration: '',
+      animationDuration: "",
       currentCardIndex: 0,
     };
   },
@@ -534,14 +550,13 @@ export default {
 
       setInterval(() => {
         this.currentCardIndex = (this.currentCardIndex + 1) % totalCards;
-      }, duration / totalCards * 1000);
+      }, (duration / totalCards) * 1000);
     },
   },
 };
 </script>
 
 <style scoped>
-
 * {
   margin: 0px;
   padding: 0px;
@@ -627,7 +642,6 @@ section.banner {
   font-weight: 700;
   text-align: center;
   color: #fcfcfc;
-  
 }
 
 .banner-text p {
@@ -649,7 +663,7 @@ section.banner {
   border-radius: 5px;
   margin: auto;
   font-size: 24px;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 /* == || BANNER == */
@@ -661,7 +675,7 @@ section.schedule,
 section.sponsors {
   padding: 120px 0px 80px;
 
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 
 .overview-container {
@@ -753,17 +767,17 @@ section.sponsors {
 
 /* == UPCOMING EVENTS == */
 .upcoming-events {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   padding: 60px 0px;
 }
 
 .upcoming-container {
- padding: 25px 0px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-overflow: hidden;
+  padding: 25px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .upcoming-container .up-left,
@@ -850,7 +864,6 @@ overflow: hidden;
   padding: 0px 0px 0px 20px;
 }
 
-
 .up-card-info .right span {
   font-family: "Montserrat";
   font-style: normal;
@@ -915,8 +928,6 @@ overflow: hidden;
   justify-content: flex-start;
 }
 
-
-
 .up-right .news .top .left span {
   font-family: "Montserrat";
   font-style: normal;
@@ -971,12 +982,12 @@ overflow: hidden;
   margin: 10px 0px;
 }
 .marquee {
-    position: relative;
-    overflow: hidden;
-    --offset: 1vw;
-    --move-initial: calc(-25% + var(--offset));
-    --move-final: calc(-75% + var(--offset));
-  }
+  position: relative;
+  overflow: hidden;
+  --offset: 1vw;
+  --move-initial: calc(-25% + var(--offset));
+  --move-final: calc(-75% + var(--offset));
+}
 .card-scroll {
   width: fit-content;
   display: flex;
@@ -984,7 +995,6 @@ overflow: hidden;
   transform: translate3d(var(--move-initial), 0, 0);
   animation: marquee-startup 15000ms linear infinite;
   animation-play-state: running;
-  
 }
 @keyframes marquee-startup {
   0% {
@@ -1029,7 +1039,7 @@ overflow: hidden;
   position: relative;
   margin: 30px 0px;
 }
-.offer-card .process{
+.offer-card .process {
   height: 64px;
   width: 64px;
   border-radius: 100%;
@@ -1039,10 +1049,9 @@ overflow: hidden;
   background: #e6353b;
   margin-top: -60px;
   margin-bottom: 20px;
-
 }
 
-.offer-card .process span{
+.offer-card .process span {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
@@ -1060,14 +1069,13 @@ overflow: hidden;
   border: 1px solid #e0e2f1;
   border-radius: 5px;
   z-index: 5;
-  margin:  auto 0px;
+  margin: auto 0px;
   text-align: center;
   border-radius: 15px;
   padding: 32px 0px 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;  
-
+  align-items: center;
 }
 
 .offer-info h3 {
@@ -1103,10 +1111,8 @@ overflow: hidden;
   justify-content: center;
   outline: none;
   border: 0px;
-  margin-top:20px;
+  margin-top: 20px;
   color: #ffffff;
-  
-  
 }
 
 /* == || OFFERS == */
@@ -1275,7 +1281,7 @@ overflow: hidden;
 /* == Contact == */
 section.contact {
   padding: 60px 0px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .contact-container {
@@ -1543,12 +1549,11 @@ footer {
 
 /* == || Footer == */
 
-
-
 /* == RESEARCH == */
 
 .research-content {
   padding: 60px 0px;
+  height: fit-content;
 }
 
 .research-head {
@@ -1567,8 +1572,7 @@ footer {
 
 .research-information {
   margin: 40px 0px;
-  min-height: 620px;
-  max-width: 1240px;
+  height: fit-content;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1579,18 +1583,16 @@ footer {
   background-image: url("https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png");
 }
 
-
 .research-card {
   max-width: 620px;
   min-width: 280px;
-  min-height: 310px;
   position: absolute;
+  height: fit-content;
   bottom: 0px;
   left: 0px;
   background: #ffffff;
   padding: 40px;
 }
-
 
 .research-card h3 {
   font-family: "Montserrat";
@@ -1609,7 +1611,6 @@ footer {
   line-height: 150%;
   color: #000000;
   margin: 20px 0px;
-
 }
 
 .research-card a {
@@ -1918,8 +1919,6 @@ section.filter {
   flex-wrap: wrap;
 }
 
-
-
 .floating-card .hold {
   display: flex;
   align-items: center;
@@ -2168,6 +2167,51 @@ section.filter {
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 640px) {
+  .mobile-sm-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .projects {
+    padding: 10px 0px;
+    border-radius: 5px;
+    background-image: url(../../public/images/home/about-banner.png);
+  }
+
+  .projects-head {
+    padding: 0px 10px;
+  }
+
+  .projects-head h1 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 60px;
+    text-align: center;
+    color: #1c1b1f;
+  }
+
+  .projects-content {
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .project .project-info {
+    padding: 10px 0px;
+  }
+  .project-info h2 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: #1c1b1f;
+    margin: 10px 0px;
+    text-align: center;
+  }
   .banner-text h1 {
     font-size: 30px;
     line-height: 35px;
@@ -2197,82 +2241,86 @@ section.filter {
     max-width: 320px;
     min-width: 250px;
   }
+  .overview-text h1 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #00000a;
+    margin-top: 40px;
+  }
 
   .tab-slide {
     justify-content: space-evenly !important;
   }
   .offer-content {
-  padding: 10px 0px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
-}
-.offer-info {
-  width: 100%;
-  height: fit-content;
-  background: #fcfcfc;
-  border: 1px solid #e0e2f1;
-  border-radius: 5px;
-  z-index: 5;
-  margin:  auto 0px;
-  text-align: center;
-  border-radius: 15px;
-  padding: 32px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 10px;
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+  .offer-info {
+    width: 100%;
+    height: fit-content;
+    background: #fcfcfc;
+    border: 1px solid #e0e2f1;
+    border-radius: 5px;
+    z-index: 5;
+    margin: auto 0px;
+    text-align: center;
+    border-radius: 15px;
+    padding: 32px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  .overview-images {
+    width: 100%;
+    max-width: 490px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-}
-.overview-images {
-  width: 100%;
-  max-width: 490px;
-  min-width: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .overview-images .col {
+    padding: 10px;
+    max-width: 100%;
+  }
 
-.overview-images .col {
-  padding: 10px;
-  max-width: 100%;
-}
+  .overview-images .col img:nth-child(1) {
+    margin-bottom: 20px;
+  }
+  .overview-images img {
+    height: 280px;
+    object-fit: cover;
+  }
 
-.overview-images .col img:nth-child(1) {
-  margin-bottom: 20px;
-}
-.overview-images img {
-  height: 280px;
-  object-fit: cover;
-}
+  .overview-images .col.one {
+    padding-top: 60px;
+  }
+  .upcoming-events {
+    display: none;
+  }
+  .research-information {
+    margin: 40px 0px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-.overview-images .col.one {
-  padding-top: 60px;
-}
-.upcoming-events{
-display: none;
-}
-.research-information {
-  margin: 40px 0px;
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
+  .research-information.one {
+    background-image: url("https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png");
+  }
 
-.research-information.one {
-  background-image: url("https://acelitigator.com/wp-content/uploads/2022/10/Analysis-of-Supreme-Court-30-of-2019.png");
-}
-
-
-.research-card {
-  width: 100%;
-  height: fit-content;
-  background: #ffffff;
-  padding: 40px;
-  position: absolute;
-  top:100px;
-}
-
+  .research-card {
+    width: 100%;
+    height: fit-content;
+    background: #ffffff;
+    padding: 40px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

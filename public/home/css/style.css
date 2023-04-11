@@ -3987,7 +3987,8 @@ section.courses {
 
 /* Small Device: 320px */
 
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 640px) {
+
   .instagram-photo .insta-item {
     width: 100%;
   }
