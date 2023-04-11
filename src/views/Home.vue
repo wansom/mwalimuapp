@@ -222,7 +222,7 @@
             <div class="bottom">
               <div
                 class="flex card-scroll"
-                v-for="i of allAdvocates"
+                v-for="i of allAdvocates*5"
                 :key="i.id"
               >
                 <card-info :advocate="i"></card-info>
@@ -980,16 +980,16 @@ section.sponsors {
 .marquee {
   position: relative;
   overflow: hidden;
-  --offset: 1vw;
+  --offset: 3vw;
   --move-initial: calc(-25% + var(--offset));
-  --move-final: calc(-75% + var(--offset));
+  --move-final: calc(-95% + var(--offset));
 }
 .card-scroll {
   width: fit-content;
   display: flex;
   position: relative;
   transform: translate3d(var(--move-initial), 0, 0);
-  animation: marquee-startup 15000ms linear infinite;
+  animation: marquee-startup 25000ms linear infinite;
   animation-play-state: running;
 }
 @keyframes marquee-startup {
