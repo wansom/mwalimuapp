@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container py-4">
     <div id="product-list">
       <a-row :gutter="16">
           <a-col :span="24" :lg="6">
