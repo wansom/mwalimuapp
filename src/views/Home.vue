@@ -1,26 +1,13 @@
 <template>
   <div>
     <Header></Header>
-    <div class="d-block d-md-none ">
-      <div class="mobile-sm-menu">
-        <router-link to="/">
-          <img
-            src="images/dial-logo.png"
-            alt=""
-            style="height: 50px; object-fit: contain"
-          />
-        </router-link>
-        <div>
-          <a-icon type="bars" style="font-size:40px;"/>
-        </div>
-      </div>
 
-    </div>
     <main>
       <section class="banner">
         <div class="banner-mask">
           <div class="banner-container container">
             <div class="banner-text">
+              
               <h1>Improving Access to justice accross the African continent</h1>
               <p>
                 Our mission is to improve access to justice across Africa by
@@ -522,9 +509,13 @@ export default {
   data() {
     return {
       columns,
+      myText:"hello world",
+      isNavOpen:false,
       lawyers: [1, 2, 3, 4, 5, 6, 6, 6, 7, 7],
       animationDuration: "",
       currentCardIndex: 0,
+      visibleNav: false,
+     
     };
   },
   created() {},
@@ -533,6 +524,7 @@ export default {
     advocates() {
       return this.allAdvocates.filter(
         (advocate) => advocate.status === "active"
+        
       );
     },
   },
@@ -540,6 +532,10 @@ export default {
     this.startAnimation();
   },
   methods: {
+    showNav() {
+      this.visibleNav =!this.visibleNav;
+      console.log('button clicked',this.visibleNav)
+    },
     startAnimation() {
       const containerWidth = this.$el.clientWidth;
       const cardWidth = 600; // adjust this to fit your card width
@@ -2167,13 +2163,7 @@ section.filter {
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 640px) {
-  .mobile-sm-menu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 20px;
-    margin-top: -30px;
-  }
+
   .projects {
     padding: 10px 0px;
     border-radius: 5px;

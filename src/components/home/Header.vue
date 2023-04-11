@@ -1,5 +1,35 @@
 <template>
+<section>
+  <div class="d-block d-md-none">
+      <div class="mobile-sm-menu">
+        <router-link to="/">
+          <img
+            src="images/dial-logo.png"
+            alt=""
+            style="height: 50px; object-fit: contain"
+          />
+        </router-link>
+        <div>
+          <a-icon type="bars" style="font-size: 40px" @click="togleNav" />
+        </div>
+        <nav class=" mobile-nav" v-if="isNavOpen">
+         
+          <ul>
+            <li class="active"><router-link to="/">Home</router-link></li>
+            <li><router-link to="/find-a-lawyer">Find A Lawyer</router-link></li>
+            <li><a href="#courts">Know Your Courts</a></li>
+            <li>
+              <a href="//acelitigator.com">Resources</a>
+            </li>
+            <li><router-link to="contact-us">Contact</router-link></li>
+           
+          </ul>
+        </nav>
+
+      </div>
+    </div> 
   <header class="header-section">
+
     <div class="header-top">
       <div class="container">
         <div class="ht-left">
@@ -18,7 +48,7 @@
           </div>
         </div>
 
-        <div class="ht-right">
+        <div class="ht-right d-none d-md-block">
           <!-- <a href="#" class="login-panel"><i class="fa fa-user"></i>ACCOUNT</a> -->
           <a-dropdown>
     <a class="login-panel" @click="e => e.preventDefault()"><i class="fa fa-user"></i>
@@ -58,7 +88,6 @@
         <nav class="nav-menu mobile-menu">
           <ul>
             <li class="active"><router-link to="/">Home</router-link></li>
-            <!-- <li><router-link to="/">About Us</router-link></li> -->
             <li><a href="#courts">Know Your Courts</a></li>
             <li>
               <a href="#">Resources</a>
@@ -75,7 +104,9 @@
         <div id="mobile-menu-wrap"></div>
       </div>
     </div>
+   
   </header>
+</section>
 </template>
 
 <script>
@@ -83,12 +114,50 @@ import { mapState } from 'vuex';
 export default {
     data(){
         return{
-      
+      myText:"hello world",
+      isNavOpen:false
         }
+    },
+    methods:{
+togleNav(){
+  this.isNavOpen=!this.isNavOpen
+}
     },
     computed: {
     ...mapState(["practiseAreas","counties"]),}
 };
 </script>
 
-<style></style>
+<style scoped>
+  .mobile-sm-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin-top: -30px;
+    position: relative;
+  }
+  .mobile-nav {
+    background: #ffffff;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    z-index: 10px;
+
+    width: 80%;
+    height: fit-content;
+    padding: 5px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .mobile-nav a{
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 10px;
+  }
+  .mobile-nav a:active{
+    font-size: 20px;
+    color: #e6353b;
+    margin-bottom: 10px;
+  }
+</style>
