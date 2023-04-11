@@ -2,12 +2,12 @@
   <div>
     <Header></Header>
     <div class="d-block d-md-none ">
-      <div class="mobile-sm-menu pb-2">
+      <div class="mobile-sm-menu">
         <router-link to="/">
           <img
             src="images/dial-logo.png"
             alt=""
-            style="height: 60px; object-fit: contain"
+            style="height: 50px; object-fit: contain"
           />
         </router-link>
         <div>
@@ -2170,7 +2170,9 @@ section.filter {
   .mobile-sm-menu{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin-top: -30px;
   }
   .projects {
     padding: 10px 0px;
