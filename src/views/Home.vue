@@ -220,7 +220,7 @@
           <h1 class="mb-5">Lawyer Profiles</h1>
           <div class="grid-container">
             
-            <card-info :advocate="i" v-for="i of allAdvocates.slice(0,10)" :key="i.id"></card-info>
+            <card-info :advocate="i" v-for="i of advocates.slice(0,10)" :key="i.id"></card-info>
           
         </div>
           <div class="up-left">

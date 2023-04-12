@@ -1,8 +1,9 @@
 <template>
+
   <div>
     <Header></Header>
     <section class="single-research-banner"></section>
-   <Filters :advocates="allAdvocates"></Filters>
+   <Filters :advocates="advocates"></Filters>
    <Footer></Footer>
   </div>
  

@@ -24,7 +24,7 @@
                     ],
                   },
                 ]"
-                placeholder="current employer"
+                placeholder="current company"
               ><a-tooltip slot="suffix" title="Enter Freelance if currently unemployed">
         <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
       </a-tooltip>
@@ -65,7 +65,7 @@
                     ],
                   },
                 ]"
-                placeholder="employer"
+                placeholder="company"
               />
             </a-form-item>
           </a-col>
@@ -108,7 +108,7 @@
                     ],
                   },
                 ]"
-                placeholder="employer"
+                placeholder="company"
               />
             </a-form-item>
           </a-col>
@@ -139,7 +139,7 @@
                     ],
                   },
                 ]"
-                placeholder="employer"
+                placeholder="company"
               />
             </a-form-item>
           </a-col>
@@ -170,7 +170,7 @@
                     ],
                   },
                 ]"
-                placeholder="employer"
+                placeholder="company"
               />
             </a-form-item>
           </a-col>
