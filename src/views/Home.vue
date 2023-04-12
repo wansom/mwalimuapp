@@ -216,18 +216,14 @@
         </div>
       </section>
       <section class="upcoming-events">
-        <div class="upcoming-container container-fluid marquee">
-          <h1>Lawyer Profiles</h1>
+        <div class="upcoming-container container-fluid ">
+          <h1 class="mb-5">Lawyer Profiles</h1>
+          <div class="grid-container">
+            
+            <card-info :advocate="i" v-for="i of allAdvocates.slice(0,10)" :key="i.id"></card-info>
+          
+        </div>
           <div class="up-left">
-            <div class="bottom">
-              <div
-                class="flex card-scroll"
-                v-for="i of allAdvocates*5"
-                :key="i.id"
-              >
-                <card-info :advocate="i"></card-info>
-              </div>
-            </div>
             <div class="bottom-more">
               <router-link to="find-a-lawyer"
                 ><button>View All Lawyers</button></router-link
@@ -767,6 +763,7 @@ section.sponsors {
   padding: 60px 0px;
 }
 
+
 .upcoming-container {
   padding: 25px 0px;
   display: flex;
@@ -774,6 +771,16 @@ section.sponsors {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+.card-scroll{
+  display: flex;
+  flex-wrap: wrap;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+  gap: 10px; /* Gap between grid items */
+  margin-top: 10px;
 }
 
 .upcoming-container .up-left,
@@ -976,30 +983,6 @@ section.sponsors {
   line-height: 24px;
   color: #1c1b1f;
   margin: 10px 0px;
-}
-.marquee {
-  position: relative;
-  overflow: hidden;
-  --offset: 3vw;
-  --move-initial: calc(-25% + var(--offset));
-  --move-final: calc(-95% + var(--offset));
-}
-.card-scroll {
-  width: fit-content;
-  display: flex;
-  position: relative;
-  transform: translate3d(var(--move-initial), 0, 0);
-  animation: marquee-startup 25000ms linear infinite;
-  animation-play-state: running;
-}
-@keyframes marquee-startup {
-  0% {
-    transform: translate3d(var(--move-initial), 0, 0);
-  }
-
-  100% {
-    transform: translate3d(var(--move-final), 0, 0);
-  }
 }
 
 /* == || UPCOMING EVENTS == */
@@ -2204,6 +2187,12 @@ section.filter {
     margin: 10px 0px;
     text-align: center;
   }
+  .grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Two columns with equal width */
+  gap: 10px; /* Gap between grid items */
+  margin-top: 10px;
+}
   .banner-text h1 {
     font-size: 30px;
     line-height: 35px;

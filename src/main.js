@@ -8,6 +8,8 @@ import DashboardLayout from './layouts/Dashboard.vue'
 import DashboardRTLLayout from './layouts/DashboardRTL.vue'
 import router from './router'
 import VueSocialSharing from 'vue-social-sharing'
+import VueCarousel from 'vue-carousel';
+
 
 // import './plugins/click-away'
 
@@ -23,6 +25,7 @@ import { auth } from "./database/index";
 
 Vue.use(Antd);
 Vue.use(VueSocialSharing);
+Vue.use(VueCarousel);
 
 Vue.config.productionTip = false
 
