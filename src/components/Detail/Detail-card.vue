@@ -35,19 +35,19 @@
       </div>
       <div class="col-lg-6">
         <div class="product-details">
-          <div class="pd-title">
+          <div class="pd-title ">
             <span>{{ advocate.job_title }}</span>
-            <h3 style="white-space:nowrap">{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h3>
+            <h3 style="white-space:nowrap;display: flex;">{{ advocate.first_name }}<span class="mr-2"></span>{{ advocate.last_name }}</h3>
             <!-- <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a> -->
           </div>
-          <div class="pd-rating">
+          <!-- <div class="pd-rating">
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
             <i class="fa fa-star-o"></i>
             <span>(5)</span>
-          </div>
+          </div> -->
           <div class="pd-desc">
             <p>
              {{ advocate.biography }}
