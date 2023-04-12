@@ -59,15 +59,17 @@
 	  style="display:none;"
     >
       <section slot="pdf-content" class="pdf-section">
-        <img
-          src="images/logo-lg.png"
+        <div class="d-flex justify-content-center p-3">
+          <img
+          src="images/dial-logo.png"
           alt=""
           style="
             height: 100px;
-            width: 200px;
+           
             object-fit: contain;
           "
         />
+        </div>
         <div class="pdf-header">
           <div class="text-center">
             <p
@@ -85,15 +87,18 @@
           </div>
         </div>
         <a-divider />
+        <h3 style="text-decoration: line-through; color:#e6353b; margin-right: 10px;"> KSH 15000 Discount</h3> 
+       <div class="d-flex justify-content-center px-5 w-100">
         <table class="styled-table">
           <tr>
-            <td><span class="pdf-asset-details">Amount:</span></td>
+            <td><span class="pdf-asset-details">Amount Paid:</span></td>
             <td>
               <span class="pdf-asset-details"><span  style="margin-right:10px">KSH</span>{{
                 item.amount
               }}</span>
             </td>
           </tr>
+          
           <tr>
             <td>
               <span class="pdf-asset-details">Payment Date:</span>
@@ -121,12 +126,12 @@
             </td>
           </tr>
         </table>
-
+       </div>
         <div class="text-center">
           <div
             style="display: flex; align-items: center; justify-content: center"
           >
-            <barcode :value="date"> Barcode </barcode>
+            <barcode :value="new Date().toDateString()"> Barcode </barcode>
           </div>
           <div
             class="bg-dark text-center"
