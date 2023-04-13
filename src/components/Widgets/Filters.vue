@@ -4,7 +4,15 @@
     
       <a-row :gutter="16" >
           <a-col :span="24" :lg="6">
-         
+            <div>
+              <div class="sidebar">
+                <span class="line"></span>
+
+              </div>
+              <button class="filter-btn px-5" @click="filterItems">
+                Filter
+              </button>
+            </div>
           </a-col>
           <a-col :span="24" :lg="18">
             <div class="row">
