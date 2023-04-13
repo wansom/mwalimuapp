@@ -1,12 +1,13 @@
 <template>
 <section>
   <div class="container py-4">
-    <div>
+    
       <a-row :gutter="16">
           <!-- <a-col :span="24" :lg="6">
             <div id="filters">
               <div class="sidebar">
                 <span class="line"></span>
+
                 <div class="filter-widget">
                   <a-collapse
                     expand-icon-position="right"
@@ -129,7 +130,6 @@
           
           </a-col>
         </a-row>
-    </div>
   </div>
 </section>
 </template>
