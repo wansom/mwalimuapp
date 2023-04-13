@@ -4,8 +4,8 @@
     
       <a-row :gutter="16">
           <a-col :span="24" :lg="6">
-            <div id="filters">
-              <div class="sidebar d-none d-lg-block">
+            <div id="filters" class="d-none d-lg-block">
+              <div class="sidebar">
                 <span class="line"></span>
 
                 <div class="filter-widget">
