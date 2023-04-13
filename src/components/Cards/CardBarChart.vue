@@ -17,7 +17,7 @@
         </a-card>
       </a-col>
       <a-col :span="12">
-        <a-select v-model="selectedTimePeriod" style="width: 100%;" @change="updateChartLabels">
+        <a-select v-model="selectedTimePeriod" style="width: 100%;margin-left: 15px;" @change="updateChartLabels">
       <a-select-option value="thisWeek">Weekly Views</a-select-option>
       <a-select-option value="thisMonth">This Month</a-select-option>
       <a-select-option value="thisYear">This Year</a-select-option>
