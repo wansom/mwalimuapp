@@ -12,6 +12,7 @@
 		props: [
 			'data',
 			'height',
+			'options'
 		],
 		data(){
 			return {
@@ -56,7 +57,7 @@
 							},
 							ticks: {
 								suggestedMin: 0,
-								suggestedMax: 1000,
+								suggestedMax: 10000,
 								display: true,
 								color: "#8C8C8C",
 								font: {

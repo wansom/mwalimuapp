@@ -17,10 +17,10 @@
         </a-card>
       </a-col>
       <a-col :span="12">
-        <a-select v-model="selectedTimePeriod" style="margin-left: 16px;width: 100%;" @change="loadData">
-      <a-select-option value="day">Today</a-select-option>
-      <a-select-option value="week">Last Week</a-select-option>
-      <a-select-option value="month">Last Month</a-select-option>
+        <a-select v-model="selectedTimePeriod" style="width: 100%;" @change="updateChartLabels">
+      <a-select-option value="thisWeek">Weekly Views</a-select-option>
+      <a-select-option value="thisMonth">This Month</a-select-option>
+      <a-select-option value="thisYear">This Year</a-select-option>
     </a-select>
       </a-col>
     </a-row>
@@ -42,7 +42,18 @@ export default {
   data() {
     return {
       profileViewsData: [],
-      selectedTimePeriod: 'day',
+      chartData: null,
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            stepSize: 1
+          }
+        }
+      },
+      selectedTimePeriod: 'thisWeek',
       icon: `<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6Z" fill="#111827"/>
 							<path d="M17 6C17 7.65685 15.6569 9 14 9C12.3431 9 11 7.65685 11 6C11 4.34315 12.3431 3 14 3C15.6569 3 17 4.34315 17 6Z" fill="#111827"/>
@@ -67,33 +78,50 @@ export default {
     };
   },
   computed: {
-    loadedVisits(){
-      let visitos=[]
-      for(let i=0;i<=this.visitors.lenght;i++){
-        visitos.push(this.visitors[i].toDate())
-      }
-      return visitos
-    },
-    formattedDate(){
-      return "hello world"
-    },
     filteredProfileViewsData() {
       // Filter profile views data based on selected time period
       const now = new Date();
       const cutoffDate =
-        this.selectedTimePeriod === 'day'
-          ? new Date(now.getTime() - 24 * 60 * 60 * 1000)
-          : this.selectedTimePeriod === 'week'
-          ? new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
-          : new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        this.selectedTimePeriod === 'thisWeek'
+          ? new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay())
+          : this.selectedTimePeriod === 'thisMonth'
+          ? new Date(now.getFullYear(), now.getMonth(), 1)
+          : this.selectedTimePeriod === 'thisYear'
+          ? new Date(now.getFullYear(), 0, 1)
+          : null;
 
-      return this.visitors.filter(view =>view.toDate() > cutoffDate);
+      if (!cutoffDate) {
+        return [];
+      }
+
+      return this.visitors.filter(timestamp => timestamp.toDate() > cutoffDate);
+    },
+    chartLabels() {
+      // Generate chart labels based on selected time period
+      const now = new Date();
+      const labels =
+        this.selectedTimePeriod === 'thisWeek'
+          ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+          : this.selectedTimePeriod === 'thisMonth'
+          ? Array.from({ length: new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() }, (_, i) =>
+              (i + 1).toString()
+            )
+          : Array.from({ length: 12 }, (_, i) => new Date(now.getFullYear(), i).toLocaleString('en-us', { month: 'long' }));
+
+      return labels;
     },
     filteredChartData() {
       // Prepare data for chart.js
-      const data = this.filteredProfileViewsData.reduce((acc, view) => {
-        const date = view.toDate().toDateString();
-        acc[date] = acc[date] ? acc[date] + 1 : 1;
+      const data = this.filteredProfileViewsData.reduce((acc, timestamp) => {
+        const date = timestamp.toDate();
+        const label =
+          this.selectedTimePeriod === 'thisWeek'
+            ? date.toLocaleDateString('en-us', { weekday: 'short' })
+            : this.selectedTimePeriod === 'thisMonth'
+            ? date.toLocaleDateString('en-us', { day: 'numeric' })
+            : `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}`;
+
+        acc[label] = acc[label] ? acc[label] + 1 : 1;
         return acc;
       }, {});
       const labels = Object.keys(data);
@@ -130,9 +158,35 @@ export default {
     }
   },
   methods:{
-    loadData(){
-      console.log(this.filteredProfileViewsData, this.visitors[0].toDate(),this.loadedVisits)
+    loadData(value){
+      console.log(this.filteredProfileViewsData,value)
+      this.selectedTimePeriod =value
+    },
+    updateChartLabels() {
+      // Update chart data labels when selected time period changes
+      this.chartData.labels = this.chartLabels;
     }
-  }
+  },
+  mounted() {
+  // Set initial chart data and labels
+  this.chartData = {
+    labels: this.chartLabels,
+    datasets: [
+      {
+        label: 'Profile Views',
+        data: this.chartLabels.map(label => this.filteredProfileViewsData.filter(timestamp => {
+          const date = timestamp.toDate();
+          if (this.selectedTimePeriod === 'thisWeek') {
+            return date.toLocaleDateString('en-us', { weekday: 'short' }) === label;
+          } else if (this.selectedTimePeriod === 'thisMonth') {
+            return date.toLocaleDateString('en-us', { day: 'numeric' }) === label;
+          } else if (this.selectedTimePeriod === 'thisYear') {
+            return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}` === label;
+          }
+        }).length)
+      }
+    ]
+  };
+}
 };
 </script>
