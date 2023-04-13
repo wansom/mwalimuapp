@@ -2,9 +2,9 @@
 <section>
   <div class="container py-4">
     
-      <a-row :gutter="16">
+      <a-row :gutter="16"  class="d-none d-lg-block">
           <a-col :span="24" :lg="6">
-            <div id="filters" class="d-none d-lg-block">
+            <div id="filters">
               <div class="sidebar">
                 <span class="line"></span>
 
