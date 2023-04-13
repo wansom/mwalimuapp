@@ -3,9 +3,9 @@
   <div class="container py-4">
     
       <a-row :gutter="16">
-          <!-- <a-col :span="24" :lg="6">
+          <a-col :span="24" :lg="6">
             <div id="filters">
-              <div class="sidebar">
+              <div class="sidebar d-none d-lg-block">
                 <span class="line"></span>
 
                 <div class="filter-widget">
@@ -85,7 +85,7 @@
                 Filter
               </button>
             </div>
-          </a-col> -->
+          </a-col>
           <a-col :span="24" :lg="18">
             <div class="row">
               <div class="col-lg-5 col-12 text-right my-2">
