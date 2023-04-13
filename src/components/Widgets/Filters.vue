@@ -88,49 +88,6 @@
               </button>
             </div>
           </a-col>
-          <a-col :span="24" :lg="18">
-            <div class="row">
-              <div class="col-lg-5 col-12 text-right my-2">
-                <p>
-                  Showing
-                  {{ filterApplied ? displayItems.length : advocates.length }}
-                  Advocates
-                </p>
-              </div>
-            </div>
-              <div class="col-sm-12">
-               <!-- Loop products  -->
-                  <a-spin v-if="loading"></a-spin>
-                  <a-result
-                    status="500"
-                    title="500"
-                    sub-title="Sorry, the server is wrong."
-                    v-else-if="firebaseEror"
-                  >
-                    <template #extra>
-                      <a-button type="primary"> Back Home </a-button>
-                    </template>
-                  </a-result>
-                  <a-list
-                    v-else
-                    item-layout="vertical"
-                    size="large"
-                    :pagination="pagination"
-                    :data-source="filterApplied ? displayItems : advocates"
-                    style="overflow: hidden !important;"
-                  >
-                    <a-list-item
-                      slot="renderItem"
-                      key="item.title"
-                      slot-scope="item"
-                     
-                    >
-                      <card-info :advocate="item"></card-info>
-                    </a-list-item>
-                  </a-list>
-              </div>
-          
-          </a-col>
         </a-row>
     </div>
   </div>
