@@ -84,6 +84,9 @@
               <button class="filter-btn px-5" @click="filterItems">
                 Filter
               </button>
+              <button class="clear-filter-btn px-5 bg-black" @click="clearFilters" v-if="filterApplied">
+                Clear Filters
+              </button>
             </div>
           </a-col>
           <a-col :span="24" :lg="18">
@@ -249,6 +252,10 @@ export default {
     removeTags: function (item) {
       var itemIndex = this.filtersAppied.indexOf(item);
       this.filtersAppied.splice(itemIndex, 1);
+    },
+    clearFilters(){
+      this.filterApplied =false
+      this.selectedCounty=""
     },
     clearTags() {
       this.filtersAppied = [];

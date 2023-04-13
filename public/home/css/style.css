@@ -1873,6 +1873,19 @@ ol {
   border: none;
   width: 80%;
 }
+.clear-filter-btn {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 700;
+  background: #000000;
+  padding: 7px 40px 5px;
+  border-radius: 2px;
+  display: inline-block;
+  text-transform: uppercase;
+  border: none;
+  width: 80%;
+  margin-top: 10px;
+}
 
 .filter-widget .fw-color-choose .cs-item {
   width: 50%;
