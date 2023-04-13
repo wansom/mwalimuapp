@@ -42,15 +42,15 @@
                     </a-collapse-panel>
                   </a-collapse>
                 </div>
-                <div class="filter-widget experience-w d-none d-lg-block">
+                <div class="filter-widget experience-w">
                   <h4 class="fw-title">Years of Experience</h4>
-                  <div class="filter-range-wrap position-relative">
+                 
                     <vue-range-slider
                       ref="slider"
                       v-model="years_of_experience"
                       @change="setExperience"
                     ></vue-range-slider>
-                  </div>
+                
                 </div>
 
                 <div class="filter-widget">
