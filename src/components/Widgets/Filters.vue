@@ -1,4 +1,5 @@
 <template>
+<section>
   <div class="container py-4">
     <div id="product-list">
       <a-row :gutter="16">
@@ -97,7 +98,6 @@
                 </p>
               </div>
             </div>
-            <div >
               <div class="col-sm-12">
                <!-- Loop products  -->
                   <a-spin v-if="loading"></a-spin>
@@ -129,11 +129,12 @@
                     </a-list-item>
                   </a-list>
               </div>
-            </div>
+          
           </a-col>
         </a-row>
     </div>
   </div>
+</section>
 </template>
 
 <script>

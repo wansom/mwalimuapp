@@ -2,8 +2,10 @@
 
   <div>
     <Header></Header>
-    <section class="single-research-banner"></section>
+<main>
+  <section class="single-research-banner"></section>
    <Filters :advocates="advocates"></Filters>
+</main>
    <Footer></Footer>
   </div>
  
