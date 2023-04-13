@@ -42,7 +42,44 @@
                     </a-collapse-panel>
                   </a-collapse>
                 </div>
+                <!-- <div class="filter-widget">
+                  <h4 class="fw-title">Years of Experience</h4>
+                  <div class="filter-range-wrap position-relative">
+                    <vue-range-slider
+                      ref="slider"
+                      v-model="years_of_experience"
+                      @change="setExperience"
+                    ></vue-range-slider>
+                  </div>
+                </div> -->
 
+                <div class="filter-widget">
+                  <a-collapse expand-icon-position="right" :bordered="false">
+                    <template #expandIcon="props">
+                      <a-icon
+                        type="caret-down"
+                        :rotate="props.isActive ? 180 : 0"
+                      />
+                    </template>
+                    <a-collapse-panel key="1" header="Counties">
+                      <div class="fw-color-choose">
+                        <div
+                          class="cs-item"
+                          v-for="item in counties"
+                          :key="item"
+                        >
+                          <input
+                            type="radio"
+                            :id="item"
+                            :value="item"
+                            v-model="selectedCounty"
+                          />
+                          <label class="cs-red" :for="item">{{ item }}</label>
+                        </div>
+                      </div>
+                    </a-collapse-panel>
+                  </a-collapse>
+                </div>
               </div>
               <button class="filter-btn px-5" @click="filterItems">
                 Filter
