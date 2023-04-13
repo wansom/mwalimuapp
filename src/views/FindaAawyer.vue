@@ -2,8 +2,7 @@
   <div>
     <Header></Header>
     <main>
-      <section class="single-research-banner"></section>
-
+    <section class="single-research-banner"></section>
       <p>
         The standard Lorem Ipsum passage, used since the 1500s "Lorem ipsum
         dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -70,7 +69,7 @@
         pleasures to secure other greater pleasures, or else he endures pains to
         avoid worse pains."
       </p>
-            <Filters :advocates="advocates"></Filters>
+            <!-- <Filters :advocates="advocates"></Filters> -->
     </main>
     <Footer></Footer>
   </div>
