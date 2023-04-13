@@ -22,6 +22,7 @@ import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
 import {getAdvocate} from '../database/firestore'
 import {increment} from "firebase/firestore"
 import { updateAdvocate } from "../database/firestore";
+import { arrayUnion} from "firebase/firestore";
 export default {
   components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },
   data(){
@@ -39,7 +40,7 @@ export default {
       getAdvocate(this.$route.params.id).then((data)=>{
        this.advocate=data
        updateAdvocate(this.$route.params.id,{
-          profile_visits: increment(1),
+          profile_visits:arrayUnion(new Date()),
         })
       })
     },
