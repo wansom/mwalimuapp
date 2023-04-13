@@ -8,6 +8,41 @@
               <div class="sidebar">
                 <span class="line"></span>
 
+                <div class="filter-widget">
+                  <a-collapse
+                    expand-icon-position="right"
+                    :bordered="false"
+                    default-active-key="1"
+                  >
+                    <template #expandIcon="props">
+                      <a-icon
+                        type="caret-down"
+                        :rotate="props.isActive ? 180 : 0"
+                      />
+                    </template>
+                    <a-collapse-panel key="1" header="Practise Areas">
+                      <div
+                        v-for="category in practiseAreas"
+                        :key="category"
+                        class="checkbox"
+                        @change="
+                          () => {
+                            setActive(category);
+                          }
+                        "
+                      >
+                        <label>
+                          <input type="checkbox" /><span
+                            class="checkbox-material"
+                            ><span class="check"></span
+                          ></span>
+                          {{ category }}
+                        </label>
+                      </div>
+                    </a-collapse-panel>
+                  </a-collapse>
+                </div>
+
               </div>
               <button class="filter-btn px-5" @click="filterItems">
                 Filter
