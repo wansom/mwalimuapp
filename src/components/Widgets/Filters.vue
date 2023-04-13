@@ -256,6 +256,7 @@ export default {
     clearFilters(){
       this.filterApplied =false
       this.selectedCounty=""
+      this.selectedPractiseArea=[]
     },
     clearTags() {
       this.filtersAppied = [];
@@ -356,7 +357,7 @@ export default {
       if (practiceAreas && practiceAreas.length > 0) {
         advocates = advocates.filter((advocate) => {
           return practiceAreas.every((area) =>
-            advocate.practise_areas.includes(area)
+            advocate.all_areas.includes(area)
           );
         });
       }
@@ -376,7 +377,7 @@ export default {
         years_of_experience[0],
         years_of_experience[1],
         selectedPractiseArea,
-        this.advocates
+        this.myAdvocates
       );
       this.filterApplied = true;
     },
@@ -389,6 +390,14 @@ export default {
       "loading",
       "firebaseEror",
     ]),
+ 
+    myAdvocates() {
+  return this.advocates.map(obj => {
+    const { specialisation, practise_areas } = obj;
+    const all_areas = specialisation + " " + practise_areas.join(" ");
+    return { ...obj, all_areas };
+  });
+}
   },
   updated() {},
   mounted() {},
