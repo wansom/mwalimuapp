@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="card-info d-none d-md-block mb-3"  style="height:300px;">
+    <a-card :bordered="false" class="card-info d-none d-md-block mb-3"  style="min-height:300px; height: fit-content;">
     <a-row type="flex">
       <a-col class="col-img d-block d-md-none" :span="24" :md="12">
         <div>

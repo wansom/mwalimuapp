@@ -1,19 +1,9 @@
 <template>
   <!-- Active Users Card -->
   <a-card :bordered="false" class="dashboard-bar-chart">
-   <h1>{{ selectedTimePeriod }}</h1>
    <div>
 		<canvas ref="chart" :style="{'height': height + 'px'}"></canvas>
 	</div>
-    <!-- <div v-if="selectedTimePeriod === 'thisWeek'">
-      <chart-line :height="350" :data="weeklyChartData" :options="chartOptions"></chart-line>
-    </div>
-    <div v-if="selectedTimePeriod === 'thisMonth'">
-      <chart-line :height="350" :data="monthlyChartData" :options="chartOptions"></chart-line>
-    </div>
-    <div v-if="selectedTimePeriod === 'thisYear'">
-      <chart-line :height="350" :data="yearlyChartData" :options="chartOptions"></chart-line>
-    </div> -->
     <div class="card-title"></div>
     <a-row class="card-footer" type="flex" justify="start" align="middle">
       <a-col :span="6">
@@ -115,7 +105,8 @@ export default {
           {
             label: 'Profile Views',
             data: values,
-            backgroundColor: '#1890ff' // Ant Design primary color
+            backgroundColor: '#1890ff', // Ant Design primary color
+            tension: 0.4
           }
         ]
       };
@@ -146,7 +137,8 @@ export default {
       {
         label: 'Profile Views',
         data: values,
-        backgroundColor: '#1890ff' // Ant Design primary color
+        backgroundColor: '#1890ff', // Ant Design primary color
+        tension: 0.4
       }
     ]
   };
@@ -180,7 +172,8 @@ yearlyChartData() {
       {
         label: 'Profile Views',
         data: values,
-        backgroundColor: '#1890ff' // Ant Design primary color
+        backgroundColor: '#1890ff' ,// Ant Design primary color
+        tension: 0.4
       }
     ]
   };
