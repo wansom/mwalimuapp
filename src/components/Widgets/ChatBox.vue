@@ -140,7 +140,7 @@
       @toggle-rooms-list="$emit('show-demo-options', $event.detail[0].opened)"
     >
     <div slot="add-icon">
-      <img src="images/message-icon.png" alt="">
+    <div  style="border: solid 1px #000000; padding:4px;border-radius: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 2px;z-index: 30px;">MESSAGES</div>
     </div>
     <div slot="rooms-empty">
       <p>No Chats</p>

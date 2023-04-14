@@ -40,120 +40,143 @@
           :title="item.date.toDate().toDateString()"
         ></a-list-item-meta>
         <div class="amount"><span class="mx-4">KSH</span>{{ item.amount }}</div>
-		<vue-html2pdf
-      :show-layout="true"
-      :float-layout="true"
-      :enable-download="true"
-      :preview-modal="true"
-      :paginate-elements-by-height="160"
-      :filename="date"
-      :pdf-quality="2"
-      :manual-pagination="false"
-      pdf-format="a4"
-      pdf-orientation="landscape"
-      pdf-content-width="1250px"
-      @progress="onProgress($event)"
-      @hasStartedGeneration="hasStartedGeneration()"
-      @hasGenerated="hasGenerated($event)"
-      ref="html2Pdf"
-	  style="display:none;"
-    >
-      <section slot="pdf-content" class="pdf-section">
-        <div class="d-flex justify-content-center p-3">
-          <img
-          src="images/dial-logo.png"
-          alt=""
-          style="
-            height: 100px;
-           
-            object-fit: contain;
-          "
-        />
-        </div>
-        <div class="pdf-header">
-          <div class="text-center">
-            <p
-              class="pdf-title"
-              style="letter-spacing: 8px; text-transform: uppercase"
-            >
-              Account Subscription Receipt
-            </p>
-            <p
-              style="letter-spacing: 10px; text-transform: uppercase"
-              class="pdf-sub-title"
-            >
-              {{first_name}}<span style="margin-left:10px;">{{ last_name }}</span>
-            </p>
-          </div>
-        </div>
-        <a-divider />
-        <h3 style="text-decoration: line-through; color:#e6353b; margin-right: 10px;"> KSH 15000 Discount</h3> 
-       <div class="d-flex justify-content-center px-5 w-100">
-        <table class="styled-table">
-          <tr>
-            <td><span class="pdf-asset-details">Amount Paid:</span></td>
-            <td>
-              <span class="pdf-asset-details"><span  style="margin-right:10px">KSH</span>{{
-                item.amount
-              }}</span>
-            </td>
-          </tr>
-          
-          <tr>
-            <td>
-              <span class="pdf-asset-details">Payment Date:</span>
-            </td>
-            <td>
-              <span class="pdf-asset-details">{{
-             item.date.toDate().toDateString()
-              }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td><span class="pdf-asset-details">Transaction reference:</span></td>
-            <td>
-              <span class="pdf-asset-details">{{
-               item.number
-              }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="pdf-asset-details">Next Payment Date:</span>
-            </td>
-            <td>
-              <span class="pdf-asset-details">{{ date}}</span>
-            </td>
-          </tr>
-        </table>
-       </div>
-        <div class="text-center">
-          <div
-            style="display: flex; align-items: center; justify-content: center"
-          >
-            <barcode :value="new Date().toDateString()"> Barcode </barcode>
-          </div>
-          <div
-            class="bg-dark text-center"
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              height: 100px;
-            "
-          >
-            <p class="pdf-declaration">
-              This is a digital receipt issued by Acelitigator  and should  not be
-              forged or used by any other party.
-            </p>
-          </div>
-        </div>
-      </section>
-    </vue-html2pdf>
+        <vue-html2pdf
+          :show-layout="true"
+          :float-layout="true"
+          :enable-download="true"
+          :preview-modal="true"
+          :paginate-elements-by-height="160"
+          :filename="date"
+          :pdf-quality="2"
+          :manual-pagination="false"
+          pdf-format="a4"
+          pdf-orientation="landscape"
+          pdf-content-width="1250px"
+          @progress="onProgress($event)"
+          @hasStartedGeneration="hasStartedGeneration()"
+          @hasGenerated="hasGenerated($event)"
+          ref="html2Pdf"
+          style="display: none"
+        >
+          <section slot="pdf-content" class="pdf-section">
+            <div class="d-flex justify-content-center p-3">
+              <img
+                src="images/dial-logo.png"
+                alt=""
+                style="
+                  height: 100px;
+
+                  object-fit: contain;
+                "
+              />
+            </div>
+            <div class="pdf-header">
+              <div class="text-center">
+                <p
+                  class="pdf-title"
+                  style="letter-spacing: 8px; text-transform: uppercase"
+                >
+                  Account Subscription Receipt
+                </p>
+                <p
+                  style="letter-spacing: 10px; text-transform: uppercase"
+                  class="pdf-sub-title"
+                >
+                  {{ first_name
+                  }}<span style="margin-left: 10px">{{ last_name }}</span>
+                </p>
+              </div>
+            </div>
+            <a-divider />
+            <div class="d-flex justify-content-center px-5 w-100">
+              <table class="styled-table">
+                <tr>
+                  <td><span class="pdf-asset-details">Amount Due:</span></td>
+                  <td>
+                    <span class="pdf-asset-details"
+                      ><span style="margin-right: 10px">KSH</span
+                      >{{ 1500 }}</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="pdf-asset-details">Amount Paid:</span></td>
+                  <td>
+                    <span class="pdf-asset-details"
+                      ><span style="margin-right: 10px">KSH</span
+                      >{{ item.amount }}</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="pdf-asset-details">Discount:</span></td>
+                  <td>
+                    <span class="pdf-asset-details"
+                      ><span style="margin-right: 10px">KSH</span
+                      >{{ 1500 }}</span
+                    >
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <span class="pdf-asset-details">Payment Date:</span>
+                  </td>
+                  <td>
+                    <span class="pdf-asset-details">{{
+                      item.date.toDate().toDateString()
+                    }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="pdf-asset-details"
+                      >Transaction reference:</span
+                    >
+                  </td>
+                  <td>
+                    <span class="pdf-asset-details">{{ item.number }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="pdf-asset-details">Next Payment Date:</span>
+                  </td>
+                  <td>
+                    <span class="pdf-asset-details">{{ date }}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="text-center">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <barcode :value="new Date().toDateString()"> Barcode </barcode>
+              </div>
+              <div
+                class="bg-dark text-center"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  height: 100px;
+                "
+              >
+                <p class="pdf-declaration">
+                  This is a digital receipt issued by Acelitigator and should
+                  not be forged or used by any other party.
+                </p>
+              </div>
+            </div>
+          </section>
+        </vue-html2pdf>
       </a-list-item>
     </a-list>
-
- 
   </a-card>
   <!-- / Invoices Card -->
 </template>
@@ -162,20 +185,19 @@
 import VueHtml2pdf from "vue-html2pdf";
 import VueBarcode from "vue-barcode";
 export default {
-  props: ["first_name","last_name","data", "date"],
+  props: ["first_name", "last_name", "data", "date"],
   components: {
     VueHtml2pdf,
     barcode: VueBarcode,
-	
   },
   data() {
     return {
-		visible:false
-	};
+      visible: false,
+    };
   },
   methods: {
     generateReport() {
-		this.visible=true
+      this.visible = true;
       this.$refs.html2Pdf.generatePdf();
     },
   },
