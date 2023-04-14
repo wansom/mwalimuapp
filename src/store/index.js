@@ -9,9 +9,9 @@ import {
   addCourt,
 } from "../database/firestore";
 import swal from "sweetalert";
-import { createUser ,signIn,logout,passwordReset} from "../database/auth";
-import { arrayUnion,onSnapshot,collection} from "firebase/firestore";
-import {auth,firestoreDb} from "../database/index"
+import { createUser, signIn, logout, passwordReset } from "../database/auth";
+import { arrayUnion, onSnapshot, collection } from "firebase/firestore";
+import { auth, firestoreDb } from "../database/index";
 const axios = require("axios").default;
 
 Vue.use(Vuex);
@@ -98,13 +98,17 @@ export default new Vuex.Store({
       "State Tribunals",
     ],
     courtData: [],
-    filteredItems:[],
-    firebaseEror:""
+    filteredItems: [],
+    firebaseEror: "",
+    selectedTimePeriod: "thisWeek",
   },
   getters: {},
   mutations: {
     setUserProfile(state, val) {
       state.user = val;
+    },
+    setSelectedTimePeriod(state, val) {
+      state.selectedTimePeriod = val;
     },
     setStep(state, val) {
       state.current = val;
@@ -127,24 +131,24 @@ export default new Vuex.Store({
     setCourtData(state, val) {
       state.courtData = val;
     },
-    setFilteredItems(state,val){
-      state.filteredItems=val
+    setFilteredItems(state, val) {
+      state.filteredItems = val;
     },
-    setFirebaseError(state,val){
-      state.firebaseEror=val
-    }
+    setFirebaseError(state, val) {
+      state.firebaseEror = val;
+    },
   },
   actions: {
     //register new user
     signUp({ commit, dispatch }, data) {
       dispatch("changeLoading", true);
-      console.log(data)
+      console.log(data);
       createUser({
-        email:data.email,
-        password:data.password
+        email: data.email,
+        password: data.password,
       })
         .then((result) => {
-          console.log(result.user)
+          console.log(result.user);
           addLawyer({
             first_name: data.first_name,
             last_name: data.last_name,
@@ -152,14 +156,14 @@ export default new Vuex.Store({
             password: data.password,
             uid: result.user.uid,
             status: "incomplete",
-            profile_visits:[],
-            username:`${data.first_name}${data.last_name}`,
-            _id:result.user.uid,
-            notifications:arrayUnion({
+            profile_visits: [],
+            username: `${data.first_name}${data.last_name}`,
+            _id: result.user.uid,
+            notifications: arrayUnion({
               notification: `Your account was created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile`,
               date: new Date(),
-            })
-          }).then(()=>{
+            }),
+          }).then(() => {
             dispatch("sendMail", {
               name: data.first_name,
               email: data.email,
@@ -169,7 +173,7 @@ export default new Vuex.Store({
             });
             dispatch("changeLoading", false);
             router.push("/sign-in");
-          })
+          });
         })
         .catch((err) => {
           swal({
@@ -182,20 +186,22 @@ export default new Vuex.Store({
     },
 
     //login user
-    login({ dispatch}, data) {
+    login({ dispatch }, data) {
       dispatch("changeLoading", true);
-      signIn(data).then(()=>{
-        dispatch("changeLoading", false);
-        dispatch("fetchUserProfile");
-        router.push("/dashboard");
-      }).catch((err)=>{
-        dispatch("changeLoading", false);
-        swal({
-          title: "OOPS!",
-          text: `${err.message}`,
-          icon: "error",
+      signIn(data)
+        .then(() => {
+          dispatch("changeLoading", false);
+          dispatch("fetchUserProfile");
+          router.push("/dashboard");
+        })
+        .catch((err) => {
+          dispatch("changeLoading", false);
+          swal({
+            title: "OOPS!",
+            text: `${err.message}`,
+            icon: "error",
+          });
         });
-      })
     },
 
     fetchUserProfile({ commit }) {
@@ -210,22 +216,22 @@ export default new Vuex.Store({
       }
     },
 
-
     logout({ dispatch }) {
-      logout().then(()=>{
+      logout().then(() => {
         router.push("/sign-in");
-        localStorage.clear()
-      })
+        localStorage.clear();
+      });
     },
 
     restPassword({ commit }, values) {
       dispatch("changeLoading", true);
-      passwordReset(values.email).then(()=>{
-        dispatch("changeLoading", false);
-      }).catch((err)=>{
-        dispatch("changeLoading", false);
-      })
-
+      passwordReset(values.email)
+        .then(() => {
+          dispatch("changeLoading", false);
+        })
+        .catch((err) => {
+          dispatch("changeLoading", false);
+        });
     },
     /*
     user registration start
@@ -233,7 +239,7 @@ export default new Vuex.Store({
     updateUser({ dispatch, commit }, data) {
       dispatch("changeLoading", true);
       let user = auth.currentUser;
-     updateAdvocate(user.uid,data)
+      updateAdvocate(user.uid, data)
         .then(() => {
           swal({
             title: "Success!",
@@ -241,14 +247,14 @@ export default new Vuex.Store({
             icon: "success",
           });
 
-          updateAdvocate(user.uid,{
+          updateAdvocate(user.uid, {
             notifications: arrayUnion({
               notification: `your ${data.step} have been updated successfully`,
               date: new Date(),
             }),
           });
           if (data.status == "pending approval") {
-            updateAdvocate(user.uid,{
+            updateAdvocate(user.uid, {
               notifications: arrayUnion({
                 notification: `your account details have been submitted successfully for review`,
                 date: new Date(),
@@ -260,13 +266,19 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-          dispatch("changeLoading", false)
+          dispatch("changeLoading", false);
           swal({
             title: "OOPS!",
             text: `${err.message}`,
             icon: "error",
           });
         });
+    },
+
+    //set selected time period
+    changeTimeLine({ commit }, val) {
+      commit("setSelectedTimePeriod", val);
+      console.log(val)
     },
     //mpesa
     async intiatePayments({ dispatch }, values) {
@@ -294,9 +306,9 @@ export default new Vuex.Store({
       );
     },
     async fetchCourts({ commit }) {
-      getAllCourts().then(({data})=>{
+      getAllCourts().then(({ data }) => {
         commit("setCourtData", data);
-      })
+      });
     },
 
     async fetchRequests({ commit }) {
@@ -309,36 +321,39 @@ export default new Vuex.Store({
         });
     },
     subscribeToCollection({ commit }) {
-      const LAWYERS_PATH='nigeria_lawyers'
+      const LAWYERS_PATH = "nigeria_lawyers";
       const myCollection = collection(firestoreDb, LAWYERS_PATH);
-  
+
       const unsubscribe = onSnapshot(myCollection, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        commit('setAdvocates', data);
+        commit("setAdvocates", data);
       });
-  
+
       // Return a function to detach the listener when the action is no longer needed
       return unsubscribe;
     },
-    async fetAllAdvocates({ dispatch,commit }) {
-      const LAWYERS_PATH='nigeria_lawyers'
-      const myCollection = collection(firestoreDb, LAWYERS_PATH); 
-      const unsubscribe = onSnapshot(myCollection, (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        commit('setAllAdvocates', data);
-       
-      }, (error) => {
-        dispatch("changeLoading", false);
-        commit("setFirebaseError", error.message)
-        console.log(error.message)
-      });
-  
+    async fetAllAdvocates({ dispatch, commit }) {
+      const LAWYERS_PATH = "nigeria_lawyers";
+      const myCollection = collection(firestoreDb, LAWYERS_PATH);
+      const unsubscribe = onSnapshot(
+        myCollection,
+        (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          commit("setAllAdvocates", data);
+        },
+        (error) => {
+          dispatch("changeLoading", false);
+          commit("setFirebaseError", error.message);
+          console.log(error.message);
+        }
+      );
+
       // Return a function to detach the listener when the action is no longer needed
       return unsubscribe;
     },
@@ -350,14 +365,12 @@ export default new Vuex.Store({
     },
 
     async addCourt({ dispatch }, data) {
-      
       dispatch("changeLoading", true);
-      addCourt(data).then(()=>{
+      addCourt(data).then(() => {
         dispatch("changeLoading", false);
-        location.reload()
-      })
+        location.reload();
+      });
     },
-
   },
   modules: {},
 });

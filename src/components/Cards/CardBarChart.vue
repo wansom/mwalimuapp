@@ -1,7 +1,19 @@
 <template>
   <!-- Active Users Card -->
   <a-card :bordered="false" class="dashboard-bar-chart">
-    <chart-line :height="350" :data="filteredChartData"></chart-line>
+   <h1>{{ selectedTimePeriod }}</h1>
+   <div>
+		<canvas ref="chart" :style="{'height': height + 'px'}"></canvas>
+	</div>
+    <!-- <div v-if="selectedTimePeriod === 'thisWeek'">
+      <chart-line :height="350" :data="weeklyChartData" :options="chartOptions"></chart-line>
+    </div>
+    <div v-if="selectedTimePeriod === 'thisMonth'">
+      <chart-line :height="350" :data="monthlyChartData" :options="chartOptions"></chart-line>
+    </div>
+    <div v-if="selectedTimePeriod === 'thisYear'">
+      <chart-line :height="350" :data="yearlyChartData" :options="chartOptions"></chart-line>
+    </div> -->
     <div class="card-title"></div>
     <a-row class="card-footer" type="flex" justify="start" align="middle">
       <a-col :span="6">
@@ -17,11 +29,14 @@
         </a-card>
       </a-col>
       <a-col :span="12">
-        <a-select v-model="selectedTimePeriod" style="width: 100%;margin-left: 15px;" @change="updateChartLabels">
-      <a-select-option value="thisWeek">Weekly Views</a-select-option>
-      <a-select-option value="thisMonth">This Month</a-select-option>
-      <a-select-option value="thisYear">This Year</a-select-option>
-    </a-select>
+        <div class="mx-4">
+    <a-button-group>
+      <a-button @click="()=>{updateChartLabels( 'thisWeek')}">This Week</a-button>
+      <a-button @click="()=>{updateChartLabels( 'thisMonth')}">This Month</a-button>
+      <a-button @click="()=>{updateChartLabels( 'thisYear')}">This Year</a-button>
+    </a-button-group>
+
+  </div>
       </a-col>
     </a-row>
   </a-card>
@@ -29,9 +44,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 // Bar chart for "Active Users" card.
 import ChartBar from "../Charts/ChartBar";
 import ChartLine from "../Charts/ChartLine";
+import { Chart, registerables } from 'chart.js';
+	Chart.register(...registerables);
 
 export default {
   props: ["visitors"],
@@ -41,9 +59,9 @@ export default {
   },
   data() {
     return {
+      height:450,
+      chart: null,
       profileViewsData: [],
-      chartData: null,
-      selectedTimePeriod: 'thisWeek',
       icon: `<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6Z" fill="#111827"/>
 							<path d="M17 6C17 7.65685 15.6569 9 14 9C12.3431 9 11 7.65685 11 6C11 4.34315 12.3431 3 14 3C15.6569 3 17 4.34315 17 6Z" fill="#111827"/>
@@ -68,54 +86,28 @@ export default {
     };
   },
   computed: {
-    filteredProfileViewsData() {
-      // Filter profile views data based on selected time period
+    ...mapState(["selectedTimePeriod",]),
+    weeklyChartData() {
+      // Prepare data for weekly chart
+      const data = {};
       const now = new Date();
-      const cutoffDate =
-        this.selectedTimePeriod === 'thisWeek'
-          ? new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay())
-          : this.selectedTimePeriod === 'thisMonth'
-          ? new Date(now.getFullYear(), now.getMonth(), 1)
-          : this.selectedTimePeriod === 'thisYear'
-          ? new Date(now.getFullYear(), 0, 1)
-          : null;
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 6);
 
-      if (!cutoffDate) {
-        return [];
-      }
-
-      return this.visitors.filter(timestamp => timestamp.toDate() > cutoffDate);
-    },
-    chartLabels() {
-      // Generate chart labels based on selected time period
-      const now = new Date();
-      const labels =
-        this.selectedTimePeriod === 'thisWeek'
-          ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-          : this.selectedTimePeriod === 'thisMonth'
-          ? Array.from({ length: new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() }, (_, i) =>
-              (i + 1).toString()
-            )
-          : Array.from({ length: 12 }, (_, i) => new Date(now.getFullYear(), i).toLocaleString('en-us', { month: 'long' }));
-
-      return labels;
-    },
-    filteredChartData() {
-      // Prepare data for chart.js
-      const data = this.filteredProfileViewsData.reduce((acc, timestamp) => {
-        const date = timestamp.toDate();
-        const label =
-          this.selectedTimePeriod === 'thisWeek'
-            ? date.toLocaleDateString('en-us', { weekday: 'short' })
-            : this.selectedTimePeriod === 'thisMonth'
-            ? date.toLocaleDateString('en-us', { day: 'numeric' })
-            : `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}`;
-
-        acc[label] = acc[label] ? acc[label] + 1 : 1;
-        return acc;
-      }, {});
-      const labels = Object.keys(data);
-      const values = Object.values(data);
+      const labels = daysOfWeek.map(day => day.toLocaleString('en-us', { weekday: 'short' }));
+      const values = labels.map(label => {
+        const date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        date.setDate(date.getDate() - now.getDay() + labels.indexOf(label));
+        const dateString = date.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
+        const count = this.visitors.filter(timestamp => {
+          const profileViewDate = timestamp.toDate();
+          const profileViewDateString = profileViewDate.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
+          return profileViewDateString === dateString;
+        }).length;
+        return count;
+      });
 
       return {
         labels: labels,
@@ -123,17 +115,76 @@ export default {
           {
             label: 'Profile Views',
             data: values,
-            backgroundColor: '#1890ff', // Ant Design primary color
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#1890FF",
-            borderWidth: 3,
-            maxBarThickness: 6,
+            backgroundColor: '#1890ff' // Ant Design primary color
           }
         ]
       };
     },
+    monthlyChartData() {
+  // Prepare data for monthly chart
+  const data = {};
+  const now = new Date();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endDate = new Date(now.getFullYear(), now.getMonth(), daysInMonth);
+
+  const labels = Array.from({ length: daysInMonth }, (_, index) => String(index + 1));
+  const values = labels.map(label => {
+    const date = new Date(now.getFullYear(), now.getMonth(), parseInt(label));
+    const dateString = date.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
+    const count = this.visitors.filter(timestamp => {
+      const profileViewDate = timestamp.toDate();
+      const profileViewDateString = profileViewDate.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
+      return profileViewDateString === dateString;
+    }).length;
+    return count;
+  });
+
+  return {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Profile Views',
+        data: values,
+        backgroundColor: '#1890ff' // Ant Design primary color
+      }
+    ]
+  };
+},
+yearlyChartData() {
+  // Prepare data for yearly chart
+  const data = {};
+  const now = new Date();
+  const monthsInYear = 12;
+  const startDate = new Date(now.getFullYear(), 0, 1);
+  const endDate = new Date(now.getFullYear(), 11, 31);
+
+  const labels = Array.from({ length: monthsInYear }, (_, index) => {
+    const monthDate = new Date(now.getFullYear(), index, 1);
+    return monthDate.toLocaleDateString('en-us', { month: 'short' });
+  });
+
+  const values = labels.map(label => {
+    const count = this.visitors.filter(timestamp => {
+      const profileViewDate = timestamp.toDate();
+      const profileViewMonth = profileViewDate.getMonth();
+      const profileViewMonthString = profileViewDate.toLocaleDateString('en-us', { month: 'short' });
+      return profileViewMonthString === label;
+    }).length;
+    return count;
+  });
+
+  return {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Profile Views',
+        data: values,
+        backgroundColor: '#1890ff' // Ant Design primary color
+      }
+    ]
+  };
+},
     chartOptions() {
       return {
         responsive: true,
@@ -141,7 +192,10 @@ export default {
         scales: {
           y: {
             beginAtZero: true,
-            stepSize: 1
+            stepSize: 1,
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
           }
         }
       };
@@ -152,31 +206,177 @@ export default {
       console.log(this.filteredProfileViewsData,value)
       this.selectedTimePeriod =value
     },
-    updateChartLabels() {
+    updateChartLabels(value) {
+     
       // Update chart data labels when selected time period changes
-      this.chartData.labels = this.chartLabels;
+      this.$store.dispatch("changeTimeLine",value)
+      if(this.selectedTimePeriod=="thisWeek"){
+        this.profileViewsData=this.weeklyChartData
+      }
+      if(this.selectedTimePeriod=="thisMonth"){
+        this.profileViewsData=this.monthlyChartData
+      }
+      if(this.selectedTimePeriod=="thisYear"){
+        this.profileViewsData=this.yearlyChartData
+      }
+      console.log(this.profileViewsData)
+      this.chart.destroy() ;
+      let ctx = this.$refs.chart.getContext("2d");
+
+   
+			this.chart = new Chart(ctx, {
+				type: "line",
+				data: this.profileViewsData,
+     			options: {
+					layout: {
+						padding: {
+							top: 30,
+							right: 15,
+							left: 10,
+							bottom: 5,
+						},
+					},
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							display: false,
+						},
+					},
+					tooltips: {
+						enabled: true,
+						mode: "index",
+						intersect: false,
+					},
+					scales: {
+						y: {
+							grid: {
+								display: true,
+								color: "rgba(0, 0, 0, .2)",
+								zeroLineColor: "#000000",
+								borderDash: [6],
+								borderDashOffset: [6],
+							},
+							ticks: {
+								suggestedMin: 0,
+								suggestedMax: 10000,
+								display: true,
+								color: "#8C8C8C",
+								font: {
+									size: 14,
+									lineHeight: 1.8,
+									weight: '600',
+									family: "Open Sans",
+								},
+							},
+						},
+						x: {
+							grid: {
+								display: false,
+							},
+							ticks: {
+								display: true,
+								color: "#8C8C8C",
+								font: {
+									size: 14,
+									lineHeight: 1.5,
+									weight: '600',
+									family: "Open Sans",
+								},
+							},
+						},
+					},
+				}
+			});
     }
   },
   mounted() {
   // Set initial chart data and labels
-  this.chartData = {
-    labels: this.chartLabels,
-    datasets: [
-      {
-        label: 'Profile Views',
-        data: this.chartLabels.map(label => this.filteredProfileViewsData.filter(timestamp => {
-          const date = timestamp.toDate();
-          if (this.selectedTimePeriod === 'thisWeek') {
-            return date.toLocaleDateString('en-us', { weekday: 'short' }) === label;
-          } else if (this.selectedTimePeriod === 'thisMonth') {
-            return date.toLocaleDateString('en-us', { day: 'numeric' }) === label;
-          } else if (this.selectedTimePeriod === 'thisYear') {
-            return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}` === label;
-          }
-        }).length)
+console.log(this.selectedTimePeriod)
+if(this.selectedTimePeriod=="thisWeek"){
+        this.profileViewsData=this.weeklyChartData
       }
-    ]
-  };
-}
+      if(this.selectedTimePeriod=="thisMonth"){
+        this.profileViewsData=this.monthlyChartData
+      }
+      if(this.selectedTimePeriod=="thisYear"){
+        this.profileViewsData=this.yearlyChartData
+      }
+      console.log(this.profileViewsData)
+let ctx = this.$refs.chart.getContext("2d");
+
+			this.chart = new Chart(ctx, {
+				type: "line",
+				data: this.profileViewsData,
+     			options: {
+					layout: {
+						padding: {
+							top: 30,
+							right: 15,
+							left: 10,
+							bottom: 5,
+						},
+					},
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							display: false,
+						},
+					},
+					tooltips: {
+						enabled: true,
+						mode: "index",
+						intersect: false,
+					},
+					scales: {
+						y: {
+							grid: {
+								display: true,
+								color: "rgba(0, 0, 0, .2)",
+								zeroLineColor: "#000000",
+								borderDash: [6],
+								borderDashOffset: [6],
+							},
+							ticks: {
+								suggestedMin: 0,
+								suggestedMax: 10000,
+								display: true,
+								color: "#8C8C8C",
+								font: {
+									size: 14,
+									lineHeight: 1.8,
+									weight: '600',
+									family: "Open Sans",
+								},
+							},
+						},
+						x: {
+							grid: {
+								display: false,
+							},
+							ticks: {
+								display: true,
+								color: "#8C8C8C",
+								font: {
+									size: 14,
+									lineHeight: 1.5,
+									weight: '600',
+									family: "Open Sans",
+								},
+							},
+						},
+					},
+				}
+			});
+},
+		// Right before the component is destroyed,
+		// also destroy the chart.
+		beforeDestroy: function () {
+			this.chart.destroy() ;
+		},
 };
 </script>
+
+<style lang="scss" scoped>
+</style>
