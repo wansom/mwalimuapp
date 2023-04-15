@@ -20,7 +20,7 @@
                         :rotate="props.isActive ? 180 : 0"
                       />
                     </template>
-                    <a-collapse-panel key="1" header="Practise Areas">
+                    <a-collapse-panel key="1" header="Practice Areas">
                       <div
                         v-for="category in practiseAreas"
                         :key="category"
