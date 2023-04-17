@@ -8,7 +8,7 @@
       <h3>General Information</h3>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="First Name">
               <a-input
                 v-decorator="[
@@ -26,7 +26,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Last Name">
               <a-input
                 v-decorator="[
@@ -47,7 +47,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Email">
               <a-input
                 v-decorator="[
@@ -86,7 +86,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Primary Location(County)">
               <a-select
                 v-decorator="[
@@ -109,7 +109,7 @@
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Other Counties">
               <a-select
                 mode="tags"
@@ -171,7 +171,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Primary Practice Area">
               <a-select
                 style="width: 100%"
@@ -190,7 +190,7 @@
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item
               label="Other Practice Areas (Select upto 3 that apply)"
             >
@@ -215,7 +215,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Your LinkedIn link">
               <a-input
                 v-decorator="[
@@ -234,7 +234,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Your Twitter Link">
               <a-input
                 v-decorator="[
@@ -277,7 +277,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="24" v-if="user.profile_photo">
+          <a-col :span="24"  v-if="user.profile_photo">
             <img :src="user.profile_photo" alt="" style="height: 100px" />
           </a-col>
           <a-col :span="24">

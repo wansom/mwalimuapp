@@ -13,7 +13,7 @@
       <a-form :form="form" layout="vertical">
         <h5 class="my-5">Your Current work place</h5>
         <a-row :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -31,7 +31,7 @@
             </a-input>
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24"  :md="8">
             <a-form-item label="Starting Date">
              
               <a-date-picker
@@ -54,7 +54,7 @@
         </a-row>
         <h5 class="my-10">Your Previous Work place</h5>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -69,7 +69,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Dates">
               <!-- <a-date-picker
               :disabled-date="disabledDate"
@@ -97,7 +97,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -112,7 +112,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Starting Date">
               <a-range-picker 
               :disabled-date="disabledDate"
@@ -128,7 +128,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -143,7 +143,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Starting Date">
               <a-range-picker 
               :disabled-date="disabledDate"
@@ -159,7 +159,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -174,7 +174,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Starting Date">
               <a-range-picker 
               :disabled-date="disabledDate"
