@@ -10,7 +10,7 @@
       <a-form :form="form" layout="vertical">
         <h5 class="my-10">Education History</h5>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="University">
               <a-input
                 v-decorator="[
@@ -28,7 +28,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label=" Dates">
               <a-range-picker 
               :disabled-date="disabledDate"
@@ -44,7 +44,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Postgraduate Diploma">
               
               <a-input
@@ -58,7 +58,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Dates">
               <a-range-picker 
               :disabled-date="disabledDate"
@@ -73,7 +73,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="14">
+          <a-col :span="24" :md="14">
             <a-form-item label="Any other Institution">
               <a-input
                 v-decorator="[
@@ -86,7 +86,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Dates">
               <a-range-picker 
            

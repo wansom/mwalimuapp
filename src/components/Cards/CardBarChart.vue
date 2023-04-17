@@ -6,7 +6,7 @@
 	</div>
     <div class="card-title"></div>
     <a-row class="card-footer" type="flex" justify="start" align="middle">
-      <a-col :span="6">
+      <a-col :span="24" :md="6">
         <a-card :bordered="false" class="widget-1">
           <a-statistic
             title="Total Profile Views"
@@ -18,8 +18,8 @@
           <div class="icon" v-html="icon"></div>
         </a-card>
       </a-col>
-      <a-col :span="12">
-        <div class="mx-4">
+      <a-col :span="24" :md="12">
+        <div class="mx-4 mt-sm-2">
     <a-button-group>
       <a-button @click="()=>{updateChartLabels( 'thisWeek')}">This Week</a-button>
       <a-button @click="()=>{updateChartLabels( 'thisMonth')}">This Month</a-button>

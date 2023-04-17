@@ -8,7 +8,7 @@
       <h3>Certificate Upload</h3>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Date of Admission">
               <a-date-picker
                 :disabled-date="disabledDate"
@@ -29,7 +29,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Last Practicing Certificate Renewal Date">
               <a-date-picker
                 :disabled-date="disabledDate"
@@ -52,7 +52,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="National ID/Passport Number">
               <a-input
                 v-decorator="[
@@ -72,7 +72,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Practicing Certificate Number">
               <a-input
                 v-decorator="[
@@ -96,7 +96,7 @@
         </a-row>
 
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Curriculum Vitae/Resume" style="width: 100%">
               <a-upload
                 label="Curriculum Vitae/Resume"
@@ -123,7 +123,7 @@
               >
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Practice Certificate">
               <a-upload
                 name="file"
@@ -149,7 +149,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="National ID">
               <a-upload
                 name="file"
@@ -175,7 +175,7 @@
               </a-upload>
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Admission Certificate">
               <a-upload
                 name="file"
