@@ -56,7 +56,7 @@
             <h4><i class="fa fa-location-dot mr-2"></i>{{advocate.location}}<span>(Primary Location)</span></h4>
           </div>
           <ul class="pd-tags">
-            <li class="row align-items-center"><span  class="mr-3">PRACTISE AREAS:</span><p class="mr-2 mt-2" v-for="area of advocate.practise_areas" :key="area">{{ area }},</p></li>
+            <li class="row align-items-center"><span  class="mr-3">PRACTICE AREAS:</span><p class="mr-2 mt-2" v-for="area of advocate.practise_areas" :key="area">{{ area }},</p></li>
             <li class="row align-items-center"><span  class="mr-3">lOCATIONS:</span><p class="mr-2 mt-2" v-for="area of advocate.other_counties" :key="area">{{ area }},</p></li>
           </ul>
           <div class="pd-size-choose">

@@ -73,7 +73,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Practicing Certificate Number">
+            <a-form-item label="Admission Number">
               <a-input
                 v-decorator="[
                   'practise_number',
@@ -124,7 +124,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Practice Certificate">
+            <a-form-item label="Current Practice Certificate">
               <a-upload
                 name="file"
                 accept="application/pdf"
