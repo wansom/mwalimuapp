@@ -10,9 +10,7 @@
               <h1>Improving Access to justice accross the African continent</h1>
               <p>
                 Our mission is to improve access to justice across Africa by
-                providing affordable and accessible legal services. We're
-                dedicated to promoting justice, equality, and fairness for all,
-                and empowering individuals and communities
+                linking verified legal professionals in the justice sector to the market
               </p>
               <router-link to="find-a-lawyer">
                 <button>Find A lawyer</button></router-link
@@ -30,8 +28,7 @@
             <div class="project">
               <div class="project-info">
                 <h2>
-                  Promoting Justice, Empowering Communities:Dial A Lawyer-
-                  Improving Access to Justice Across Africa.
+                  Your legal matchmaker in Africa
                 </h2>
                 <p>
                   Welcome to Dial a Lawyer - the ultimate platform for lawyers
