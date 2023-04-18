@@ -70,10 +70,7 @@
               platform is designed to help lawyers like you connect with clients
               who need your specific area of expertise. By signing up for Dial a
               Lawyer, you'll gain access to a wide range of clients who are
-              actively searching for legal assistance, all while we handle the
-              technical details. Plus, our platform is free to use and provides
-              a variety of tools and resources to help you grow your practice
-              and succeed as a lawyer. Whether you're just starting out or
+              actively searching for legal services. Whether you're just starting out or
               looking to expand your existing practice, Dial a Lawyer is the
               ultimate platform for connecting with clients and growing your
               legal career.
