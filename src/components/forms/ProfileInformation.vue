@@ -1,22 +1,7 @@
 <template>
   <div>
-    <!-- <div class="steps-action">
-        <a-button v-if="current < steps.length - 1" type="primary" @click="next">
-          Next
-        </a-button>
-        <a-button
-          v-if="current == steps.length - 1"
-          type="primary"
-          @click="$message.success('Processing complete!')"
-        >
-          Done
-        </a-button>
-        <a-button v-if="current > 0" style="margin-left: 8px" @click="prev">
-          Previous
-        </a-button>
-      </div> -->
     <a-row :gutter="24" type="flex" align="middle">
-      <a-col :span="24" :md="4">
+      <a-col :span="12" :md="4">
         <a-card
           class="icon-card"
           @click="
@@ -29,7 +14,7 @@
           <p class="card-p">General Information</p>
         </a-card>
       </a-col>
-      <a-col :span="24" :md="4">
+      <a-col :span="12" :md="4">
         <a-card
           class="icon-card"
           @click="
@@ -42,7 +27,7 @@
           <p class="card-p">Employment Information</p>
         </a-card>
       </a-col>
-      <a-col :span="24" :md="4">
+      <a-col :span="12" :md="4">
         <a-card
           class="icon-card"
           @click="
@@ -56,7 +41,7 @@
         </a-card>
       </a-col>
       <a-col
-        :span="24" :md="4"
+        :span="12" :md="4"
         @click="
           () => {
             next(4);
@@ -181,5 +166,30 @@ export default {
 .icon-list {
   font-size: 68px;
   margin-bottom: 10px;
+}
+@media only screen and (max-width: 640px){
+  .icon-list {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+	.icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.icon-card:hover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100px;
+  background-color: #db1c22;
+  margin-bottom: 10px;
+}
 }
 </style>
