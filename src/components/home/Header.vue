@@ -98,6 +98,7 @@
               </ul>
             </li>
             <li><router-link to="contact-us">Contact</router-link></li>
+            <li><router-link to="sign-in">Login </router-link></li>
            
           </ul>
         </nav>
