@@ -7,7 +7,6 @@
         <div class="banner-mask">
           <div class="banner-container container">
             <div class="banner-text">
-              
               <h1>Improving Access to justice accross the African continent</h1>
               <p>
                 Our mission is to improve access to justice across Africa by
@@ -35,10 +34,19 @@
                   Improving Access to Justice Across Africa.
                 </h2>
                 <p>
-                  We also launched the Mary Antoinette Brown Sherman Think Tank,
-                  which will strengthen the position of girls and women in
-                  society through leadership and governance training programs,
-                  by providing a platform for discussion and through research.
+                  Welcome to Dial a Lawyer - the ultimate platform for lawyers
+                  and clients to connect and access legal services with ease.
+                  Our platform is designed to streamline the process of finding
+                  legal help, making it easy for clients to search for lawyers
+                  based on their area of expertise and location. Whether you're
+                  a seasoned lawyer with years of experience or just starting
+                  out in your legal career, Dial a Lawyer can help you reach a
+                  wider audience and connect with potential clients who might
+                  not have found you otherwise. By connecting clients with
+                  lawyers who specialize in their specific legal needs, we're
+                  helping to ensure that everyone has access to the legal
+                  services they require. Join us today and experience the
+                  benefits of our streamlined, user-friendly platform.
                 </p>
                 <router-link to="find-a-lawyer"
                   ><button>Find A Lawyer</button></router-link
@@ -60,16 +68,18 @@
               Rapidly Changing World
             </h1>
             <p>
-              With a focus on unlocking Africa's potential, the summit delved
-              into topics such as digital transformation, automation, remote
-              work, and skills development. Attendees will gain insights on the
-              latest trends and innovations shaping the future of work in
-              Africa, and explored strategies for harnessing these changes to
-              drive economic growth, enhance productivity, and create more
-              inclusive and equitable work environments. Through engaging panel
-              discussions, interactive workshops, and networking opportunities,
-              the summit will provide a platform for stakeholders to
-              collaborate, learn, and shape the future of work in Africa
+              Looking to expand your legal practice and connect with potential
+              clients? Look no further than Dial a Lawyer. Our user-friendly
+              platform is designed to help lawyers like you connect with clients
+              who need your specific area of expertise. By signing up for Dial a
+              Lawyer, you'll gain access to a wide range of clients who are
+              actively searching for legal assistance, all while we handle the
+              technical details. Plus, our platform is free to use and provides
+              a variety of tools and resources to help you grow your practice
+              and succeed as a lawyer. Whether you're just starting out or
+              looking to expand your existing practice, Dial a Lawyer is the
+              ultimate platform for connecting with clients and growing your
+              legal career.
             </p>
             <router-link to="sign-up"><button>Sign Up</button></router-link>
           </div>
@@ -216,13 +226,15 @@
         </div>
       </section>
       <section class="upcoming-events">
-        <div class="upcoming-container container-fluid ">
+        <div class="upcoming-container container-fluid">
           <h1 class="mb-5">Lawyer Profiles</h1>
           <div class="grid-container">
-            
-            <card-info :advocate="i" v-for="i of advocates.slice(0,10)" :key="i.id"></card-info>
-          
-        </div>
+            <card-info
+              :advocate="i"
+              v-for="i of advocates.slice(0, 10)"
+              :key="i.id"
+            ></card-info>
+          </div>
           <div class="up-left">
             <div class="bottom-more">
               <router-link to="find-a-lawyer"
@@ -257,7 +269,10 @@
                   have the legal knowledge you need to succeed in and out of the
                   courtroom
                 </p>
-                <a href="" class="flex gap-2 items-center"
+                <a
+                  href="//kenyalaw.org"
+                  class="flex gap-2 items-center"
+                  target="blank"
                   >Read More
                   <svg
                     width="16"
@@ -505,13 +520,12 @@ export default {
   data() {
     return {
       columns,
-      myText:"hello world",
-      isNavOpen:false,
+      myText: "hello world",
+      isNavOpen: false,
       lawyers: [1, 2, 3, 4, 5, 6, 6, 6, 7, 7],
       animationDuration: "",
       currentCardIndex: 0,
       visibleNav: false,
-     
     };
   },
   created() {},
@@ -520,7 +534,6 @@ export default {
     advocates() {
       return this.allAdvocates.filter(
         (advocate) => advocate.status === "active"
-        
       );
     },
   },
@@ -529,8 +542,8 @@ export default {
   },
   methods: {
     showNav() {
-      this.visibleNav =!this.visibleNav;
-      console.log('button clicked',this.visibleNav)
+      this.visibleNav = !this.visibleNav;
+      console.log("button clicked", this.visibleNav);
     },
     startAnimation() {
       const containerWidth = this.$el.clientWidth;
@@ -763,7 +776,6 @@ section.sponsors {
   padding: 60px 0px;
 }
 
-
 .upcoming-container {
   padding: 25px 0px;
   display: flex;
@@ -772,7 +784,7 @@ section.sponsors {
   align-items: center;
   overflow: hidden;
 }
-.card-scroll{
+.card-scroll {
   display: flex;
   flex-wrap: wrap;
 }
@@ -2146,7 +2158,6 @@ section.filter {
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 640px) {
-
   .projects {
     padding: 10px 0px;
     border-radius: 5px;
@@ -2188,11 +2199,11 @@ section.filter {
     text-align: center;
   }
   .grid-container {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr); /* Two columns with equal width */
-  gap: 10px; /* Gap between grid items */
-  margin-top: 10px;
-}
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Two columns with equal width */
+    gap: 10px; /* Gap between grid items */
+    margin-top: 10px;
+  }
   .banner-text h1 {
     font-size: 30px;
     line-height: 35px;
