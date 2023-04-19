@@ -70,17 +70,18 @@
       </a-col> -->
       <a-col :span="24" :md="10">
         <a-card class="payment-method-card p-2">
+          <a-input class="mr-2" v-model="coupon"/>
+          <a-button type="primary" @click="payWithCard"> Enter  this code to checkout:<strong>dialalawyer9c97a@</strong></a-button>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="10">
+        <a-card class="payment-method-card p-2">
           <img src="images/mpesa.png" alt="" />
           <h6 class="card-number">MPESA</h6>
           <a-button type="primary" @click="byPassPayment">Proceed to checkout</a-button>
         </a-card>
       </a-col>
-      <a-col :span="24" :md="10">
-        <a-card class="payment-method-card p-2">
-          <a-input class="mr-2" v-model="coupon"/>
-          <a-button type="primary" @click="payWithCard"> Enter  this code to checkout:<strong>dialalawyer9c97a@</strong></a-button>
-        </a-card>
-      </a-col>
+    
     </a-row>
   </a-card>
   <!-- Payment Methods Card -->

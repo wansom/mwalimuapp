@@ -7,7 +7,7 @@
         <div class="banner-mask">
           <div class="banner-container container">
             <div class="banner-text">
-              <h1>Improving Access to justice accross the African continent</h1>
+              <h1>Improving Access to justice across the African continent</h1>
               <p>
                 Our mission is to improve access to justice across Africa by
                 linking verified legal professionals in the justice sector to the market
@@ -101,8 +101,7 @@
 
                 <h3>Create A free Account</h3>
                 <p>
-                  We also launched the Mary Antoinette Brown Sherman Think
-                  Tank...
+                 a simple account creation process to kickstart your advocate signup journey
                 </p>
                 <a href="sign-up">
                   <button>
@@ -141,8 +140,7 @@
                 <div class="process"><span>02</span></div>
                 <h3>Complete and submit Profile</h3>
                 <p>
-                  We also launched the Mary Antoinette Brown Sherman Think
-                  Tank...
+                 Upload legal documents help us complete the  KYC process
                 </p>
                 <a href="sign-up">
                   <button>
@@ -181,8 +179,7 @@
                 <div class="process"><span>03</span></div>
                 <h3>Pay for monthly Subscription</h3>
                 <p>
-                  We also launched the Mary Antoinette Brown Sherman Think
-                  Tank...
+                 Pay a monthly subscription of KSH 500 and get your account approved
                 </p>
                 <a href="sign-up">
                   <button>
