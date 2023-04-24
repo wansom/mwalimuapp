@@ -40,7 +40,7 @@
             </div>
           <div class="mail-service">
             <i class="fa fa-envelope"></i>
-            info@acelitigator.com
+            info@dialalawyerafrica.com
           </div>
           <div class="phone-service">
             <i class="fa fa-phone"></i>

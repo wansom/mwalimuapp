@@ -74,12 +74,12 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please select your phone number',
+                        message: 'Please enter your phone number',
                       },
                     ],
                   },
                 ]"
-                placeholder="Please a valid phone number"
+                placeholder="Please enter a valid phone number"
                 type="email"
               />
             </a-form-item>
