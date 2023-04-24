@@ -78,7 +78,7 @@
         <a-card class="payment-method-card p-2">
           <img src="images/mpesa.png" alt="" />
           <h6 class="card-number">MPESA</h6>
-          <a-button type="primary" @click="byPassPayment">Proceed to checkout</a-button>
+          <a-button type="primary" @click="intiatePayment">Proceed to checkout</a-button>
         </a-card>
       </a-col>
     
@@ -145,7 +145,19 @@ export default {
             })
     },
     payWithCard(){
-      if(this.coupon=="dialalawyer9c97a@"){
+      if(!this.user.biography){
+        this.$message.error("please fill out the general information section")
+
+      }else if(!this.user.current_employer){
+        this.$message.error("please fill out the employment information section")
+      }
+      else if(!this.user.law_school){
+        this.$message.error("please fill out the education information section")
+      }
+      else if(!this.user.practise_number){
+        this.$message.error("some documents are not uploaded. upload them to complete registration")
+      }else{
+        if(this.coupon=="dialalawyer9c97a@"){
         this.paymentConfirmed = true;
             localStorage.clear()
             this.$store.dispatch("updateUser", {
@@ -174,6 +186,9 @@ export default {
             });
 
       }
+      }
+      
+
 
     
     },

@@ -1,5 +1,4 @@
 <template>
-	
 	<!-- Main Sidebar -->
 	<a-layout-sider
 		collapsible
@@ -15,7 +14,6 @@
 		:style="{ backgroundColor: 'transparent',}">
 			<div ><router-link to="/"><img src="images/dial-logo.png" alt="" style="height:100px;"></router-link> <span></span></div>
 			<hr>
-
 			<!-- Sidebar Navigation Menu -->
 			<a-menu theme="light" mode="inline">
 				<a-menu-item>
