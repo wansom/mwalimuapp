@@ -55,7 +55,7 @@
         <h5 class="my-10">Your Previous Work place</h5>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="14">
-            <a-form-item label="Company">
+            <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
                   'prev1',
@@ -70,7 +70,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Dates">
+            <a-form-item label="Dates(Optional)">
               <!-- <a-date-picker
               :disabled-date="disabledDate"
                 v-decorator="[
@@ -98,7 +98,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="14">
-            <a-form-item label="Company">
+            <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
                   'prev2',
@@ -113,7 +113,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date">
+            <a-form-item label="Starting Date(Optional)">
               <a-range-picker 
               :disabled-date="disabledDate"
               v-decorator="[
@@ -129,7 +129,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="14">
-            <a-form-item label="Company">
+            <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
                   'prev3',
@@ -144,7 +144,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date">
+            <a-form-item label="Starting Date(Optional)">
               <a-range-picker 
               :disabled-date="disabledDate"
               v-decorator="[
@@ -160,7 +160,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="14">
-            <a-form-item label="Company">
+            <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
                   'prev4',
@@ -175,7 +175,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date">
+            <a-form-item label="Starting Date(Optional)">
               <a-range-picker 
               :disabled-date="disabledDate"
               v-decorator="[

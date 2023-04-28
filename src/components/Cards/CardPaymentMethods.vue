@@ -78,7 +78,7 @@
         <a-card class="payment-method-card p-2">
           <img src="images/mpesa.png" alt="" />
           <h6 class="card-number">MPESA</h6>
-          <a-button type="primary" @click="intiatePayment">Proceed to checkout</a-button>
+          <a-button type="primary" @click="handleChecks">Proceed to checkout</a-button>
         </a-card>
       </a-col>
     
@@ -252,26 +252,21 @@ export default {
 
       })
     },
-    byPassPayment(){
-      this.paymentConfirmed = true;
-            localStorage.clear()
-            this.$store.dispatch("updateUser", {
-                status: "pending approval",
-                payment_date: new Date(),
-                notifications:arrayUnion({
-                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
-                  date:new Date()
+    handleChecks(){
+      if(!this.user.biography){
+        this.$message.error("please fill out the general information section")
 
-                }),
-                invoices:arrayUnion({
-                  date: new Date(),
-                  amount:1500,
-                  number: 1
-                })
-              });
-              this.sendMail()
-              this.visible=false
-              location.reload()
+      }else if(!this.user.current_employer){
+        this.$message.error("please fill out the employment information section")
+      }
+      else if(!this.user.law_school){
+        this.$message.error("please fill out the education information section")
+      }
+      else if(!this.user.practise_number){
+        this.$message.error("some documents are not uploaded. upload them to complete registration")
+      }else{
+        this.intiatePayment()
+      }
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));

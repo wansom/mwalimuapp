@@ -87,7 +87,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Primary Location(County)">
+            <a-form-item label="Primary practice Location(County)">
               <a-select
                 v-decorator="[
                   'location',
@@ -110,7 +110,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Other Counties">
+            <a-form-item label="Other Counties of practice(Optional)">
               <a-select
                 mode="tags"
                 style="width: 100%"
@@ -132,7 +132,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="Website">
+            <a-form-item label="Website(Optional)">
               <a-input
                 v-decorator="[
                   'website',
@@ -216,7 +216,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Your LinkedIn link">
+            <a-form-item label="Your LinkedIn link(Optional)">
               <a-input
                 v-decorator="[
                   'linkedIn',
@@ -235,7 +235,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Your Twitter Link">
+            <a-form-item label="Your Twitter Link(Optional)">
               <a-input
                 v-decorator="[
                   'twitter',

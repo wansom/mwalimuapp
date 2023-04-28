@@ -74,7 +74,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="14">
-            <a-form-item label="Any other Institution">
+            <a-form-item label="Any other Institution (Optional)">
               <a-input
                 v-decorator="[
                   'school2',
@@ -87,7 +87,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Dates">
+            <a-form-item label="Dates Attended (Optional)">
               <a-range-picker 
            
                 v-decorator="[
