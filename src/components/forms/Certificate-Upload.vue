@@ -6,6 +6,9 @@
   >
     <div>
       <h3>Certificate Upload</h3>
+      <div class="p-4 text-white rounded-lg my-2" style="width: fit-content;background-color:#FFC107;">
+        <h5 >The inforamtion submitted will be used for the approval of your account</h5>
+      </div>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="24" :md="12">

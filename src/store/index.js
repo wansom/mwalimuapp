@@ -246,11 +246,7 @@ export default new Vuex.Store({
               title: "Account submitted for review!",
               text: `Your details have been submitted successfully.Your account will be reviewed within 48 hours`,
               icon: "success",
-            })
-            location.reload()
-
-
-            
+            })      
           }else{
             swal({
               title: "Progress Saved.",

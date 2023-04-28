@@ -6,6 +6,9 @@
   >
     <div>
       <h3>General Information</h3>
+      <div class="p-4 text-white rounded-lg my-2" style="width: fit-content;background-color:#FFC107;">
+        <h5 >The inforamtion submitted on this page will be visibile to all potential clients</h5>
+      </div>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
@@ -110,7 +113,15 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Other Counties of practice(Optional)">
+            <a-form-item label="Other Counties of practice(Optional)"><a-tooltip
+                  slot="suffix"
+                  title="Enter Freelance if currently unemployed"
+                >
+                  <a-icon
+                    type="info-circle"
+                    style="color: rgba(0, 0, 0, 0.45)"
+                  />
+                </a-tooltip>
               <a-select
                 mode="tags"
                 style="width: 100%"

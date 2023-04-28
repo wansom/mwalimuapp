@@ -49,7 +49,7 @@
           <p>Make payment to complete your profile</p>
           <a-alert message="Your early adopter's promo code is: dialalawyer9c97a@"
           description="enter the promo code to start 2 months free trial"
-           type="info" show-icon />
+           type="warning" show-icon />
         </a-col>
         <a-col
           :span="24"
