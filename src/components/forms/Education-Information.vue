@@ -30,15 +30,34 @@
           </a-col>
           <a-col :span="24" :md="8">
             <a-form-item label=" Dates">
-              <a-range-picker 
-              :disabled-date="disabledDate"
-                v-decorator="[
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
                   'law_starting',
-                  {
-                    rules: [{ required: true, message: 'Field is required' }],
+                  { initialValue: user.law_starting,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
                   },
                 ]"
-                placeholder="Start"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'law_ending',
+                  { initialValue: user.law_ending,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen"
+                @openChange="handleEndOpenChange"
               />
             </a-form-item>
           </a-col>
@@ -60,14 +79,35 @@
           </a-col>
           <a-col :span="24" :md="8">
             <a-form-item label="Dates">
-              <a-range-picker 
-              :disabled-date="disabledDate"
-                v-decorator="[
+         
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
                   'postgraduate_diploma_start',
-                  {
-                    rules: [{ required: true, message: 'Field is required' }],
+                  { initialValue: user.postgraduate_diploma_start,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
                   },
                 ]"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange2"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'postgraduate_diploma_start',
+                  { initialValue: user.postgraduate_diploma_start,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen2"
+                @openChange="handleEndOpenChange2"
               />
             </a-form-item>
           </a-col>
@@ -84,19 +124,39 @@
                 ]"
                 placeholder="Institution"
               />
+              
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
             <a-form-item label="Dates Attended (Optional)">
-              <a-range-picker 
-           
-                v-decorator="[
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
                   'school2_start',
-                  {
-                    rules: [{ required: false, message: 'field is required' }],
+                  { initialValue: user.school2_start,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
                   },
                 ]"
-                placeholder="Start"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange3"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'school2_end',
+                  { initialValue: user.school2_end,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen3"
+                @openChange="handleEndOpenChange3"
               />
             </a-form-item>
           </a-col>
@@ -123,6 +183,11 @@ export default {
       startValue: null,
       prev1startValue: null,
       prev1endValue: null,
+      mode2: ["month", "month"],
+      startValue: null,
+      endOpen: false,
+      endOpen2:false,
+      endOpen3:false,
       endOpen: false,
       form: this.$form.createForm(this, { name: "coordinated" }),
     };
@@ -138,30 +203,58 @@ export default {
   methods: {
     moment,
     disabledDate(current) {
-      // Can not select days before today and today
-      return current && current > moment().endOf('day');
+      const startMonth = moment().startOf("month");
+      return current < startMonth;
     },
-    prev1disabledStartDate(startValue) {
+    disabledPrevDate(current) {
+      const startMonth = moment().startOf("month");
+      return current>startMonth;
+    },
+    handleRangeChange(dates) {
+      const [startDate, endDate] = dates;
+      console.log(
+        "Selected range:",
+        startDate.format("YYYY-MM"),
+        endDate.format("YYYY-MM")
+      );
+    },
+    disabledStartDate(startValue) {
       const endValue = this.endValue;
       if (!startValue || !endValue) {
         return false;
       }
       return startValue.valueOf() > endValue.valueOf();
     },
-    prev1disabledEndDate(endValue) {
+    disabledEndDate(endValue) {
       const startValue = this.startValue;
       if (!endValue || !startValue) {
         return false;
       }
       return startValue.valueOf() >= endValue.valueOf();
     },
-    prev1handleStartOpenChange(open) {
+    handleStartOpenChange(open) {
       if (!open) {
         this.endOpen = true;
       }
     },
-    prev1handleEndOpenChange(open) {
+    handleEndOpenChange(open) {
       this.endOpen = open;
+    },
+    handleStartOpenChange2(open) {
+      if (!open) {
+        this.endOpen2 = true;
+      }
+    },
+    handleEndOpenChange2(open) {
+      this.endOpen2 = open;
+    },
+    handleStartOpenChange3(open) {
+      if (!open) {
+        this.endOpen3 = true;
+      }
+    },
+    handleEndOpenChange3(open) {
+      this.endOpen3 = open;
     },
     handlePrevious() {
       this.$store.dispatch("changeStep", 2);
@@ -171,15 +264,15 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           const payload = {
-            law_ending: values.law_starting[1]?.format() ?? "",
+            law_ending: values.law_ending?.format() ?? "",
             law_school: values.law_school ?? "",
-            law_starting: values.law_starting[0]?.format() ?? "",
+            law_starting: values.law_starting?.format() ?? "",
             postgraduate_diploma: values.postgraduate_diploma ?? "",
-            postgraduate_diploma_end: values.postgraduate_diploma_start[1]?.format() ?? "",
-            postgraduate_diploma_start: values.postgraduate_diploma_start[0]?.format()?? "",
+            postgraduate_diploma_end: values.postgraduate_diploma_start?.format() ?? "",
+            postgraduate_diploma_start: values.postgraduate_diploma_end?.format()?? "",
             school2: values.school2 ?? "",
-            school2_end:  values.school2_start?values.school2_start[0]?.format():"",
-            school2_start: values.school2_start?values.school2_start[1]?.format():"",
+            school2_end:  values.school2_start?values.school2_start?.format():"",
+            school2_start: values.school2_start?values.school2_end?.format():"",
             step:"education Information ",
             current:4
           };
