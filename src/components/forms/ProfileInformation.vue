@@ -3,7 +3,7 @@
     <a-row :gutter="24" type="flex" align="middle">
       <a-col :span="12" :md="4">
         <a-card
-          class="icon-card"
+          :class="current===1?'icon-card-active text-white':'icon-card'"
           @click="
             () => {
               next(1);
@@ -16,7 +16,7 @@
       </a-col>
       <a-col :span="12" :md="4">
         <a-card
-          class="icon-card"
+        :class="current===2?'icon-card-active text-white':'icon-card'"
           @click="
             () => {
               next(2);
@@ -29,7 +29,7 @@
       </a-col>
       <a-col :span="12" :md="4">
         <a-card
-          class="icon-card"
+        :class="current===3?'icon-card-active text-white':'icon-card'"
           @click="
             () => {
               next(3);
@@ -48,14 +48,14 @@
           }
         "
       >
-        <a-card class="icon-card">
+        <a-card :class="current===4?'icon-card-active text-white':'icon-card'">
           <a-icon type="file-protect" class="icon-list text-warning" />
           <p class="card-p">Documents Upload</p>
         </a-card>
       </a-col>
       <a-col :span="24" :md="4">
         <a-card
-          class="icon-card"
+        :class="current===5?'icon-card-active text-white':'icon-card'"
           @click="
             () => {
               next(5);
@@ -146,6 +146,17 @@ export default {
   height: 200px;
   margin-bottom: 10px;
 }
+.icon-card-active{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 200px;
+  background-color: #db1c22;
+  margin-bottom: 10px;
+  color:#ffffff
+}
 .icon-card:hover {
   display: flex;
   flex-direction: column;
@@ -155,9 +166,7 @@ export default {
   height: 200px;
   background-color: #db1c22;
   margin-bottom: 10px;
-}
-.icon-card:hover {
- color:#ffffff
+  color:#ffffff
 }
 .card-p {
   font-size: 24;

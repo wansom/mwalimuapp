@@ -42,7 +42,6 @@
        
       </a-modal>
     </div>
-
     <template #title>
       <a-row type="flex" align="middle" class="d-flex align-items-center">
         <a-col :span="24" :md="12" class="my-5">
@@ -76,7 +75,7 @@
         <a-card class="payment-method-card p-2">
           
           <a-input class="mr-2" v-model="coupon"/>
-          <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
+          <a-button type="primary" @click="openNotification"> Enter Code</a-button>
         </a-card>
       </a-col>
       <a-col :span="24" :md="4" style="display:flex;align-items:center"><h3>Or Pay With</h3></a-col>
@@ -133,6 +132,38 @@ export default {
       }else{
         return value
       }
+    },
+    openNotification() {
+      swal( 'The details you submit to us will only be used for account verification. Please confirm to proceed').then(()=>{
+        this.payWithCard()
+      })
+      // const key = `open${Date.now()}`;
+      // this.$notification.open({
+      //   message: 'Privacy Policy',
+      //   description:
+      //     'The details you submit to us will only be used for account verification. Please confirm to proceed',
+      //   btn: h => {
+      //     return h(
+      //       'a-button',
+      //       {
+      //         props: {
+      //           type: 'primary',
+      //           size: 'small',
+      //         },
+      //         on: {
+      //           click: () => {
+                  
+      //             this.payWithCard()
+      //             // this.$notification.close(key)
+      //           },
+      //         },
+      //       },
+      //       'Confirm',
+      //     );
+      //   },
+      //   key,
+      //   onClose: close,
+      // });
     },
     SendMail(){
       this.$store.dispatch("sendMail",{
