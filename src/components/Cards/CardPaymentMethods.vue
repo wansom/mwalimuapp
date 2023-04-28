@@ -44,10 +44,13 @@
     </div>
 
     <template #title>
-      <a-row type="flex" align="middle">
+      <a-row type="flex" align="middle" class="d-flex align-items-center">
         <a-col :span="24" :md="12" class="my-5">
           <h6 class="font-semibold mb-5">Account Subscription</h6>
           <p>Make payment to complete your profile</p>
+          <a-alert message="Your early adopter's promo code is: dialalawyer9c97a@"
+          description="enter the promo code to start 2 months free trial"
+           type="info" show-icon />
         </a-col>
         <a-col
           :span="24"
@@ -69,11 +72,14 @@
         </a-card>
       </a-col> -->
       <a-col :span="24" :md="10">
+        
         <a-card class="payment-method-card p-2">
+          
           <a-input class="mr-2" v-model="coupon"/>
-          <a-button type="primary" @click="payWithCard"> Enter  this code to checkout:<strong>dialalawyer9c97a@</strong></a-button>
+          <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
         </a-card>
       </a-col>
+      <a-col :span="24" :md="4" style="display:flex;align-items:center"><h3>Or Pay With</h3></a-col>
       <a-col :span="24" :md="10">
         <a-card class="payment-method-card p-2">
           <img src="images/mpesa.png" alt="" />
@@ -133,7 +139,7 @@ export default {
               name: this.user.first_name,
                 email: this.user.email,
                 subject: "Acelitigator Account",
-                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback`
+                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback within 48 hours`
   
             })
             this.$store.dispatch("sendMail",{
@@ -176,7 +182,8 @@ export default {
               });
               this.sendMail()
               this.visible=false
-              location.reload()
+            
+             
 
       }else{
         swal({

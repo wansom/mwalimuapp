@@ -241,12 +241,23 @@ export default new Vuex.Store({
       let user = auth.currentUser;
       updateAdvocate(user.uid, data)
         .then(() => {
-          swal({
-            title: "Success!",
-            text: `Info updated Successfully!`,
-            icon: "success",
-          });
+          if (data.status == "pending approval") {
+            swal({
+              title: "Account submitted for review!",
+              text: `Your details have been submitted successfully.Your account will be reviewed within 48 hours`,
+              icon: "success",
+            })
+            location.reload()
 
+
+            
+          }else{
+            swal({
+              title: "Progress Saved.",
+              text: `Info updated Successfully. Click next to continue.`,
+              icon: "success",
+            });
+          }
           updateAdvocate(user.uid, {
             notifications: arrayUnion({
               notification: `your ${data.step} have been updated successfully`,
