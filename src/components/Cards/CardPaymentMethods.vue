@@ -137,33 +137,6 @@ export default {
       swal( 'The details you submit to us will only be used for account verification. Please confirm to proceed').then(()=>{
         this.payWithCard()
       })
-      // const key = `open${Date.now()}`;
-      // this.$notification.open({
-      //   message: 'Privacy Policy',
-      //   description:
-      //     'The details you submit to us will only be used for account verification. Please confirm to proceed',
-      //   btn: h => {
-      //     return h(
-      //       'a-button',
-      //       {
-      //         props: {
-      //           type: 'primary',
-      //           size: 'small',
-      //         },
-      //         on: {
-      //           click: () => {
-                  
-      //             this.payWithCard()
-      //             // this.$notification.close(key)
-      //           },
-      //         },
-      //       },
-      //       'Confirm',
-      //     );
-      //   },
-      //   key,
-      //   onClose: close,
-      // });
     },
     SendMail(){
       this.$store.dispatch("sendMail",{
@@ -200,6 +173,7 @@ export default {
             this.$store.dispatch("updateUser", {
                 status: "pending approval",
                 payment_date: new Date(),
+                current: 5,
                 notifications:arrayUnion({
                   notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
                   date:new Date()
