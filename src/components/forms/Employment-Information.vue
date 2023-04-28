@@ -13,7 +13,7 @@
       <a-form :form="form" layout="vertical">
         <h5 class="my-5">Your Current work place</h5>
         <a-row :gutter="16">
-          <a-col :span="24" :md="14">
+          <a-col :span="24" :md="8">
             <a-form-item label="Company">
               <a-input
                 v-decorator="[
@@ -33,6 +33,21 @@
                     style="color: rgba(0, 0, 0, 0.45)"
                   />
                 </a-tooltip>
+              </a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" :md="8">
+            <a-form-item label="Position">
+              <a-input
+                v-decorator="[
+                  'current_position',
+                  {
+                    initialValue: user.current_position,
+                    rules: [{ required: true, message: 'Field is required' }],
+                  },
+                ]"
+                placeholder=""
+                >
               </a-input>
             </a-form-item>
           </a-col>
@@ -59,7 +74,7 @@
         </a-row>
         <h5 class="my-10">Your Previous Work place</h5>
         <a-row type="flex" :gutter="16">
-          <a-col :span="24" :md="14">
+          <a-col :span="24" :md="8">
             <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
@@ -70,6 +85,20 @@
                   },
                 ]"
                 placeholder="company"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" :md="8">
+            <a-form-item label="Position(Optional)">
+              <a-input
+                v-decorator="[
+                  'prev1_position',
+                  {
+                    initialValue: user.prev1_position,
+                    rules: [{ required: false, message: 'Field is required' }],
+                  },
+                ]"
+                placeholder=""
               />
             </a-form-item>
           </a-col>
@@ -108,7 +137,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="24" :md="14">
+          <a-col :span="24" :md="8">
             <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
@@ -119,6 +148,20 @@
                   },
                 ]"
                 placeholder="company"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" :md="8">
+            <a-form-item label="Position(Optional)">
+              <a-input
+                v-decorator="[
+                  'prev2_position',
+                  {
+                    initialValue: user.prev2_position,
+                    rules: [{ required: false, message: 'Field is required' }],
+                  },
+                ]"
+                placeholder=""
               />
             </a-form-item>
           </a-col>
@@ -157,7 +200,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="24" :md="14">
+          <a-col :span="24" :md="8">
             <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
@@ -168,6 +211,20 @@
                   },
                 ]"
                 placeholder="company"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" :md="8">
+            <a-form-item label="Position(Optional)">
+              <a-input
+                v-decorator="[
+                  'prev3_position',
+                  {
+                    initialValue: user.prev3_position,
+                    rules: [{ required: false, message: 'Field is required' }],
+                  },
+                ]"
+                placeholder=""
               />
             </a-form-item>
           </a-col>
@@ -206,7 +263,7 @@
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="16">
-          <a-col :span="24" :md="14">
+          <a-col :span="24" :md="8">
             <a-form-item label="Company(Optional)">
               <a-input
                 v-decorator="[
@@ -217,6 +274,20 @@
                   },
                 ]"
                 placeholder="company"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" :md="8">
+            <a-form-item label="Position(Optional)">
+              <a-input
+                v-decorator="[
+                  'prev4_position',
+                  {
+                    initialValue: user.prev4_position,
+                    rules: [{ required: false, message: 'Field is required' }],
+                  },
+                ]"
+                placeholder=""
               />
             </a-form-item>
           </a-col>
@@ -402,6 +473,11 @@ export default {
             current_starting: values.current_starting.format() ?? "",
 
             prev1: values.prev1 ?? "",
+            current_position:values.current_position??"",
+            prev1_position:values.prev1_position??"",
+            prev2_position:values.prev2_position??"",
+            prev3_position:values.prev3_position??"",
+            prev4_position:values.prev4_position??"",
             prev1ending: values.prev1starting
               ? values.prev1starting.format()
               : "",
