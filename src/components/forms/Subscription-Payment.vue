@@ -10,6 +10,16 @@
       title="Account Pending review"
       sub-title="Your Details are currently being reviewed,your account will be activated once the review is done"
     > 
+    <template #extra>
+      <a href="/find-a-lawyer">
+        <a-button key="console" type="primary">
+        Browse Profiles
+      </a-button>
+      </a>
+      <a-button key="buy" @click="reviewInfo" class="m-2">
+        Review Information
+      </a-button>
+    </template>
     </a-result>
     <a-result
     v-else-if="user.status == 'active'"
@@ -17,6 +27,16 @@
     title="Your Account currently is Active!"
     :sub-title="'You will be required to renew your subscription on' +'-'+ user.subscription_date"
   >
+  <template #extra>
+      <a href="/find-a-lawyer">
+        <a-button key="console" type="primary">
+        Browse Profiles
+      </a-button>
+      </a>
+      <a-button key="buy" @click="reviewInfo" class="m-2">
+        Review Information
+      </a-button>
+    </template>
   </a-result>
   <CardPaymentMethods v-else :user="user"></CardPaymentMethods>
     <!-- <a-result
@@ -55,6 +75,11 @@ export default {
   },
   mounted() {
   },
+  methods:{
+    reviewInfo(){
+      this.$store.dispatch('changeStep',1)
+    }
+  }
 };
 </script>
 
