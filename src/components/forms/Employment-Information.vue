@@ -18,27 +18,32 @@
               <a-input
                 v-decorator="[
                   'current_employer',
-                  { initialValue: user.current_employer,
-                    rules: [
-                      { required: true, message: 'Field is required' },
-                    ],
+                  {
+                    initialValue: user.current_employer,
+                    rules: [{ required: true, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="current company"
-              ><a-tooltip slot="suffix" title="Enter Freelance if currently unemployed">
-        <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
-      </a-tooltip>
-            </a-input>
+                ><a-tooltip
+                  slot="suffix"
+                  title="Enter Freelance if currently unemployed"
+                >
+                  <a-icon
+                    type="info-circle"
+                    style="color: rgba(0, 0, 0, 0.45)"
+                  />
+                </a-tooltip>
+              </a-input>
             </a-form-item>
           </a-col>
-          <a-col :span="24"  :md="8">
+          <a-col :span="24" :md="8">
             <a-form-item label="Starting Date">
-             
               <a-date-picker
-              :disabled-date="disabledDate"
+                :disabled-date="disabledDate"
                 v-decorator="[
                   'current_starting',
-                  { initialValue: user.current_starting,
+                  {
+                    initialValue: user.current_starting,
                     rules: [
                       {
                         required: true,
@@ -59,10 +64,9 @@
               <a-input
                 v-decorator="[
                   'prev1',
-                  { initialValue: user.prev1,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
+                  {
+                    initialValue: user.prev1,
+                    rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="company"
@@ -71,9 +75,9 @@
           </a-col>
           <a-col :span="24" :md="8">
             <a-form-item label="Dates(Optional)">
-              <!-- <a-date-picker
-              :disabled-date="disabledDate"
-                v-decorator="[
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
                   'prev1starting',
                   { initialValue: user.prev1starting,
                     rules: [
@@ -81,18 +85,25 @@
                     ],
                   },
                 ]"
-                placeholder="Start"
-              /> -->
-              <a-range-picker 
-              :disabled-date="disabledDate"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
               v-decorator="[
-                  'prev1starting',
-                  { 
+                  'prev1ending',
+                  { initialValue: user.prev1ending,
                     rules: [
                       { required: false, message: 'Field is required' },
                     ],
                   },
-                ]"/>
+                ]"
+                placeholder="End Date"
+                :open="endOpen"
+                @openChange="handleEndOpenChange"
+              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -102,10 +113,9 @@
               <a-input
                 v-decorator="[
                   'prev2',
-                  { initialValue: user.prev2,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
+                  {
+                    initialValue: user.prev2,
+                    rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="company"
@@ -113,17 +123,36 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date(Optional)">
-              <a-range-picker 
-              :disabled-date="disabledDate"
+            <a-form-item label="Dates(Optional)">
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
               v-decorator="[
                   'prev2starting',
-                  { 
+                  { initialValue: user.prev2starting,
                     rules: [
                       { required: false, message: 'Field is required' },
                     ],
                   },
-                ]"/>
+                ]"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange2"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'prev2ending',
+                  { initialValue: user.prev2ending,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen2"
+                @openChange="handleEndOpenChange2"
+              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -133,10 +162,9 @@
               <a-input
                 v-decorator="[
                   'prev3',
-                  { initialValue: user.prev3,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
+                  {
+                    initialValue: user.prev3,
+                    rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="company"
@@ -144,17 +172,36 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date(Optional)">
-              <a-range-picker 
-              :disabled-date="disabledDate"
+            <a-form-item label="Dates(Optional)">
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
               v-decorator="[
                   'prev3starting',
-                  { 
+                  { initialValue: user.prev3starting,
                     rules: [
                       { required: false, message: 'Field is required' },
                     ],
                   },
-                ]"/>
+                ]"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange3"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'prev3ending',
+                  { initialValue: user.prev3ending,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen3"
+                @openChange="handleEndOpenChange3"
+              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -164,10 +211,9 @@
               <a-input
                 v-decorator="[
                   'prev4',
-                  { initialValue: user.prev4,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
+                  {
+                    initialValue: user.prev4,
+                    rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
                 placeholder="company"
@@ -175,43 +221,75 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="8">
-            <a-form-item label="Starting Date(Optional)">
-              <a-range-picker 
-              :disabled-date="disabledDate"
+              <a-form-item label="Dates(Optional)">
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
               v-decorator="[
                   'prev4starting',
-                  { 
+                  { initialValue: user.prev4starting,
                     rules: [
                       { required: false, message: 'Field is required' },
                     ],
                   },
-                ]"/>
+                ]"
+                format="YYYY-MM"
+                placeholder="Start Date"
+                @openChange="handleStartOpenChange4"
+                class="mx-2"
+              />
+              <a-month-picker
+              :disabled-date="disabledPrevDate"
+              v-decorator="[
+                  'prev4ending',
+                  { initialValue: user.prev4ending,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                placeholder="End Date"
+                :open="endOpen4"
+                @openChange="handleEndOpenChange4"
+              />
             </a-form-item>
           </a-col>
         </a-row>
       </a-form>
-      <div style="display:flex;">
+      <div style="display: flex">
         <a-button type="dark" @click="handlePrevious" class="mx-10">
           Previous
         </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" disabled v-if="user.status==='pending approval'">Save and Continue </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else>Save and Continue </a-button>
+        <a-button
+          type="primary"
+          @click="handleSubmit"
+          :loading="loading"
+          disabled
+          v-if="user.status === 'pending approval'"
+          >Save and Continue
+        </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
+          >Save and Continue
+        </a-button>
       </div>
     </div>
   </a-card>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import moment from 'moment';
+import { mapState } from "vuex";
+import moment from "moment";
 export default {
-  props:['user'],
+  props: ["user"],
   data() {
     return {
+      mode2: ["month", "month"],
       startValue: null,
       prev1startValue: null,
       prev1endValue: null,
       endOpen: false,
+      endOpen2:false,
+      endOpen3:false,
+      endOpen4:false,
       form: this.$form.createForm(this, { name: "coordinated" }),
     };
   },
@@ -226,11 +304,69 @@ export default {
   methods: {
     moment,
     disabledDate(current) {
-      // Can not select days before today and today
-      return current && current > moment().endOf('day');
+      const startMonth = moment().startOf("month");
+      return current < startMonth;
     },
-    onChange(val){
-      console.log(val)
+    disabledPrevDate(current) {
+      const startMonth = moment().startOf("month");
+      return current>startMonth;
+    },
+    handleRangeChange(dates) {
+      const [startDate, endDate] = dates;
+      console.log(
+        "Selected range:",
+        startDate.format("YYYY-MM"),
+        endDate.format("YYYY-MM")
+      );
+    },
+    disabledStartDate(startValue) {
+      const endValue = this.endValue;
+      if (!startValue || !endValue) {
+        return false;
+      }
+      return startValue.valueOf() > endValue.valueOf();
+    },
+    disabledEndDate(endValue) {
+      const startValue = this.startValue;
+      if (!endValue || !startValue) {
+        return false;
+      }
+      return startValue.valueOf() >= endValue.valueOf();
+    },
+    handleStartOpenChange(open) {
+      if (!open) {
+        this.endOpen = true;
+      }
+    },
+    handleEndOpenChange(open) {
+      this.endOpen = open;
+    },
+    handleStartOpenChange2(open) {
+      if (!open) {
+        this.endOpen2 = true;
+      }
+    },
+    handleEndOpenChange2(open) {
+      this.endOpen2 = open;
+    },
+    handleStartOpenChange3(open) {
+      if (!open) {
+        this.endOpen3 = true;
+      }
+    },
+    handleEndOpenChange3(open) {
+      this.endOpen3 = open;
+    },
+    handleStartOpenChange4(open) {
+      if (!open) {
+        this.endOpen4 = true;
+      }
+    },
+    handleEndOpenChange4(open) {
+      this.endOpen4 = open;
+    },
+    onChange(val) {
+      console.log(val);
     },
     prev1disabledStartDate(startValue) {
       const endValue = this.endValue;
@@ -262,25 +398,41 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           const payload = {
-            current_employer:values.current_employer?? "",
-            current_starting:values.current_starting.format()??"",
+            current_employer: values.current_employer ?? "",
+            current_starting: values.current_starting.format() ?? "",
 
-            prev1:values.prev1?? "",
-            prev1ending:values.prev1starting?values.prev1starting[1].format():"",
-            prev1starting:values.prev1starting?values.prev1starting[0]?.format():"",
-            prev2:values.prev2?values.prev2: "",
-            prev2ending:values.prev2ending?values.prev2starting[1]?.format():"",
-            prev2starting:values.prev2starting?values.prev2starting[0]?.format():"",
-            prev3:values.prev3?values.prev3: "",
-            prev3ending:values.prev3starting?values.prev3starting[1]?.format():"",
-            prev3starting:values.prev3starting?values.prev3starting[0]?.format():"",
-            prev4: values.prev4??"",
-            prev4ending: values.prev4starting?values.prev4starting[1]?.format():"",
-            prev4starting:values.prev4starting?values.prev4starting[0]?.format():"",
-            step:"employment information",
-            current:3
+            prev1: values.prev1 ?? "",
+            prev1ending: values.prev1starting
+              ? values.prev1starting.format()
+              : "",
+            prev1starting: values.prev1starting
+              ? values.prev1ending?.format()
+              : "",
+            prev2: values.prev2 ? values.prev2 : "",
+            prev2ending: values.prev2ending
+              ? values.prev2ending?.format()
+              : "",
+            prev2starting: values.prev2starting
+              ? values.prev2starting?.format()
+              : "",
+            prev3: values.prev3 ? values.prev3 : "",
+            prev3ending: values.prev3ending
+              ? values.prev3ending?.format()
+              : "",
+            prev3starting: values.prev3starting
+              ? values.prev3starting?.format()
+              : "",
+            prev4: values.prev4 ?? "",
+            prev4ending: values.prev4ending
+              ? values.prev4ending?.format()
+              : "",
+            prev4starting: values.prev4starting
+              ? values.prev4starting?.format()
+              : "",
+            step: "employment information",
+            current: 3,
           };
-          this.$store.dispatch("updateUser",payload);
+          this.$store.dispatch("updateUser", payload);
         }
       });
     },
@@ -288,10 +440,7 @@ export default {
   computed: {
     ...mapState(["loading"]),
   },
-
 };
 </script>
 
 <style></style>
-
-
