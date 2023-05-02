@@ -14,7 +14,7 @@
               </p>
               <div  class="d-flex flex-column flex-md-row" style="justify-content: center;align-items: center; gap:10px;"> <router-link to="find-a-lawyer">
                 <button class="btn-primary">Find A lawyer</button></router-link
-              > <router-link to="find-a-lawyer">
+              > <router-link to="/sign-in">
                 <button class="btn-secondary">Advocate Account</button></router-link
               ></div>
              

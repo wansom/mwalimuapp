@@ -142,7 +142,6 @@ export default new Vuex.Store({
     //register new user
     signUp({ commit, dispatch }, data) {
       dispatch("changeLoading", true);
-      console.log(data);
       createUser({
         email: data.email,
         password: data.password,
@@ -175,12 +174,12 @@ export default new Vuex.Store({
             router.push("/sign-in");
           });
         })
-        .catch((err) => {
+        .catch((err) => { 
           swal({
-            title: "OOPS!",
-            text: `${err.message}`,
+            title: "`This email count is already in use by another account!",
+            text: `please enter another email and try again`,
             icon: "error",
-          });
+          });   
           dispatch("changeLoading", false);
         });
     },
@@ -197,8 +196,8 @@ export default new Vuex.Store({
         .catch((err) => {
           dispatch("changeLoading", false);
           swal({
-            title: "OOPS!",
-            text: `${err.message}`,
+            title: "Authentication Failed!",
+            text: `Please check the credentials and try again`,
             icon: "error",
           });
         });
