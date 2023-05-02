@@ -171,7 +171,7 @@ export default new Vuex.Store({
                 "Your Account has been created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile",
             });
             dispatch("changeLoading", false);
-            router.push("/sign-in");
+            router.push("/dashboard");
           });
         })
         .catch((err) => { 
