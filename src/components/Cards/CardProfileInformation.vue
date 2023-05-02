@@ -14,18 +14,6 @@
     </p>
     <hr class="my-25" />
     <a-descriptions :column="1">
-      <!-- <a-descriptions-item label="Full Name">
-				{{advocate.first_name}}<span class="mx-5"></span>{{advocate.last_name}}
-			</a-descriptions-item>
-			<a-descriptions-item label="Mobile">
-				{{advocate.phone}}
-			</a-descriptions-item>
-			<a-descriptions-item label="Email">
-				{{advocate.email}}
-			</a-descriptions-item>
-			<a-descriptions-item label="Location">
-				{{advocate.location}}
-			</a-descriptions-item> -->
       <div
         label="Social"
         style="display: flex; align-items: center; justify-content: center"

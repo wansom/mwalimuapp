@@ -63,19 +63,12 @@
       </a-row>
     </template>
     <a-row :gutter="[24, 24]">
-      <!-- <a-col :span="24" :md="8">
-        <a-card class="payment-method-card">
-          <img src="images/logos/mastercard-logo.png" alt="" />
-          <h6 class="card-number">CREDIT CARD</h6>
-          <a-button type="dashed" @click="payWithCard"> PAY </a-button>
-        </a-card>
-      </a-col> -->
       <a-col :span="24" :md="10">
         
         <a-card class="payment-method-card p-2">
           
-          <a-input class="mr-2" v-model="coupon"/>
-          <a-button type="primary" @click="openNotification"> Enter Code</a-button>
+          <a-input class="mr-2" v-model.trim="coupon"/>
+          <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
         </a-card>
       </a-col>
       <a-col :span="24" :md="4" style="display:flex;align-items:center"><h3>Or Pay With</h3></a-col>
@@ -138,7 +131,7 @@ export default {
         this.payWithCard()
       })
     },
-    SendMail(){
+    sendMail(){
       this.$store.dispatch("sendMail",{
               name: this.user.first_name,
                 email: this.user.email,
@@ -150,14 +143,13 @@ export default {
               name: "Admin",
                 email: "owarren@barizicommunications.com",
                 subject: "Account creation",
-                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application. advocatelisting.acelitigator.com `
+                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`
   
             })
     },
     payWithCard(){
       if(!this.user.biography){
         this.$message.error("please fill out the general information section")
-
       }else if(!this.user.current_employer){
         this.$message.error("please fill out the employment information section")
       }

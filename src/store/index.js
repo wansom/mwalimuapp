@@ -147,7 +147,6 @@ export default new Vuex.Store({
         password: data.password,
       })
         .then((result) => {
-          console.log(result.user);
           addLawyer({
             first_name: data.first_name,
             last_name: data.last_name,
@@ -166,9 +165,9 @@ export default new Vuex.Store({
             dispatch("sendMail", {
               name: data.first_name,
               email: data.email,
-              subject: "Acelitigator Account",
+              subject: "Dial A lawyer Account",
               content:
-                "Your Account has been created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile",
+                "Your Account has been created successfully. You can now log into your account and complete your profile befor your account is activated",
             });
             dispatch("changeLoading", false);
             router.push("/dashboard");
@@ -241,11 +240,12 @@ export default new Vuex.Store({
       updateAdvocate(user.uid, data)
         .then(() => {
           if (data.status == "pending approval") {
+
             swal({
               title: "Account submitted for review!",
               text: `Your details have been submitted successfully.Your account will be reviewed within 48 hours`,
               icon: "success",
-            })      
+            })  
           }else{
             swal({
               title: "Progress Saved.",
@@ -309,7 +309,9 @@ export default new Vuex.Store({
           subject: values.subject,
           content: values.content,
         }
-      );
+      ).then((res)=>{
+        console.log(res)
+      })
     },
     async fetchCourts({ commit }) {
       getAllCourts().then(({ data }) => {
