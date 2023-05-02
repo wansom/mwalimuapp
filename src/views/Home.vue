@@ -12,9 +12,12 @@
                 Our mission is to improve access to justice across Africa by
                 linking verified legal professionals in the justice sector to the market
               </p>
-              <router-link to="find-a-lawyer">
-                <button>Find A lawyer</button></router-link
-              >
+              <div style="display: flex;justify-content: center;align-items: center; gap:10px;"> <router-link to="find-a-lawyer">
+                <button class="btn-primary">Find A lawyer</button></router-link
+              > <router-link to="find-a-lawyer">
+                <button class="btn-secondary">Advocate Account</button></router-link
+              ></div>
+             
             </div>
           </div>
         </div>
@@ -649,13 +652,25 @@ section.banner {
   margin: 20px 0px;
 }
 
-.banner-text button {
+.banner-text  .btn-primary {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 16px 24px;
   background: #e6353b;
+  border-radius: 5px;
+  margin: auto;
+  font-size: 24px;
+  color: #ffffff;
+}
+.banner-text  .btn-secondary {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  background: #000000;
   border-radius: 5px;
   margin: auto;
   font-size: 24px;
