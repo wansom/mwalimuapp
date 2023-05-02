@@ -60,11 +60,11 @@
             <li class="row align-items-center"><span  class="mr-3">lOCATIONS:</span><p class="mr-2 mt-2" v-for="area of advocate.other_counties" :key="area">{{ area }},</p></li>
           </ul>
           <div class="pd-size-choose">
-            <div class="sc-item">
+            <div class="sc-item" @click="openPhoneDialer">
               <input type="radio" id="sm-size" />
-              <label for="sm-size"> <i class="fa fa-phone"></i>{{advocate.phone}}</label>
+              <label for="sm-size"> <i class="fa fa-phone"></i >{{advocate.phone}}</label>
             </div>
-            <div class="sc-item">
+            <div class="sc-item" @click="openMailClient">
               <input type="radio" id="sm-size" />
               <label for="sm-size"> <i class="fa fa-envelope"></i>{{ advocate.email}}</label>
             </div>
@@ -181,7 +181,17 @@
 
 <script>
 export default {
-  props:['advocate']
+  props:['advocate'],
+  methods:{
+    openPhoneDialer() {
+      const url = `tel:${this.advocate.phone}`;
+      window.open(url);
+    },
+    openMailClient() {
+      const url = `mailto:${this.advocate.email}`;
+      window.open(url);
+    },
+  }
 };
 </script>
 
