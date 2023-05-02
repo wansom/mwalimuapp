@@ -12,7 +12,7 @@
                 Our mission is to improve access to justice across Africa by
                 linking verified legal professionals in the justice sector to the market
               </p>
-              <div style="display: flex;justify-content: center;align-items: center; gap:10px;"> <router-link to="find-a-lawyer">
+              <div  class="d-flex flex-column flex-md-row" style="justify-content: center;align-items: center; gap:10px;"> <router-link to="find-a-lawyer">
                 <button class="btn-primary">Find A lawyer</button></router-link
               > <router-link to="find-a-lawyer">
                 <button class="btn-secondary">Advocate Account</button></router-link
