@@ -219,7 +219,7 @@
           </div>
         </div>
       </section>
-      <section class="upcoming-events">
+      <!-- <section class="upcoming-events">
         <div class="upcoming-container container-fluid">
           <h1 class="mb-5">Lawyer Profiles</h1>
           <div class="grid-container">
@@ -237,7 +237,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
       <section class="research-content" id="courts">
         <div class="research-container container">
           <div class="research-item">
