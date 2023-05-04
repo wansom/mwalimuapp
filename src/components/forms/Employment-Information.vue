@@ -105,7 +105,7 @@
           <a-col :span="24" :md="8">
             <a-form-item label="Dates(Optional)">
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledStartDate"
               v-decorator="[
                   'prev1starting',
                   { initialValue: user.prev1starting,
@@ -116,10 +116,25 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange"
                 class="mx-2"
               />
               <a-month-picker
+              :disabled-date="disabledEndDate"
+              v-decorator="[
+                  'prev1ending',
+                  { initialValue: user.prev1ending,
+                    rules: [
+                      { required: false, message: 'Field is required' },
+                    ],
+                  },
+                ]"
+                format="YYYY-MM"
+                placeholder="End Date"
+                @openChange="handleEndOpenChange"
+              />
+              <!-- <a-month-picker
               :disabled-date="disabledPrevDate"
               v-decorator="[
                   'prev1ending',
@@ -129,10 +144,11 @@
                     ],
                   },
                 ]"
+                format="YYYY-MM"
                 placeholder="End Date"
                 :open="endOpen"
                 @openChange="handleEndOpenChange"
-              />
+              /> -->
             </a-form-item>
           </a-col>
         </a-row>
@@ -168,7 +184,7 @@
           <a-col :span="24" :md="8">
             <a-form-item label="Dates(Optional)">
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledStartDate"
               v-decorator="[
                   'prev2starting',
                   { initialValue: user.prev2starting,
@@ -179,11 +195,12 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange2"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'prev2ending',
                   { initialValue: user.prev2ending,
@@ -231,7 +248,7 @@
           <a-col :span="24" :md="8">
             <a-form-item label="Dates(Optional)">
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledStartDate"
               v-decorator="[
                   'prev3starting',
                   { initialValue: user.prev3starting,
@@ -242,11 +259,12 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange3"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'prev3ending',
                   { initialValue: user.prev3ending,
@@ -294,22 +312,23 @@
           <a-col :span="24" :md="8">
               <a-form-item label="Dates(Optional)">
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledStartDate"
               v-decorator="[
                   'prev4starting',
                   { initialValue: user.prev4starting,
                     rules: [
-                      { required: false, message: 'Field is required' },
+                      { required: false, message: 'Field is required'},
                     ],
                   },
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange4"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'prev4ending',
                   { initialValue: user.prev4ending,
@@ -361,6 +380,7 @@ export default {
       endOpen2:false,
       endOpen3:false,
       endOpen4:false,
+      disabledPrev1Date:null,
       form: this.$form.createForm(this, { name: "coordinated" }),
     };
   },
@@ -382,35 +402,26 @@ export default {
       const startMonth = moment().startOf("month");
       return current>startMonth;
     },
-    handleRangeChange(dates) {
-      const [startDate, endDate] = dates;
-      console.log(
-        "Selected range:",
-        startDate.format("YYYY-MM"),
-        endDate.format("YYYY-MM")
-      );
-    },
-    disabledStartDate(startValue) {
-      const endValue = this.endValue;
-      if (!startValue || !endValue) {
-        return false;
-      }
-      return startValue.valueOf() > endValue.valueOf();
+    disabledStartDate(current) {
+      const startMonth = moment().startOf("month");
+      return current >startMonth;
     },
     disabledEndDate(endValue) {
-      const startValue = this.startValue;
-      if (!endValue || !startValue) {
-        return false;
-      }
-      return startValue.valueOf() >= endValue.valueOf();
+      const startMonth = this.disabledPrev1Date;
+      return endValue <startMonth;
+    },
+    setStartDate(value){
+      this.disabledPrev1Date=value
     },
     handleStartOpenChange(open) {
       if (!open) {
         this.endOpen = true;
       }
     },
-    handleEndOpenChange(open) {
+    handleEndOpenChange(current,open) {
       this.endOpen = open;
+      console.log(current)
+      this.disabledPrev1Date=current
     },
     handleStartOpenChange2(open) {
       if (!open) {
@@ -455,6 +466,7 @@ export default {
     },
     prev1handleStartOpenChange(open) {
       if (!open) {
+       
         this.endOpen = true;
       }
     },
