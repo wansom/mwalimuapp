@@ -395,8 +395,8 @@ export default {
   methods: {
     moment,
     disabledDate(current) {
-      const startMonth = moment().startOf("month");
-      return current < startMonth;
+      const startMonth = moment().startOf("day");
+      return current >startMonth;
     },
     disabledPrevDate(current) {
       const startMonth = moment().startOf("month");
