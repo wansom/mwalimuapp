@@ -42,11 +42,12 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'law_ending',
                   { initialValue: user.law_ending,
@@ -92,11 +93,12 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange2"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'postgraduate_diploma_start',
                   { initialValue: user.postgraduate_diploma_start,
@@ -141,11 +143,12 @@
                 ]"
                 format="YYYY-MM"
                 placeholder="Start Date"
+                @change="setStartDate"
                 @openChange="handleStartOpenChange3"
                 class="mx-2"
               />
               <a-month-picker
-              :disabled-date="disabledPrevDate"
+              :disabled-date="disabledEndDate"
               v-decorator="[
                   'school2_end',
                   { initialValue: user.school2_end,
@@ -185,6 +188,7 @@ export default {
       prev1endValue: null,
       mode2: ["month", "month"],
       startValue: null,
+      disabledPrev1Date:null,
       endOpen: false,
       endOpen2:false,
       endOpen3:false,
@@ -226,11 +230,11 @@ export default {
       return startValue.valueOf() > endValue.valueOf();
     },
     disabledEndDate(endValue) {
-      const startValue = this.startValue;
-      if (!endValue || !startValue) {
-        return false;
-      }
-      return startValue.valueOf() >= endValue.valueOf();
+      const startMonth = this.disabledPrev1Date;
+      return endValue <startMonth;
+    },
+    setStartDate(value){
+      this.disabledPrev1Date=value
     },
     handleStartOpenChange(open) {
       if (!open) {
