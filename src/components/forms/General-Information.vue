@@ -7,7 +7,7 @@
     <div>
       <h3>General Information</h3>
       <div class="p-4 text-black rounded-lg my-2" style="width: fit-content;background-color:#FFFBE6;">
-        <h5 >The inforamtion submitted on this page will be visibile to all potential clients</h5>
+        <h5 >The information submitted on this page will be visibile to all potential clients</h5>
       </div>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">

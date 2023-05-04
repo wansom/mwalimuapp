@@ -22,10 +22,13 @@ import '../public/home/css/elegant-icons.css'
 
 import store from './store'
 import { auth } from "./database/index";
+import VueFormulate from '@braid/vue-formulate'
+
 
 Vue.use(Antd);
 Vue.use(VueSocialSharing);
 Vue.use(VueCarousel);
+Vue.use(VueFormulate);
 
 Vue.config.productionTip = false
 
