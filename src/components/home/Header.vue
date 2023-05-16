@@ -18,7 +18,7 @@
             <li>
               <router-link to="/find-a-lawyer">Find A Lawyer</router-link>
             </li>
-            <li><a href="/#courts">Know Your Courts</a></li>
+            <li><a href="//kenyalaw.org">Know Your Courts</a></li>
             <li>
               <a href="//acelitigator.com">Resources</a>
             </li>
@@ -100,7 +100,7 @@
               <li class="active">
                 <router-link to="/find-a-lawyer">FIND LAWYERS</router-link>
               </li>
-              <li><router-link :to="{ path: '/', hash: '#courts' }">Know Your Courts</router-link></li>
+              <li><a href="//kenyalaw.org" target="blank">Know Your Courts</a></li>
               <li>
                 <a href="#">Resources</a>
                 <ul class="dropdown">
