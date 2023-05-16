@@ -353,11 +353,8 @@
           type="primary"
           @click="handleSubmit"
           :loading="loading"
-          disabled
-          v-if="user.status === 'pending approval'"
-          >Save and Continue
-        </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
+          :disabled="user.status === 'pending approval'"
+         
           >Save and Continue
         </a-button>
       </div>

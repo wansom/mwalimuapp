@@ -2,7 +2,7 @@
 	This is the dashboard layout, used in dashboard, tables, billing and profile pages.
  -->
 
-<template>
+ <template>
   <div>
     <!-- Dashboard Layout -->
     <a-layout
@@ -14,15 +14,6 @@
         layoutClass,
       ]"
     >
-      <!-- Main Sidebar -->
-      <DashboardSidebar
-        :sidebarCollapsed="sidebarCollapsed"
-        :sidebarColor="sidebarColor"
-        :sidebarTheme="sidebarTheme"
-        @toggleSidebar="toggleSidebar"
-		:user="user"
-      ></DashboardSidebar>
-      <!-- / Main Sidebar -->
 
       <!-- Layout Content -->
       <a-layout>

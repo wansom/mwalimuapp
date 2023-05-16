@@ -6,9 +6,6 @@
   >
     <div>
       <h3>Certificate Upload</h3>
-      <div class="p-4 text-black rounded-lg my-2" style="width: fit-content;background-color:#FFFBE6;">
-        <h5 >The inforamtion submitted will be used for the approval of your account</h5>
-      </div>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
@@ -203,34 +200,11 @@
                 </a-button></a-upload
               >
             </a-form-item>
-            <!-- <a-form-item
-              label="Proof of Residence(Utility bill or evidence of payment of branch dues to the Nigerian Bar Association)"
-            >
-              <a-upload
-                name="file"
-                accept="application/pdf"
-                :file-list="fileList1"
-                :remove="handleRemove1"
-                :before-upload="beforeUpload1"
-                v-decorator="[
-                  'residence_evidence',
-                  {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please upload proof of residence',
-                      },
-                    ],
-                  },
-                ]"
-              >
-                <a-button>
-                  <a-icon type="upload" block /> Click to Upload
-                </a-button></a-upload
-              >
-            </a-form-item> -->
           </a-col>
         </a-row>
+        <a-checkbox @change="changeTerms" class="mb-3" :checked="terms">
+          The inforamtion submitted will be used for the approval of your account
+  </a-checkbox>
       </a-form>
       <div>
         <a-button type="dark" class="mx-10" @click="handlePrevious"
@@ -240,11 +214,7 @@
           type="primary"
           @click="handleSubmit"
           :loading="loading"
-          disabled
-          v-if="user.status === 'pending approval'"
-          >Save and Continue
-        </a-button>
-        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
+          :disabled="user.status === 'pending approval'||!terms"
           >Save and Continue
         </a-button>
       </div>
@@ -276,6 +246,7 @@ export default {
       fileList3: [],
       progress: 0,
       imageUrls: [],
+      terms:true
     };
   },
   watch: {
@@ -296,6 +267,9 @@ export default {
     beforeUpload(file) {
       this.fileList = [...this.fileList, file];
       return false;
+    },
+    changeTerms(){
+      this.terms =!this.terms
     },
     handleRemove(file) {
       const index = this.fileList.indexOf(file);
