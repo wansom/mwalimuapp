@@ -71,15 +71,6 @@
           <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
         </a-card>
       </a-col>
-      <!-- <a-col :span="24" :md="4" style="display:flex;align-items:center"><h3>Or Pay With</h3></a-col>
-      <a-col :span="24" :md="10">
-        <a-card class="payment-method-card p-2">
-          <img src="images/mpesa.png" alt="" />
-          <h6 class="card-number">MPESA</h6>
-          <a-button type="primary" @click="handleChecks">Proceed to checkout</a-button>
-        </a-card>
-      </a-col> -->
-    
     </a-row>
   </a-card>
   <!-- Payment Methods Card -->
@@ -145,7 +136,7 @@ export default {
       this.$store.dispatch("sendMail",{
               name: this.user.first_name,
                 email: this.user.email,
-                subject: "Acelitigator Account",
+                subject: "Dial A Lawyer Account",
                 content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback within 48 hours`
   
             })
