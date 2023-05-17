@@ -203,7 +203,7 @@
           </a-col>
         </a-row>
         <a-checkbox @change="changeTerms" class="mb-3" :checked="terms">
-          The inforamtion submitted will be used for the approval of your account
+          The inforamtion submitted will only be used for the approval of your account <a href="https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/Privacy%20Policy%20200223.docx?alt=media&token=bd536806-a1ac-4361-a56a-ddfca9885a8f">View privacy policy</a>
   </a-checkbox>
       </a-form>
       <div>

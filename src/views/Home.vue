@@ -7,9 +7,9 @@
         <div class="banner-mask">
           <div class="banner-container container">
             <div class="banner-text">
-              <h1>Improving access to justice across the African continent</h1>
+              <h1>Aiding access to justice across the African continent</h1>
               <p>
-                Our mission is to improve access to justice across Africa by
+                Our mission is to aid access to justice across Africa by
                 linking verified legal professionals in the justice sector to the market
               </p>
               <div  class="d-flex flex-column flex-md-row" style="justify-content: center;align-items: center; gap:10px;"> <router-link to="find-a-lawyer">

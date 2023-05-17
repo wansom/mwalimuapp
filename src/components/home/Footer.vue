@@ -47,9 +47,9 @@
           <div class="newslatter-item">
             <h5>Join Our Newsletter Now</h5>
             <p>Get E-mail updates about our latest articles and event offers.</p>
-            <form action="#" class="subscribe-form">
+            <form action="#" class="subscribe-form" @submit.prevent="handleSubmit">
               <input type="text" placeholder="Enter Your Mail" />
-              <button type="button">Subscribe</button>
+              <button type="submit">Subscribe</button>
             </form>
           </div>
         </div>
