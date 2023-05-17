@@ -26,7 +26,7 @@
                 placeholder="current company"
                 ><a-tooltip
                   slot="suffix"
-                  title="Enter Freelance if currently unemployed"
+                  title="Enter Freelance if currently unemployed.you can also use your own firm"
                 >
                   <a-icon
                     type="info-circle"
@@ -72,86 +72,8 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <h5 class="my-10">Your Previous Work place</h5>
-        <a-row type="flex" :gutter="16">
-          <a-col :span="24" :md="8">
-            <a-form-item label="Company(Optional)">
-              <a-input
-                v-decorator="[
-                  'prev1',
-                  {
-                    initialValue: user.prev1,
-                    rules: [{ required: false, message: 'Field is required' }],
-                  },
-                ]"
-                placeholder="company"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="24" :md="8">
-            <a-form-item label="Position(Optional)">
-              <a-input
-                v-decorator="[
-                  'prev1_position',
-                  {
-                    initialValue: user.prev1_position,
-                    rules: [{ required: false, message: 'Field is required' }],
-                  },
-                ]"
-                placeholder=""
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="24" :md="8">
-            <a-form-item label="Dates(Optional)">
-              <a-month-picker
-              :disabled-date="disabledStartDate"
-              v-decorator="[
-                  'prev1starting',
-                  { initialValue: user.prev1starting,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                format="YYYY-MM"
-                placeholder="Start Date"
-                @change="setStartDate"
-                @openChange="handleStartOpenChange"
-                class="mx-2"
-              />
-              <a-month-picker
-              :disabled-date="disabledEndDate"
-              v-decorator="[
-                  'prev1ending',
-                  { initialValue: user.prev1ending,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                format="YYYY-MM"
-                placeholder="End Date"
-                @openChange="handleEndOpenChange"
-              />
-              <!-- <a-month-picker
-              :disabled-date="disabledPrevDate"
-              v-decorator="[
-                  'prev1ending',
-                  { initialValue: user.prev1ending,
-                    rules: [
-                      { required: false, message: 'Field is required' },
-                    ],
-                  },
-                ]"
-                format="YYYY-MM"
-                placeholder="End Date"
-                :open="endOpen"
-                @openChange="handleEndOpenChange"
-              /> -->
-            </a-form-item>
-          </a-col>
-        </a-row>
+        <h5 class="my-10">Your Previous Work place (optional)</h5>
+   
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="8">
             <a-form-item label="Company(Optional)">
@@ -353,8 +275,11 @@
           type="primary"
           @click="handleSubmit"
           :loading="loading"
-          :disabled="user.status === 'pending approval'"
-         
+          disabled
+          v-if="user.status === 'pending approval'"
+          >Save and Continue
+        </a-button>
+        <a-button type="primary" @click="handleSubmit" :loading="loading" v-else
           >Save and Continue
         </a-button>
       </div>
@@ -480,19 +405,11 @@ export default {
           const payload = {
             current_employer: values.current_employer ?? "",
             current_starting: values.current_starting.format() ?? "",
-
-            prev1: values.prev1 ?? "",
             current_position:values.current_position??"",
-            prev1_position:values.prev1_position??"",
+           
             prev2_position:values.prev2_position??"",
             prev3_position:values.prev3_position??"",
             prev4_position:values.prev4_position??"",
-            prev1ending: values.prev1starting
-              ? values.prev1starting.format()
-              : "",
-            prev1starting: values.prev1starting
-              ? values.prev1ending?.format()
-              : "",
             prev2: values.prev2 ? values.prev2 : "",
             prev2ending: values.prev2ending
               ? values.prev2ending?.format()
@@ -515,7 +432,7 @@ export default {
               ? values.prev4starting?.format()
               : "",
             step: "employment information",
-            current: 3,
+            current: 4,
           };
           this.$store.dispatch("updateUser", payload);
         }

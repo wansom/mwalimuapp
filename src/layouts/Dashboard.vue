@@ -14,6 +14,16 @@
         layoutClass,
       ]"
     >
+          <!-- Main Sidebar -->
+      <DashboardSidebar
+        :sidebarCollapsed="sidebarCollapsed"
+        :sidebarColor="sidebarColor"
+        :sidebarTheme="sidebarTheme"
+        @toggleSidebar="toggleSidebar"
+        v-if="user.status==='admin' ||user.status==='active'"
+		:user="user"
+      ></DashboardSidebar>
+      <!-- / Main Sidebar -->
 
       <!-- Layout Content -->
       <a-layout>
