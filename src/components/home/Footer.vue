@@ -24,10 +24,10 @@
           <div class="footer-widget">
             <h5>COMPANY</h5>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Terms and Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="//acelitigator.com">About Us</a></li>
+              <li><a href="/find-a-lawyer">Find a Lawyer</a></li>
+              <li><a href="https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/Privacy%20Policy%20200223.docx?alt=media&token=bd536806-a1ac-4361-a56a-ddfca9885a8f">Privacy Policy</a></li>
+              <li><a href="/contact-us">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -38,8 +38,8 @@
               
               <li><router-link to="sign-up">Create Account</router-link></li>
               <li><router-link to="sign-in">Login</router-link></li>
-              <li><router-link to="know-your-courts">Know Your Courts</router-link></li>
-              <li><a href="#">Advocates In Practise</a></li>
+              <li><router-link to="//kenyalaw.org">Know Your Courts</router-link></li>
+              <!-- <li><a href="#">Advocates In Practise</a></li> -->
             </ul>
           </div>
         </div>
