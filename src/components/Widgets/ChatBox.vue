@@ -900,7 +900,6 @@ export default {
 
     async createRoom() {
       this.disableForm = true;
-      console.log(this.addRoomUsername, "no data");
       let advocate = this.advocates.find((a) => a.id === this.addRoomUsername);
       let user = {
         _id: advocate.id,
@@ -910,6 +909,7 @@ export default {
       await firestoreService.addIdentifiedUser(advocate.id, user);
 
       await firestoreService.addRoom({
+        id:advocate.id,
         users: [advocate.id, this.currentUserId],
         lastUpdated: new Date(),
       });

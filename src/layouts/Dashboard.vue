@@ -45,11 +45,6 @@
 
         <!-- Layout Footer -->
         <DashboardFooter></DashboardFooter>
-        <!-- / Layout Footer -->
-
-        <!-- / Floating Action Button For Toggling Settings Drawer -->
-
-        <!-- Sidebar Overlay -->
         <div
           class="sidebar-overlay"
           @click="sidebarCollapsed = true"
