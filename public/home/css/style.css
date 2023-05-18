@@ -1925,26 +1925,11 @@ ol {
 	content: "";
 } */
 
-.filter-widget .fw-size-choose .sc-item {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.filter-widget .fw-size-choose .sc-item:last-child {
-  margin-right: 0;
-}
-
-.filter-widget .fw-size-choose .sc-item input {
-  position: absolute;
-  visibility: hidden;
-}
 
 .filter-widget .fw-size-choose .sc-item label {
   font-size: 16px;
   color: #252525;
   font-weight: 700;
-  height: 40px;
-  width: 47px;
   border: 1px solid #ebebeb;
   text-align: center;
   line-height: 40px;
@@ -2444,7 +2429,7 @@ ol {
 }
 
 .specification-table {
-  padding-top: 52px;
+  padding-top: 2px;
 }
 
 .specification-table table {

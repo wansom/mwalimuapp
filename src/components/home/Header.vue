@@ -1,10 +1,10 @@
 <template>
   <section>
-    <div class="d-block d-md-none">
+    <div class="block md:hidden">
       <div class="mobile-sm-menu">
         <router-link to="/">
           <img
-            src="images/dial-logo.png"
+            src="/images/dial-logo.png"
             alt=""
             style="height: 50px; object-fit: contain"
           />
@@ -30,12 +30,12 @@
     </div>
     <header class="header-section">
       <div class="header-top">
-        <div class="container">
+        <div class="container mx-auto">
           <div class="ht-left">
             <div class="logo">
               <router-link to="/">
                 <img
-                  src="images/dial-logo.png"
+                  src="/images/dial-logo.png"
                   alt=""
                   style="height: 80px; object-fit: contain"
                 />
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="nav-item">
-        <div class="container">
+        <div class="container mx-auto">
           <div class="nav-depart">
             <router-link to="/">
               <div class="depart-btn">

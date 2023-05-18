@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="">
     <Header></Header>
     <Breadcrum></Breadcrum>
-    <Map></Map>
+
     <section class="contact-section spad">
-      <div class="container">
+
+      <div class="container mx-auto">
+        <Map></Map>
         <div class="row">
           <div class="col-lg-5">
             <div class="contact-title">
