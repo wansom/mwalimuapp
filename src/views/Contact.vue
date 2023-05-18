@@ -41,7 +41,7 @@
                 </div>
                 <div class="ci-text">
                   <span>Email:</span>
-                  <p>info@acelitigator.com
+                  <p>info@dailalawyerfrica.com
 </p>
                 </div>
               </div>

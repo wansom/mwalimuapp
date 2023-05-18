@@ -230,7 +230,7 @@ export default {
           this.$store.dispatch("sendMail", {
             name: this.user.first_name,
             email: this.user.email,
-            subject: "Acelitigator Account",
+            subject: "Dial A Lawyer Account",
             content:
               "Your account request has been declined please contact admin for more information",
           });
@@ -238,7 +238,7 @@ export default {
           this.$store.dispatch("sendMail", {
             name: this.user.first_name,
             email: this.user.email,
-            subject: "Acelitigator Account",
+            subject: "Dial A Lawyer Account",
             content: `Your account request has been activated successfully. You have an active subscription valid till ${new Date(
               new Date().setMonth(new Date().getMonth() + 1)
             )}`,

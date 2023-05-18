@@ -161,16 +161,17 @@ export default new Vuex.Store({
               notification: `Your account was created successfully. Proceed to https://advocatelisting.acelitigator.com/sign-in to complete your profile`,
               date: new Date(),
             }),
-          }).then(() => {
-            dispatch("sendMail", {
+          }).then(async() => {
+            dispatch("changeLoading", false);
+              router.push("/dashboard");
+              await dispatch("sendMail", {
               name: data.first_name,
               email: data.email,
               subject: "Dial A lawyer Account",
               content:
                 "Your Account has been created successfully. You can now log into your account and complete your profile befor your account is activated",
             });
-            dispatch("changeLoading", false);
-            router.push("/dashboard");
+         
           });
         })
         .catch((err) => { 

@@ -285,9 +285,33 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
+          <a-col :span="24" :md="12">
+            <a-form-item label="Date of Admission to the Bar.">
+              <a-date-picker
+                :disabled-date="disabledDate"
+                v-decorator="[
+                  'practise_start',
+                  {
+                    initialValue: user.practise_start,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter Year of Admission to the Nigerian Bar.',
+                      },
+                    ],
+                  },
+                ]"
+                placeholder="Select date"
+                style="width: 100%"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="16">
           <a-col :span="24"  v-if="user.profile_photo">
             <img :src="user.profile_photo" alt="" style="height: 100px" />
           </a-col>
+
           <a-col :span="24">
             <a-form-item label="Profile Picture">
               <a-upload-dragger
@@ -318,6 +342,7 @@
               </a-upload-dragger>
             </a-form-item>
           </a-col>
+         
         </a-row>
         <a-checkbox @change="changeTerms" class="mb-3" :checked="terms">
           The information submitted on this page will be visibile to all potential clients
@@ -428,6 +453,9 @@ export default {
             step: "general information",
             profile_photo: url,
             current: 2,
+            practise_start: this.user.practise_start
+                ? this.user.practise_start
+                : values.practise_start.format(),
             twitter: values.twitter ?? "https://www.twitter.com/",
             linkedIn: values.linkedIn ?? "https://www.linkedin.com/",
           };
