@@ -219,25 +219,6 @@
           </div>
         </div>
       </section>
-      <!-- <section class="upcoming-events">
-        <div class="upcoming-container container-fluid">
-          <h1 class="mb-5">Lawyer Profiles</h1>
-          <div class="grid-container">
-            <card-info
-              :advocate="i"
-              v-for="i of advocates.slice(0, 10)"
-              :key="i.id"
-            ></card-info>
-          </div>
-          <div class="up-left">
-            <div class="bottom-more">
-              <router-link to="find-a-lawyer"
-                ><button>View All Lawyers</button></router-link
-              >
-            </div>
-          </div>
-        </div>
-      </section> -->
       <section class="research-content" id="courts">
         <div class="research-container container">
           <div class="research-item">
@@ -478,7 +459,6 @@ export default {
   },
   data() {
     return {
-      columns,
       myText: "hello world",
       isNavOpen: false,
       lawyers: [1, 2, 3, 4, 5, 6, 6, 6, 7, 7],
@@ -497,24 +477,11 @@ export default {
     },
   },
   mounted() {
-    this.startAnimation();
   },
   methods: {
     showNav() {
       this.visibleNav = !this.visibleNav;
       console.log("button clicked", this.visibleNav);
-    },
-    startAnimation() {
-      const containerWidth = this.$el.clientWidth;
-      const cardWidth = 600; // adjust this to fit your card width
-      const visibleCards = Math.floor(containerWidth / cardWidth) + 2;
-      const totalCards = this.cards.length;
-      const duration = (totalCards + visibleCards) * 2; // adjust this to fit your desired animation speed
-      this.animationDuration = `${duration}s`;
-
-      setInterval(() => {
-        this.currentCardIndex = (this.currentCardIndex + 1) % totalCards;
-      }, (duration / totalCards) * 1000);
     },
   },
 };
