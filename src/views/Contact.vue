@@ -5,9 +5,9 @@
 
     <section class="contact-section spad">
 
-      <div class="container mx-auto">
+      <div class="container mx-auto space-y-4">
         <Map></Map>
-        <div class="row">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div class="col-lg-5">
             <div class="contact-title">
               <h4>Contacts Us</h4>
