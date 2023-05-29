@@ -18,6 +18,13 @@
         <a-card
         :class="current===2?'icon-card-active text-white':'icon-card'"
           @click="
+
+
+
+
+
+
+          
             () => {
               next(2);
             }

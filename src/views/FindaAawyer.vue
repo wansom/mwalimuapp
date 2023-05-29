@@ -15,6 +15,11 @@ import { mapState } from "vuex";
 import Footer from "../components/home/Footer.vue";
 export default {
   components: { Header, Filters, Footer },
+data(){
+return{
+  title: process.env.VUE_APP_FIREBASE_API_KEY
+}
+},
   created() {},
   computed: {
     ...mapState(["allAdvocates", "courtData"]),

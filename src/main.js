@@ -31,7 +31,7 @@ Vue.use(VueSocialSharing);
 Vue.use(VueCarousel);
 Vue.use(VueFormulate);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 // Adding template layouts to the vue components.
 Vue.component("layout-default", DefaultLayout);
