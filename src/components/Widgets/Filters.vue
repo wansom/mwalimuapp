@@ -54,7 +54,7 @@
                 </div> -->
 
                 <div class="filter-widget">
-                  <a-collapse expand-icon-position="right" :bordered="false">
+                  <a-collapse expand-icon-position="right" :bordered="false"  default-active-key="1">
                     <template #expandIcon="props">
                       <a-icon
                         type="caret-down"
