@@ -1,0 +1,310 @@
+.home-bn{
+    padding: 90px 0px 0px;
+    background-color: #FBFDFF;
+  }
+  .home-bn-contain{
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .hm-bn-txt{
+    width: 100%;
+    max-width: 520px;
+    padding: 10px 0px 20px;
+  }
+  .hm-bn-txt h3{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 38px;
+    color: #000000;
+    margin: 0px 0px 10px;
+  }
+  .hm-bn-txt h3 u{
+    color: #F48C06 !important;
+  }
+  .hm-bn-txt h1{
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 40px;
+    color: #2F327D;
+    margin: 0px 0px 10px;
+  }
+  .hm-bn-txt p{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 38px;
+    color: #696984;
+    margin: 10px 0px;
+  }
+  .hm-bn-txt button{
+    outline: none;
+    border: 0px;
+    background-color: #F48C06;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 20px;
+    margin: 10px 0px;
+    padding: 10px 20px;
+  }
+  .hm-bn-img{
+    width: 100%;
+    max-width: 520px;
+    padding: 10px 0px 20px;
+  }
+  .hm-bn-img img{
+    width: 100%;
+  }
+  section.rd-bg{
+    background-color: #ffffff;
+    padding: 40px 0px;
+  }
+  .rd-bg-contain{
+    padding: 0px 20px;
+  }
+  .rd-bg-contain h3.rd-title{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #000000;
+    margin: 10px 0px 20px;
+  }
+  .rd-bg-cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .rd-bg.card{
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    margin: 10px 2px;
+  }
+  .rd-bg.card img{
+    width: 280px;
+    height: 280px;
+    position: relative;
+    z-index: 1;
+  }
+  .rd-bg-cd-title{
+    height: 44px;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #ffffffcc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+    font-weight: 700;
+    color: #000000cc;
+  }
+  
+  section.related-blogs{
+    padding: 60px 0px 60px;
+    background-color: #FBFDFF;
+  }
+  .related-blogs-contain{
+    padding: 0px 20px;
+  }
+  .r-blog-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .r-blog-top span.title{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 38px;
+    color: #000000;
+  }
+  .r-blog-top a.see-link{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #F48C06;
+  }
+  .r-blogs{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .r-blog{
+    width: 100%;
+    max-width: 520px;
+    min-width: 280px;
+    height: fit-content;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 10px 12px;
+  }
+  .r-blog img.r-blog-img{
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px 0px 10px;
+  }
+  .r-blog h4.r-blog-head{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #252641;
+  }
+  .r-blog-profile{
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .r-blog-profile img{
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    margin: 0px 10px 0px 0px;
+  }
+  .r-blog-profile  span.bg-writer{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #000000;
+  }
+  .r-blog p.r-bg-text{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #696984;
+    margin: 10px 0px;
+  }
+  .r-blog-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .r-blog-info a{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-decoration: underline;
+    color: #696984;
+  }
+  .r-blog-info span{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #696984;
+  }
+  .r-blog-info span i{
+    color: #F48C06;
+  }
+  
+  section.mkt-articles{
+    padding: 60px 0px;
+    background-color: #ffffff;
+  }
+  .mkt-articles-contain h3.title{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 38px;
+    color: #000000;
+    margin: 0px 0px 20px;
+  }
+  .mkt-articles{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .mkt-article{
+    padding: 14px;
+    height: fit-content;
+    width: 280px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px #00000033;
+    margin: 10px 7px;
+  }
+  .mkt-article img.mkt-img{
+    width: 100%;
+    border-radius: 20px;
+  }
+  .mkt-icon-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+  }
+  .mkt-icon-info span{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 13px;
+    font-weight: 500;
+    color: #696984;
+  }
+  .mkt-icon-info span svg{
+    margin: 0px 8px 0px 0px;
+  }
+  .mkt-article h3{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    color: #252641;
+    margin: 5px 0px 10px;
+  }
+  .mkt-article p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #696984;
+    margin: 10px 0px 10px;
+  }
+  .mkt-article .mkt-amount{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px 10px;
+  }
+  .mkt-article-writer,
+  .mkt-amount .price{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .mkt-article-writer img{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin: 0px 5px 0px 0px;
+  }
+  .mkt-article-writer span{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #000000;
+  }
+  .mkt-amount .price p:nth-child(1){
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    text-decoration: line-through;
+    
+  }
+  .mkt-amount .price span:nth-child(2){
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #F48C06;
+    margin: 0px 0px 0px 10px;
+  }
