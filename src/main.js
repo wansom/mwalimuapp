@@ -6,5 +6,5 @@ import './assets/tailwind.css'
 import './assets/forms.css'
 import './assets/landing.css'
 import './assets/about.css'
-
+import './assets/dashboard.css'
 createApp(App).use(store).use(router).mount('#app')
