@@ -1,19 +1,20 @@
 <template>
-      <header class="header-scroll">
+      <header class="header-scroll bg-[#ffffff]">
         <nav id="nav-bar">
             <div class="nav-container contain">
-                <div class="logo">
-                    <a href="index.html" class="logo" style="font-weight: Bold;"><img class="logo-image blended" src="/images/home/Mwalimu Logo.png"
-                            alt="Mwalimu app logo" width="200px"></a>
+                <div class="">
+                   <img class="w-[220px]" src="/images/home/mwalimu-logo.png"
+                            alt="Mwalimu app logo" >
                 </div>
                 <div class="links" id="links">
                     <div class="cancel">
                         <span class="cancel-btn"><i class="fas fa-times"></i></span>
                     </div>
-                    <a href="#top">Home</a>
+                    <router-link to="/">Home</router-link>
+                    <router-link to="about">Resources</router-link>
                     <a href="#scc">Online</a>
                     <a href="#pack">Physical</a>
-                    <a href="#resource">Resources</a>
+                  
                     <a href="#sch">School</a>
                     <a href="#news">news</a>
                     <div class="nav-btns">

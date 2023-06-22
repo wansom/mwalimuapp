@@ -26,7 +26,7 @@ html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #00acff;
+    background: #10376D;
 }
 
 /* Animation CSS */
@@ -89,7 +89,7 @@ html {
 /* == || SCROLL BAR == */
 .contain {
     margin: auto;
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 /* == HEADER == */
@@ -100,6 +100,7 @@ header {
     top: 0px;
     z-index: 5;
     position: fixed;
+    
 }
 header.logged-in{
     background-color: #ffffff;
@@ -187,7 +188,7 @@ nav {
 .links a {
     font-size: 16px;
     font-weight: 500;
-    color: #EBF5FF;
+    color: #10376D;
     padding: 10px 10px;
 
 }
@@ -201,11 +202,11 @@ nav {
 
 
 .header .links .active-link {
-    color: #EBF5FF;
+    color: #10376D;
 }
 
 .links a:hover {
-    color: #ffffff;
+    color: #000000;
 }
 
 .links button {

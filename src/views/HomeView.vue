@@ -262,7 +262,7 @@
         <section class="tls-sect">
             <div class="tls-contain contain">
                 <div class="tls-card">
-                    <img src="/images/homepeople on an online call discussion.png" alt="people on an online discussion">
+                    <img src="/images/home/people on an online call discussion.png" alt="people on an online discussion">
                 </div>
                 <div class="tls-card">
                     <h2>One-on-One <u>Discussions</u></h2>
@@ -507,44 +507,19 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="footer-contain contain">
-            <div class="footer-top">
-                <div class="footer-img">
-                    <img src="/images/home/Mwalimu Logo.png" alt="mwalimu app logo">
-                </div>
-                <div class="f-top-txt">
-                    Virtual class <br>
-                    for Zoom
-                </div>
-            </div>
-            <div class="footer-newsletter">
-                <p>Subscribe to get our Newsletter</p>
-                <form action="">
-                    <input type="email" placeholder="Your Email">
-                    <button>Subscribe</button>
-                </form>
-            </div>
-            <div class="copyright">
-                <div class="top-copyright">
-                    <a href="#">Careers</a>|
-                    <a href="#">Privacy Policy</a>|
-                    <a href="#">Terms & Conditions</a>
-                </div>
-                <div class="bottom-copyright">© 2021 Class Technologies Inc. </div>
-            </div>
-        </div>
-    </footer>
+<footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import DefaultNavbar from '@/components/navbars/DefaultNavbar.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    DefaultNavbar
+    DefaultNavbar,
+    FooterComponent
   }
 }
 </script>
