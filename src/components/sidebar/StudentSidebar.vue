@@ -1,7 +1,7 @@
 <template>
     <nav class="dash-nav">
       <div class="ins-lg">
-        <div class="dash-lg">
+        <div class="dash-lg bg-white">
           <img
             src="/images/home/mwalimu-logo.png"
             alt=""
@@ -232,17 +232,13 @@
             link: "reports",
           },
           {
-            icon: `    <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M5.27428 8.11279V14.0934" stroke="#ADC9CD" stroke-linecap="round"
-                                  stroke-linejoin="round" />
-                              <path d="M9.03072 5.25049V14.094" stroke="#ADC9CD" stroke-linecap="round"
-                                  stroke-linejoin="round" />
-                              <path d="M12.7227 11.2732V14.0937" stroke="#ADC9CD" stroke-linecap="round"
-                                  stroke-linejoin="round" />
-                              <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M1 9.69958C1 3.17537 3.00803 1 9.03039 1C15.0527 1 17.0608 3.17537 17.0608 9.69958C17.0608 16.2238 15.0527 18.3992 9.03039 18.3992C3.00803 18.3992 1 16.2238 1 9.69958Z"
-                                  stroke="#ADC9CD" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>`,
+            icon: `   
+            <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.84536 1.49414C5.26411 1.49414 1.59911 5.15911 1.59911 9.74036C1.59911 11.1656 1.90453 12.3874 2.51536 13.609L0.988281 18.6993C2.61717 18.1903 4.34786 17.6812 5.97675 17.0704C7.19842 17.6812 8.52189 18.0884 9.94716 18.0884C14.5284 18.0884 18.1934 14.4234 18.1934 9.8422C18.0916 5.26096 14.4266 1.49414 9.84536 1.49414Z" stroke="#ADC9CD" stroke-miterlimit="10"/>
+              <path d="M6.4868 11.4717C7.04906 11.4717 7.50486 11.0159 7.50486 10.4536C7.50486 9.89135 7.04906 9.43555 6.4868 9.43555C5.92455 9.43555 5.46875 9.89135 5.46875 10.4536C5.46875 11.0159 5.92455 11.4717 6.4868 11.4717Z" stroke="#ADC9CD" stroke-miterlimit="10"/>
+              <path d="M10.1499 11.4717C10.7121 11.4717 11.1679 11.0159 11.1679 10.4536C11.1679 9.89135 10.7121 9.43555 10.1499 9.43555C9.58763 9.43555 9.13184 9.89135 9.13184 10.4536C9.13184 11.0159 9.58763 11.4717 10.1499 11.4717Z" stroke="#ADC9CD" stroke-miterlimit="10"/>
+              <path d="M13.3071 11.4717C13.8694 11.4717 14.3252 11.0159 14.3252 10.4536C14.3252 9.89135 13.8694 9.43555 13.3071 9.43555C12.7449 9.43555 12.2891 9.89135 12.2891 10.4536C12.2891 11.0159 12.7449 11.4717 13.3071 11.4717Z" stroke="#ADC9CD" stroke-miterlimit="10"/>
+            </svg> `,
             title: "Chat",
             link: "reports",
           },
@@ -275,5 +271,170 @@
   .router-link {
     color: #ffffff;
   }
+  
+.dash-nav {
+    height: 100vh;
+    padding: 15px;
+    background-color: #0F305E;
+    width: 20vw !important;
+    position: relative;
+}
+
+.ins-lg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dash-lg svg {
+    height: 90px;
+    width: 150px;
+}
+
+.dash-arrow button {
+    height: 30px;
+    width: 30px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: #345687;
+    color: #ffffff;
+    outline: none;
+    cursor: pointer;
+}
+
+.dash-links {
+    padding: 25px 0px;
+}
+
+.dash-links .link {
+    margin: 6px 0px;
+}
+
+.dash-links .link a,
+.nav-profile .link a {
+    padding: 10px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+ 
+}
+
+.link-text,
+.link-icon,
+.help-icon {
+    height: 100%;
+    width: fit-content;
+    min-width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.link-text,
+.help-text {
+    padding: 0px 14px;
+}
+
+.dash-links .link a.active,
+.dash-links .link a:hover,
+.nav-profile .link a:hover {
+    background-color: #ffffff;
+    color: #1787E0;
+}
+
+.dash-links .link a.active svg path,
+.dash-links .link a:hover svg path {
+    stroke: #1787E0 !important;
+}
+
+.red-status {
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    background-color: #F64018;
+    margin: 0px 0px 0px 20px;
+}
+
+.inbox-msgs {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #E72424;
+    margin: 0px 0px 0px 12px;
+}
+
+.nav-profile {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 250px;
+}
+
+.nav-profile .link {
+    margin: 0px 0px 20px;
+}
+
+.nav-profile .profile {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #395E93;
+    border-radius: 12px;
+}
+
+.profile .pr-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.name-initials {
+    position: absolute;
+    bottom: -10px;
+    right: -5px;
+    height: 30px;
+    width: 30px;
+    padding: 0px 3px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: #ffffff;
+    background-color: #2D3B79;
+    border-radius: 10px;
+}
+
+.pr-text h4 {
+    font-size: 14px;
+    color: #ffffff;
+    margin: 0px 0px 4px;
+}
+
+.pr-text p {
+    font-size: 12px;
+    color: #45B9FB;
+}
+
+.pr-drpdwn button {
+    background-color: #00000000;
+    border: 0px;
+    padding: 5px;
+    outline: none;
+}
+
+.profile .pr-img img {
+    width: 100%;
+}
+
   </style>
   

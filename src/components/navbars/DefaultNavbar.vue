@@ -3,8 +3,8 @@
         <nav id="nav-bar">
             <div class="nav-container contain">
                 <div class="">
-                   <img class="w-[220px]" src="/images/home/mwalimu-logo.png"
-                            alt="Mwalimu app logo" >
+                  <router-link to="/"> <img class="w-[220px]" src="/images/home/mwalimu-logo.png"
+                            alt="Mwalimu app logo" ></router-link>
                 </div>
                 <div class="links" id="links">
                     <div class="cancel">
