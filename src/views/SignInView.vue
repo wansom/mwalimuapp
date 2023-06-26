@@ -116,7 +116,6 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -126,7 +125,6 @@ export default {
     const emailError = ref(false);
     const passwordError = ref(false);
     const loginError = ref(null);
-    const store = useStore();
     const router = useRouter();
 
     const validateEmail = (email) => {
@@ -145,7 +143,7 @@ export default {
 
     const logInUser = async () => {
       try {
-        await store.dispatch('login', { email: email.value, password: password.value });
+        // await store.dispatch('login', { email: email.value, password: password.value });
         router.push("/dashboard");
       } catch (error) {
         loginError.value = "Login failed. Please check your credentials and try again.";
