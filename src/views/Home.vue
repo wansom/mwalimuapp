@@ -7,7 +7,7 @@
         <div class="banner-mask">
           <div class="banner-container container">
             <div class="banner-text">
-              <h1>Aiding access to justice across the African continent</h1>
+              <h1>Aiding access to justice across the African continent.</h1>
               <p>
                 Our mission is to aid access to justice across Africa by
                 linking verified legal professionals in the justice sector to the market
@@ -304,7 +304,7 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                <span>+231 794 342 159</span>
+                <span>+254 704 927 969</span>
               </div>
               <div class="detail">
                 <svg

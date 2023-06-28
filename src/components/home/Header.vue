@@ -47,7 +47,7 @@
             </div>
             <div class="phone-service">
               <i class="fa fa-phone"></i>
-              +231 794 342 159
+              +254 704 927 969
             </div>
           </div>
 
