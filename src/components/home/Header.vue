@@ -94,7 +94,7 @@
 
           <nav class="nav-menu mobile-menu">
             <ul>
-              <li class="active">
+              <li>
                 <router-link to="/find-a-lawyer">FIND LAWYERS</router-link>
               </li>
               <li><a href="//kenyalaw.org" target="blank">Know Your Courts</a></li>
