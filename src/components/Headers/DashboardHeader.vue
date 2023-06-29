@@ -21,7 +21,7 @@
             overlayClassName="header-notifications-dropdown"
             :getPopupContainer="() => wrapper"
           >
-            <a-badge :count="user.notifications.length" class="text-white">
+            <a-badge :count="user.notifications&&user.notifications.length" class="text-white">
               <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 <svg
                   width="20"
@@ -102,7 +102,7 @@
                 block
                 size="small"
                 @click="clearAll"
-                v-if="user.notifications.length"
+                v-if="user.notifications&&user.notifications.length"
                 class="flex align-items-center justify-content-center"
               >
                 <svg

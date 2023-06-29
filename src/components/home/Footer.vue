@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="bottom-footer container mx-auto">
-        <p>Dial A lawyer Africa. Rights Reserved. Copyright 2022.</p>
+        <p>Dial A lawyer Africa. Rights Reserved. Copyright {{ new Date().getFullYear() }}.</p>
       </div>
     </footer>
 </template>

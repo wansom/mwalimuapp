@@ -95,7 +95,7 @@ export default {
           const profileViewDate = timestamp.toDate();
           const profileViewDateString = profileViewDate.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
           return profileViewDateString === dateString;
-        }).length;
+        })?.length;
         return count;
       });
 
@@ -127,7 +127,7 @@ export default {
       const profileViewDate = timestamp.toDate();
       const profileViewDateString = profileViewDate.toLocaleDateString('en-us', { month: 'short', day: 'numeric' });
       return profileViewDateString === dateString;
-    }).length;
+    })?.length;
     return count;
   });
 
@@ -162,7 +162,7 @@ yearlyChartData() {
       const profileViewMonth = profileViewDate.getMonth();
       const profileViewMonthString = profileViewDate.toLocaleDateString('en-us', { month: 'short' });
       return profileViewMonthString === label;
-    }).length;
+    })?.length;
     return count;
   });
 

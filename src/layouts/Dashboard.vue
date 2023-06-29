@@ -20,7 +20,7 @@
         :sidebarColor="sidebarColor"
         :sidebarTheme="sidebarTheme"
         @toggleSidebar="toggleSidebar"
-        v-if="user.status==='admin' ||user.status==='active'"
+        v-if="user&&user.status==='admin' ||user&&user.status==='active'"
 		:user="user"
       ></DashboardSidebar>
       <!-- / Main Sidebar -->

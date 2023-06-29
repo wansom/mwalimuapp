@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { auth } from "../database/index";	
-import {updateAdvocate} from "../database/firestore";
-import {arrayUnion} from 'firebase/firestore';
-
-
 
 Vue.use(VueRouter)
 
@@ -62,24 +58,36 @@ let routes = [
 		path: '/layout',
 		name: 'Layout',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/Layout.vue'),
 	},
 	{
 		path: '/requests',
 		name: 'Requests',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/Requests.vue'),
 	},
 	{
 		path: '/courts',
 		name: 'Courts',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/Courts.vue'),
 	},
 	{
 		path: '/chat',
 		name: 'Chat',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/Chat.vue'),
 	},
 	{
@@ -91,6 +99,9 @@ let routes = [
 	{
 		path: '/details/:id',
 		name: 'Details',
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/Profile.vue'),
 	},
 	{
@@ -106,6 +117,9 @@ let routes = [
 		path: '/profile',
 		name: 'Profile',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+		  },
 		component: () => import('../views/ActiveProfile.vue'),
 	},
 	{
@@ -126,6 +140,7 @@ let routes = [
 	{
 		path: '/advocate-listing',
 		name: 'Advocate-Listing',
+		
 		component: () => import('../views/Advocate-List.vue'),
 	},
 ]
@@ -152,18 +167,9 @@ router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some((route) => route.meta.requiresAuth);
   
 	if (requiresAuth && !auth.currentUser) {
-	  next("/Sign-In");
+	  next("/sign-in");
 	} else {
 	  next();
-	}
-  });
-
-  router.afterEach((to, from) => {
-	if(to.params.id){
-		updateAdvocate(to.params.id,{
-			profile_visits:arrayUnion(new Date())
-		})
-
 	}
   });
 
