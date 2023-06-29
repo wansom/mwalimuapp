@@ -69,6 +69,7 @@ let routes = [
 		layout: "dashboard",
 		meta: {
 			requiresAuth: true,
+			requiresAdmin: true,
 		  },
 		component: () => import('../views/Requests.vue'),
 	},
@@ -78,6 +79,7 @@ let routes = [
 		layout: "dashboard",
 		meta: {
 			requiresAuth: true,
+			requiresAdmin: true,
 		  },
 		component: () => import('../views/Courts.vue'),
 	},
@@ -94,6 +96,10 @@ let routes = [
 		path: '/request/:id',
 		name: 'Request',
 		layout: "dashboard",
+		meta: {
+			requiresAuth: true,
+			requiresAdmin: true,
+		  },
 		component: () => import('../views/SingleRequest.vue'),
 	},
 	{
@@ -143,6 +149,11 @@ let routes = [
 		
 		component: () => import('../views/Advocate-List.vue'),
 	},
+	{
+		path: '/not-authorized',
+		name: 'not-authorized',
+		component: () => import('../views/NotAuthorized.vue'),
+	},
 ]
 
 function addLayoutToRoute( route, parentLayout = "default" )
@@ -165,10 +176,13 @@ const router = new VueRouter({
 })
 router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some((route) => route.meta.requiresAuth);
-  
+	const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
 	if (requiresAuth && !auth.currentUser) {
 	  next("/sign-in");
-	} else {
+	}  else if (requiresAuth && requiresAdmin && !auth.currentUser.email !='admin@acelitigator.com') {
+		next('not-authorized') //redirect to not-authorized page
+	  }
+	else {
 	  next();
 	}
   });
