@@ -52,7 +52,7 @@ auth.onAuthStateChanged((user) => {
         titleTemplate: '%s | Dial a Lawyer',
         meta: [
           { property: 'og:site_name', content: 'Dial a Lawyer' },
-          { property: 'og:image', content: 'https://dialalawyer.africa/img/banner.251176c6.jpg'},
+          { property: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/banner.jpg?alt=media&token=638b0c97-bd4b-4e0a-8053-874fc7e5bc80'},
           { property: 'og:description', content: 'Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market' },
           { name: 'twitter:site', content: '@dialalawyer' },
           { name: 'twitter:description', content: 'Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market' },
