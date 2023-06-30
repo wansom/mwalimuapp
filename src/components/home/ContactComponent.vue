@@ -93,12 +93,8 @@
             <form action="">
               <div class="names">
                 <div class="control-group name">
-                  <label for="name">First Name</label><br />
+                  <label for="name">Full Name</label><br />
                   <input type="text" placeholder="John" />
-                </div>
-                <div class="control-group name">
-                  <label for="name">Last Name</label><br />
-                  <input type="text" name="email" placeholder="Kamana" />
                 </div>
               </div>
               <div class="control-group">
@@ -107,14 +103,6 @@
                   type="email"
                   name="email"
                   placeholder="johnkamara@gmail.com"
-                />
-              </div>
-              <div class="control-group">
-                <label for="company">Company Name</label><br />
-                <input
-                  type="text"
-                  name="company"
-                  placeholder="Adanian Labs Limited"
                 />
               </div>
               <div class="control-group">
@@ -182,21 +170,21 @@ section.contact {
 .contact-details .title h1 {
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 49px;
   color: #1c1b1f;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 
 .contact-details .title p {
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 18px;
   line-height: 36px;
   color: #e6353b;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 
 .contact-details .details {

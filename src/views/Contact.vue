@@ -1,7 +1,6 @@
 <template>
   <div class="">
     <Header></Header>
-    <Breadcrum></Breadcrum>
 <contact-component></contact-component>
     <Footer></Footer>
   </div>

@@ -4,7 +4,7 @@
       <div class="flex items-center justify-center">
         <div class="w-1/2">
           <div class="login-form">
-            <h2>Login</h2>
+            <h2 class="text-lg">Login</h2>
             <a-form
               id="components-form-demo-normal-login"
               :form="form"
@@ -54,13 +54,9 @@
                 </a-input-password>
               </a-form-item>
               <div class="group-input gi-check">
+                <router-link to="forgot-password" class="forget-pass">Forget your Password</router-link>
                 <div class="gi-more">
-                  <label for="save-pass">
-                    Remember Me
-                    <input type="checkbox" id="save-pass" checked />
-                    <span class="checkmark"></span>
-                  </label>
-                  <router-link to="forgot-password" class="forget-pass">Forget your Password</router-link>
+                 
                 </div>
               </div>
 
