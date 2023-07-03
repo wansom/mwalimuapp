@@ -1,149 +1,107 @@
+Apologies for the oversight. Here's an updated version of the code using Vue.js 2 syntax:
+
+```vue
 <template>
-    <div>
-        <FormulateForm v-model="formData">
-    <div v-for="(field, index) in formFields" :key="index">
-      <FormulateInput
-        v-if="field.type === 'text'"
-        v-model="formData[field.name]"
-        :type="field.type"
-        :label="field.label"
-      />
-      <FormulateSelect
-        v-if="field.type === 'select'"
-        v-model="formData[field.name]"
-        :label="field.label"
-        :options="field.options"
-      />
-      <!-- Add more field types as needed -->
-
-      <button @click="removeFormField(index)">Remove</button>
-    </div>
-
-    <button @click="addFormField">Add Field</button>
-    <button type="submit">Submit</button>
-  </FormulateForm>
-  <form>
-      <label for="field-type">Field Type:</label>
-      <select id="field-type" v-model="selectedFieldType">
-        <option value="text">Text Field</option>
-        <option value="textarea">Textarea</option>
-        <option value="checkbox">Checkbox</option>
-        <option value="radio">Radio Buttons</option>
-        <option value="select">Select</option>
-      </select>
-
-      <label for="field-label">Label:</label>
-      <input id="field-label" v-model="fieldLabel" type="text">
-
-      <button type="button" @click="addField">Add Field</button>
-    </form>
-
-    <div v-for="(field, index) in formFields" :key="index">
-      <label :for="'field-' + index">{{ field.label }}</label>
-
-      <template v-if="field.type === 'text'">
-        <input :id="'field-' + index" type="text">
-      </template>
-
-      <template v-if="field.type === 'textarea'">
-        <textarea :id="'field-' + index"></textarea>
-      </template>
-
-      <template v-if="field.type === 'checkbox'">
-        <input :id="'field-' + index" type="checkbox">
-      </template>
-
-      <template v-if="field.type === 'radio'">
-        <input :id="'field-' + index + '-1'" type="radio" name="field">
-        <label :for="'field-' + index + '-1'">Option 1</label>
-
-        <input :id="'field-' + index + '-2'" type="radio" name="field">
-        <label :for="'field-' + index + '-2'">Option 2</label>
-      </template>
-
-      <template v-if="field.type === 'select'">
-        <select :id="'field-' + index">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </template>
-
-      <button type="button" @click="removeField(index)">Remove Field</button>
-    </div>
+  <div>
+    <a-form ref="form" @submit="handleSubmit">
+      <a-form-item label="First Name" :colon="false" :required="true">
+        <a-input :value="form.firstName" @input="form.firstName = $event.target.value"></a-input>
+      </a-form-item>
+      <a-form-item label="Last Name" :colon="false" :required="true">
+        <a-input :value="form.lastName" @input="form.lastName = $event.target.value"></a-input>
+      </a-form-item>
+      <a-form-item label="Description" :colon="false">
+        <a-textarea :value="form.description" @input="form.description = $event.target.value"></a-textarea>
+      </a-form-item>
+      <a-form-item label="Profile Picture" :colon="false">
+        <a-upload
+          :before-upload="handleBeforeUpload"
+          :show-upload-list="false"
+          :custom-request="uploadProfilePicture"
+        >
+         
+          <a-progress type="circle" :percent="uploadProgress" :width="80" v-if="uploadProgress" />
+          <a-button>
+            <a-icon type="upload"></a-icon> Click to Upload
+          </a-button>
+        </a-upload>
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" :disabled="!isFormDirty" html-type="submit">
+          Save
+        </a-button>
+      </a-form-item>
+    </a-form>
   </div>
-  </template>
-  
+</template>
 
 <script>
-import VueFormulate from '@braid/vue-formulate'
+import { message } from 'ant-design-vue';
+import { storage } from '../../database';
+import { getStorage, ref , uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+
 export default {
-    components:{
-        VueFormulate
-    },
   data() {
     return {
-      formData: {},
-      formSchema:  [
-        {
-          type: 'password',
-          name: 'password',
-          label: 'Enter a new password',
-          validation: 'required'
-        },
-        {
-          type: 'password',
-          name: 'password_confirm',
-          label: 'Confirm your password',
-          validation: '^required|confirm:password',
-          validationName: 'Password confirmation'
-        },
-        {
-          type: 'submit',
-          label: 'Change password'
-        }
-      ],
-      formFields: [
-      { type: 'text', label: 'First Name', name: 'firstName' },
-      { type: 'text', label: 'Last Name', name: 'lastName' },
-      // Add more field objects as needed
-    ],
+      form: {
+        firstName: '',
+        lastName: '',
+        description: ''
+      },
+      isFormDirty: false,
+      uploadProgress: 0
     };
   },
   methods: {
-    addField() {
-      if (this.selectedFieldType && this.fieldLabel) {
-        this.formFields.push({
-          type: this.selectedFieldType,
-          label: this.fieldLabel
+    handleSubmit(e) {
+      e.preventDefault();
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          // Handle form submission and update the profile in Firebase
+          // Access the form values via this.form.firstName, this.form.lastName, this.form.description
+          console.log(this.form.firstName, this.form.lastName, this.form.description)
+        } else {
+          console.error('Form validation error');
+        }
+      });
+    },
+    handleBeforeUpload(file) {
+      // Validate the file type, size, etc., if needed
+    },
+    uploadProfilePicture({ file }) {
+      const storageRef = ref(storage,'profilePictures/' + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Track the upload progress
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadProgress = Math.round(progress);
+        },
+        (error) => {
+          // Handle the upload error
+          message.error('Failed to upload profile picture');
+          console.error(error);
+        },
+        () => {
+          // Get the download URL of the uploaded file
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log(downloadURL)
         });
-        this.selectedFieldType = '';
-        this.fieldLabel = '';
-      }
-    },
-    removeField(index) {
-      this.formFields.splice(index, 1);
-    },
-    addFormField() {
-      const newField = {
-        name: `field${this.formFields.length + 1}`,
-        type: 'text',
-        label: 'Field Label',
-        options: [],
-      };
-      this.formFields.push(newField);
-    },
-    removeFormField(index) {
-      this.formFields.splice(index, 1);
-      delete this.formData[`field${index + 1}`];
-    },
-    handleSubmit() {
-      // Handle form submission logic
-    },
+        }
+      );
+
+      return false; // Prevent default upload behavior
+    }
   },
+  watch: {
+    form: {
+      handler() {
+        this.isFormDirty = true;
+      },
+      deep: true
+    }
+  }
 };
 </script>
-
-<style>
-
-</style>

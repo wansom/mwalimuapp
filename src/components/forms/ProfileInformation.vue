@@ -75,6 +75,7 @@
       </a-col>
     </a-row>
     <div class="my-10" v-if="current == 1">
+      <!-- <test-form></test-form> -->
       <GeneralInformation :user="user" />
     </div>
     <div class="my-10" v-if="current == 2">
@@ -99,6 +100,7 @@ import CertificateUpload from "./Certificate-Upload.vue";
 import SubscriptionPayment from "./Subscription-Payment.vue";
 import { auth } from "../../database/index";
 import { mapState } from "vuex";
+import TestForm from './TestForm.vue';
 export default {
   data() {
     return {};
@@ -117,6 +119,7 @@ export default {
     EducationInformation,
     CertificateUpload,
     SubscriptionPayment,
+    TestForm,
   },
   computed: {
     ...mapState(["allAdvocates", "current"]),

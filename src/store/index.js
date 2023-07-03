@@ -26,6 +26,8 @@ export default new Vuex.Store({
     request: {},
     loading: false,
     current: 1,
+
+    
     practiseAreas: [
       "	Admiralty (Maritime) and Aviation Law",
       "Bankruptcy Law and Recovery",

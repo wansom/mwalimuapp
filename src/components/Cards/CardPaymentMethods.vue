@@ -39,7 +39,6 @@
           v-else
         >
         </a-result>
-       
       </a-modal>
     </div>
     <template #title>
@@ -47,9 +46,33 @@
         <a-col :span="24" :md="12" class="my-5">
           <h6 class="font-semibold mb-5">Account Subscription</h6>
           <p>Make payment to complete your profile</p>
-          <a-alert message="Your early adopter's promo code is: dialalawyer9c97a@"
-          description="enter the promo code to start 2 months free trial"
-           type="warning" show-icon close-text="Copy Code"  @close="onClose" />
+          <a-alert
+            message="Your early adopter's promo code is: dialalawyer9c97a@"
+            type="warning"
+            show-icon
+          >
+            <p slot="description" class="flex cursor-pointer"  @click="onClose">
+              enter the promo code to start 2 months free trial
+              <span style="color: red" class="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
+                  />
+                </svg>
+
+                Copy</span
+              >
+            </p>
+          </a-alert>
         </a-col>
         <a-col
           :span="24"
@@ -64,10 +87,8 @@
     </template>
     <a-row :gutter="[24, 24]">
       <a-col :span="24" :md="16">
-        
         <a-card class="payment-method-card p-2">
-          
-          <a-input class="mr-2" v-model.trim="coupon"/>
+          <a-input class="mr-2" v-model.trim="coupon" />
           <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
         </a-card>
       </a-col>
@@ -77,229 +98,225 @@
 </template>
 
 <script>
-import {getMpesaReference,getTransactionReference,getTransactions} from "@/database/firestore"
-import {arrayUnion} from "firebase/firestore"
+import {
+  getMpesaReference,
+  getTransactionReference,
+  getTransactions,
+} from "@/database/firestore";
+import { arrayUnion } from "firebase/firestore";
 export default {
   props: ["user"],
   data() {
     return {
       visible: false,
       loading: false,
-      sdkSent:false,
-      coupon:""
+      sdkSent: false,
+      coupon: "",
     };
   },
   methods: {
     onClose() {
-      const textarea = document.createElement('textarea');
-  textarea.textContent = "dialalawyer9c97a@";
-  textarea.style.position = 'fixed';
-  textarea.style.top = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
+      const textarea = document.createElement("textarea");
+      textarea.textContent = "dialalawyer9c97a@";
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
     },
     showModal() {
       if (!this.user.biography) {
-            this.$message.error(
-              "please complete the general information section"
-            );
-          } else if (!this.user.current_employer) {
-            this.$message.error("please complete the employment section");
-          } else {
-            this.visible = true;
-            this.loading=false
-          }
+        this.$message.error("please complete the general information section");
+      } else if (!this.user.current_employer) {
+        this.$message.error("please complete the employment section");
+      } else {
+        this.visible = true;
+        this.loading = false;
+      }
     },
-    formatNumber(value){
-      if(value.startsWith("254")){
-        return value
-      }else if(value.startsWith("07")){
-        return  "254" +value.substring(1)
-      }else if(value.startsWith("+254")){
-        return  "254" +value.substring(2)
-      }else if(value.startsWith("01")){
-        return  "254" +value.substring(1)
-      }else{
-        return value
+    formatNumber(value) {
+      if (value.startsWith("254")) {
+        return value;
+      } else if (value.startsWith("07")) {
+        return "254" + value.substring(1);
+      } else if (value.startsWith("+254")) {
+        return "254" + value.substring(2);
+      } else if (value.startsWith("01")) {
+        return "254" + value.substring(1);
+      } else {
+        return value;
       }
     },
     openNotification() {
-      swal( 'The details you submit to us will only be used for account verification. Please confirm to proceed').then(()=>{
-        this.payWithCard()
-      })
+      swal(
+        "The details you submit to us will only be used for account verification. Please confirm to proceed"
+      ).then(() => {
+        this.payWithCard();
+      });
     },
-    sendMail(){
-      this.$store.dispatch("sendMail",{
-              name: this.user.first_name,
-                email: this.user.email,
-                subject: "Dial A Lawyer Account",
-                content:`Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback within 48 hours`
-  
-            })
-            this.$store.dispatch("sendMail",{
-              name: "Admin",
-                email: "owarren@barizicommunications.com",
-                subject: "Account creation",
-                content:`A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`
-  
-            })
+    sendMail() {
+      this.$store.dispatch("sendMail", {
+        name: this.user.first_name,
+        email: this.user.email,
+        subject: "Dial A Lawyer Account",
+        content: `Your payment has been received successfully on ${new Date().toDateString()} . Our admin will review your documents and give you feedback within 48 hours`,
+      });
+      this.$store.dispatch("sendMail", {
+        name: "Admin",
+        email: "owarren@barizicommunications.com",
+        subject: "Account creation",
+        content: `A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`,
+      });
     },
-    payWithCard(){
-      if(!this.user.biography){
-        this.$message.error("please fill out the general information section")
-      }else if(!this.user.current_employer){
-        this.$message.error("please fill out the employment information section")
+    payWithCard() {
+      if (!this.user.biography) {
+        this.$message.error("please fill out the general information section");
+      } else if (!this.user.current_employer) {
+        this.$message.error(
+          "please fill out the employment information section"
+        );
+      } else if (!this.user.practise_number) {
+        this.$message.error(
+          "some documents are not uploaded. upload them to complete registration"
+        );
+      } else {
+        if (this.coupon == "dialalawyer9c97a@") {
+          this.paymentConfirmed = true;
+          localStorage.clear();
+          this.$store.dispatch("updateUser", {
+            status: "pending approval",
+            payment_date: new Date(),
+            current: 5,
+            notifications: arrayUnion({
+              notification: `payment has been made succcessfully,Our admin will review your application and give feedback`,
+              date: new Date(),
+            }),
+            invoices: arrayUnion({
+              date: new Date(),
+              amount: 0,
+              number: this.coupon,
+            }),
+          });
+          this.sendMail();
+          this.visible = false;
+        } else {
+          swal({
+            title: "OOPS!",
+            text: `Coupon code is unavailable or has expired`,
+            icon: "error",
+          });
+        }
       }
-      else if(!this.user.practise_number){
-        this.$message.error("some documents are not uploaded. upload them to complete registration")
-      }else{
-        if(this.coupon=="dialalawyer9c97a@"){
-        this.paymentConfirmed = true;
-            localStorage.clear()
-            this.$store.dispatch("updateUser", {
-                status: "pending approval",
-                payment_date: new Date(),
-                current: 5,
-                notifications:arrayUnion({
-                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
-                  date:new Date()
-
-                }),
-                invoices:arrayUnion({
-                  date: new Date(),
-                  amount:0,
-                  number: this.coupon
-                })
-              });
-              this.sendMail()
-              this.visible=false
-            
-             
-
-      }else{
-        swal({
-              title: "OOPS!",
-              text: `Coupon code is unavailable or has expired`,
-              icon: "error",
-            });
-
-      }
-      }
-      
-
-
-    
     },
     intiatePayment() {
       this.loading = true;
-        this.$store
-          .dispatch("intiatePayments", {
-            amount: 5,
-            phone_number: this.formatNumber(this.user.phone) ,
-          })
-          .then((response) => {
-            // handle success
-            if (response.status == 200) {
-              let id = response.data.CheckoutRequestID;
-              localStorage.setItem("transactionID", JSON.stringify(id));
-              this.sdkSent=true
-              this.loading = false;
-              // this.visible=false
-            }
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-            swal({
-              title: "OOPS!",
-              text: `something went wrong`,
-              icon: "error",
-            });
+      this.$store
+        .dispatch("intiatePayments", {
+          amount: 5,
+          phone_number: this.formatNumber(this.user.phone),
+        })
+        .then((response) => {
+          // handle success
+          if (response.status == 200) {
+            let id = response.data.CheckoutRequestID;
+            localStorage.setItem("transactionID", JSON.stringify(id));
+            this.sdkSent = true;
+            this.loading = false;
+            // this.visible=false
+          }
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          swal({
+            title: "OOPS!",
+            text: `something went wrong`,
+            icon: "error",
           });
+        });
     },
     confirmPayment() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      getMpesaReference(id).then((data)=>{
+      getMpesaReference(id).then((data) => {
         if (data) {
-            if (data.resultCode == 1032) {
-              swal({
-                title: "SORRY!",
-                text: `You have cancelled the transaction,please try again`,
-                icon: "error",
-              });
-              this.sdkSent=false
-              this.visible=false
-            } else if (data.resultCode == 1037) {
-              swal({
-                title: "SORRY!",
-                text: `DS timeout user cannot be reached`,
-                icon: "error",
-              });
-              this.sdkSent=false
-              this.visible=false
-            } else {
-              this.verifyAmount();
-            }
-          } else {
+          if (data.resultCode == 1032) {
             swal({
               title: "SORRY!",
-              text: `No transaction record found`,
+              text: `You have cancelled the transaction,please try again`,
               icon: "error",
             });
+            this.sdkSent = false;
+            this.visible = false;
+          } else if (data.resultCode == 1037) {
+            swal({
+              title: "SORRY!",
+              text: `DS timeout user cannot be reached`,
+              icon: "error",
+            });
+            this.sdkSent = false;
+            this.visible = false;
+          } else {
+            this.verifyAmount();
           }
-
-      })
+        } else {
+          swal({
+            title: "SORRY!",
+            text: `No transaction record found`,
+            icon: "error",
+          });
+        }
+      });
     },
-    handleChecks(){
-      if(!this.user.biography){
-        this.$message.error("please fill out the general information section")
-
-      }else if(!this.user.current_employer){
-        this.$message.error("please fill out the employment information section")
-      }
-      else if(!this.user.law_school){
-        this.$message.error("please fill out the education information section")
-      }
-      else if(!this.user.practise_number){
-        this.$message.error("some documents are not uploaded. upload them to complete registration")
-      }else{
-        this.intiatePayment()
+    handleChecks() {
+      if (!this.user.biography) {
+        this.$message.error("please fill out the general information section");
+      } else if (!this.user.current_employer) {
+        this.$message.error(
+          "please fill out the employment information section"
+        );
+      } else if (!this.user.law_school) {
+        this.$message.error(
+          "please fill out the education information section"
+        );
+      } else if (!this.user.practise_number) {
+        this.$message.error(
+          "some documents are not uploaded. upload them to complete registration"
+        );
+      } else {
+        this.intiatePayment();
       }
     },
     verifyAmount() {
       let id = JSON.parse(localStorage.getItem("transactionID"));
-      getTransactionReference(id).then((data)=>{
+      getTransactionReference(id).then((data) => {
         if (data && data.amount == 5) {
-            this.paymentConfirmed = true;
-            localStorage.clear()
-            this.$store.dispatch("updateUser", {
-                status: "pending approval",
-                payment_date: new Date(),
-                notifications:arrayUnion({
-                  notification:`payment has been made succcessfully,Our admin will review your application and give feedback`,
-                  date:new Date()
-
-                }),
-                invoices:arrayUnion({
-                  date: new Date(),
-                  amount:data.amount,
-                  number: id
-                })
-              });
-              this.sendMail()
-              this.visible=false
-              location.reload()
-          } else {
-            swal({
-              title: "SORRY!",
-              text: `Wrong amount`,
-              icon: "error",
-            });
-          }
-
-      })
+          this.paymentConfirmed = true;
+          localStorage.clear();
+          this.$store.dispatch("updateUser", {
+            status: "pending approval",
+            payment_date: new Date(),
+            notifications: arrayUnion({
+              notification: `payment has been made succcessfully,Our admin will review your application and give feedback`,
+              date: new Date(),
+            }),
+            invoices: arrayUnion({
+              date: new Date(),
+              amount: data.amount,
+              number: id,
+            }),
+          });
+          this.sendMail();
+          this.visible = false;
+          location.reload();
+        } else {
+          swal({
+            title: "SORRY!",
+            text: `Wrong amount`,
+            icon: "error",
+          });
+        }
+      });
     },
     handleCancel() {
       this.visible = false;

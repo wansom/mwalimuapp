@@ -5,7 +5,7 @@
     :bodyStyle="{ paddingTop: 0, paddingBottom: '16px' }"
   >
     <div>
-      <h3>Certificate Upload</h3>
+      <h3 class="my-10 text-lg">Certificate Upload</h3>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
@@ -53,54 +53,54 @@
 
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Admission Certificate">
-              <a-upload
-                name="file"
+            <a-form-item label="Current Practice Certificate">
+              <a-upload-dragger
                 accept="application/pdf"
-                :file-list="fileList1"
-                :remove="handleRemove1"
-                :before-upload="beforeUpload1"
-                v-decorator="[
-                  'admission_cert',
-                  {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please upload proof of residence',
-                      },
-                    ],
-                  },
-                ]"
+                :multiple="false"
+                list-type="picture"
+                :before-upload="handleBeforeUpload"
+                :show-upload-list="false"
+                :custom-request="uploadPracticeCert"
               >
-                <a-button>
-                  <a-icon type="upload" block /> Click to Upload
-                </a-button></a-upload
-              >
+
+                <div >
+                  <p class="ant-upload-drag-icon">
+                    <a-icon type="inbox" />
+                  </p>
+                  <p class="ant-upload-text">
+                    Click or drag file to this area to upload Certificate
+                  </p>
+                </div>
+              </a-upload-dragger>
+             
             </a-form-item>
+            <a-progress :percent="uploadPracticeProgress" v-if="uploadPracticeProgress"/> 
+
+            
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Current Practice Certificate">
-              <a-upload
-                name="file"
+            <a-form-item label="Admission Certificate">
+              <a-upload-dragger
                 accept="application/pdf"
-                :file-list="fileList3"
-                :remove="handleRemove3"
-                :before-upload="beforeUpload3"
-                v-decorator="[
-                  'practise_cert',
-                  {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please upload a valid certificate',
-                      },
-                    ],
-                  },
-                ]"
+                :multiple="false"
+                list-type="picture"
+                :before-upload="handleBeforeUpload"
+                :show-upload-list="false"
+                :custom-request="uploadAdmissionCert"
               >
-                <a-button> <a-icon type="upload" /> Click to Upload </a-button>
-              </a-upload>
+
+                <div >
+                  <p class="ant-upload-drag-icon">
+                    <a-icon type="inbox" />
+                  </p>
+                  <p class="ant-upload-text">
+                    Click or drag file to this area to upload Certificate
+                  </p>
+                </div>
+              </a-upload-dragger>
+             
             </a-form-item>
+            <a-progress :percent="uploadAdmissionProgress" v-if="uploadAdmissionProgress"/> 
           </a-col>
         </a-row>
         <a-checkbox @change="changeTerms" class="mb-3" :checked="terms">
@@ -128,6 +128,7 @@ import { mapState } from "vuex";
 import moment from "moment";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/database";
+import { updateAdvocate } from '../../database/firestore';
 export default {
   props: ["user"],
   data() {
@@ -147,7 +148,11 @@ export default {
       fileList3: [],
       progress: 0,
       imageUrls: [],
-      terms:true
+      terms:false,
+      uploadAdmissionProgress: 0,
+      uploadPracticeProgress: 0,
+
+
     };
   },
   watch: {
@@ -171,6 +176,63 @@ export default {
     },
     changeTerms(){
       this.terms =!this.terms
+    },
+    handleBeforeUpload(file) {
+      // Validate the file type, size, etc., if needed
+    },
+    uploadAdmissionCert({ file }) {
+      const storageRef = ref(storage, "certificates/" + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Track the upload progress
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadAdmissionProgress = Math.round(progress);
+        },
+        (error) => {
+          // Handle the upload error
+          message.error("Failed to upload profile picture");
+          console.error(error);
+        },
+        () => {
+          // Get the download URL of the uploaded file
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            updateAdvocate(this.user.id, { residence_evidence: downloadURL });
+          });
+        }
+      );
+
+      return false; // Prevent default upload behavior
+    },
+    uploadPracticeCert({ file }) {
+      const storageRef = ref(storage, "certificates/" + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Track the upload progress
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadPracticeProgress = Math.round(progress);
+        },
+        (error) => {
+          // Handle the upload error
+          message.error("Failed to upload profile picture");
+          console.error(error);
+        },
+        () => {
+          // Get the download URL of the uploaded file
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            updateAdvocate(this.user.id, { practise_certificate: downloadURL });
+          });
+        }
+      );
+
+      return false; // Prevent default upload behavior
     },
     handleRemove(file) {
       const index = this.fileList.indexOf(file);
@@ -212,72 +274,20 @@ export default {
       this.fileList3 = newFileList;
     },
 
-    transformFile(file) {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const canvas = document.createElement("canvas");
-          const img = document.createElement("img");
-          img.src = reader.result;
-          img.onload = () => {
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-            ctx.fillStyle = "red";
-            ctx.textBaseline = "middle";
-            ctx.fillText("Ant Design", 20, 20);
-            canvas.toBlob(resolve);
-          };
-        };
-      });
-    },
     handlePrevious() {
-      this.$store.dispatch("changeStep", 3);
+      this.$store.dispatch("changeStep", 2);
     },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (!err) {
-          this.$store.dispatch("changeLoading", true);
-          const files = [
-            values.practise_cert.file,
-            values.admission_cert.file,,
-          ];
-          const promises = files.map((file) => {
-            const storageRef = ref(storage, `certificates/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-
-            return new Promise((resolve, reject) => {
-              uploadTask.on("state_changed", null, reject, () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                  resolve(downloadURL);
-                });
-              });
-            });
-          });
-
-          try {
-            const downloadURLs = await Promise.all(promises);
-            const payload = {
+          const payload = {
               national_id: values.national_id ?? "",
-
-              
               practise_number: values.practise_number ?? "",
-              practise_certificate: downloadURLs[0],
-              residence_evidence: downloadURLs[1],
               step: "certificates",
               current: 5,
             };
             await this.$store.dispatch("updateUser", payload);
-
-            console.log("User information updated successfully.", downloadURLs);
-          } catch (error) {
-            console.error("Error updating user information:", error);
-          }
-          // Upload each file to Firebase Storage and get download URLs
-          const fileRefs = [];
-
-          this.$store.dispatch("changeLoading", false);
         }
       });
     },
