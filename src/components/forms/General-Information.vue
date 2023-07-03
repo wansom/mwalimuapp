@@ -137,7 +137,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Website(Optional)">
               <a-input
                 v-decorator="[
@@ -156,7 +156,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             <a-form-item label="Job Title">
               <a-input
                 v-decorator="[
@@ -307,7 +307,7 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
-          <a-col :span="12">
+          <a-col :span="24"  :md="12">
             <a-form-item label="Profile Picture">
               <a-upload-dragger
                 accept="image/png, image/jpeg"
@@ -334,7 +334,7 @@
               </a-upload-dragger>
             </a-form-item>
           </a-col>
-          <a-col :span="12">
+          <a-col :span="24" :md="12">
             
             <a-avatar :src="user.profile_photo" :size="160"  v-if="user.profile_photo"/>
             <a-avatar icon="user" v-else  :size="160"/>

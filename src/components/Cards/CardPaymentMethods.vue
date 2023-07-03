@@ -45,15 +45,10 @@
       <a-row type="flex" align="middle" class="d-flex align-items-center">
         <a-col :span="24" :md="12" class="my-5">
           <h6 class="font-semibold mb-5">Account Subscription</h6>
-          <p>Make payment to complete your profile</p>
-          <a-alert
-            message="Your early adopter's promo code is: dialalawyer9c97a@"
-            type="warning"
-            show-icon
-          >
-            <p slot="description" class="flex cursor-pointer"  @click="onClose">
-              enter the promo code to start 2 months free trial
-              <span style="color: red" class="flex">
+          <!-- <p>Make payment to complete your profile</p> -->
+          <div class="w-full flex gap-2 "  @click="onClose">
+            <p>Your early adopter's promo code is:<span class="text-lg text-black">dialalawyer9c97a@</span></p>
+            <span style="color: red" class="flex cursor-pointer ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -71,8 +66,17 @@
 
                 Copy</span
               >
+          </div>
+          <!-- <a-alert
+            message=" dialalawyer9c97a@"
+            type="warning"
+            show-icon
+          >
+            <p slot="description" class="flex cursor-pointer"  @click="onClose">
+              enter the promo code to start 2 months free trial
+            
             </p>
-          </a-alert>
+          </a-alert> -->
         </a-col>
         <a-col
           :span="24"
@@ -85,13 +89,10 @@
         </a-col>
       </a-row>
     </template>
-    <a-row :gutter="[24, 24]">
-      <a-col :span="24" :md="16">
-        <a-card class="payment-method-card p-2">
-          <a-input class="mr-2" v-model.trim="coupon" />
+ <div class="flex flex-col md:flex-row  gap-4 md:gap-10">
+  <a-input class="mr-2" v-model.trim="coupon" />
           <a-button type="primary" @click="payWithCard"> Enter Code</a-button>
-        </a-card>
-      </a-col>
+ </div>
     </a-row>
   </a-card>
   <!-- Payment Methods Card -->
