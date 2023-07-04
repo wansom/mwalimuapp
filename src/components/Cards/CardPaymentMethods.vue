@@ -165,8 +165,8 @@ export default {
       });
       this.$store.dispatch("sendMail", {
         name: "Admin",
-        email: "owarren@barizicommunications.com",
-        subject: "Account creation",
+        email: "owarren@barizicommunications.com,okothj@barizicommunicatins.com,jndungu@barizicommunications.com,,ochiengwarren3@gmail.com,rmulamba@barizicommunications.com,director@acelitigator.com",
+        subject: " A New Account creation",
         content: `A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`,
       });
     },
@@ -177,7 +177,7 @@ export default {
         this.$message.error(
           "please fill out the employment information section"
         );
-      } else if (!this.user.practise_number) {
+      } else if (!this.user.practise_number||!this.user.practise_certificate||!this.user.residence_evidence) {
         this.$message.error(
           "some documents are not uploaded. upload them to complete registration"
         );
@@ -190,7 +190,7 @@ export default {
             payment_date: new Date(),
             current: 5,
             notifications: arrayUnion({
-              notification: `payment has been made succcessfully,Our admin will review your application and give feedback`,
+              notification: `You have completed your profile succcessfully,Our admin will review your application and give feedback`,
               date: new Date(),
             }),
             invoices: arrayUnion({
