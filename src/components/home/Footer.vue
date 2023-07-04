@@ -17,7 +17,7 @@
           <h4>Support</h4>
           <ul>
           
-            <li><a href="/contact-us">Find A Lawyer</a></li>
+            <li><a href="/find-a-lawyer">Find A Lawyer</a></li>
             <li><a href="/sign-up">My Account</a></li>
             <li><a href="/sign-up">Register</a></li>
           </ul>

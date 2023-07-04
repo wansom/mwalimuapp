@@ -90,11 +90,11 @@
             ></iframe>
           </div>
           <div class="contact-form">
-            <form action="">
+            <form @submit.prevent="handleSubmit">
               <div class="names">
                 <div class="control-group name">
                   <label for="name">Full Name</label><br />
-                  <input type="text" placeholder="John" />
+                  <input type="text" placeholder="John" v-model="name" />
                 </div>
               </div>
               <div class="control-group">
@@ -103,11 +103,13 @@
                   type="email"
                   name="email"
                   placeholder="johnkamara@gmail.com"
+                  v-model="email" 
                 />
               </div>
               <div class="control-group">
                 <label for="how">How Did You Hear About Us?</label><br />
-                <input type="text" name="how" placeholder="Linkedin" />
+                <input type="text" name="how" placeholder="Linkedin" 
+                v-model="platform" />
               </div>
               <div class="control-group">
                 <label for="">Leave a Message?</label><br />
@@ -117,15 +119,16 @@
                   cols="30"
                   rows="10"
                   placeholder="Type Your Message Here..."
+                  v-model="message"
                 ></textarea>
               </div>
-              <div class="control-group checkbox">
+              <!-- <div class="control-group checkbox">
                 <input type="checkbox" id="checkboxed" />
                 <label for=""
                   >By clicking on “Send Message” you agree to our Terms &
                   Conditions and Privacy Statement.</label
                 >
-              </div>
+              </div> -->
               <div class="control-group">
                 <button type="submit">Send Message</button>
               </div>
@@ -137,6 +140,31 @@
 
 <script>
 export default {
+  data(){
+    return{
+      name:"",
+      email:"",
+      platform:"",
+      message:""
+    }
+  },
+  methods:{
+    handleSubmit(){
+     
+      console.log(this.name,this.email,this.platform,this.message)
+      this.$store.dispatch("sendMail", {
+        name: "ADMIN",
+        email: "director@acelitigator.com",
+        subject: "CONTACT FORM SUBMISSION",
+        content: `full name:${this.name},email:${this.email},where did you hear about us:${this.platform},message:${this.message}`,
+      }).then(()=>{
+        this.$message.success("form has been submitted successfully")
+        this.name="",
+        this.email="",
+        this.message=""
+      })
+    }
+  }
 
 }
 </script>
