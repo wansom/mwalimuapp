@@ -53,11 +53,8 @@
                   />
                 </a-input-password>
               </a-form-item>
-              <div class="group-input gi-check">
-                <router-link to="forgot-password" class="forget-pass">Forget your Password</router-link>
-                <div class="gi-more">
-                 
-                </div>
+              <div >
+                <router-link to="forgot-password" class="forget-pass hover:text-black hover:text-lg">Forget your Password</router-link>
               </div>
 
             

@@ -31,7 +31,7 @@
                 
                 :class="[loading ? 'site-btn-active disabled' : 'site-btn', 'login-btn']"
               >
-                Sign In   <a-spin v-if="loading" /> 
+                SEND EMAIL   <a-spin v-if="loading" /> 
               </button>
             </a-form>
             <div class="switch-login">
@@ -47,12 +47,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
       // Binded model property for "Sign In Form" switch button for "Remember Me" .
       rememberMe: true,
-      loading: this.$store.state.loading,
       email:""
     };
   },
@@ -60,14 +60,16 @@ export default {
     // Creates the form and adds to it component's "form" property.
     this.form = this.$form.createForm(this, { name: "normal_login" });
   },
+  computed:{
+...mapState(["loading"])
+  },
   methods: {
     // Handles input validation after submission.
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
-          this.$store.dispatch("restPassword", values);
+          this.$store.dispatch("restPassword", values)
         }
       });
     },

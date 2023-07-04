@@ -3433,19 +3433,27 @@ ol {
   top: -2px;
   width: 13px;
   height: 6px;
-  border: solid #ffffff;
+  border: solid #e6353b;
+  color: #e6353b;
   border-width: 2px 2px 0px 0px;
   -webkit-transform: rotate(127deg);
   -ms-transform: rotate(127deg);
   transform: rotate(127deg);
 }
 
-.login-form .group-input .gi-more .forget-pass {
+.login-form .group-input .gi-check .forget-pass {
   float: right;
   line-height: 20px;
   margin-top: -2px;
   font-size: 14px;
   color: #6b6b6b;
+}
+.login-form .group-input .gi-check .forget-pass:hover {
+  float: right;
+  line-height: 20px;
+  margin-top: -2px;
+  font-size: 14px;
+  color: #e6353b;
 }
 
 /* == TEACHING AND TRAINING == */
