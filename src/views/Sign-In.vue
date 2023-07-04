@@ -18,7 +18,7 @@ export default {
       title: 'Account',
       description: 'Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market',
       url: 'https://dialalawyer.africa',
-      image: 'https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/banner.jpg?alt=media&token=638b0c97-bd4b-4e0a-8053-874fc7e5bc80',
+      image: 'https://dialalawyer.africa/images/banner.jpg',
       // Binded model property for "Sign In Form" switch button for "Remember Me" .
       rememberMe: true,
       loading: this.$store.state.loading,
@@ -29,6 +29,7 @@ export default {
     return {
       title: this.title,
       meta: [
+      { name: 'description', content: 'Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market' },
   // Open Graph (for Facebook, LinkedIn, etc.)
   { property: 'og:title', content: this.title },
         { property: 'og:description', content: this.description },
