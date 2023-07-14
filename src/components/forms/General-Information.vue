@@ -310,6 +310,13 @@
           <a-col :span="24"  :md="12">
             <a-form-item label="Profile Picture">
               <a-upload-dragger
+              v-decorator="[
+                  'photo',
+                  {
+                    initialValue: user.profile_photo,
+                    rules: [{ required: true, message: 'profile photo is required' }],
+                  },
+                ]"
                 accept="image/png, image/jpeg"
                 :multiple="false"
                 list-type="picture"
@@ -476,8 +483,8 @@ export default {
                   other_counties: values.other_counties,
                   step: "general information",
                   current: 2,
-                  practise_start: this.user.practise_start
-                    ? this.user.practise_start
+                  practise_start:  typeof  this.user.practise_start==="string"?
+                     this.user.practise_start
                     : values.practise_start.format(),
                   twitter: values.twitter ?? "",
                   linkedIn: values.linkedIn ?? "",
