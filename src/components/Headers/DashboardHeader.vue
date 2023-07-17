@@ -21,8 +21,7 @@
             overlayClassName="header-notifications-dropdown"
             :getPopupContainer="() => wrapper"
           >
-            <a-badge :count="user.notifications&&user.notifications.length" class="text-white">
-              <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
+            <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 <svg
                   width="20"
                   height="20"
@@ -38,9 +37,7 @@
                     d="M10 18C8.34315 18 7 16.6569 7 15H13C13 16.6569 11.6569 18 10 18Z"
                     fill="#111827"
                   />
-                </svg>
-              </a>
-            </a-badge>
+                </svg></a>
 
             <a-list
               item-layout="horizontal"
