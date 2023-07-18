@@ -404,36 +404,35 @@ export default {
         if (!err) {
           const payload = {
             current_employer: values.current_employer ?? "",
-            current_starting: values.current_starting.format() ?? "",
+            current_starting: typeof values.current_starting==='string'?values.current_starting:values.current_starting.format(),
             current_position:values.current_position??"",
            
             prev2_position:values.prev2_position??"",
             prev3_position:values.prev3_position??"",
             prev4_position:values.prev4_position??"",
             prev2: values.prev2 ? values.prev2 : "",
-            prev2ending: values.prev2ending
-              ? values.prev2ending?.format()
-              : "",
-            prev2starting: values.prev2starting
-              ? values.prev2starting?.format()
-              : "",
+            prev2ending:typeof values.prev2ending==='string'?values.prev2ending:
+              values.prev2ending?.format()??"",
+            prev2starting: typeof values.prev2starting==='string'?values.prev2starting
+              :values.prev2starting?.format()??""
+              ,
             prev3: values.prev3 ? values.prev3 : "",
-            prev3ending: values.prev3ending
-              ? values.prev3ending?.format()
-              : "",
-            prev3starting: values.prev3starting
-              ? values.prev3starting?.format()
-              : "",
+            prev3ending:typeof values.prev3ending==='string'?values.prev3ending:
+              values.prev3ending?.format()??"",
+            prev3starting: typeof values.prev3starting==='string'?values.prev3starting:
+               values.prev3starting?.format()??""
+              ,
             prev4: values.prev4 ?? "",
-            prev4ending: values.prev4ending
-              ? values.prev4ending?.format()
-              : "",
-            prev4starting: values.prev4starting
-              ? values.prev4starting?.format()
-              : "",
+            prev4ending:typeof values.prev4ending==='string'?values.prev4ending:
+               values.prev4ending?.format()??""
+              ,
+            prev4starting:typeof values.prev4starting==='string'
+              ?values.prev4starting: values.prev4starting?.format()??""
+              ,
             step: "employment information",
             current: 4,
           };
+          console.log(payload)
           this.$store.dispatch("updateUser", payload);
         }
       });

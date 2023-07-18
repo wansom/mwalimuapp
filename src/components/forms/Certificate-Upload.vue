@@ -55,6 +55,13 @@
           <a-col :span="24" :md="12">
             <a-form-item label="Current Practice Certificate">
               <a-upload-dragger
+              v-decorator="[
+                  'practise_certificate',
+                  {
+                    initialValue: user.practise_certificate,
+                    rules: [{ required: true, message: 'Certificate  is required' }],
+                  },
+                ]"
                 accept="application/pdf"
                 :multiple="false"
                 list-type="picture"
@@ -81,6 +88,13 @@
           <a-col :span="24" :md="12">
             <a-form-item label="Admission Certificate">
               <a-upload-dragger
+              v-decorator="[
+                  'residence_evidence',
+                  {
+                    initialValue: user.residence_evidence,
+                    rules: [{ required: true, message: 'Certificate  is required' }],
+                  },
+                ]"
                 accept="application/pdf"
                 :multiple="false"
                 list-type="picture"
