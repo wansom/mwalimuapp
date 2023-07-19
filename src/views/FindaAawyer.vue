@@ -4,7 +4,7 @@
     <div>
       <main  class="content container-fluid mx-auto px-5 lg:px-10">
    <div>
-    <nav class="nav sticky top-0">
+    <nav class="nav">
         <menu class="nav__controls">
           <a-icon type="filter" />
           <li
