@@ -118,7 +118,7 @@
                 <a-icon type="info-circle" style="color: rgba(0, 0, 0, 0.45)" />
               </a-tooltip>
               <a-select
-                mode="tags"
+                mode="multiple"
                 style="width: 100%"
                 placeholder="Type or search"
                 v-decorator="[
