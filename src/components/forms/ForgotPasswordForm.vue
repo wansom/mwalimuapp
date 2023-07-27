@@ -69,7 +69,7 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$store.dispatch("restPassword", values)
+          this.$store.dispatch("resetPassword", values);
         }
       });
     },

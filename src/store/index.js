@@ -226,7 +226,7 @@ export default new Vuex.Store({
       });
     },
 
-    restPassword({ dispatch }, values) {
+    resetPassword({ dispatch }, values) {
       dispatch("changeLoading", true);
       passwordReset(values.email)
         .then(() => {
@@ -239,6 +239,12 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           dispatch("changeLoading", false);
+          console.log(err.message)
+          swal({
+            title: "Passowerd Reset",
+            text: `something went wrong`,
+            icon: "error",
+          });
         });
     },
     /*

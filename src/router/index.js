@@ -123,7 +123,7 @@ let routes = [
     {
         path: '/reset-password',
         name: 'Reset-Password',
-        component: () => import(/* webpackChunkName: "forgotpassword" */ '../views/ResetPassword.vue'),
+        component: () => import(/* webpackChunkName: "resetpassword" */ '../views/ResetPassword.vue'),
     },
     {
         path: '/advocate-listing',
