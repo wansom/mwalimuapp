@@ -90,49 +90,33 @@
             ></iframe>
           </div>
           <div class="contact-form">
-            <form @submit.prevent="handleSubmit">
-              <div class="names">
-                <div class="control-group name">
-                  <label for="name">Full Name</label><br />
-                  <input type="text" placeholder="John" v-model="name" />
-                </div>
-              </div>
-              <div class="control-group">
-                <label for="email">Email Address</label><br />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="johnkamara@gmail.com"
-                  v-model="email" 
-                />
-              </div>
-              <div class="control-group">
-                <label for="how">How Did You Hear About Us?</label><br />
-                <input type="text" name="how" placeholder="Linkedin" 
-                v-model="platform" />
-              </div>
-              <div class="control-group">
-                <label for="">Leave a Message?</label><br />
-                <textarea
-                  name="message"
-                  id=""
-                  cols="30"
-                  rows="10"
-                  placeholder="Type Your Message Here..."
-                  v-model="message"
-                ></textarea>
-              </div>
-              <!-- <div class="control-group checkbox">
-                <input type="checkbox" id="checkboxed" />
-                <label for=""
-                  >By clicking on “Send Message” you agree to our Terms &
-                  Conditions and Privacy Statement.</label
-                >
-              </div> -->
-              <div class="control-group">
-                <button type="submit">Send Message</button>
-              </div>
-            </form>
+            <a-form :form="form"  class="login-form" @submit="handleSubmit">
+    <a-form-item label="Your Name">
+      <a-input
+        v-decorator="['name', { rules: [{ required: true, message: 'Please input your name!' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="Email">
+      <a-input
+        v-decorator="['email', { rules: [{ required: true, message: 'Please input your Email!' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="How Did You Hear About Us?">
+      <a-input
+        v-decorator="['platform', { rules: [{ required: true, message: 'Field is required!' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="Leave a Message?">
+      <a-textarea
+        v-decorator="['message', { rules: [{ required: true, message: 'Field is required!' }] }]"
+      ></a-textarea>
+    </a-form-item>
+    <a-form-item >
+      <a-button type="primary" html-type="submit" class="w-full">
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
           </div>
         </div>
       </section>
@@ -145,25 +129,25 @@ export default {
       name:"",
       email:"",
       platform:"",
-      message:""
+      message:"",
+      
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
   methods:{
-    handleSubmit(){
-     
-      console.log(this.name,this.email,this.platform,this.message)
-      this.$store.dispatch("sendMail", {
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.$store.dispatch("sendMail", {
         name: "ADMIN",
         email: "director@acelitigator.com",
         subject: "CONTACT FORM SUBMISSION",
-        content: `full name:${this.name},email:${this.email},where did you hear about us:${this.platform},message:${this.message}`,
-      }).then(()=>{
-        this.$message.success("form has been submitted successfully")
-        this.name="",
-        this.email="",
-        this.message=""
+        content: `full name:${values.name},email:${values.email},where did you hear about us:${values.platform},message:${values.message}`,
       })
-    }
+        }
+      });
+    },
   }
 
 }
