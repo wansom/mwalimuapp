@@ -57,9 +57,8 @@ auth.onAuthStateChanged((user) => {
     }).$mount("#app");
   }
   if (user) {
-    store.dispatch("fetAllAdvocates")
+    store.dispatch("fetchAllUsers")
 
   }
-  store.dispatch("fetAllAdvocates")
-  store.dispatch("fetchCourts")
+  store.dispatch("fetchAllUsers")
 });

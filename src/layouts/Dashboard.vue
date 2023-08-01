@@ -14,7 +14,7 @@
                     href="#"
                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                     aria-current="page"
-                    v-if="user.status == 'active' || 'admin'"
+                    v-if="user.account_type == 'teacher'"
                     >Dashboard</a
                   >
                   <a
@@ -25,21 +25,21 @@
                     >Complete Profile</a
                   >
                 </router-link>
-                <router-link to="/profile" v-if="user.status == 'active'">
+                <router-link to="/profile" v-if="user.account_type == 'teacher'">
                   <a
                     href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >My Profile</a
                   >
                 </router-link>
-                <router-link to="/requests" v-if="user.status == 'admin'">
+                <router-link to="/requests" v-if="user.account_type == 'teacher'">
                   <a
                     href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >Requests</a
                   >
                 </router-link>
-                <router-link to="/chat" v-if="user.status == 'active'">
+                <router-link to="/chat" v-if="user.account_type == 'teacher'">
                   <a
                     href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
@@ -72,24 +72,6 @@
                 </svg>
               </button>
               <a-menu slot="overlay">
-                <!-- <div v-if="user.notifications.length">
-                  <a-menu-item v-for="(item,index) in user.notifications" :key="index" >
-                 <div class="flex items-center gap-4" >
-
-                  <p>  <span class="mr-3 text-red-600">{{ item.date.toDate().toDateString() }}</span>{{ item.notification }}</p>
-                  <a-icon
-                    type="close"
-                    @click="
-                      () => {
-                        removeNotification(item);
-                      }
-                    "
-                />
-                 </div>
-
-                 
-                </a-menu-item>
-                </div> -->
               <a-menu-item>
                 <div v-if="user.notifications.length">
                   <div v-for="item of user.notifications" :key="item">
@@ -481,14 +463,14 @@ export default {
     },
   },
   computed: {
-    ...mapState(["allAdvocates"]),
+    ...mapState(["users"]),
     // Sets layout's element's class based on route's meta data.
     layoutClass() {
       return this.$route.meta.layoutClass;
     },
 
     user() {
-      return this.allAdvocates.filter((i) => i.id == auth.currentUser.uid)[0];
+      return this.users.filter((i) => i.id == auth.currentUser.uid)[0];
     },
   },
   mounted: function () {

@@ -157,8 +157,10 @@ export const getAllUsers = () => {
 export const getUser = userId => {
 	return getDocument(userRef(userId))
 }
-
-export const addUser = data => {
+export const addUser=(values)=>{
+	return setDocument(USERS_PATH,values.uid,values)
+	}
+export const addNewUser = data => {
 	return addDocument(usersRef, data)
 }
 

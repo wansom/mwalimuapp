@@ -8,6 +8,7 @@ import {
   getAllCourts,
   addCourt,
   addUser,
+  getAllUsers,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -19,6 +20,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    users:[],
     user: {},
     step: 0,
     advocates: [],
@@ -111,6 +113,9 @@ export default new Vuex.Store({
   mutations: {
     setUserProfile(state, val) {
       state.user = val;
+    },
+    setUsers(state,val){
+state.users=val
     },
     setSelectedTimePeriod(state, val) {
       state.selectedTimePeriod = val;
@@ -296,6 +301,30 @@ export default new Vuex.Store({
             icon: "error",
           });
         });
+    },
+
+    //users
+    fetchAllUsers({commit,dispatch}){
+      const LAWYERS_PATH = "mwalimuapp";
+      const myCollection = collection(firestoreDb, LAWYERS_PATH);
+      const unsubscribe = onSnapshot(
+        myCollection,
+        (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          commit("setUsers", data);
+        },
+        (error) => {
+          dispatch("changeLoading", false);
+          commit("setFirebaseError", error.message);
+          console.log(error.message);
+        }
+      );
+
+      // Return a function to detach the listener when the action is no longer needed
+      return unsubscribe;
     },
 
     //set selected time period
