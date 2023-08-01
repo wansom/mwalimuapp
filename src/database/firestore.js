@@ -22,11 +22,12 @@ import {
 	where
 } from 'firebase/firestore'
 
-const USERS_PATH = 'users'
+const USERS_PATH = 'mwalimuapp'
 
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
-const LAWYERS_PATH='nigeria_lawyers'
+const TEACHERS_PATH ='teachers'
+const STUDENTS_PATH='students'
 const MPESA_PATH='mpesa_responses'
 const TRANSACTIONS_PATH = 'transactions';
 const COURTS_PATH= 'courts'
@@ -67,24 +68,43 @@ const updateDocument = (ref, data) => {
 const deleteDocument = (ref, docId) => {
 	return deleteDoc(doc(firestoreDb, ref, docId))
 }
-//ADVOCATES
-const advocatesRef = collection(firestoreDb, LAWYERS_PATH)
-const advocateRef = userId => {
-	return doc(firestoreDb, LAWYERS_PATH, userId)
+//TEACHERS
+const teachersRef = collection(firestoreDb, TEACHERS_PATH)
+const teacherRef = userId => {
+	return doc(firestoreDb, TEACHERS_PATH, userId)
 }
-export const getAllAdvocates = () => {
-	return getDocuments(query(advocatesRef))
+export const getAllTeachers = () => {
+	return getDocuments(query(teachersRef))
 }
-export const addLawyer=(values)=>{
-return setDocument(LAWYERS_PATH,values.uid,values)
+export const addTeacher=(values)=>{
+return setDocument(TEACHERS_PATH,values.uid,values)
 }
 
 
-export const getAdvocate = userId => {
-	return getDocument(advocateRef(userId))
+export const getTeacher = userId => {
+	return getDocument(teacherRef(userId))
 }
-export const updateAdvocate = (userId, data) => {
-	return updateDocument(advocateRef(userId), data)
+export const updateteacher = (userId, data) => {
+	return updateDocument(teacherRef(userId), data)
+}
+//STUDENTS
+const studentsRef = collection(firestoreDb, STUDENTS_PATH)
+const studentRef = userId => {
+	return doc(firestoreDb, STUDENTS_PATH, userId)
+}
+export const getAllStudents = () => {
+	return getDocuments(query(studentsRef))
+}
+export const addStudent=(values)=>{
+return setDocument(STUDENTS_PATH,values.uid,values)
+}
+
+
+export const getStudent = userId => {
+	return getDocument(studentRef(userId))
+}
+export const updateStudent = (userId, data) => {
+	return updateDocument(studentRef(userId), data)
 }
 
 //REQUESTS

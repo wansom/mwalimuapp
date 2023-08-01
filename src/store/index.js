@@ -7,6 +7,7 @@ import {
   updateAdvocate,
   getAllCourts,
   addCourt,
+  addUser,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -151,14 +152,14 @@ export default new Vuex.Store({
         password: data.password,
       })
         .then((result) => {
-          addLawyer({
+          addUser({
             first_name: data.first_name,
             last_name: data.last_name,
             email: data.email,
             password: data.password,
+            phone_number:data.phone,
+            account_type:data.account_type,
             uid: result.user.uid,
-            status: "incomplete",
-            profile_visits: [],
             username: `${data.first_name}${data.last_name}`,
             _id: result.user.uid,
             notifications: arrayUnion({
@@ -171,9 +172,9 @@ export default new Vuex.Store({
               await dispatch("sendMail", {
               name: data.first_name,
               email: data.email,
-              subject: "Dial A lawyer Account",
+              subject: "Mwalimu App Account",
               content:
-                "Your Account has been created successfully. You can now log into your account and complete your profile befor your account is activated",
+                "Your Account has been created successfully. You can now log into your account and complete your profile",
             });
          
           });

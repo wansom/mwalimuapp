@@ -12,7 +12,7 @@
           <ul>
             <li class="active"><router-link to="/">Home</router-link></li>
             <li>
-              <router-link to="/find-a-lawyer" aria-label="read more">Find A Lawyer</router-link>
+              <router-link to="/find-a-lawyer" aria-label="read more">Teachers</router-link>
             </li>
             <li><a href="//kenyalaw.org" aria-label="read more">Know Your Courts</a></li>
             <li>
@@ -35,7 +35,7 @@
             </div>
             <div class="mail-service">
               <i class="fa fa-envelope"></i>
-              info@dialalawyerafrica.com
+              info@mwalimuapp.com
             </div>
             <div class="phone-service">
               <i class="fa fa-phone"></i>
@@ -48,7 +48,7 @@
             <!-- <a href="#" class="login-panel"><i class="fa fa-user"></i>ACCOUNT</a> -->
             <a-dropdown>
               <a class="login-panel" @click="(e) => e.preventDefault()" v-if="!account" href="#"><i class="fa fa-user"></i>
-                ADVOCATE ACCOUNT
+                 LOGIN
               </a>
               <a class="login-panel" @click="(e) => e.preventDefault()" v-else  href="#"> <a-avatar :src="account.profile_photo"
                   v-if="account.profile_photo" />
@@ -100,9 +100,9 @@
           <nav class="nav-menu mobile-menu">
             <ul>
               <li>
-                <router-link to="/find-a-lawyer" aria-label="learn more">FIND LAWYERS</router-link>
+                <router-link to="/find-a-lawyer" aria-label="learn more">FIND TEACHERS</router-link>
               </li>
-              <li><a href="//kenyalaw.org" target="blank" aria-label="learn more">Know Your Courts</a></li>
+              <li><a href="//kenyalaw.org" target="blank" aria-label="learn more">CLASSES</a></li>
               <li>
                 <a href="#" aria-label="learn more">Resources</a>
                 <ul class="dropdown">
