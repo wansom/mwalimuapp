@@ -69,7 +69,7 @@ module.exports = {
 		config
 			.plugin('html')
 			.tap(args => {
-				args[0].title = 'Dial A Lawyer'
+				args[0].title = 'Mwalimu Worldwide'
 				
 				return args
 			})

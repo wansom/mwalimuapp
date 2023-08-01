@@ -3,7 +3,7 @@
     <div class="block md:hidden">
       <div class="mobile-sm-menu">
         <router-link to="/">
-          <img src="/images/dial-logo.png" alt="logo" style="height: 50px; object-fit: contain" />
+          <img src="/images/logo-sm.png" alt="logo" style="height: 50px; object-fit: contain" />
         </router-link>
         <div>
           <a-icon type="bars" style="font-size: 40px" @click="togleNav" />
@@ -27,10 +27,10 @@
     <header class="">
       <div class="header-top">
         <div class="container mx-auto px-6 lg:px-16">
-          <div class="ht-left">
+          <div class="ht-left flex items-center">
             <div class="logo">
               <router-link to="/">
-                <img src="/images/dial-logo.png" alt="logo" style="object-fit: contain" height="80px"  width="80px"/>
+                <img src="/images/mwalimu-logo.png" alt="logo" style="object-fit: contain" height="200px"  width="200px"/>
               </router-link>
             </div>
             <div class="mail-service">
