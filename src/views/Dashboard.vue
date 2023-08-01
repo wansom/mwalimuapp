@@ -48,6 +48,7 @@ import CardInfo from "../components/Cards/CardInfo";
 // Information card 2.
 import CardInfo2 from "../components/Cards/CardInfo2";
 import CardInvoices from "../components/Cards/CardInvoices"
+import AdminDashboard from "./AdminDashboard.vue";
 import { mapState } from "vuex";
 import * as fb from "../firebase";
 export default {
