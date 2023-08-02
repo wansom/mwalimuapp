@@ -11,7 +11,7 @@
         <div class="card-content">
          <a-row type="flex">
           <a-col :span="12"><p class="flex items-center "><a-icon type="user" class="mx-5" />{{ advocate.first_name }} {{ advocate.last_name }}</p></a-col>
-          <a-col :span="12"><p class="flex items-start overflow-hidden overflow-ellipsis whitespace-nowrap"><a-icon type="solution" class="mx-5" />{{ advocate.job_title }}</p></a-col>
+          <a-col :span="12"><p class="flex items-start overflow-hidden overflow-ellipsis whitespace-nowrap"><a-icon type="solution" class="mx-5" />{{ advocate.current_position }}</p></a-col>
          </a-row>
           <a-row type="flex" class="my-5">
             <a-col :span="12">
@@ -22,9 +22,8 @@
               </p>
               <p class="flex items-center">
                 <a-icon type="calendar" class="mx-5" />{{
-                  new Date().getFullYear() -
-                  new Date(advocate.practise_start).getFullYear()
-                }}Year(s) Experience
+                  advocate.language
+                }}
               </p>
             </a-col>
             <a-col :span="12">
@@ -42,13 +41,13 @@
           <p class=" lowercase h-16 mb-6">
             {{ advocate.biography.slice(0,150) }}
           </p>
-        <div class="flex items-center gap-4">  <span class="text-red-600 whitespace-nowrap">Primary Practise Area</span>
-          <p class=" whitespace-nowrap">{{ advocate.specialisation }}</p></div>
-            <span class="text-red-600 whitespace-nowrap">Other Practise Areas</span>
+        <div class="flex items-center gap-4">  <span class="text-red-600 whitespace-nowrap">Curriculum</span>
+          <p class=" whitespace-nowrap">{{ advocate.curriculum[0] }}</p></div>
+            <span class="text-red-600 whitespace-nowrap">Subject Areas</span>
           <div style="display: flex; flex-wrap: nowrap">
             <div
               class="my-5"
-              v-for="i of advocate.practise_areas"
+              v-for="i of advocate.subjects"
               :key="i"
             >
               <span class=" mx-2 whitespace-nowrap">{{ i }}</span>
@@ -81,7 +80,7 @@
       </a-col>
       <a-col :span="12">
         <h5 class="mb-2">{{ advocate.first_name }} {{ advocate.last_name }}</h5>
-          <h6>{{ advocate.job_title }}</h6>
+          <h6>{{ advocate.current_position }}</h6>
       </a-col>
     </a-row>
     <a-row type="flex">
@@ -98,9 +97,8 @@
               </div>
               <div>
                 <a-icon type="calendar" class="mx-5" />{{
-                  new Date().getFullYear() -
-                  new Date(advocate.practise_start).getFullYear()
-                }}Years Experience
+                   advocate.language
+                }}
               </div>
             </a-col>
             <a-col :span="12">
@@ -118,13 +116,13 @@
           <p>
             {{ advocate.biography.slice(0,150) }}
           </p>
-          <div class="flex items-center gap-4">  <span class="text-red-600">Primary Practise Area</span>
-          <p>{{ advocate.specialisation }}</p></div>
-            <span class="text-red-600">Other Practise Areas</span>
+          <div class="flex items-center gap-4">  <span class="text-red-600">Curriculum</span>
+          <p>{{ advocate.curriculum }}</p></div>
+            <span class="text-red-600">Subject Areas</span>
           <div style="display: flex; flex-wrap: wrap">
             <div
               class="my-5"
-              v-for="i of advocate.practise_areas"
+              v-for="i of advocate.subjects"
               :key="i"
             >
               <span class=" mx-2">{{ i }}</span>

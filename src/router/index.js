@@ -16,6 +16,8 @@ let routes = [
     {
         path: '/advocate/:id',
         name: 'Advocate',
+        meta: { requiresAuth: true },
+        layout: "dashboard",
         component: () => import(/* webpackChunkName: "advocate" */ '../views/Lawyer-Details.vue'),
     },
     {
@@ -65,6 +67,20 @@ let routes = [
         layout: "dashboard",
         meta: { requiresAuth: true},
         component: () => import(/* webpackChunkName: "dashboard" */ '../views/TeacherLessons.vue'),
+    },
+    {
+        path: '/view-lessons',
+        name: 'ViewLessons',
+        layout: "dashboard",
+        meta: { requiresAuth: true},
+        component: () => import(/* webpackChunkName: "dashboard" */ '../views/StudentLessons.vue'),
+    },
+    {
+        path: '/teachers',
+        name: 'Teachers',
+        layout: "dashboard",
+        meta: { requiresAuth: true},
+        component: () => import(/* webpackChunkName: "dashboard" */ '../views/ViewTeachers.vue'),
     },
     {
         path: '/chat',

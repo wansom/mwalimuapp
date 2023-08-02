@@ -1,13 +1,5 @@
 <template>
   <div>
-    <Header></Header>
-    <!-- <section class="product-shop spad page-details">
-      <div class="container">
-        <div class="row">
-          <detail-card  :advocate="advocate"></detail-card>
-        </div>
-      </div>
-    </section> -->
     <div class="container mx-auto my-5 px-5 lg:px-10 py-5 overflow-x-hidden">
         <div class="md:flex no-wrap md:-mx-2 ">
             <!-- Left Side -->
@@ -20,7 +12,7 @@
                             alt="">
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ advocate.first_name }}<span class="mx-1"></span>{{ advocate.last_name }}</h1>
-                    <h3 class="text-gray-600 font-lg text-semibold leading-6">{{ advocate.job_title }}</h3>
+                    <h3 class="text-gray-600 font-lg text-semibold leading-6">{{ advocate.current_position }}</h3>
                  
                     <ul
                         class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -30,21 +22,9 @@
                                     class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="mail" /></span></span>
                         </li>
                         <li class="flex items-center py-3" @click="openPhoneDialer">
-                            <span>Call Advocate</span>
+                            <span>Call Now</span>
                             <span class="ml-auto cursor-pointer"><span
                                     class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="phone" /></span></span>
-                        </li>
-                        <li class="flex items-center py-3 justify-between">
-                            <span>View Social Profile </span>
-                            <div class="flex items-center gap-6 ml-6">
-                              <span class="ml-auto"><span
-                                    class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"> <a :href="'//' + advocate.twitter"  target="_blank"><i class="ti-twitter-alt hover:text-red-600"></i></a></span></span>
-                                    <span class="ml-auto"><span
-                                    class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a  :href="'//' + advocate.website" target="_blank"><i class="fa fa-globe hover:text-red-600"></i></a></span></span>
-                                    <span class="ml-auto"><span
-                                    class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a :href="'//' +advocate.linkedIn"  target="_blank"><i class="fa fa-linkedin hover:text-red-600"></i></a></span></span>
-                            </div>
-                           
                         </li>
                        
                     </ul>
@@ -64,7 +44,7 @@
                         <span>Similar Profiles</span>
                     </div>
                     <div class="grid grid-cols-3" >
-                        <div class="text-center my-2" v-for="advocate of advocates.slice(0,3)" :key="advocate.id">
+                        <div class="text-center my-2" v-for="advocate of users.slice(0,3)" :key="advocate.id">
                             <img class="h-16 w-16 rounded-full mx-auto object-cover"
                             :src="advocate.profile_photo"
                                 alt="">
@@ -108,13 +88,13 @@
                                 <div class="px-4 py-2">{{ advocate.email }}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Primary Practise Area</div>
-                                <div class="px-4 py-2">{{ advocate.specialisation }}</div>
+                                <div class="px-4 py-2 font-semibold">Language</div>
+                                <div class="px-4 py-2">{{ advocate.language }}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="p-2 font-semibold">Other Practise Areas.</div>
+                                <div class="p-2 font-semibold">Subject Areas.</div>
                                 <div class="flex items-center">
-                                  <div class="px-4 py-2 " v-for="(area,index) of advocate.practise_areas" :key="index">
+                                  <div class="px-4 py-2 " v-for="(area,index) of advocate.subjects" :key="index">
                                     {{ area }}
                                 </div>
                                 </div>
@@ -176,31 +156,6 @@
                                 
                             </ul>
                         </div>
-                        <!-- <div>
-                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                                <span clas="text-green-500">
-                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                                        <path fill="#fff"
-                                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                                    </svg>
-                                </span>
-                                <span class="tracking-wide">Education</span>
-                            </div>
-                            <ul class="list-inside space-y-2">
-                                <li>
-                                    <div class="text-teal-600">Masters Degree in Oxford</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
-                                <li>
-                                    <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
-                            </ul>
-                        </div> -->
                     </div>
                     <!-- End of Experience and education grid -->
                 </div>
@@ -218,7 +173,7 @@ import Footer from "../components/home/Footer.vue";
 import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
-import {getAdvocate} from '../database/firestore'
+import {getUser} from '../database/firestore'
 import {increment} from "firebase/firestore"
 import { updateAdvocate } from "../database/firestore";
 import { arrayUnion} from "firebase/firestore";
@@ -245,16 +200,14 @@ export default {
 
     },
     fetchDetails() {
-      getAdvocate(this.$route.params.id).then((data)=>{
+      getUser(this.$route.params.id).then((data)=>{
        this.advocate=data
-       updateAdvocate(this.$route.params.id,{
-          profile_visits:arrayUnion(new Date()),
-        })
+       console.log(data)
       })
     },
   },
   computed: {
-...mapState([ "advocates",])
+...mapState([ "users",])
   },
   mounted() {
     this.fetchDetails();

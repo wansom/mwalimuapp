@@ -11,7 +11,7 @@
 				<!-- Projects Table Column -->
 				<CardProjectTable2
 				:user="user"
-					:data="table2Data"
+					:data="lessons"
 					:columns="table2Columns"
 				></CardProjectTable2>
 				<!-- / Projects Table Column -->
@@ -35,27 +35,27 @@ import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
 	const table2Columns = [
 		{
 			title: 'LESSON',
-			dataIndex: 'company',
-			scopedSlots: { customRender: 'company' },
+			dataIndex: 'name',
+			scopedSlots: { customRender: 'name' },
 			width: 300,
 		},
 		{
 			title: 'COST',
-			dataIndex: 'budget',
+			dataIndex: 'amount',
 			class: 'font-semibold text-muted',
 		},
 		{
 			title: 'TYPE',
-			dataIndex: 'status',
+			dataIndex: 'type',
 			class: 'font-semibold text-muted text-sm',
 		},
 		{
 			title: 'REGISTRATIONS',
-			scopedSlots: { customRender: 'completion' },
-			dataIndex: 'completion',
+			scopedSlots: { customRender: 'registrations' },
+			dataIndex: 'registrations',
 		},
 		{
-			title: '',
+			title: 'Edit',
 			scopedSlots: { customRender: 'editBtn' },
 			width: 50,
 		},
@@ -131,7 +131,9 @@ import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
       return this.users.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
     }
   },
-  mounted
+  mounted(){
+	this.$store.dispatch('getMyLessons')
+  }
 	})
 
 </script>

@@ -241,13 +241,15 @@ export default ({
 						url:values.url,
 						amount:values.amount,
 						description:values.description,
-						teacher:this.user.id
+						teacher:this.user.id,
+						registrations:0
 					}
 					this.$store.dispatch('addNewLesson',payload)
 				}
 			});
 		},
 	},
+	
 
 })
 

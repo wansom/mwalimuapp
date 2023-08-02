@@ -9,7 +9,7 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <router-link to="/dashboard">
+                <router-link to="/dashboard" v-if="user.account_type=='teacher'">
                   <a
                     href="#"
                     class=" text-white rounded-md px-3 py-2 text-sm font-medium"
@@ -23,6 +23,33 @@
                     aria-current="page"
                     v-else
                     >Complete Profile</a
+                  >
+                </router-link>
+                <router-link to="/dashboard" v-if="user.account_type=='Student'">
+                  <a
+                    href="#"
+                    class=" text-white rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    
+                    >Dashboard</a
+                  >
+                </router-link>
+                <router-link to="/teachers" v-if="user.account_type=='Student'">
+                  <a
+                    href="#"
+                    class=" text-white rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    
+                    >Teachers</a
+                  >
+                </router-link>
+                <router-link to="/view-lessons" v-if="user.account_type=='Student'">
+                  <a
+                    href="#"
+                    class=" text-white rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    
+                    >Lessons</a
                   >
                 </router-link>
                 <router-link to="/profile" v-if="user.account_type == 'teacher'">
