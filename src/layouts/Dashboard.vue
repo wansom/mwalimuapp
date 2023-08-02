@@ -73,7 +73,7 @@
                     >Wallet</a
                   >
                 </router-link>
-                <router-link to="/chat" v-if="user.account_type == 'teacher'">
+                <router-link to="/chat">
                   <a
                     href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
@@ -209,7 +209,6 @@
               @click="mobileMenu=!mobileMenu"
             >
               <span class="sr-only">Open main menu</span>
-              <!-- Menu open: "hidden", Menu closed: "block" -->
               <svg
                 class="block h-6 w-6"
                 fill="none"
@@ -278,7 +277,7 @@
                     >Requests</a
                   >
                 </router-link>
-                <router-link to="/chat" v-if="user.status == 'active'">
+                <router-link to="/chat">
                   <a
                     href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"

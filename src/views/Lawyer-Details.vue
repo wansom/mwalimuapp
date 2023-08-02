@@ -5,7 +5,7 @@
             <!-- Left Side -->
             <div class="w-full md:w-3/12 md:mx-2">
                 <!-- Profile Card -->
-                <div class="bg-white p-3 border-t-4 border-red-600">
+                <div class="bg-white p-3 border-t-4 border-blue-800">
                     <div class="image overflow-hidden">
                         <img class="h-auto w-full mx-auto"
                             :src="advocate.profile_photo"
@@ -19,12 +19,12 @@
                         <li class="flex items-center py-3"  @click="openMailClient">
                             <span>Send Email</span>
                             <span class="ml-auto cursor-pointer"><span
-                                    class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="mail" /></span></span>
+                                    class="bg-yellow-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="mail" /></span></span>
                         </li>
                         <li class="flex items-center py-3" @click="openPhoneDialer">
                             <span>Call Now</span>
                             <span class="ml-auto cursor-pointer"><span
-                                    class="bg-red-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="phone" /></span></span>
+                                    class="bg-yellow-500 py-1 px-2 rounded text-white text-sm flex items-center"><a-icon type="phone" /></span></span>
                         </li>
                        
                     </ul>
@@ -34,7 +34,7 @@
                 <!-- Friends card -->
                 <div class="bg-white p-3 hover:shadow">
                     <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                        <span class="text-red-600">
+                        <span class="text-yellow-500">
                             <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -81,7 +81,7 @@
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                <div class="px-4 py-2">{{ advocate.phone }}</div>
+                                <div class="px-4 py-2">{{ advocate.phone_number }}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact Email</div>
@@ -174,9 +174,6 @@ import Breadcrum from "../components/Widgets/Breadcrum.vue";
 import DetailCard from '../components/Detail/Detail-card.vue';
 import RelatedAdvocates from '../components/Detail/Related-Advocates.vue';
 import {getUser} from '../database/firestore'
-import {increment} from "firebase/firestore"
-import { updateAdvocate } from "../database/firestore";
-import { arrayUnion} from "firebase/firestore";
 import { mapState } from 'vuex';
 export default {
   components: { Header, Footer, Breadcrum,DetailCard, RelatedAdvocates },

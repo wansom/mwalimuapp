@@ -358,7 +358,7 @@ state.users=val
     //mpesa
     async intiatePayments({ dispatch }, values) {
       const result = await axios.get(
-        `https://us-central1-scanpal-f74da.cloudfunctions.net/barizi/mpesa/pay/${values.amount}/${values.phone_number}`
+        `https://us-central1-scanpal-f74da.cloudfunctions.net/mpesa/payments/pay/${values.amount}/${values.phone_number}`
       );
       return result;
     },
