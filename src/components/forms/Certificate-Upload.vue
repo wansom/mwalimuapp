@@ -130,7 +130,7 @@
           @click="handleSubmit"
           :loading="loading"
           :disabled="user.status === 'pending approval'||!terms"
-          >Save and Continue
+          >Submit Profile
         </a-button>
       </div>
     </div>
@@ -142,7 +142,7 @@ import { mapState } from "vuex";
 import moment from "moment";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/database";
-import { updateAdvocate, updateUser } from '../../database/firestore';
+import { updateUser } from '../../database/firestore';
 export default {
   props: ["user"],
   data() {
@@ -291,6 +291,17 @@ export default {
     handlePrevious() {
       this.$store.dispatch("changeStep", 2);
     },
+   async  handleChecks(payload) {
+      if (!this.user.biography) {
+        this.$message.error("please fill out the general information section firast before submitting profile");
+      } else if (!this.user.current_employer) {
+        this.$message.error(
+          "please fill out the employment information section before submitting profile"
+        );
+      }  else {
+        await this.$store.dispatch("updateUser", payload);
+      }
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
@@ -300,8 +311,9 @@ export default {
               practise_number: values.practise_number ?? "",
               step: "certificates",
               current: 5,
+              status:'complete'
             };
-            await this.$store.dispatch("updateUser", payload);
+           this.handleChecks(payload)
         }
       });
     },

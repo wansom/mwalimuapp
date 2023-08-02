@@ -176,7 +176,7 @@
 
 <script>
 import { arrayRemove } from "@firebase/firestore";
-import { updateAdvocate } from "../../database/firestore";
+import {updateUser } from "../../database/firestore";
 import { auth } from "../../database";
 export default {
   props: {
@@ -224,7 +224,7 @@ export default {
     },
     removeNotification(item) {
       this.loading = true;
-      updateAdvocate(auth.currentUser.uid, {
+      updateUser(auth.currentUser.uid, {
         notifications: arrayRemove(item),
       }).then(() => {
           this.loading = false;
@@ -236,7 +236,7 @@ export default {
     },
     clearAll() {
       this.loading = true;
-      updateAdvocate(auth.currentUser.uid, { notifications: [] })
+      updateUser(auth.currentUser.uid, { notifications: [] })
         .then(() => {
           this.loading = false;
         })

@@ -1,76 +1,31 @@
 <template>
   <div>
     <a-row :gutter="24" type="flex" align="middle">
-      <a-col :span="12" :md="6">
-        <a-card
-          :class="current===1?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
-          @click="
-            () => {
-              next(1);
-            }
-          "
-        >
+      <a-col :span="12" :md="8">
+        <a-card :class="current === 1 ? 'icon-card-active text-white rounded-lg' : 'icon-card rounded-lg'" @click="() => {
+            next(1);
+          }
+          ">
           <a-icon type="exclamation-circle" class="icon-list text-warning" />
           <p class="card-p">General Information</p>
         </a-card>
       </a-col>
-      <a-col :span="12" :md="6">
-        <a-card
-        :class="current===2?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
-          @click="
-
-
-
-
-
-
-          
-            () => {
-              next(2);
-            }
-          "
-        >
+      <a-col :span="12" :md="8">
+        <a-card :class="current === 2 ? 'icon-card-active text-white rounded-lg' : 'icon-card rounded-lg'" @click="() => {
+            next(2);
+          }
+          ">
           <a-icon type="bank" class="icon-list text-warning" />
           <p class="card-p">Employment Information</p>
         </a-card>
       </a-col>
-      <!-- <a-col :span="12" :md="4">
-        <a-card
-        :class="current===3?'icon-card-active text-white':'icon-card'"
-          @click="
-            () => {
-              next(3);
-            }
-          "
-        >
-          <a-icon type="folder-open" class="icon-list text-warning" />
-          <p class="card-p">Education Information</p>
-        </a-card>
-      </a-col> -->
-      <a-col
-        :span="12" :md="6"
-        @click="
-          () => {
-            next(4);
-          }
-        "
-      >
-        <a-card :class="current===4?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'">
+      <a-col :span="12" :md="8" @click="() => {
+          next(4);
+        }
+        ">
+        <a-card :class="current === 4 ? 'icon-card-active text-white rounded-lg' : 'icon-card rounded-lg'">
           <a-icon type="file-protect" class="icon-list text-warning" />
           <p class="card-p">Documents Upload</p>
-        </a-card>
-      </a-col>
-      <a-col :span="12" :md="6">
-        <a-card
-        :class="current===5?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
-          @click="
-            () => {
-              next(5);
-            }
-          "
-        >
-          <a-icon type="credit-card" class="icon-list text-warning" />
-          <p class="card-p">Wallet</p>
         </a-card>
       </a-col>
     </a-row>
@@ -94,10 +49,10 @@
 </template>
 <script>
 import GeneralInformation from "./General-Information.vue";
-import EmploymentInformation from "./Employment-Information.vue";
 import EducationInformation from "./Education-Information.vue";
 import CertificateUpload from "./Certificate-Upload.vue";
-import SubscriptionPayment from "./Subscription-Payment.vue";
+import EmploymentInformation from "./Employment-Information.vue";
+import subscriptionPayment from "./Subscription-Payment.vue";
 import { auth } from "../../database/index";
 import { mapState } from "vuex";
 import TestForm from './TestForm.vue';
@@ -118,7 +73,7 @@ export default {
     EmploymentInformation,
     EducationInformation,
     CertificateUpload,
-    SubscriptionPayment,
+    subscriptionPayment,
     TestForm,
   },
   computed: {
@@ -147,6 +102,7 @@ export default {
 .steps-action {
   margin-top: 24px;
 }
+
 .icon-card {
   display: flex;
   flex-direction: column;
@@ -156,7 +112,8 @@ export default {
   height: 200px;
   margin-bottom: 10px;
 }
-.icon-card-active{
+
+.icon-card-active {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,8 +122,9 @@ export default {
   height: 200px;
   background-color: #0A3770;
   margin-bottom: 10px;
-  color:#ffffff
+  color: #ffffff
 }
+
 .icon-card:hover {
   display: flex;
   flex-direction: column;
@@ -176,50 +134,56 @@ export default {
   height: 200px;
   background-color: #0A3770;
   margin-bottom: 10px;
-  color:#ffffff
+  color: #ffffff
 }
+
 .card-p {
   font-size: 24;
   font-weight: bold;
 }
+
 .icon-list {
   font-size: 68px;
   margin-bottom: 10px;
 }
-@media only screen and (max-width: 640px){
+
+@media only screen and (max-width: 640px) {
   .icon-list {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
-	.icon-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: 100px;
-  margin-bottom: 10px;
-}
-.icon-card:hover {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: 100px;
-  background-color: #0A3770;
-  margin-bottom: 10px;
-}
-.icon-card-active{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: 100px;
-  background-color: #0A3770;
-  margin-bottom: 10px;
-  color:#ffffff
-}
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .icon-card:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100px;
+    background-color: #0A3770;
+    margin-bottom: 10px;
+  }
+
+  .icon-card-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100px;
+    background-color: #0A3770;
+    margin-bottom: 10px;
+    color: #ffffff
+  }
 }
 </style>
