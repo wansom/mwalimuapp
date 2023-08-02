@@ -9,6 +9,8 @@ import {
   addCourt,
   addUser,
   updateUser,
+  addLesson,
+  getAllLessons,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -29,6 +31,7 @@ export default new Vuex.Store({
     request: {},
     loading: false,
     current: 1,
+    lessons:[],
 
     
     practiseAreas: [
@@ -108,11 +111,15 @@ export default new Vuex.Store({
     filteredItems: [],
     firebaseEror: "",
     selectedTimePeriod: "thisWeek",
+    subjects:['English','Swahili','French','German','Afrikaans', 'Mathematics', 'Science', 'Social Studies', 'Religious Education', 'Creative Arts', 'Physical Education',]
   },
   getters: {},
   mutations: {
     setUserProfile(state, val) {
       state.user = val;
+    },
+    setLessons(state,val){
+state.lessons=val
     },
     setUsers(state,val){
 state.users=val
@@ -328,6 +335,21 @@ state.users=val
       return unsubscribe;
     },
 
+    //lessons
+
+    addNewLesson({commit},values){
+      addLesson(values).then(()=>{
+        console.log('done')
+      })
+    },
+    getMyLessons({commit}){
+      getAllLessons().then(({ data }) => {
+        commit("setLessons", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
     //set selected time period
     changeTimeLine({ commit }, val) {
       commit("setSelectedTimePeriod", val);

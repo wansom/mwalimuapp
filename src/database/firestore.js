@@ -31,6 +31,7 @@ const STUDENTS_PATH='students'
 const MPESA_PATH='mpesa_responses'
 const TRANSACTIONS_PATH = 'transactions';
 const COURTS_PATH= 'courts'
+const LESSONS_PATH='lessons'
 const MESSAGE_PATH = roomId => {
 	return `${ROOMS_PATH}/${roomId}/${MESSAGES_PATH}`
 }
@@ -68,24 +69,24 @@ const updateDocument = (ref, data) => {
 const deleteDocument = (ref, docId) => {
 	return deleteDoc(doc(firestoreDb, ref, docId))
 }
-//TEACHERS
-const teachersRef = collection(firestoreDb, TEACHERS_PATH)
-const teacherRef = userId => {
-	return doc(firestoreDb, TEACHERS_PATH, userId)
+//LESSONS
+const lessonsRef = collection(firestoreDb, LESSONS_PATH)
+const lessonRef = userId => {
+	return doc(firestoreDb, LESSONS_PATH, userId)
 }
-export const getAllTeachers = () => {
-	return getDocuments(query(teachersRef))
+export const getAllLessons = () => {
+	return getDocuments(query(lessonsRef))
 }
-export const addTeacher=(values)=>{
-return setDocument(TEACHERS_PATH,values.uid,values)
-}
+export const addLesson=(data)=>{
+	return addDocument(lessonsRef,data)
+	}
 
 
-export const getTeacher = userId => {
-	return getDocument(teacherRef(userId))
+export const getLesson = lessonId => {
+	return getDocument(lessonRef(lessonId))
 }
-export const updateteacher = (userId, data) => {
-	return updateDocument(teacherRef(userId), data)
+export const updateLesson = (userId, data) => {
+	return updateDocument(lessonRef(userId), data)
 }
 //STUDENTS
 const studentsRef = collection(firestoreDb, STUDENTS_PATH)

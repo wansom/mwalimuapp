@@ -10,6 +10,7 @@
 
 				<!-- Projects Table Column -->
 				<CardProjectTable2
+				:user="user"
 					:data="table2Data"
 					:columns="table2Columns"
 				></CardProjectTable2>
@@ -27,7 +28,8 @@
 <script>
 
 	// "Projects" table component.
-	import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
+	import { mapState } from 'vuex';
+import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
 	
 	// "Projects" table list of columns and their properties.
 	const table2Columns = [
@@ -108,7 +110,7 @@
 			},
 		},
 	];
-
+	import * as fb from "../firebase";
 	export default ({
 		components: {
 			CardProjectTable2,
@@ -123,6 +125,13 @@
 				table2Columns: table2Columns,
 			}
 		},
+		computed: {
+    ...mapState(["users",'lessons']),
+    user(){
+      return this.users.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
+    }
+  },
+  mounted
 	})
 
 </script>
