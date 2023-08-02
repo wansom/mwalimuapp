@@ -14,7 +14,7 @@
         <h5 class="my-5">Your Current work place</h5>
         <a-row :gutter="16">
           <a-col :span="24" :md="8">
-            <a-form-item label="Company">
+            <a-form-item label="Institution">
               <a-input
                 v-decorator="[
                   'current_employer',
@@ -23,7 +23,7 @@
                     rules: [{ required: true, message: 'Field is required' }],
                   },
                 ]"
-                placeholder="current company"
+                placeholder="current Institution"
                 ><a-tooltip
                   slot="suffix"
                   title="Enter Freelance if currently unemployed.you can also use your own firm"
@@ -74,9 +74,9 @@
         </a-row>
         <h5 class="my-10">Your Previous Work place (optional)</h5>
    
-        <a-row type="flex" :gutter="16">
+        <a-row type="flex" :gutter="24">
           <a-col :span="24" :md="8">
-            <a-form-item label="Company(Optional)">
+            <a-form-item label="Institution(Optional)">
               <a-input
                 v-decorator="[
                   'prev2',
@@ -85,7 +85,7 @@
                     rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
-                placeholder="company"
+                placeholder="Institution"
               />
             </a-form-item>
           </a-col>
@@ -103,7 +103,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="24" :md="8">
+          <a-col :span="24" :md="8" class="flex">
             <a-form-item label="Dates(Optional)">
               <a-month-picker
               :disabled-date="disabledStartDate"
@@ -140,7 +140,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="8">
-            <a-form-item label="Company(Optional)">
+            <a-form-item label="Institution(Optional)">
               <a-input
                 v-decorator="[
                   'prev3',
@@ -149,7 +149,7 @@
                     rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
-                placeholder="company"
+                placeholder="Institution"
               />
             </a-form-item>
           </a-col>
@@ -204,7 +204,7 @@
         </a-row>
         <a-row type="flex" :gutter="16">
           <a-col :span="24" :md="8">
-            <a-form-item label="Company(Optional)">
+            <a-form-item label="Institution(Optional)">
               <a-input
                 v-decorator="[
                   'prev4',
@@ -213,7 +213,7 @@
                     rules: [{ required: false, message: 'Field is required' }],
                   },
                 ]"
-                placeholder="company"
+                placeholder="Institution"
               />
             </a-form-item>
           </a-col>

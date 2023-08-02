@@ -1,13 +1,12 @@
 <template>
   <div>
     <!-- Charts -->
-		<a-row :gutter="24" type="flex" align="stretch"  v-if="user.status == 'active'">
+		<a-row :gutter="24" type="flex" align="stretch"  v-if="user.status == 'complete'">
 			<a-col :span="24"  class="mb-4">
 
 				<!-- Active Users Card -->
 				<CardBarChart :visitors="user.profile_visits"></CardBarChart>
 				<!-- Active Users Card -->
-
 			</a-col>
 			<a-col :span="24"  class="mb-24">
         <CardInvoices
@@ -18,10 +17,8 @@
 				></CardInvoices> 
 			</a-col>
 		</a-row>
-    <admin-dashboard v-if="user.status=='admin'"></admin-dashboard>
-    <!-- / Table & Timeline -->
-    <!-- / Charts -->
-    <profile-information v-if="user.status!='admin'&&user.status !='active'"></profile-information>
+    <admin-dashboard v-else-if="user.account_type=='student'"></admin-dashboard>
+    <profile-information v-else></profile-information>
   </div>
 </template>
 
@@ -70,9 +67,9 @@ export default {
   },
 
   computed: {
-    ...mapState(["allAdvocates",]),
+    ...mapState(["users",]),
     user(){
-      return this.allAdvocates.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
+      return this.users.filter((i)=>i.id==fb.auth.currentUser.uid)[0]
     }
   },
   mounted() {

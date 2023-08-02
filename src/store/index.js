@@ -8,7 +8,7 @@ import {
   getAllCourts,
   addCourt,
   addUser,
-  getAllUsers,
+  updateUser,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -165,6 +165,7 @@ state.users=val
             phone_number:data.phone,
             account_type:data.account_type,
             uid: result.user.uid,
+            status:'incomplete',
             username: `${data.first_name}${data.last_name}`,
             _id: result.user.uid,
             notifications: arrayUnion({
@@ -259,7 +260,7 @@ state.users=val
     updateUser({ dispatch, commit }, data) {
       dispatch("changeLoading", true);
       let user = auth.currentUser;
-      updateAdvocate(user.uid, data)
+      updateUser(user.uid, data)
         .then(() => {
           if (data.status == "pending approval") {
 

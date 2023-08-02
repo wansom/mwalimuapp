@@ -68,9 +68,9 @@
             <a-form-item label="Phone Number">
               <a-input
                 v-decorator="[
-                  'phone',
+                  'phone_number',
                   {
-                    initialValue: user.phone,
+                    initialValue: user.phone_number,
                     rules: [
                       {
                         required: true,
@@ -87,7 +87,7 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Primary practice Location(County)">
+            <a-form-item label="Primary Teaching Location(County)">
               <a-select
                 v-decorator="[
                   'location',
@@ -110,7 +110,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Other Counties of practice(Optional)"
+            <a-form-item label="Other Counties of Teaching(Optional)"
               ><a-tooltip
                 slot="suffix"
                 title="Enter Freelance if currently unemployed"
@@ -138,59 +138,61 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Website(Optional)">
-              <a-input
+            <a-form-item label="Curriculum">
+              <a-select
+                mode="multiple"
+                style="width: 100%"
+                placeholder="Type or search"
                 v-decorator="[
-                  'website',
+                  'curriculum',
                   {
-                    initialValue: user.website,
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please enter your job title',
-                      },
-                    ],
+                    initialValue: user.curriculum,
+                    rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
-                style="width: 100%"
-              />
+              >
+                <a-select-option v-for="i in curriculums" :key="i">
+                  {{ i }}
+                </a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Job Title">
-              <a-input
+            <a-form-item label="Education Level">
+              <a-select
+                mode="multiple"
+                style="width: 100%"
+                placeholder="Type or search"
                 v-decorator="[
-                  'job_title',
+                  'education_level',
                   {
-                    initialValue: user.job_title,
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter your job title',
-                      },
-                    ],
+                    initialValue: user.education_level,
+                    rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
-                style="width: 100%"
-              />
+              >
+                <a-select-option v-for="i in education_levels" :key="i">
+                  {{ i }}
+                </a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Primary Practice Area">
+            <a-form-item label="Which Language do you use">
               <a-select
                 style="width: 100%"
-                placeholder="Type or search"
+                placeholder="Select Language"
                 v-decorator="[
-                  'specialisation',
+                  'language',
                   {
-                    initialValue: user.specialisation,
+                    initialValue: user.language,
                     rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
               >
-                <a-select-option v-for="i in practiseAreas" :key="i">
+                <a-select-option v-for="i in languages" :key="i">
                   {{ i }}
                 </a-select-option>
               </a-select>
@@ -198,7 +200,7 @@
           </a-col>
           <a-col :span="24" :md="12">
             <a-form-item
-              label="Other Practice Areas (Select upto 3 that apply)"
+              label="Which Subjects do you teach (Select upto 3 that apply)"
             >
               <a-select
                 mode="tags"
@@ -206,57 +208,17 @@
                 style="width: 100%"
                 placeholder="Type or search"
                 v-decorator="[
-                  'practise_areas',
+                  'subjects',
                   {
-                    initialValue: user.practise_areas,
+                    initialValue: user.subjects,
                     rules: [{ required: true, message: 'field is required' }],
                   },
                 ]"
               >
-                <a-select-option v-for="i in practiseAreas" :key="i">
+                <a-select-option v-for="i in schoolSubjects" :key="i">
                   {{ i }}
                 </a-select-option>
               </a-select>
-            </a-form-item>
-          </a-col>
-        </a-row>
-        <a-row :gutter="16">
-          <a-col :span="24" :md="12">
-            <a-form-item label="Your LinkedIn link(Optional)">
-              <a-input
-                v-decorator="[
-                  'linkedIn',
-                  {
-                    initialValue: user.linkedIn,
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Filed is required',
-                      },
-                    ],
-                  },
-                ]"
-                style="width: 100%"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="24" :md="12">
-            <a-form-item label="Your Twitter Link(Optional)">
-              <a-input
-                v-decorator="[
-                  'twitter',
-                  {
-                    initialValue: user.twitter,
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please enter your job title',
-                      },
-                    ],
-                  },
-                ]"
-                style="width: 100%"
-              />
             </a-form-item>
           </a-col>
         </a-row>
@@ -278,30 +240,6 @@
                 ]"
                 :rows="4"
                 placeholder="Enter a short biography"
-              />
-            </a-form-item>
-          </a-col>
-        </a-row>
-        <a-row :gutter="16">
-          <a-col :span="24" :md="12">
-            <a-form-item label="Date of Admission to the Bar.">
-              <a-date-picker
-                :disabled-date="disabledDate"
-                v-decorator="[
-                  'practise_start',
-                  {
-                    initialValue: user.practise_start,
-                    rules: [
-                      {
-                        required: true,
-                        message:
-                          'Please enter Year of Admission to the Nigerian Bar.',
-                      },
-                    ],
-                  },
-                ]"
-                placeholder="Select date"
-                style="width: 100%"
               />
             </a-form-item>
           </a-col>
@@ -392,7 +330,7 @@ import { storage } from "../../database";
 import { Cropper, Preview } from "vue-advanced-cropper";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import moment from "moment";
-import { updateAdvocate } from "../../database/firestore";
+import { updateAdvocate, updateUser } from "../../database/firestore";
 function getMimeType(file, fallback = null) {
 	const byteArray = (new Uint8Array(file)).subarray(0, 4);
     let header = '';
@@ -430,6 +368,23 @@ export default {
         type: null,
       },
       fileList: [],
+      curriculums:[
+        '8.4.4',
+        'Competency Bsaed Curriculum(CBC)',
+        'Cambridge Curriculum',
+        'American Curriculum'
+      ],
+      languages:['English','Swahili','French','German','Afrikaans'],
+     primarySubjects:[
+  'English', 'Kiswahili', 'Mathematics', 'Science', 'Social Studies', 'Religious Education', 'Creative Arts', 'Physical Education',
+],
+
+ secondarySubjects:[
+ 'Biology', 'Chemistry', 'Physics', 'Geography', 'History and Government', 'Business Studies', 'Agriculture', 'Home Science', 'Computer Studies', 'Music', 'Art and Design',
+],
+
+
+      education_levels:['Primary Level','Secondary level','Tertiary Level','pre-primary','lower primary','upper primary','junior secondary','senior secondary'],
       uploading: false,
       isFormDirty: false,
       uploadProgress: 0,
@@ -530,41 +485,13 @@ export default {
             () => {
               // Get the download URL of the uploaded file
               getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                updateAdvocate(this.user.id, { profile_photo: downloadURL });
+                updateUser(this.user.id, { profile_photo: downloadURL });
               });
             }
           );
         }, "image/jpeg");
       }
       return false;
-    },
-    uploadProfilePicture({ file }) {
-      const storageRef = ref(storage, "profilePictures/" + file.name);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Track the upload progress
-          this.showModal = false;
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploadProgress = Math.round(progress);
-        },
-        (error) => {
-          // Handle the upload error
-          message.error("Failed to upload profile picture");
-          console.error(error);
-        },
-        () => {
-          // Get the download URL of the uploaded file
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            updateAdvocate(this.user.id, { profile_photo: downloadURL });
-          });
-        }
-      );
-
-      return false; // Prevent default upload behavior
     },
     handleCancel() {
       this.showModal = false;
@@ -612,23 +539,17 @@ export default {
           const payload = {
             first_name: values.first_name ?? "",
             last_name: values.last_name ?? "",
-            phone: values.phone ?? "",
-            job_title: values.job_title ?? "",
+            phone_number: values.phone_number ?? "",
+            curriculum: values.curriculum ?? "",
             biography: values.biography ?? "",
             email: values.email ?? "",
             location: values.location ?? "",
-            website: values.website ?? "",
-            specialisation: values.specialisation ?? "",
-            practise_areas: values.practise_areas.slice(0, 3) ?? [],
-            other_counties: values.other_counties,
+            subjects: values.subjects ?? "",
+            language: values.language ?? "",
+            education_level: values.education_level ?? "",
+            other_counties: values.other_counties??[],
             step: "general information",
             current: 2,
-            practise_start:
-              typeof this.user.practise_start === "string"
-                ? this.user.practise_start
-                : values.practise_start.format(),
-            twitter: values.twitter ?? "",
-            linkedIn: values.linkedIn ?? "",
           };
 
           this.$store.dispatch("updateUser", payload);
@@ -644,6 +565,9 @@ export default {
   },
   computed: {
     ...mapState(["loading", "counties", "practiseAreas"]),
+    schoolSubjects(){
+      return  [...this.primarySubjects, ...this.secondarySubjects];
+    }
   },
   destroyed() {
 		if (this.image.src) {

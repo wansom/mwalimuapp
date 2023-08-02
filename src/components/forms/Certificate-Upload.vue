@@ -5,7 +5,7 @@
     :bodyStyle="{ paddingTop: 0, paddingBottom: '16px' }"
   >
     <div>
-      <h3 class="my-10 text-lg">Certificate Upload</h3>
+      <h3 class="my-10 text-lg">Documents Upload</h3>
       <a-form :form="form" layout="vertical">
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
@@ -29,7 +29,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Admission Number">
+            <a-form-item label="TSC Number">
               <a-input
                 v-decorator="[
                   'practise_number',
@@ -38,7 +38,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'enter number',
+                        message: 'enter your TSC Number',
                       },
                     ],
                   },
@@ -53,12 +53,12 @@
 
         <a-row :gutter="16">
           <a-col :span="24" :md="12">
-            <a-form-item label="Current Practice Certificate">
+            <a-form-item label="Current Academic Certificate">
               <a-upload-dragger
               v-decorator="[
-                  'practise_certificate',
+                  'academic_certificate',
                   {
-                    initialValue: user.practise_certificate,
+                    initialValue: user.academic_certificate,
                     rules: [{ required: true, message: 'Certificate  is required' }],
                   },
                 ]"
@@ -86,13 +86,13 @@
             
           </a-col>
           <a-col :span="24" :md="12">
-            <a-form-item label="Admission Certificate">
+            <a-form-item label="National ID">
               <a-upload-dragger
               v-decorator="[
-                  'residence_evidence',
+                  'national_id_doc',
                   {
-                    initialValue: user.residence_evidence,
-                    rules: [{ required: true, message: 'Certificate  is required' }],
+                    initialValue: user.national_id_doc,
+                    rules: [{ required: true, message: 'Document  is required' }],
                   },
                 ]"
                 accept="application/pdf"
@@ -142,7 +142,7 @@ import { mapState } from "vuex";
 import moment from "moment";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/database";
-import { updateAdvocate } from '../../database/firestore';
+import { updateAdvocate, updateUser } from '../../database/firestore';
 export default {
   props: ["user"],
   data() {
@@ -214,7 +214,7 @@ export default {
         () => {
           // Get the download URL of the uploaded file
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            updateAdvocate(this.user.id, { residence_evidence: downloadURL });
+            updateUser(this.user.id, { national_id_doc: downloadURL });
           });
         }
       );
@@ -241,7 +241,7 @@ export default {
         () => {
           // Get the download URL of the uploaded file
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            updateAdvocate(this.user.id, { practise_certificate: downloadURL });
+            updateUser(this.user.id, { academic_certificate: downloadURL });
           });
         }
       );

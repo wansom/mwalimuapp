@@ -3,7 +3,7 @@
     <a-row :gutter="24" type="flex" align="middle">
       <a-col :span="12" :md="6">
         <a-card
-          :class="current===1?'icon-card-active text-white':'icon-card'"
+          :class="current===1?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
           @click="
             () => {
               next(1);
@@ -16,7 +16,7 @@
       </a-col>
       <a-col :span="12" :md="6">
         <a-card
-        :class="current===2?'icon-card-active text-white':'icon-card'"
+        :class="current===2?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
           @click="
 
 
@@ -55,14 +55,14 @@
           }
         "
       >
-        <a-card :class="current===4?'icon-card-active text-white':'icon-card'">
+        <a-card :class="current===4?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'">
           <a-icon type="file-protect" class="icon-list text-warning" />
           <p class="card-p">Documents Upload</p>
         </a-card>
       </a-col>
       <a-col :span="12" :md="6">
         <a-card
-        :class="current===5?'icon-card-active text-white':'icon-card'"
+        :class="current===5?'icon-card-active text-white rounded-lg':'icon-card rounded-lg'"
           @click="
             () => {
               next(5);
@@ -70,7 +70,7 @@
           "
         >
           <a-icon type="credit-card" class="icon-list text-warning" />
-          <p class="card-p">Payment</p>
+          <p class="card-p">Wallet</p>
         </a-card>
       </a-col>
     </a-row>
@@ -122,9 +122,9 @@ export default {
     TestForm,
   },
   computed: {
-    ...mapState(["allAdvocates", "current"]),
+    ...mapState(["users", "current"]),
     user() {
-      return this.allAdvocates.filter(
+      return this.users.filter(
         (i) => i.id == auth.currentUser.uid
       )[0];
     },
@@ -163,7 +163,7 @@ export default {
   text-align: center;
   justify-content: center;
   height: 200px;
-  background-color: #db1c22;
+  background-color: #0A3770;
   margin-bottom: 10px;
   color:#ffffff
 }
@@ -174,7 +174,7 @@ export default {
   text-align: center;
   justify-content: center;
   height: 200px;
-  background-color: #db1c22;
+  background-color: #0A3770;
   margin-bottom: 10px;
   color:#ffffff
 }
@@ -207,7 +207,7 @@ export default {
   text-align: center;
   justify-content: center;
   height: 100px;
-  background-color: #db1c22;
+  background-color: #0A3770;
   margin-bottom: 10px;
 }
 .icon-card-active{
@@ -217,7 +217,7 @@ export default {
   text-align: center;
   justify-content: center;
   height: 100px;
-  background-color: #db1c22;
+  background-color: #0A3770;
   margin-bottom: 10px;
   color:#ffffff
 }

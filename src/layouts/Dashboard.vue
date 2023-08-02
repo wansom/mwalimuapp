@@ -5,7 +5,7 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <router-link to="/"><img class="h-16 w-16" src="/images/dial-logo.png" alt="logo" /></router-link>
+              <router-link to="/"><img class="h-16 w-16" src="/images/logo-sm.png" alt="logo" /></router-link>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
@@ -14,7 +14,7 @@
                     href="#"
                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                     aria-current="page"
-                    v-if="user.account_type == 'teacher'"
+                    v-if="user.status == 'complete'"
                     >Dashboard</a
                   >
                   <a
