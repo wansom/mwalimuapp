@@ -34,9 +34,11 @@ let routes = [
         component: () => import(/* webpackChunkName: "lawyer" */ '../views/FindaAawyer.vue'),
     },
     {
-        path: '/single-court',
-        name: 'Single-Court',
-        component: () => import(/* webpackChunkName: "singlecourt" */ '../views/Single-Court.vue'),
+        path: '/wallet',
+        name: 'Wallet',
+        meta: { requiresAuth: true },
+        layout: "dashboard",
+        component: () => import(/* webpackChunkName: "singlecourt" */ '../views/UserWallet.vue'),
     },
     {
         path: '/landing',
@@ -58,11 +60,11 @@ let routes = [
         component: () => import(/* webpackChunkName: "dashboard" */ '../views/Layout.vue'),
     },
     {
-        path: '/requests',
-        name: 'Requests',
+        path: '/lessons',
+        name: 'Lessons',
         layout: "dashboard",
-        meta: { requiresAuth: true, requiresAdmin: true },
-        component: () => import(/* webpackChunkName: "dashboard" */ '../views/Requests.vue'),
+        meta: { requiresAuth: true},
+        component: () => import(/* webpackChunkName: "dashboard" */ '../views/TeacherLessons.vue'),
     },
     {
         path: '/chat',
