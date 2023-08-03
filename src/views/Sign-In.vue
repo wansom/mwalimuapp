@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <!-- <Header></Header> -->
     <LoginForm></LoginForm>
     <Footer></Footer>
   </div>
