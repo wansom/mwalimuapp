@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import router from "../router/index";
 import {
   getAllRequests,
-  addLawyer,
   updateAdvocate,
   getAllCourts,
   addCourt,

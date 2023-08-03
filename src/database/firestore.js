@@ -85,8 +85,8 @@ export const addLesson=(data)=>{
 export const getLesson = lessonId => {
 	return getDocument(lessonRef(lessonId))
 }
-export const updateLesson = (userId, data) => {
-	return updateDocument(lessonRef(userId), data)
+export const updateLesson = (lessonId, data) => {
+	return updateDocument(lessonRef(lessonId), data)
 }
 //STUDENTS
 const studentsRef = collection(firestoreDb, STUDENTS_PATH)

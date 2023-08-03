@@ -35,25 +35,51 @@
               <span>KES{{ lesson.amount }}</span>
             </div>
           </div>
+          <a-modal v-model="visible" on-ok="initiatePayment">
+            <template slot="footer">
+              <a-button key="back" @click="handleCancel"> Cancel </a-button>
+              <a-button key="submit" type="primary" :loading="loading" @click="confirmPayment" v-if="sdkSent">
+                verify payment
+              </a-button>
+              <a-button type="primary" :loading="loading" @click="() => { intiatePayment(lesson) }" v-else>
+                Proceed to Checkout
+              </a-button>
+            </template>
+            <a-skeleton active v-if="loading" />
+            <a-result status="info" :title="lesson.amount" :sub-title="'a notification will be sent to your phone number registered ' +
+              user.phone_number +
+              'enter MPESA PIN to complete payment'
+              " v-else>
+            </a-result>
+          </a-modal>
         </div>
       </div>
     </div>
-    <a-modal v-model="visible" title="Enter Phone Number" @ok="handleOk">
-      <a-input placeholder="Phone Number" v-model="phone" />
-    </a-modal>
 
   </section>
 </template>
 <script>
 import { mapState } from "vuex";
 import * as fb from "../firebase";
+import {
+  getMpesaReference,
+  getTransactionReference,
+  getTransactions,
+  updateLesson,
+  updateUser
+} from "@/database/firestore";
+import { arrayUnion } from "firebase/firestore";
 export default ({
   components: {
   },
   data() {
     return {
       visible: false,
-      phone:""
+      phone: "",
+      loading: false,
+      sdkSent: false,
+      coupon: "",
+      selectedLesson: null
     }
   },
   computed: {
@@ -62,25 +88,16 @@ export default ({
       return this.users.filter((i) => i.id == fb.auth.currentUser.uid)[0]
     }
   },
-  methods:{
+  methods: {
     showModal() {
       this.visible = true;
     },
     handleOk() {
-      this.visible = false;
-      console.log(this.phone)
-      this.intiatePayment()
+      console.log(this.formatNumber(this.user.phone_number))
+      // this.intiatePayment()
     },
-    onClose() {
-      const textarea = document.createElement("textarea");
-      textarea.textContent = "dialalawyer9c97a@";
-      textarea.style.position = "fixed";
-      textarea.style.top = "-9999px";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      this.$message.success('code copied successfully')
+    handleCancel() {
+      this.visible = false
     },
     formatNumber(value) {
       if (value.startsWith("254")) {
@@ -88,7 +105,7 @@ export default ({
       } else if (value.startsWith("07")) {
         return "254" + value.substring(1);
       } else if (value.startsWith("+254")) {
-        return "254" + value.substring(2);
+        return "254" + value.substring(4);
       } else if (value.startsWith("01")) {
         return "254" + value.substring(1);
       } else {
@@ -116,54 +133,16 @@ export default ({
         content: `A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`,
       });
     },
-    payWithCard() {
-      if (!this.user.biography) {
-        this.$message.error("please fill out the general information section");
-      } else if (!this.user.current_employer) {
-        this.$message.error(
-          "please fill out the employment information section"
-        );
-      } else if (!this.user.practise_number||!this.user.practise_certificate||!this.user.residence_evidence) {
-        this.$message.error(
-          "some documents are not uploaded. upload them to complete registration"
-        );
-      } else {
-        if (this.coupon == "dialalawyer9c97a@") {
-          this.paymentConfirmed = true;
-          localStorage.clear();
-          this.$store.dispatch("updateUser", {
-            status: "pending approval",
-            payment_date: new Date(),
-            current: 5,
-            notifications: arrayUnion({
-              notification: `You have completed your profile succcessfully,Our admin will review your application and give feedback`,
-              date: new Date(),
-            }),
-            invoices: arrayUnion({
-              date: new Date(),
-              amount: 0,
-              number: this.coupon,
-            }),
-          });
-          this.sendMail();
-          this.visible = false;
-        } else {
-          swal({
-            title: "OOPS!",
-            text: `Coupon code is unavailable or has expired`,
-            icon: "error",
-          });
-        }
-      }
-    },
-    intiatePayment() {
+    intiatePayment(lesson) {
+      this.selectedLesson = lesson
       this.loading = true;
       this.$store
         .dispatch("intiatePayments", {
-          amount: 5,
-          phone_number: this.formatNumber(this.phone),
+          amount: 1,
+          phone_number: this.formatNumber(this.user.phone_number),
         })
         .then((response) => {
+          console.log(response)
           // handle success
           if (response.status == 200) {
             let id = response.data.CheckoutRequestID;
@@ -204,7 +183,32 @@ export default ({
             this.sdkSent = false;
             this.visible = false;
           } else {
-            this.verifyAmount();
+            this.paymentConfirmed = true;    
+            localStorage.clear();
+            this.$store.dispatch("updateUser", {
+              payment_date: new Date(),
+              lessons: arrayUnion(this.selectedLesson),
+              notifications: arrayUnion({
+                notification: `payment has been made succcessfully,You will be notified when the lesson starts`,
+                date: new Date(),
+              }),
+              invoices: arrayUnion({
+                date: new Date(),
+                amount: data.amount,
+                number: id,
+              }),
+            });
+            updateLesson(this.selectedLesson.id, {
+              attendees: arrayUnion(this.user)
+            })
+            updateUser(this.selectedLesson.teacher,{
+              receipts:  arrayUnion({
+                date: new Date(),
+                amount: data.amount,
+                number: id,
+              }),
+            })
+            this.sendMail();        
           }
         } else {
           swal({
@@ -386,4 +390,5 @@ section.mkt-articles {
   line-height: 24px;
   color: #F48C06;
   margin: 0px 0px 0px 10px;
-}</style>
+}
+</style>
