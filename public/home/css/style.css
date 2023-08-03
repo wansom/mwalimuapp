@@ -155,14 +155,15 @@ ol {
   font-weight: 700;
   padding: 12px 30px;
   color: #ffffff;
-  background: #e6353b;
+  background: #0A3770;
   text-transform: uppercase;
 }
 
 .site-btn {
   color: #ffffff;
-  background: #e6353b;
-  border: 1px solid #e6353b;
+  background: #0A3770;
+  border: 1px solid #0A3770;
+
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
