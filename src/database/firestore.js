@@ -23,7 +23,6 @@ import {
 } from 'firebase/firestore'
 
 const USERS_PATH = 'mwalimuapp'
-
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
 const TEACHERS_PATH ='teachers'

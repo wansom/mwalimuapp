@@ -27,7 +27,7 @@
           <p>{{ lesson.description }}</p>
           <div class="mkt-amount">
             <div class="mkt-article-writer">
-              <a-button type="primary" @click="showModal">Enroll</a-button>
+              <a-button type="primary" @click="()=>{showModal(lesson)}">Enroll</a-button>
               <!-- <span>By Lina</span> -->
             </div>
             <div class="price">
@@ -89,8 +89,9 @@ export default ({
     }
   },
   methods: {
-    showModal() {
+    showModal(lesson) {
       this.visible = true;
+      this.selectedLesson = lesson
     },
     handleOk() {
       console.log(this.formatNumber(this.user.phone_number))
@@ -133,8 +134,8 @@ export default ({
         content: `A new account has been created on  ${new Date().toDateString()} .Please login to the main site to review application.`,
       });
     },
-    intiatePayment(lesson) {
-      this.selectedLesson = lesson
+    intiatePayment() {
+      
       this.loading = true;
       this.$store
         .dispatch("intiatePayments", {

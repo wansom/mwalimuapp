@@ -1,7 +1,7 @@
 <template>
   <div class="window-container" :class="{ 'window-mobile': isDevice }">
   
-    <a-modal v-model="addNewRoom" title="Search or Select Advocate to start chat">
+    <a-modal v-model="addNewRoom" title="Search or Select to start chat">
       <form  @submit.prevent="createRoom">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
@@ -37,7 +37,7 @@
         </a-button>
       </template>
     </a-modal>
-    <a-modal v-model="inviteRoomId" title="Type or search to add advocate to group chat">
+    <a-modal v-model="inviteRoomId" title="Type or search to user to group chat">
       <form  @submit.prevent="addRoomUser">
       <a-row type="flex" justify="space-around" align="middle">
         <a-col span="16">
@@ -249,10 +249,10 @@ export default {
     },
   },
   computed: {
-    ...mapState(["allAdvocates"]),
+    ...mapState(["users"]),
     advocates() {
-      return this.allAdvocates.filter(
-        (a) => a.status === "active" && a.id != this.currentUserId
+      return this.users.filter(
+        (a) => a.id != this.currentUserId
       );
     },
     loadedRooms() {
