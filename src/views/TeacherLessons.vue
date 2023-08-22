@@ -49,10 +49,7 @@ import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
 			dataIndex: 'bike',
 			class: 'font-semibold text-muted text-sm',
 		},
-		{
-			title: 'Edit',
-			scopedSlots: { customRender: 'editBtn' },
-		},
+	
 	];
 	import * as fb from "../firebase";
 	export default ({

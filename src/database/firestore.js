@@ -102,24 +102,16 @@ export const   getAllOrdersFromAllUsers=async()=> {
   
 	return allOrders;
   }
-const studentsRef = collection(firestoreDb, STUDENTS_PATH)
-const studentRef = userId => {
-	return doc(firestoreDb, STUDENTS_PATH, userId)
-}
-export const getAllStudents = () => {
-	return getDocuments(query(studentsRef))
-}
-export const addStudent=(values)=>{
-return setDocument(STUDENTS_PATH,values.uid,values)
-}
 
+export const updateOrder = (orderId,userId, data) => {
+	const orderDocRef = doc(firestoreDb, 'fikisha_delivery_history', userId, 'deliveries_ordered',orderId);
+	return updateDocument(orderDocRef, data)
+}
 
 export const getStudent = userId => {
 	return getDocument(studentRef(userId))
 }
-export const updateStudent = (userId, data) => {
-	return updateDocument(studentRef(userId), data)
-}
+
 
 //REQUESTS
 export const getAllRequests=()=>{
