@@ -19,18 +19,19 @@ import {
 	startAfter,
 	startAt,
 	updateDoc,
-	where
+	where,
+	collectionGroup
 } from 'firebase/firestore'
 
 const USERS_PATH = 'mwalimuapp'
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
-const TEACHERS_PATH ='teachers'
+const ORDERS_PATH ='fikisha_delivery_history'
 const STUDENTS_PATH='students'
 const MPESA_PATH='mpesa_responses'
 const TRANSACTIONS_PATH = 'transactions';
 const COURTS_PATH= 'courts'
-const LESSONS_PATH='lessons'
+const RIDERS_PATH='riders'
 const MESSAGE_PATH = roomId => {
 	return `${ROOMS_PATH}/${roomId}/${MESSAGES_PATH}`
 }
@@ -68,26 +69,39 @@ const updateDocument = (ref, data) => {
 const deleteDocument = (ref, docId) => {
 	return deleteDoc(doc(firestoreDb, ref, docId))
 }
-//LESSONS
-const lessonsRef = collection(firestoreDb, LESSONS_PATH)
-const lessonRef = userId => {
-	return doc(firestoreDb, LESSONS_PATH, userId)
+//RIDERS
+const ridersRef = collection(firestoreDb, RIDERS_PATH)
+const riderRef = userId => {
+	return doc(firestoreDb, RIDERS_PATH, userId)
 }
-export const getAllLessons = () => {
-	return getDocuments(query(lessonsRef))
+export const getAllRiders = () => {
+	return getDocuments(query(ridersRef))
 }
-export const addLesson=(data)=>{
-	return addDocument(lessonsRef,data)
+export const addRider=(data)=>{
+	return addDocument(ridersRef,data)
 	}
 
 
-export const getLesson = lessonId => {
-	return getDocument(lessonRef(lessonId))
+export const getRider = riderId => {
+	return getDocument(riderRef(riderId))
 }
-export const updateLesson = (lessonId, data) => {
-	return updateDocument(lessonRef(lessonId), data)
+export const updateRider = (riderId, data) => {
+	return updateDocument(riderRef(riderId), data)
 }
-//STUDENTS
+//ORDERS
+export const   getAllOrdersFromAllUsers=async()=> {
+	const ordersQuery = collectionGroup(firestoreDb, 'deliveries_ordered');
+	const ordersSnapshot = await getDocs(ordersQuery);
+  
+	// Convert snapshot to array of order objects
+	const allOrders = ordersSnapshot.docs.map(doc => ({
+	  id: doc.id,
+	  ...doc.data(),
+	  userId: doc.ref.parent.parent.id  // Gets the userId (parent document ID) for each order
+	}));
+  
+	return allOrders;
+  }
 const studentsRef = collection(firestoreDb, STUDENTS_PATH)
 const studentRef = userId => {
 	return doc(firestoreDb, STUDENTS_PATH, userId)

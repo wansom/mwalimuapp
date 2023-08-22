@@ -10,6 +10,9 @@ import {
   updateUser,
   addLesson,
   getAllLessons,
+  addRider,
+  getAllRiders,
+  getAllOrdersFromAllUsers,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -31,7 +34,8 @@ export default new Vuex.Store({
     loading: false,
     current: 1,
     lessons:[],
-
+riders:[],
+orders:[],
     
     practiseAreas: [
       "	Admiralty (Maritime) and Aviation Law",
@@ -153,6 +157,12 @@ state.users=val
     setFirebaseError(state, val) {
       state.firebaseEror = val;
     },
+    setRiders(state,val){
+      state.riders=val
+    },
+    setOrders(state,val){
+      state.orders=val
+    }
   },
   actions: {
     //register new user
@@ -312,7 +322,7 @@ state.users=val
 
     //users
     fetchAllUsers({commit,dispatch}){
-      const LAWYERS_PATH = "mwalimuapp";
+      const LAWYERS_PATH = "fikisha_delivery_history";
       const myCollection = collection(firestoreDb, LAWYERS_PATH);
       const unsubscribe = onSnapshot(
         myCollection,
@@ -334,16 +344,21 @@ state.users=val
       return unsubscribe;
     },
 
-    //lessons
 
-    addNewLesson({commit},values){
-      addLesson(values).then(()=>{
-        console.log('done')
-      })
+  //orders
+  fetchAllOrders({commit,dispatch}){
+getAllOrdersFromAllUsers().then(allOrders => {
+  commit('setOrders',allOrders)
+
+});
+  },
+    //riders
+    addNewRider({commit},values){
+      addRider(values)
     },
-    getMyLessons({commit}){
-      getAllLessons().then(({ data }) => {
-        commit("setLessons", data);
+    getRiders({commit}){
+      getAllRiders().then(({ data }) => {
+        commit("setRiders", data);
       })
       .catch((err) => {
         console.log(err);

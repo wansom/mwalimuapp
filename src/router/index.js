@@ -62,8 +62,8 @@ let routes = [
         component: () => import(/* webpackChunkName: "dashboard" */ '../views/Layout.vue'),
     },
     {
-        path: '/lessons',
-        name: 'Lessons',
+        path: '/riders',
+        name: 'Riders',
         layout: "dashboard",
         meta: { requiresAuth: true},
         component: () => import(/* webpackChunkName: "dashboard" */ '../views/TeacherLessons.vue'),

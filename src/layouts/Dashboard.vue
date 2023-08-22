@@ -5,61 +5,22 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <router-link to="/"><img class="h-16 w-16" src="/images/logo-sm.png" alt="logo" /></router-link>
+              <router-link to="/"><img class="h-16 w-16" src="/images/logos.png" alt="logo" /></router-link>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <router-link to="/dashboard" v-if="user.account_type == 'teacher'">
-                  <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page"
-                    v-if="user.status == 'complete'">Dashboard</a>
-                  <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page"
-                    v-else>Complete Profile</a>
-                </router-link>
-                <router-link to="/dashboard" v-if="user.account_type == 'Student'">
+               
+                <router-link to="/dashboard">
                   <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium"
-                    aria-current="page">Dashboard</a>
+                    aria-current="page">Orders</a>
                 </router-link>
-                <router-link to="/teachers" v-if="user.account_type == 'Student'">
-                  <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium"
-                    aria-current="page">Teachers</a>
-                </router-link>
-
-                <a-dropdown>
-                  <a class="ant-dropdown-link text-white flex items-center" @click="e => e.preventDefault()"
-                    v-if="user.account_type == 'Student'">
-                    Lessons <a-icon type="down" />
-                  </a>
-                  <a-menu slot="overlay" class="hover:text-yellow-500">
-                    <a-menu-item>
-                      <router-link to="/my-lessons" class="hover:text-yellow-500">
-                        <a href="#" class=" text-black rounded-md px-3 py-2 text-sm font-medium hover:text-yellow-500"
-                          aria-current="page">My Lessons</a>
-                      </router-link>
-                    </a-menu-item>
-                    <a-menu-item>
-                      <router-link to="/view-lessons" class="hover:text-yellow-500">
-                        <a href="#" class=" text-black rounded-md px-3 py-2 text-sm font-medium hover:text-yellow-500"
-                          aria-current="page">All Lessons</a>
-                      </router-link>
-                    </a-menu-item>
-                  </a-menu>
-                </a-dropdown>
-                <router-link to="/profile" v-if="user.account_type == 'teacher'">
+                <router-link to="/riders">
                   <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My
-                    Profile</a>
-                </router-link>
-                <router-link to="/lessons" v-if="user.account_type == 'teacher'">
-                  <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Lessons</a>
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Riders</a>
                 </router-link>
                 <router-link to="/wallet">
                   <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Wallet</a>
-                </router-link>
-                <router-link to="/chat">
-                  <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Chat</a>
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Payments</a>
                 </router-link>
               </div>
             </div>
@@ -165,16 +126,14 @@
 
           <router-link to="/dashboard">
             <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-              aria-current="page" v-if="user.status == 'active' || 'admin'">Dashboard</a>
-            <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page"
-              v-else>Complete Profile</a>
+              aria-current="page" >Dashboard</a>
           </router-link>
-          <router-link to="/profile" v-if="user.status == 'active'">
+          <router-link to="/profile">
             <a href="#"
               class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My
               Profile</a>
           </router-link>
-          <router-link to="/requests" v-if="user.status == 'admin'">
+          <router-link to="/requests">
             <a href="#"
               class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Requests</a>
           </router-link>
@@ -190,11 +149,10 @@
                 class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm outline-none ring-2 ring-white ring-offset-2 ring-offset-gray-800"
                 id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full object-contain" :src="user.profile_photo" alt=""
-                  v-if="user.profile_photo" />
+                
                 <img class="h-8 w-8 rounded-full"
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt="" v-else />
+                  alt="" />
               </button>
               <a-menu slot="overlay">
                 <a-menu-item>

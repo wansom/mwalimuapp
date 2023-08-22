@@ -4,14 +4,10 @@
 		<template #title>
 			<a-row type="flex">
 				<a-col :span="24" :md="12">
-					<h5 class="font-semibold m-0">My Lessons</h5>
+					<h5 class="font-semibold m-0">All Riders</h5>
 				</a-col>
 				<a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
-					<a-button type="primary" @click="showDrawer" class="mx-2">Add NewLesson</a-button>
-					<a-radio-group v-model="projectHeaderBtns" size="small">
-						<a-radio-button value="onlije">ONLINE</a-radio-button>
-						<a-radio-button value="stores">PHYISCAL</a-radio-button>
-					</a-radio-group>
+					<a-button type="primary" @click="showDrawer" class="mx-2">Add New Rider</a-button>
 				</a-col>
 			</a-row>
 		</template>
@@ -65,94 +61,31 @@
 							<a-input v-decorator="[
 								'name',
 								{
-									rules: [{ required: true, message: 'Please enter lesson title' }],
+									rules: [{ required: true, message: 'Please enter name' }],
 								},
-							]" placeholder="Please enter lesson title" />
+							]" placeholder="Full Name" />
 						</a-form-item>
 					</a-col>
 					<a-col :span="12">
-						<a-form-item label="Zoom Url">
+						<a-form-item label="Phone Number">
 							<a-input v-decorator="[
-								'url',
+								'phone',
 								{
-									rules: [{ required: true, message: 'please enter url' }],
+									rules: [{ required: true, message: 'please enter phone number' }],
 								},
-							]" style="width: 100%" addon-before="http://" placeholder="please enter url" />
+							]" style="width: 100%"  placeholder="please enter phone number" />
 						</a-form-item>
 					</a-col>
 				</a-row>
 				<a-row :gutter="16">
 					<a-col :span="12">
-						<a-form-item label="Type">
-							<a-select v-decorator="[
-								'type',
-								{
-									rules: [{ required: true, message: 'Please select type' }],
-								},
-							]" placeholder="Please select">
-								<a-select-option value="online">
-									Online
-								</a-select-option>
-								<a-select-option value="physical">
-									Physical
-								</a-select-option>
-							</a-select>
-						</a-form-item>
-					</a-col>
-					<a-col :span="12">
-						<a-form-item label="Amount">
+						<a-form-item label="Motor Bike">
 							<a-input v-decorator="[
-								'amount',
+								'bike',
 								{
-									rules: [{ required: true, message: '3000' }],
+									rules: [{ required: true, message: 'please enter motorbike' }],
 								},
-							]" placeholder="Field is required" />
-
-						</a-form-item>
-					</a-col>
-				</a-row>
-				<a-row :gutter="16">
-					<a-col :span="12">
-						<a-form-item label="Subject">
-							<a-select v-decorator="[
-								'subject',
-								{
-									rules: [{ required: true, message: 'Please select Subject' }],
-								},
-							]" placeholder="Please choose a class">
-								<a-select-option v-for="(subject, index) of subjects" :key="index" :value="subject">
-									{{ subject }}
-								</a-select-option>
-							</a-select>
-						</a-form-item>
-					</a-col>
-					<a-col :span="12">
-						<a-form-item label="Lesson Dates">
-							<a-range-picker v-decorator="[
-								'dateTime',
-								{
-									rules: [{ required: true, message: 'Please choose the dateTime' }],
-								},
-							]">
-								<template slot="dateRender" slot-scope="current">
-									<div class="ant-calendar-date" :style="getCurrentStyle(current)">
-										{{ current.date() }}
-									</div>
-								</template>
-							</a-range-picker>
-
-						</a-form-item>
-					</a-col>
-				</a-row>
-				<a-row :gutter="16">
-					<a-col :span="24">
-						<a-form-item label="Description">
-							<a-textarea v-decorator="[
-								'description',
-								{
-									rules: [{ required: true, message: 'Please enter url description' }],
-								},
-							]" :rows="4" placeholder="please enter url description" />
+							]" style="width: 100%"  placeholder="please enter motorbike" />
 						</a-form-item>
 					</a-col>
 				</a-row>
@@ -211,12 +144,12 @@ export default ({
 	},
 
 	computed: {
-		...mapState(["subjects"]),
+		...mapState(["riders"]),
 	},
 	methods: {
 		showDrawer() {
 			this.visible = true;
-			console.log('hello world')
+			
 		},
 		onClose() {
 			this.visible = false;
@@ -233,18 +166,14 @@ export default ({
 			e.preventDefault();
 			this.form.validateFields((err, values) => {
 				if (!err) {
-					console.log('Received values of form: ', values);
+					
 					const payload={
 						name:values.name,
-						type:values.type,
-						subject:values.subject,
-						url:values.url,
-						amount:values.amount,
-						description:values.description,
-						teacher:this.user.id,
-						registrations:0
+						phone:values.phone,
+						bike:values.bike,
+						
 					}
-					this.$store.dispatch('addNewLesson',payload)
+					this.$store.dispatch('addNewRider',payload)
 				}
 			});
 		},
