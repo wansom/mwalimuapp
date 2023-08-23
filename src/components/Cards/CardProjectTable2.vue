@@ -104,7 +104,7 @@
 				<a-button :style="{ marginRight: '8px' }" @click="onClose">
 					Cancel
 				</a-button>
-				<a-button type="primary" @click="handleSubmit">
+				<a-button type="primary" @click="handleSubmit" :loading="loading">
 					Submit
 				</a-button>
 			</div>
@@ -115,6 +115,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { addRider } from '../../database/firestore';
 
 
 export default ({
@@ -139,6 +140,7 @@ export default ({
 			showModal: false,
 			form: this.$form.createForm(this),
 			visible: false,
+			loading:false
 
 		}
 	},
@@ -174,6 +176,14 @@ export default ({
 						
 					}
 					this.$store.dispatch('addNewRider',payload)
+					addRider(payload).then(()=>{
+						this.loading=false
+						this.visible=false
+						location.reload()
+					
+					}).catch((err)=>{
+						this.loading=false	
+					})
 				}
 			});
 		},

@@ -13,6 +13,7 @@ import {
   addRider,
   getAllRiders,
   getAllOrdersFromAllUsers,
+  getTransactions,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
@@ -36,6 +37,7 @@ export default new Vuex.Store({
     lessons:[],
 riders:[],
 orders:[],
+transactions:[],
     
     practiseAreas: [
       "	Admiralty (Maritime) and Aviation Law",
@@ -162,6 +164,9 @@ state.users=val
     },
     setOrders(state,val){
       state.orders=val
+    },
+    setTransactions(state,val){
+      state.transactions=val
     }
   },
   actions: {
@@ -364,6 +369,11 @@ getAllOrdersFromAllUsers().then(allOrders => {
         console.log(err);
       });
     },
+    getAllTransactions({commit}){
+  getTransactions().then(({data})=>{
+    commit('setTransactions',data)
+  })
+},
     //set selected time period
     changeTimeLine({ commit }, val) {
       commit("setSelectedTimePeriod", val);
