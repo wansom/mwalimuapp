@@ -59,6 +59,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     store.dispatch("fetchAllUsers")
   }
+  store.dispatch("fetchAllUsers")
   store.dispatch("fetchAllOrders")
   store.dispatch("getAllTransactions")
 });

@@ -23,7 +23,7 @@ import {
 	collectionGroup
 } from 'firebase/firestore'
 
-const USERS_PATH = 'mwalimuapp'
+const USERS_PATH = 'fikisha_delivery_history'
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
 const ORDERS_PATH ='fikisha_delivery_history'

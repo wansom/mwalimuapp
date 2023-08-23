@@ -9,7 +9,10 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-               
+                <router-link to="/users">
+                  <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page">Users</a>
+                </router-link>
                 <router-link to="/dashboard">
                   <a href="#" class=" text-white rounded-md px-3 py-2 text-sm font-medium"
                     aria-current="page">Orders</a>

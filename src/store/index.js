@@ -38,6 +38,7 @@ export default new Vuex.Store({
 riders:[],
 orders:[],
 transactions:[],
+users:[],
     
     practiseAreas: [
       "	Admiralty (Maritime) and Aviation Law",
@@ -167,7 +168,7 @@ state.users=val
     },
     setTransactions(state,val){
       state.transactions=val
-    }
+    },
   },
   actions: {
     //register new user
