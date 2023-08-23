@@ -141,22 +141,17 @@ const columns = [
     key: "id",
     scopedSlots: { customRender: "id" },
   },
+  
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
   {
     title: "PHONE",
     dataIndex: "phone",
     key: "phone",
     scopedSlots: { customRender: "phone" },
-  },
-
-  {
-    title: "AMOUNT",
-    dataIndex: "amount",
-    key: "amount",
-  },
-  {
-    title: "PHONE NUMBER",
-    dataIndex: "phoneNumber",
-    key: "phoneNumber",
   },
 ];
 
