@@ -78,7 +78,7 @@ module.exports = {
 				.plugin('sitemap')
 				.use(SitemapPlugin, [
 				  {
-					base: 'https://dialalawyer.africa',
+					base: 'https://scanpal-f74da.web.app',
 					paths: paths,
 					options: {
 					  filename: 'sitemap.xml',

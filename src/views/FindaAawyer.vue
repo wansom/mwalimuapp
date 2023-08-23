@@ -282,7 +282,7 @@ export default {
         {
           name: "description",
           content:
-            "Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market",
+            "We provide last mile Delivery",
         },
         // Open Graph (for Facebook, LinkedIn, etc.)
         { property: "og:title", content: this.title },

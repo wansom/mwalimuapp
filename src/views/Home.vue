@@ -186,7 +186,7 @@ export default {
       visibleNav: false,
       title: "HOME",
       description:
-        "Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market",
+        "We provide last mile Delivery",
       url: "https://dialalawyer.africa",
       image: "https://dialalawyer.africa/images/banner.jpg",
     };
@@ -195,7 +195,7 @@ export default {
     return {
       title: this.title,
       meta: [
-      { name: 'description', content: 'Our mission is to aid access to justice across Africa by linking verified legal professionals in the justice sector to the market' },
+      { name: 'description', content: 'OWe provide last mile Delivery' },
         // Open Graph (for Facebook, LinkedIn, etc.)
         { property: "og:title", content: this.title },
         { property: "og:description", content: this.description },
