@@ -66,11 +66,11 @@
                 Sign In   <a-spin v-if="loading" /> 
               </button>
             </a-form>
-            <div class="switch-login">
+            <!-- <div class="switch-login">
               <router-link to="sign-up" class="or-login"
                 >Or Create An Account</router-link
               >
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
