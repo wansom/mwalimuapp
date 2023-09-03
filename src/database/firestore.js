@@ -113,24 +113,19 @@ export const getStudent = userId => {
 }
 
 
-//REQUESTS
+//PRICES
 const pricesRef = collection(firestoreDb, PRICES_PATH)
 const priceRef = id => {
 	return doc(firestoreDb, PRICES_PATH, id)
 }
-export const getAllPrices=()=>{
-	return query(advocatesRef,where("status","===","pending approval"))
-	
+export const getPrice =()=>{
+	return getDocuments(query(pricesRef))
 }
 export const updatePrices=(id,data)=>{
 	return updateDocument(priceRef(id), data)
 }
 //COURTS
 const courtsRef = collection(firestoreDb, COURTS_PATH)
-const courtRef = id => {
-	return doc(firestoreDb, COURTS_PATH, id)
-}
-
 export const getAllCourts =()=>{
 	return getDocuments(query(courtsRef))
 }

@@ -14,10 +14,11 @@ import {
   getAllRiders,
   getAllOrdersFromAllUsers,
   getTransactions,
+  getPrice,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
-import { arrayUnion, onSnapshot, collection,query,where } from "firebase/firestore";
+import { arrayUnion, onSnapshot, collection, query, where } from "firebase/firestore";
 import { auth, firestoreDb } from "../database/index";
 const axios = require("axios").default;
 
@@ -25,7 +26,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users:[],
+    users: [],
     user: {},
     step: 0,
     advocates: [],
@@ -34,12 +35,13 @@ export default new Vuex.Store({
     request: {},
     loading: false,
     current: 1,
-    lessons:[],
-riders:[],
-orders:[],
-transactions:[],
-users:[],
-    
+    lessons: [],
+    riders: [],
+    orders: [],
+    transactions: [],
+    users: [],
+    prices: [],
+
     practiseAreas: [
       "	Admiralty (Maritime) and Aviation Law",
       "Bankruptcy Law and Recovery",
@@ -117,18 +119,18 @@ users:[],
     filteredItems: [],
     firebaseEror: "",
     selectedTimePeriod: "thisWeek",
-    subjects:['English','Swahili','French','German','Afrikaans', 'Mathematics', 'Science', 'Social Studies', 'Religious Education', 'Creative Arts', 'Physical Education',]
+    subjects: ['English', 'Swahili', 'French', 'German', 'Afrikaans', 'Mathematics', 'Science', 'Social Studies', 'Religious Education', 'Creative Arts', 'Physical Education',]
   },
   getters: {},
   mutations: {
     setUserProfile(state, val) {
       state.user = val;
     },
-    setLessons(state,val){
-state.lessons=val
+    setLessons(state, val) {
+      state.lessons = val
     },
-    setUsers(state,val){
-state.users=val
+    setUsers(state, val) {
+      state.users = val
     },
     setSelectedTimePeriod(state, val) {
       state.selectedTimePeriod = val;
@@ -160,15 +162,18 @@ state.users=val
     setFirebaseError(state, val) {
       state.firebaseEror = val;
     },
-    setRiders(state,val){
-      state.riders=val
+    setRiders(state, val) {
+      state.riders = val
     },
-    setOrders(state,val){
-      state.orders=val
+    setOrders(state, val) {
+      state.orders = val
     },
-    setTransactions(state,val){
-      state.transactions=val
+    setTransactions(state, val) {
+      state.transactions = val
     },
+    setPrices(state, val) {
+      state.prices = val
+    }
   },
   actions: {
     //register new user
@@ -184,35 +189,35 @@ state.users=val
             last_name: data.last_name,
             email: data.email,
             password: data.password,
-            phone_number:data.phone,
-            account_type:data.account_type,
+            phone_number: data.phone,
+            account_type: data.account_type,
             uid: result.user.uid,
-            status:'incomplete',
+            status: 'incomplete',
             username: `${data.first_name}${data.last_name}`,
             _id: result.user.uid,
             notifications: arrayUnion({
               notification: `Your account was created successfully. Proceed to complete your profile`,
               date: new Date(),
             }),
-          }).then(async() => {
+          }).then(async () => {
             dispatch("changeLoading", false);
-              router.push("/dashboard");
-              await dispatch("sendMail", {
+            router.push("/dashboard");
+            await dispatch("sendMail", {
               name: data.first_name,
               email: data.email,
               subject: "Mwalimu App Account",
               content:
                 "Your Account has been created successfully. You can now log into your account and complete your profile",
             });
-         
+
           });
         })
-        .catch((err) => { 
+        .catch((err) => {
           swal({
             title: "`This email count is already in use by another account!",
             text: `please enter another email and try again`,
             icon: "error",
-          });   
+          });
           dispatch("changeLoading", false);
         });
     },
@@ -290,8 +295,8 @@ state.users=val
               title: "Account submitted for review!",
               text: `Your details have been submitted successfully.Your account will be reviewed within 48 hours`,
               icon: "success",
-            })  
-          }else{
+            })
+          } else {
             swal({
               title: "Progress Saved.",
               text: `Info updated Successfully. Click next to continue.`,
@@ -327,7 +332,7 @@ state.users=val
     },
 
     //users
-    fetchAllUsers({commit,dispatch}){
+    fetchAllUsers({ commit, dispatch }) {
       const LAWYERS_PATH = "fikisha_delivery_history";
       const myCollection = collection(firestoreDb, LAWYERS_PATH);
       const unsubscribe = onSnapshot(
@@ -351,30 +356,37 @@ state.users=val
     },
 
 
-  //orders
-  fetchAllOrders({commit,dispatch}){
-getAllOrdersFromAllUsers().then(allOrders => {
-  commit('setOrders',allOrders)
+    //orders
+    fetchAllOrders({ commit, dispatch }) {
+      getAllOrdersFromAllUsers().then(allOrders => {
+        commit('setOrders', allOrders)
 
-});
-  },
+      });
+    },
     //riders
-    addNewRider({commit},values){
+    addNewRider({ commit }, values) {
       addRider(values)
     },
-    getRiders({commit}){
+    getRiders({ commit }) {
       getAllRiders().then(({ data }) => {
         commit("setRiders", data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    getAllTransactions({commit}){
-  getTransactions().then(({data})=>{
-    commit('setTransactions',data)
-  })
-},
+    getAllTransactions({ commit }) {
+      getTransactions().then(({ data }) => {
+        commit('setTransactions', data)
+      })
+    },
+    //prices
+    getAllPrices({ commit }) {
+      getPrice().then(({ data }) => {
+        commit('setPrices', data)
+      })
+    },
+
     //set selected time period
     changeTimeLine({ commit }, val) {
       commit("setSelectedTimePeriod", val);
@@ -403,7 +415,7 @@ getAllOrdersFromAllUsers().then(allOrders => {
           subject: values.subject,
           content: values.content,
         }
-      ).then((res)=>{
+      ).then((res) => {
         console.log(res)
       })
     },
@@ -462,10 +474,10 @@ getAllOrdersFromAllUsers().then(allOrders => {
     async fetchActiveAdvocates({ dispatch, commit }) {
       const LAWYERS_PATH = "nigeria_lawyers";
       const myCollection = collection(firestoreDb, LAWYERS_PATH);
-    
+
       // Create a query against the collection
       const queryToExecute = query(myCollection, where("status", "==", "active"));
-    
+
       const unsubscribe = onSnapshot(
         queryToExecute,
         (snapshot) => {
@@ -481,7 +493,7 @@ getAllOrdersFromAllUsers().then(allOrders => {
           console.log(error.message);
         }
       );
-    
+
       // Return a function to detach the listener when the action is no longer needed
       return unsubscribe;
     },

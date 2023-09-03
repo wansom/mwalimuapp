@@ -72,7 +72,7 @@
 
                 v-decorator="[
                   'base_price',
-                  {
+                  {initialValue: prices[0].cost,
                     rules: [
                       {
                         required: true,
@@ -91,7 +91,7 @@
               <a-input
                 v-decorator="[
                   'extra_km_price',
-                  {
+                  {initialValue: prices[0].extra_km_price,
                     rules: [
                       {
                         required: true,
@@ -184,7 +184,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["transactions"]),
+    ...mapState(["transactions",'prices']),
   },
   methods: {
     showDrawer() {
@@ -226,6 +226,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getAllTransactions");
+    this.$store.dispatch("getAllPrices");
   },
 };
 </script>
