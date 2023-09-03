@@ -19,7 +19,6 @@ footer {
   padding: 80px 0px 20px;
   background: #000000;
 }
-
 .footer-container {
   display: flex;
   align-items: flex-start;

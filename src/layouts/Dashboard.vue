@@ -38,12 +38,6 @@
               </button>
               <a-menu slot="overlay">
                 <a-menu-item>
-                  <router-link to="/profile"> Profile</router-link>
-                </a-menu-item>
-                <a-menu-item>
-                  <router-link to="/forgot-password">Change Password</router-link>
-                </a-menu-item>
-                <a-menu-item>
                   <span @click="logout">Sign Out</span>
                 </a-menu-item>
               </a-menu>
@@ -104,12 +98,6 @@
                   alt="" />
               </button>
               <a-menu slot="overlay">
-                <a-menu-item>
-                  <router-link to="/profile"> Profile</router-link>
-                </a-menu-item>
-                <a-menu-item>
-                  <router-link to="/forgot-password">Change Password</router-link>
-                </a-menu-item>
                 <a-menu-item>
                   <span @click="logout">Sign Out</span>
                 </a-menu-item>
