@@ -10,6 +10,15 @@
         <a-col :span="24" :md="12">
           <h5 class="font-semibold m-0">All Payments</h5>
         </a-col>
+        <a-col
+          :span="24"
+          :md="12"
+          style="display: flex; align-items: center; justify-content: flex-end"
+        >
+          <a-button type="primary" @click="showModal" class="mx-2"
+            >Change Prices</a-button
+          >
+        </a-col>
       </a-row>
     </template>
     <a-table
@@ -20,7 +29,7 @@
     >
       <template slot="date" slot-scope="text, record">
         <!-- Assuming 'date' is the field containing the Firestore timestamp -->
-        {{record.date.toDate().toDateString()}}
+        {{ record.date.toDate().toDateString() }}
       </template>
       <template slot="editBtn" slot-scope="row">
         <a-button type="link" :data-id="row.key">
@@ -44,7 +53,7 @@
       </template>
     </a-table>
     <a-drawer
-      title="Create a new lesson"
+      title="Adjust delivery prices"
       :width="720"
       :visible="visible"
       :body-style="{ paddingBottom: '80px' }"
@@ -58,49 +67,42 @@
       >
         <a-row :gutter="16">
           <a-col :span="12">
-            <a-form-item label="Name">
+            <a-form-item label="Base Price">
               <a-input
+
                 v-decorator="[
-                  'name',
+                  'base_price',
                   {
-                    rules: [{ required: true, message: 'Please enter name' }],
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter the base price',
+                      },
+                    ],
                   },
                 ]"
-                placeholder="Full Name"
+                placeholder="price in shillings"
+                type="number"
               />
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Phone Number">
+            <a-form-item label="Additional price per kilometer">
               <a-input
                 v-decorator="[
-                  'phone',
+                  'extra_km_price',
                   {
                     rules: [
-                      { required: true, message: 'please enter phone number' },
+                      {
+                        required: true,
+                        message: 'please enter price in shillings',
+                      },
                     ],
                   },
                 ]"
                 style="width: 100%"
-                placeholder="please enter phone number"
-              />
-            </a-form-item>
-          </a-col>
-        </a-row>
-        <a-row :gutter="16">
-          <a-col :span="12">
-            <a-form-item label="Motor Bike">
-              <a-input
-                v-decorator="[
-                  'bike',
-                  {
-                    rules: [
-                      { required: true, message: 'please enter motorbike' },
-                    ],
-                  },
-                ]"
-                style="width: 100%"
-                placeholder="please enter motorbike"
+                placeholder="price in shillings"
+                type="number"
               />
             </a-form-item>
           </a-col>
@@ -133,7 +135,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { addRider } from "../database/firestore";
+import { addRider, updatePrices } from "../database/firestore";
 const columns = [
   {
     title: "TRANSACTION ID",
@@ -174,7 +176,6 @@ export default {
   data() {
     return {
       projectHeaderBtns: "all",
-      showModal: false,
       form: this.$form.createForm(this),
       visible: false,
       loading: false,
@@ -200,21 +201,21 @@ export default {
       }
       return style;
     },
+    showModal() {
+      this.visible = true;
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           const payload = {
-            name: values.name,
-            phone: values.phone,
-            bike: values.bike,
+            cost: values.base_price,
+            extra_km_price: values.extra_km_price,
           };
-          this.$store.dispatch("addNewRider", payload);
-          addRider(payload)
+          updatePrices('base_price',payload)
             .then(() => {
               this.loading = false;
               this.visible = false;
-              location.reload();
             })
             .catch((err) => {
               this.loading = false;

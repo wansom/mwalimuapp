@@ -52,7 +52,7 @@
 			</template>
 
 		</a-table>
-		<a-drawer title="Create a new lesson" :width="720" :visible="visible" :body-style="{ paddingBottom: '80px' }"
+		<a-drawer title="Add a New Rider" :width="720" :visible="visible" :body-style="{ paddingBottom: '80px' }"
 			@close="onClose">
 			<a-form :form="form" layout="vertical" hide-required-mark @submit.prevent="handleSubmit">
 				<a-row :gutter="16">
@@ -175,7 +175,6 @@ export default ({
 						bike:values.bike,
 						
 					}
-					this.$store.dispatch('addNewRider',payload)
 					addRider(payload).then(()=>{
 						this.loading=false
 						this.visible=false

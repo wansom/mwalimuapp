@@ -27,7 +27,7 @@ const USERS_PATH = 'fikisha_delivery_history'
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
 const ORDERS_PATH ='fikisha_delivery_history'
-const STUDENTS_PATH='students'
+const PRICES_PATH='fikisha_base_price';
 const MPESA_PATH='mpesa_responses'
 const TRANSACTIONS_PATH = 'transactions';
 const COURTS_PATH= 'courts'
@@ -114,12 +114,16 @@ export const getStudent = userId => {
 
 
 //REQUESTS
-export const getAllRequests=()=>{
+const pricesRef = collection(firestoreDb, PRICES_PATH)
+const priceRef = id => {
+	return doc(firestoreDb, PRICES_PATH, id)
+}
+export const getAllPrices=()=>{
 	return query(advocatesRef,where("status","===","pending approval"))
 	
 }
-export const updateRequest=(id,data)=>{
-	return updateDocument(advocateRef(id), data)
+export const updatePrices=(id,data)=>{
+	return updateDocument(priceRef(id), data)
 }
 //COURTS
 const courtsRef = collection(firestoreDb, COURTS_PATH)
