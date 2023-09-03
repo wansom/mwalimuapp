@@ -1,38 +1,8 @@
 <template>
    <footer>
-      <div class="footer-container container mx-auto">
-        <div class="col one">
-          <h2>Dial A Lawyer Africa</h2>
-          <p>
-            Empowering You with Legal Knowledge: Dial a Lawyer Africa - Your
-            Trusted Partner for Legal Advice. Our mission is to provide easy
-            access to legal advice and help advocates and individuals navigate
-            the complex legal system in Africa. We help you stay informed and
-            provide legal assistance to help you make informed decisions. With
-            Dial a Lawyer Africa, you'll have the legal knowledge you need to
-            succeed in and out of the courtroom
-          </p>
-        </div>
-        <div class="col two">
-          <h2>Support</h2>
-          <ul>
-          
-            <li><a href="/find-a-lawyer">Find A Lawyer</a></li>
-            <li><a href="/sign-up">My Account</a></li>
-            <li><a href="/sign-up">Register</a></li>
-          </ul>
-        </div>
-        <div class="col three">
-          <h2>Company</h2>
-          <ul>
-            <li><a href="//https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/Privacy%20Policy%20200223.docx?alt=media&token=bd536806-a1ac-4361-a56a-ddfca9885a8f">Privacy Policy</a></li>
-            <li><a href="//https://firebasestorage.googleapis.com/v0/b/scanpal-f74da.appspot.com/o/Privacy%20Policy%20200223.docx?alt=media&token=bd536806-a1ac-4361-a56a-ddfca9885a8f">Terms of Service</a></li>
-            <li><a href="/contact-us">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
+ 
       <div class="bottom-footer container mx-auto">
-        <p>Dial A lawyer Africa. Rights Reserved. Copyright {{ new Date().getFullYear() }}.</p>
+        <p class="text-center">Fikisha Mashinani. Rights Reserved. Copyright {{ new Date().getFullYear() }}.</p>
       </div>
     </footer>
 </template>
