@@ -49,6 +49,16 @@ import CardProjectTable2 from '../components/Cards/CardProjectTable2' ;
 			dataIndex: 'bike',
 			class: 'font-semibold text-muted text-sm',
 		},
+		{
+			title: 'Edit',
+			scopedSlots: { customRender: 'editBtn' },
+			class: 'font-semibold text-muted text-sm',
+		},
+		{
+			title: 'Delete',
+			scopedSlots: { customRender: 'deleteBtn' },
+			class: 'font-semibold text-muted text-sm',
+		},
 	
 	];
 	import * as fb from "../firebase";

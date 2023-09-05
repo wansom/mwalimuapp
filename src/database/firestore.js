@@ -80,6 +80,9 @@ export const getAllRiders = () => {
 export const addRider=(data)=>{
 	return addDocument(ridersRef,data)
 	}
+	export const deleteRider = userId => {
+		return deleteDocument(RIDERS_PATH, userId)
+	}
 
 
 export const getRider = riderId => {
@@ -88,6 +91,7 @@ export const getRider = riderId => {
 export const updateRider = (riderId, data) => {
 	return updateDocument(riderRef(riderId), data)
 }
+
 //ORDERS
 export const   getAllOrdersFromAllUsers=async()=> {
 	const ordersQuery = collectionGroup(firestoreDb, 'deliveries_ordered');
