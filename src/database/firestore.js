@@ -93,8 +93,13 @@ export const updateRider = (riderId, data) => {
 }
 
 //ORDERS
-export const   getAllOrdersFromAllUsers=async()=> {
-	const ordersQuery = collectionGroup(firestoreDb, 'deliveries_ordered');
+export const getAllOrdersFromAllUsers = async () => {
+	// Construct the query
+	const ordersQuery = query(
+	  collectionGroup(firestoreDb, 'deliveries_ordered'),
+	  orderBy('timestamp', 'desc')  // Order by timestamp in descending order (newest first)
+	);
+  
 	const ordersSnapshot = await getDocs(ordersQuery);
   
 	// Convert snapshot to array of order objects
