@@ -115,12 +115,16 @@ const columns = [
   {
     title: 'Time',
     scopedSlots: { customRender: 'time' },
+
   },
 
   {
     title: 'AMOUNT',
     dataIndex: 'amount',
     key: 'amount',
+    key:'amount',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.amount - b.amount,
   },
   {
     title: 'DESTINATION',

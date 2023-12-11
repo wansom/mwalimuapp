@@ -27,9 +27,9 @@
       :pagination="true"
       :rowKey="(record) => record.id"
     >
-      <template slot="date" slot-scope="text, record">
+      <template slot="transactionDate" slot-scope="text, record">
         <!-- Assuming 'date' is the field containing the Firestore timestamp -->
-        {{ record.date.toDate().toDateString() }}
+        {{ new Date(record.transactionDate*1000).toDateString() }}
       </template>
       <template slot="editBtn" slot-scope="row">
         <a-button type="link" :data-id="row.key">
@@ -72,7 +72,7 @@
 
                 v-decorator="[
                   'base_price',
-                  {initialValue: prices[0].cost,
+                  {initialValue: !prices[0].cost,
                     rules: [
                       {
                         required: true,
@@ -145,9 +145,9 @@ const columns = [
   },
   {
     title: "DATE",
-    dataIndex: "date",
-    key: "date",
-    scopedSlots: { customRender: "date" },
+    dataIndex: "transactionDate",
+    key: "transactionDate",
+    scopedSlots: { customRender: "transactionDate" },
   },
 
   {

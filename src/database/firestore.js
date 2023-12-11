@@ -22,7 +22,6 @@ import {
 	where,
 	collectionGroup
 } from 'firebase/firestore'
-
 const USERS_PATH = 'fikisha_delivery_history'
 const ROOMS_PATH = 'chatRooms'
 const MESSAGES_PATH = 'messages'
@@ -93,24 +92,65 @@ export const updateRider = (riderId, data) => {
 }
 
 //ORDERS
-export const getAllOrdersFromAllUsers = async () => {
-	// Construct the query
+export const getAllOrdersFromAllUsersRealtime = () => {
+  // Construct the query
+  const ordersQuery = query(
+    collectionGroup(firestoreDb, 'deliveries_ordered'),
+    orderBy('timestamp', 'desc')
+  );
+
+  // Attach a listener for real-time updates
+  const unsubscribe = onSnapshot(ordersQuery, (snapshot) => {
+    const allOrders = [];
+
+    snapshot.forEach((doc) => {
+      const orderData = doc.data();
+      const userId = doc.ref.parent.parent.id; // Gets the userId (parent document ID) for each order
+
+      allOrders.push({
+        id: doc.id,
+        ...orderData,
+        userId,
+      });
+    });
+
+    // Commit the updated data to the Vuex store
+	return allOrders
+  });
+
+  // Return the unsubscribe function to stop the listener when needed
+  return unsubscribe;
+};
+
+export const orderSnapshots = async () => {
+	let docs = [];
+	const ordersRef=collectionGroup(firestoreDb, 'deliveries_ordered')
 	const ordersQuery = query(
-	  collectionGroup(firestoreDb, 'deliveries_ordered'),
-	  orderBy('timestamp', 'desc')  // Order by timestamp in descending order (newest first)
-	);
+		collectionGroup(firestoreDb, 'deliveries_ordered'),
+		orderBy('timestamp', 'desc') // Order by timestamp in descending order (newest first)
+	  );
+	const getData = () => {
+	  return new Promise((resolve, reject) => {
+		const unsubscribe = onSnapshot(ordersQuery, (snapshot) => {
+		  snapshot.forEach((doc) => {
+			docs.push({
+			  id: doc.id,
+			  ...doc.data(),
+			});
+		  });
   
-	const ordersSnapshot = await getDocs(ordersQuery);
+		  // Resolve the promise with the data
+		  resolve(docs);
   
-	// Convert snapshot to array of order objects
-	const allOrders = ordersSnapshot.docs.map(doc => ({
-	  id: doc.id,
-	  ...doc.data(),
-	  userId: doc.ref.parent.parent.id  // Gets the userId (parent document ID) for each order
-	}));
+		  // Stop the listener to avoid memory leaks
+		  unsubscribe();
+		});
+	  });
+	};
   
-	return allOrders;
-  }
+	return getData();
+  };
+  
 
 export const updateOrder = (orderId,userId, data) => {
 	const orderDocRef = doc(firestoreDb, 'fikisha_delivery_history', userId, 'deliveries_ordered',orderId);
@@ -139,19 +179,7 @@ export const getAllCourts =()=>{
 	return getDocuments(query(courtsRef))
 }
 
-export const courtSnapshots=()=>{
-	let docs=[]
-	const getData =firestoreListener(advocatesRef,(snapshot)=>{
-		snapshot.forEach((doc)=>{
-			docs.push({
-				id: doc.id,
-				...doc.data()
-			  })
-			  console.log(doc)
-		})
-	})
-	return getData()
-}
+
 
 export const addCourt=(data)=>{
 	return addDocument(courtsRef,data)
@@ -209,6 +237,30 @@ export const getTransactionReference = id => {
 export const getTransactions=()=>{
 	return getDocuments(query(transactionsRef))
 }
+  export const transactionsnapshots = async () => {
+	let docs = [];
+	const getData = () => {
+	  return new Promise((resolve, reject) => {
+		const unsubscribe = onSnapshot(transactionsRef, (snapshot) => {
+		  snapshot.forEach((doc) => {
+			docs.push({
+			  id: doc.id,
+			  ...doc.data(),
+			});
+		  });
+  
+		  // Resolve the promise with the data
+		  resolve(docs);
+  
+		  // Stop the listener to avoid memory leaks
+		  unsubscribe();
+		});
+	  });
+	};
+  
+	return getData();
+  };
+  
 
 
 // ROOMS

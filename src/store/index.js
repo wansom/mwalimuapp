@@ -8,17 +8,17 @@ import {
   addCourt,
   addUser,
   updateUser,
-  addLesson,
-  getAllLessons,
   addRider,
   getAllRiders,
   getAllOrdersFromAllUsers,
   getTransactions,
+  transactionsnapshots,
   getPrice,
+  orderSnapshots,
 } from "../database/firestore";
 import swal from "sweetalert";
 import { createUser, signIn, logout, passwordReset } from "../database/auth";
-import { arrayUnion, onSnapshot, collection, query, where } from "firebase/firestore";
+import { arrayUnion, onSnapshot, collection, query, where, collectionGroup, orderBy } from "firebase/firestore";
 import { auth, firestoreDb } from "../database/index";
 const axios = require("axios").default;
 
@@ -357,11 +357,39 @@ export default new Vuex.Store({
 
 
     //orders
-    fetchAllOrders({ commit, dispatch }) {
-      getAllOrdersFromAllUsers().then(allOrders => {
-        commit('setOrders', allOrders)
+   async fetchAllOrders({ commit, dispatch }) {
+      const allOrders = await orderSnapshots()
+      commit('setOrders', allOrders)
 
+    },
+    async getMyOrders({commit}) {
+      // Construct the query
+      const ordersQuery = query(
+        collectionGroup(firestoreDb, 'deliveries_ordered'),
+        orderBy('timestamp', 'desc') // Order by timestamp in descending order (newest first)
+      );
+    
+      // Attach a listener for real-time updates
+      const unsubscribe = onSnapshot(ordersQuery, (snapshot) => {
+        const allOrders = [];
+    
+        snapshot.forEach((doc) => {
+          const orderData = doc.data();
+          const userId = doc.ref.parent.parent.id; // Gets the userId (parent document ID) for each order
+    
+          allOrders.push({
+            id: doc.id,
+            ...orderData,
+            userId,
+          });
+        });
+    
+        // Commit the updated data to the Vuex store
+        commit('setOrders', allOrders); // Replace 'SET_ORDERS' with your actual mutation
       });
+    
+      // Return the unsubscribe function to stop the listener when needed
+      return unsubscribe;
     },
     //riders
     addNewRider({ commit }, values) {
@@ -375,14 +403,19 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    getAllTransactions({ commit }) {
-      getTransactions().then(({ data }) => {
+   async getAllTransactions({ commit }) {
+      try{
+        const data = await transactionsnapshots();
         commit('setTransactions', data)
-      })
+        console.log(data)
+      }catch(err){
+        console.log(err)
+      }
     },
     //prices
     getAllPrices({ commit }) {
       getPrice().then(({ data }) => {
+        console.log(data)
         commit('setPrices', data)
       })
     },
