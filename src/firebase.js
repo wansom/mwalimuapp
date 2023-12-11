@@ -29,7 +29,7 @@ const usersCollection = collection(db,"nigeria_lawyers");
 const businessCollection = collection(db,"clients");
 const adminCollections =collection(db,"admins");
 const mpesaCollection =collection(db,"mpesa_responses");
-const transactions = collection(db,"transactions");
+const transactions = collection(db,"fikisha_transactions");
 const courtCollection= collection(db,"courts")
 
 // export utils/refs

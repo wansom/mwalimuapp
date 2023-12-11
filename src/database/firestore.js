@@ -29,7 +29,7 @@ const MESSAGES_PATH = 'messages'
 const ORDERS_PATH ='fikisha_delivery_history'
 const PRICES_PATH='fikisha_base_price';
 const MPESA_PATH='mpesa_responses'
-const TRANSACTIONS_PATH = 'transactions';
+const TRANSACTIONS_PATH = 'fikisha_transactions';
 const COURTS_PATH= 'courts'
 const RIDERS_PATH='riders'
 const MESSAGE_PATH = roomId => {
